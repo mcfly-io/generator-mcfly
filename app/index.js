@@ -32,8 +32,9 @@ var AngularFamousIonicGenerator = yeoman.generators.Base.extend({
 
     checkTravis: function() {
         if(!this.shell.which('travis')) {
-            this.log(chalk.red.bold('(ERROR)') + ' It looks like you do not have git installed, please install it using the following command and try again: ' + chalk.yellow.bold('\ngem install travis -v' + this.travisOptions.version + ' --no-rdoc --no-ri'));
-            this.shell.exit(1);
+            this.log(chalk.red.bold('(ERROR)') + ' It looks like you do not have travis installed, please install it using the following command and try again: ' + chalk.yellow.bold('\ngem install travis -v' + this.travisOptions.version + ' --no-rdoc --no-ri'));
+            this.shell.exec('gem install travis -v' + this.travisOptions.version + ' --no-rdoc --no-ri');
+			//this.shell.exit(1);
         } else {
             this.log(chalk.gray('travis is installed, continuing...\n'));
         }

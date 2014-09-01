@@ -1,36 +1,50 @@
 {
-  "name": "generator-angular-famous-ionic",
-  "version": "0.0.0",
-  "description": "Yeoman generator",
-  "license": "MIT",
-  "main": "app/index.js",
-  "repository": "thaiat/generator-angular-famous-ionic",
-  "author": {
-    "name": "Avi Haiat",
-    "email": "",
-    "url": "https://github.com/thaiat"
-  },
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "mocha"
-  },
-  "files": [
-    "app"
-  ],
-  "keywords": [
-    "yeoman-generator"
-  ],
-  "dependencies": {
-    "yeoman-generator": "^0.17.0",
-    "chalk": "^0.5.0",
-    "yosay": "^0.3.0"
-  },
-  "devDependencies": {
-    "mocha": "*"
-  },
-  "peerDependencies": {
-    "yo": ">=1.0.0"
-  }
+    "name": "generator-angular-famous-ionic",
+    "version": "0.0.1",
+    "description": "Yeoman generator for scaffolding an app using angularjs browserify and famous",
+    "license": "MIT",
+    "main": "app/index.js",
+    "repository": "thaiat/generator-angular-famous-ionic",
+    "author": {
+        "name": "Avi Haiat",
+        "email": "thaiat@ipelia.com",
+        "url": "https://github.com/thaiat"
+    },
+    "engines": {
+        "node": ">=0.10.0"
+    },
+    "scripts": {
+        "prepublish": "bash ./bin/prepublish.sh",
+        "test": "gulp lint &&  istanbul cover ./node_modules/mocha/bin/_mocha ./test && istanbul report cobertura"
+    },
+    "files": [
+        "app",
+        "templates"
+    ],
+    "preferGlobal": true,
+    "keywords": [
+        "yeoman-generator",
+        "angular",
+        "angularjs",
+        "browserify",
+        "watchify",
+        "famous",
+        "famo.us",
+        "famous-angular",
+        "scaffold"
+    ],
+    "dependencies": {
+        "yeoman-generator": "^0.17.0",
+        "chalk": "^0.5.0",
+        "yosay": "^0.3.0"
+    },
+    "devDependencies": {
+        "gulp": "^3.8.8",
+        "mocha": "^1.21.4",
+        "mocha-lcov-reporter": "0.0.1",
+        "require-dir": "^0.1.0"
+    },
+    "peerDependencies": {
+        "yo": ">=1.0.0"
+    }
 }
