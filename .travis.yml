@@ -14,11 +14,6 @@ after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js --verbose
   - cat ./coverage/lcov.info | codeclimate
 
-addons:
-  code_climate:
-    repo_token:
-	  secure: "<ADD YOUR REPO TOKEN FOR CODECLIMATE>"
-
 
 
 deploy:
@@ -26,7 +21,8 @@ deploy:
   email: thaiat@ipelia.com
 
   api_key:
-    secure: 
+    secure: "dgfx5wt9leS8FaWdQkEOnYWs2/W0GeU+spghoDWSRfg7fobYqyJMGLDJ3/RN/LdrOCO95j5czXD1ti0UjpA8vAHY96EkRlU3GoXhkCCT2P1nL0gKQxw50GqZfZaCLUMakStXvr
+gq8kGh2nQbt88c9KXVU03Zw9EFwTCSK4qHPnA="
   on:
     tags: true
     all_branches: true
