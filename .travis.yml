@@ -1,0 +1,33 @@
+language: node_js
+
+node_js:
+  - 0.10.30
+    
+before_script:
+  - npm link
+  - mkdir -p shippable/codecoverage
+
+after_success:
+#  - npm run coverage
+#  - mv coverage/cobertura-coverage.xml shippable/codecoverage/coverage.xml
+#  - mocha test -R mocha-lcov-reporter  && 
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js --verbose
+  - cat ./coverage/lcov.info | codeclimate
+
+addons:
+  code_climate:
+    repo_token:
+	  secure: "<ADD YOUR REPO TOKEN FOR CODECLIMATE>"
+
+
+
+deploy:
+  provider: npm
+  email: thaiat@ipelia.com
+
+  api_key:
+    secure: 
+  on:
+    tags: true
+    all_branches: true
+    repo: thaiat/generator-angular-famous-ionic

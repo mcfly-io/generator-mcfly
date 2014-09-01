@@ -1,0 +1,13 @@
+{
+  "libs": [
+    "browser",
+    "jquery",
+    "ecma5",
+    "underscore"
+  ],
+  "exclude": ["wordpress/**"],
+  "plugins": {
+    "angular": "./",
+    "node":"./"
+  }
+}

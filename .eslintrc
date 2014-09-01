@@ -1,0 +1,22 @@
+{
+ "env": {
+        "browser": true,
+        "node": true,
+        "amd": true,
+		"mocha": true
+    },
+    "rules": {
+	    "eol-last":0,
+        "no-console": 2,
+		"no-alert": 2,
+		"no-debugger": 1,
+		"no-dupe-keys": 2,
+		"no-extra-parens": 1,
+		"no-unreachable": 1,
+		"camelcase": 0,
+		"no-underscore-dangle": 0,
+		"quotes": [2, "single"],
+		"eqeqeq": [2, "smart"],
+		"no-mixed-spaces-and-tabs": [2, true]
+    }
+}
