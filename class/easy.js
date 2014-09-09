@@ -23,18 +23,18 @@ module.exports = Base.extend({
         return a + b;
     },
 
-    updateNotifier: function() {
-        this.pkg = require('../package.json');
-        var notifier = updateNotifier({
-            packageName: this.pkg.name,
-            packageVersion: this.pkg.version,
-            updateCheckInterval: 1
-        });
-        if(notifier.update) {
-            if(notifier.update.latest !== this.pkg.version) {
-                notifier.notify();
-                process.exit(1);
-            }
-        }
-    }
+//     updateNotifier: function() {
+//         this.pkg = require('./package.json');
+//         var notifier = updateNotifier({
+//             packageName: this.pkg.name,
+//             packageVersion: this.pkg.version,
+//             updateCheckInterval: 1
+//         });
+//         if(notifier.update) {
+//             if(notifier.update.latest !== this.pkg.version) {
+//                 notifier.notify();
+//                 process.exit(1);
+//             }
+//         }
+//     }
 });
