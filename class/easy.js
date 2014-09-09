@@ -20,6 +20,21 @@ module.exports = Base.extend({
         this.travisOptions = {
             version: '1.7.1'
         };
+
+    },
+
+    createOptions: function() {
+        this.option('check-travis', {
+            desc: 'Check if travis cli is installed',
+            type: 'Boolean',
+            defaults: true
+        });
+
+        this.option('check-git', {
+            desc: 'Check if git cli is installed',
+            type: 'Boolean',
+            defaults: true
+        });
     },
 
     add: function(a, b) {
@@ -27,6 +42,9 @@ module.exports = Base.extend({
     },
 
     checkCmd: function(cmd, callback) {
+        if(!this.options['check-' + cmd]) {
+            return;
+        }
         if(!shell.which(cmd)) {
             this.log(chalk.red.bold('(ERROR)') + ' It looks like you do not have ' + cmd + ' installed...');
             if(callback && callback() !== true) {

@@ -10,7 +10,10 @@ describe('angular-famous-ionic:app', function() {
         helpers.run(path.join(__dirname, '../app'))
             .inDir(path.join(os.tmpdir(), './temp-test'))
             .withOptions({
-                'skip-install': true
+                'skip-install': true,
+                'check-travis': false,
+                'check-git': true
+
             })
             .withPrompt({
                 someOption: true
