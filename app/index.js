@@ -5,41 +5,20 @@ var chalk = require('chalk');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var shell = require('shelljs');
-
-var AngularFamousIonicGenerator = yeoman.generators.Base.extend({
+var Easy = require('../class/easy');
+var AngularFamousIonicGenerator = Easy.extend({
     constructor: function() {
         yeoman.generators.Base.apply(this, arguments);
-        this.travisOptions = {
-            version: '1.7.1'
-        };
+
     },
 
     initializing: function() {
         this.pkg = require('../package.json');
-        if(!shell.which('git')) {
-            this.log(chalk.red('(ERROR)') + ' It looks like you do not have git installed, please install it and try again.');
-            shell.exit(1);
-        }
-        //console.log('Git username', this.user.git.username);
+        this.checkGit();
+        this.checkTravis();
 
     },
 
-    checkGit: function() {
-        if(!shell.which('git')) {
-            this.log(chalk.red.bold('(ERROR)') + ' It looks like you do not have git installed, please install it and try again.');
-            shell.exit(1);
-        }
-    },
-
-    checkTravis: function() {
-        if(!shell.which('travis')) {
-            this.log(chalk.red.bold('(ERROR)') + ' It looks like you do not have travis installed, please install it using the following command and try again: ' + chalk.yellow.bold('\ngem install travis -v' + this.travisOptions.version + ' --no-rdoc --no-ri'));
-            shell.exec('gem install travis -v' + this.travisOptions.version + ' --no-rdoc --no-ri');
-            //this.shell.exit(1);
-        } else {
-            this.log(chalk.gray('travis is installed, continuing...\n'));
-        }
-    },
     prompting: {
         welcome: function() {
             // Have Yeoman greet the user.
