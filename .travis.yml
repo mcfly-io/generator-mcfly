@@ -2,26 +2,24 @@ language: node_js
 
 node_js:
   - 0.10.30
-    
-before_script:
-  - npm link
-  - mkdir -p shippable/codecoverage
 
+before_script:
+  - mkdir -p shippable/codecoverage
+  
 after_success:
-#  - npm run coverage
-#  - mv coverage/cobertura-coverage.xml shippable/codecoverage/coverage.xml
-#  - mocha test -R mocha-lcov-reporter  && 
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js --verbose
   - cat ./coverage/lcov.info | codeclimate
 
-
+addons:
+  code_climate:
+    repo_token:
+      secure: "Ml8I8UZlAsSjUqJik1V+8y/N52bjhQupfcteakNz0o3du51vOrYTp2INlRoktZ0dzYM6vBZL6biBLo6tHE5FWiq5hTPwmFmEX9xxb/WgRLAFVOnXtFyU1JcvFFFToNRuxckOtQYa6FOi6cymh2CAmJ/Ee9zzpmQn/h4Afhf1QJE="     
 
 deploy:
   provider: npm
   email: thaiat@ipelia.com
   api_key:
-    secure: "dgfx5wt9leS8FaWdQkEOnYWs2/W0GeU+spghoDWSRfg7fobYqyJMGLDJ3/RN/LdrOCO95j5czXD1ti0UjpA8vAHY96EkRlU3GoXhkCCT2P1nL0gKQxw50GqZfZaCLUMakStXvr
-gq8kGh2nQbt88c9KXVU03Zw9EFwTCSK4qHPnA="
+    secure: dgfx5wt9leS8FaWdQkEOnYWs2/W0GeU+spghoDWSRfg7fobYqyJMGLDJ3/RN/LdrOCO95j5czXD1ti0UjpA8vAHY96EkRlU3GoXhkCCT2P1nL0gKQxw50GqZfZaCLUMakStXvr
+      gq8kGh2nQbt88c9KXVU03Zw9EFwTCSK4qHPnA=
   on:
     tags: true
     all_branches: true
