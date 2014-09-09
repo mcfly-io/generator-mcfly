@@ -1,6 +1,6 @@
 'use strict';
 var yeoman = require('yeoman-generator');
-
+var updateNotifier = require('update-notifier');
 var Base = yeoman.generators.Base;
 
 /**
@@ -21,5 +21,20 @@ module.exports = Base.extend({
 
     add: function(a, b) {
         return a + b;
+    },
+
+    updateNotifier: function() {
+        this.pkg = require('../package.json');
+        var notifier = updateNotifier({
+            packageName: this.pkg.name,
+            packageVersion: this.pkg.version,
+            updateCheckInterval: 1
+        });
+        if(notifier.update) {
+            if(notifier.update.latest !== this.pkg.version) {
+                notifier.notify();
+                process.exit(1);
+            }
+        }
     }
 });
