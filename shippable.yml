@@ -4,23 +4,10 @@ language: node_js
 # version numbers, testing against multiple versions of node
 node_js:
   - 0.10.30
-
-
-script:
-  - cd ..
-  - rm -rf generator-angular-famous-ionic
-  - rm -rf code/generator-angular-famous-ionic
-  - mkdir generator-angular-famous-ionic
-  - mv code/* generator-angular-famous-ionic
-  - mv generator-angular-famous-ionic code/generator-angular-famous-ionic
-  - cd code/generator-angular-famous-ionic
-  - npm test
   
 after_success:
   - mkdir -p shippable/testresults
   - mkdir -p shippable/codecoverage
-  - cd generator-angular-famous-ionic
-#  - npm run coverage
   - mocha -R xunit >> coverage/result.xml
-  - mv coverage/cobertura-coverage.xml ../shippable/codecoverage/coverage.xml
-  - mv coverage/result.xml ../shippable/testresults/result.xml
+  - mv coverage/cobertura-coverage.xml shippable/codecoverage/coverage.xml
+  - mv coverage/result.xml shippable/testresults/result.xml

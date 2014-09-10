@@ -3,7 +3,6 @@
 var gulp = require('gulp');
 var args = require('yargs').argv;
 var $ = require('gulp-load-plugins')();
-var spawm = require('child_process').spawn;
 var exec = require('child_process').exec;
 var fs = require('fs');
 var stripJsonComments = require('strip-json-comments');
@@ -84,10 +83,10 @@ gulp.task('push', ['tag'], function() {
     });
 });
 
-gulp.task('npm', ['push'], function(done) {
-    spawm('npm', ['publish'], {
-        stdio: 'inherit'
-    }).on('close', done);
-});
+// gulp.task('npm', ['push'], function(done) {
+//     spawm('npm', ['publish'], {
+//         stdio: 'inherit'
+//     }).on('close', done);
+// });
 
-gulp.task('release', ['npm']);
+gulp.task('release', ['push']);
