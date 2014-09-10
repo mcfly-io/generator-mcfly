@@ -10,7 +10,7 @@ var pkg = require('../../package.json');
 var path = require('path');
 var gutil = require('gulp-util');
 
-var repository = '';
+var repository = 'https://github.com/thaiat/generator-angular-famous-ionic';
 if(repository.length <= 0) {
     throw new Error('The repository cannot be empty');
 }
