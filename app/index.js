@@ -5,7 +5,7 @@ var chalk = require('chalk');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var shell = require('shelljs');
-var Easy = require('../class/easy');
+var Easy = require('../class');
 var AngularFamousIonicGenerator = Easy.extend({
     constructor: function() {
         yeoman.generators.Base.apply(this, arguments);

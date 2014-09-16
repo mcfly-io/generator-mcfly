@@ -37,10 +37,6 @@ module.exports = Base.extend({
         });
     },
 
-    add: function(a, b) {
-        return a + b;
-    },
-
     checkCmd: function(cmd, callback) {
         if(!this.options['check-' + cmd]) {
             return;
@@ -67,15 +63,16 @@ module.exports = Base.extend({
         });
     },
 
-    updateNotifier: function() {
-        this.pkg = require('../package.json');
+    notifyUpdate: function(pkg) {
+		console.log('notify update');
+        return;
         var notifier = updateNotifier({
-            packageName: this.pkg.name,
-            packageVersion: this.pkg.version,
+            packageName: pkg.name,
+            packageVersion: pkg.version,
             updateCheckInterval: 1
         });
         if(notifier.update) {
-            if(notifier.update.latest !== this.pkg.version) {
+            if(notifier.update.latest !== pkg.version) {
                 notifier.notify();
                 shell.exit(1);
             }

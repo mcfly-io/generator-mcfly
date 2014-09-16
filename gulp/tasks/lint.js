@@ -11,6 +11,7 @@ var jshint = $.jshint;
 var jscs = $.jscs;
 var eslint = $.eslint;
 var gutil = $.util;
+var plumber = $.plumber;
 var constants = require('../common/constants')();
 
 gulp.task('jshint', function() {
@@ -119,4 +120,52 @@ gulp.task('eslint', function() {
 
 });
 
-gulp.task('lint', ['jshint', 'jscs', 'eslint']);
+gulp.task('static', function() {
+
+    var status = {
+        hasShown: false,
+        hasError: false,
+        errs: []
+    };
+    gulp.src(constants.lint)
+        .pipe(plumber({
+            errorHandler: function(err) {
+                if(err.plugin === 'gulp-jscs') {
+                    gutil.log(err.toString());
+                }
+                status.hasError = true;
+                status.errs.push(err);
+                if(!status.hasShown) {
+                    status.hasShown = true;
+                    growly.notify('One or more lint error', {
+                        title: 'FAILED - lint',
+                        icon: constants.growly.failedIcon
+                    });
+                    this.emit('end');
+                }
+            }
+        }))
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter('jshint-stylish'))
+        .pipe(jscs())
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(jshint.reporter('fail'))
+        .pipe(eslint.failOnError())
+        .on('end', function() {
+            if(status.hasError) {
+                gutil.log(chalk.red('lint failed'));
+                throw new Error('lint_error');
+
+            } else {
+                gutil.log(chalk.green('All lint files passed'));
+                growly.notify('All files passed', {
+                    title: 'PASSED - lint',
+                    icon: constants.growly.successIcon
+                });
+            }
+        });
+
+});
+//gulp.task('lint', ['jshint', 'jscs', 'eslint']);
+gulp.task('lint', ['static']);
