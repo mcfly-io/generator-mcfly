@@ -26,6 +26,12 @@ git config --global alias.s 'status -sb'
 # l : beautiful log
 git config --global alias.l 'log --graph --pretty=format:"%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset"' 
 
+# ls: log with commited files
+git config --global alias.ls 'log --pretty=format:"%C(yellow)%h%C(cyan)%d%C(green) %s %C(white)- %an, %ar%Creset" --decorate --numstat'
+
+# d: git diff with word colors
+git config --global alias.d 'diff --color-words'
+
 # wip : quick save in progress commit
 git config --global alias.wip '!git add . && git commit -m "WIP"' 
 

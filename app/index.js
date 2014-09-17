@@ -25,7 +25,7 @@ var AngularFamousIonicGenerator = Easy.extend({
             if(!this.options.hideWelcome) {
                 this.log(yosay('Welcome to the bedazzling AngularFamousIonic generator!'));
             }
-
+            this.composeWith('sublime:app');
             // check if travis is installed
             if(this.options.checkTravis) {
                 if(!this.shell.which('travis')) {
