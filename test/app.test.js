@@ -6,6 +6,11 @@ var os = require('os');
 
 describe('angular-famous-ionic:app', function() {
     before(function(done) {
+
+        var deps = [
+            helpers.createDummyGenerator(), 'sublime:app'
+        ];
+
         helpers.run(path.join(__dirname, '../app'))
             .inDir(path.join(os.tmpdir(), './temp-test'))
             .withOptions({
@@ -17,6 +22,7 @@ describe('angular-famous-ionic:app', function() {
             .withPrompt({
                 someOption: true
             })
+            .withGenerators([deps])
             .on('end', done);
     });
 
