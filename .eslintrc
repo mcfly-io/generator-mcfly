@@ -102,7 +102,7 @@
     "semi": 2,
     "strict": 2,
     "use-isnan": 2,
-    "valid-jsdoc": 2,
+    "valid-jsdoc": [2, { "prefer": { "return": "returns" }, "requireReturn": false }],
     "valid-typeof": 2,
     "wrap-iife": [2, "any"],
     "yoda": "never"

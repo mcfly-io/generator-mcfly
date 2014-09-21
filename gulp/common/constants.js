@@ -8,7 +8,7 @@ module.exports = function() {
             successIcon: path.join(process.env.INIT_CWD, './node_modules/karma-growl-reporter/images/success.png'),
             failedIcon: path.join(process.env.INIT_CWD, './node_modules/karma-growl-reporter/images/failed.png')
         },
-        lint: ['./app/**/*.js', './server/**/*.js', 'gulpfile.js', 'gulp/**/*.js', 'karam.conf.js', 'test/**/*.js'],
+        lint: ['./app/**/*.js', './class/**/*.js', 'gulpfile.js', 'gulp/**/*.js', 'karam.conf.js', 'test/**/*.js'],
 
         browserify: {
             src: './client/scripts/main.js',

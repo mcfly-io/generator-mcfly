@@ -1,4 +1,5 @@
 'use strict';
+
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var map = require('map-stream');
@@ -158,10 +159,8 @@ gulp.task('static', function() {
 
             } else {
                 gutil.log(chalk.green('All lint files passed'));
-                gutil.log(process.env.INIT_CWD);
                 growly.notify('All files passed', {
                     title: 'PASSED - lint',
-                    //icon: path.join(process.env.INIT_CWD, constants.growly.successIcon)
                     icon: constants.growly.successIcon
                 });
             }
