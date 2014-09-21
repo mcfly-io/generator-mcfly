@@ -29,7 +29,8 @@ var readJsonFile = function(filename) {
  * gulp bump --minor (or --major or --prerelease or --patch which is the default)
  * - or -
  * gulp bump --ver=1.2.3
- * @return {undefined} Nothing
+ *
+ * @returns {void} - void
  */
 gulp.task('bump', function() {
     var bumpType = 'patch';

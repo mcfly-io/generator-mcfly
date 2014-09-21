@@ -1,18 +1,11 @@
 'use strict';
 
-var path = require('path');
 var helpers = require('yeoman-generator').test;
-var os = require('os');
+var testHelper = require('./testHelper');
 
 describe('angular-famous-ionic:app', function() {
     before(function(done) {
-
-        var deps = [
-            helpers.createDummyGenerator(), 'sublime:app'
-        ];
-
-        helpers.run(path.join(__dirname, '../app'))
-            .inDir(path.join(os.tmpdir(), './temp-test'))
+        this.runGen = testHelper.runGenerator('app', ['sublime:app'])
             .withOptions({
                 'skip-install': true,
                 'check-travis': false,
@@ -22,16 +15,21 @@ describe('angular-famous-ionic:app', function() {
             .withPrompt({
                 someOption: true
             })
-            .withGenerators([deps])
-            .on('end', done);
+            .on('ready', function() {
+                var spyLog = sinon.spy();
+                helpers.stub(this.runGen.generator, 'log', spyLog);
+                done();
+            }.bind(this));
+
     });
 
     it('creates files', function() {
-        assert.file([
-            'bower.json',
-            'package.json',
-            '.editorconfig',
-            '.jshintrc'
-        ]);
+        this.runGen.on('end', function() {
+            assert.file([
+                'package.json',
+                'bower.json'
+            ]);
+        });
+
     });
 });

@@ -127,7 +127,7 @@ gulp.task('static', function() {
         hasError: false,
         errs: []
     };
-    gulp.src(constants.lint)
+    return gulp.src(constants.lint)
         .pipe(plumber({
             errorHandler: function(err) {
                 if(err.plugin === 'gulp-jscs') {
