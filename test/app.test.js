@@ -27,7 +27,11 @@ describe('angular-famous-ionic:app', function() {
         this.runGen.on('end', function() {
             assert.file([
                 'package.json',
-                'bower.json'
+                'bower.json',
+                'karma.conf.js',
+                'client/index.html',
+                'client/styles/main.css',
+                'client/scripts/main.js'
             ]);
         });
 

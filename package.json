@@ -67,6 +67,7 @@
     "marked": "^0.3.2",
     "mocha": "^1.21.4",
     "mocha-lcov-reporter": "^0.0.1",
+    "mockery": "^1.4.0",
     "q": "^1.0.1",
     "require-dir": "^0.1.0",
     "run-sequence": "^0.3.6",

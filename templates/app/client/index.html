@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en" ng-app="main" ng-controller="main.common.titleController as titleCtrl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{titleCtrl.title}}</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body ng-controller="main.common.helloController as helloCtrl">
+    <h1>{{titleCtrl.title}}</h1>
+    <h2>{{helloCtrl.message}}</h2>
+    <simple-directive></simple-directive>
+    <script src="scripts/bundle.js"></script>
+</body>
+
+</html>

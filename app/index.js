@@ -29,7 +29,7 @@ var AppGenerator = Class.extend({
     prompting: {
         welcome: function() {
             // Have Yeoman greet the user.
-            if(!this.options.hideWelcome) {
+            if(!this.options['skip-welcome-message']) {
                 this.log(yosay('Welcome to the bedazzling AngularFamousIonic generator!'));
             }
 
@@ -108,11 +108,27 @@ var AppGenerator = Class.extend({
 
     writing: {
 
-        projectfiles: function() {
+        setRoot: function() {
             this.sourceRoot(path.join(__dirname, '../templates/app'));
+        },
 
+        projectfiles: function() {
             this.template('_package.json', 'package.json');
             this.template('_bower.json', 'bower.json');
+            this.template('karma.conf.js');
+        },
+
+        clientfiles: function() {
+            this.mkdir('client');
+            this.mkdir('client/styles');
+            this.mkdir('client/scripts');
+            this.template('client/index.html');
+            this.template('client/styles/main.css');
+            this.template('client/scripts/main.js');
+        },
+
+        serverfiles: function() {
+            this.mkdir('server');
         }
     },
 
