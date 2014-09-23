@@ -9,8 +9,9 @@ var getClientModules = function() {
     return [];
 };
 
-var ModuleGenerator = Class.extend({
+var ServiceGenerator = Class.extend({
     constructor: function() {
+
         Class.apply(this, arguments);
         this.createOptions();
 
@@ -18,7 +19,13 @@ var ModuleGenerator = Class.extend({
             type: String,
             required: false
         });
+
+        this.argument('servicename', {
+            type: String,
+            required: false
+        });
         this.modulename = this._.camelize(this._.slugify(this._.humanize(this.modulename)));
+        this.servicename = this._.camelize(this._.slugify(this._.humanize(this.servicename)));
     },
 
     initializing: function() {
@@ -46,21 +53,6 @@ var ModuleGenerator = Class.extend({
                 }
                 return true;
             }
-        }, {
-            name: 'servicename',
-            when: function() {
-                return this.servicename && this.servicename.length > 0;
-            },
-            message: 'What is the name of your service ?',
-            default: this.servicename,
-            validate: function(value) {
-                value = _.str.trim(value);
-                if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
-                    return 'Please enter a non empty name';
-                }
-
-                return true;
-            }
         }];
 
         this.prompt(prompts, function(answers) {
@@ -76,10 +68,10 @@ var ModuleGenerator = Class.extend({
     },
 
     writing: function() {
-        this.sourceRoot(path.join(__dirname, '../templates/module'));
-        var targetDir = path.join('client', 'scripts', this.modulename);
+        this.sourceRoot(path.join(__dirname, '../templates/service'));
+        var targetDir = path.join('client', 'scripts', this.modulename, 'services');
         this.mkdir(targetDir);
-        this.template('index.js', path.join(targetDir, 'index.js'));
+        this.template('index.js', path.join(targetDir, this.servicename + '.js'));
     },
 
     end: function() {
@@ -87,4 +79,4 @@ var ModuleGenerator = Class.extend({
     }
 });
 
-module.exports = ModuleGenerator;
+module.exports = ServiceGenerator;
