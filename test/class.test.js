@@ -25,6 +25,7 @@ describe('generator:class', function() {
         generator.createOptions();
         expect(generator.options).to.have.property('check-travis');
         expect(generator.options).to.have.property('check-git');
+        expect(generator.options).to.have.property('skip-welcome-message');
     });
 
     it('#checkTravis() should log when travis is installed', function() {
