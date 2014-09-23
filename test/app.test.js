@@ -15,11 +15,11 @@ describe('angular-famous-ionic:app', function() {
             .withPrompt({
                 someOption: true
             })
-            .on('ready', function() {
+            .on('ready', function(generator) {
                 var spyLog = sinon.spy();
-                helpers.stub(this.runGen.generator, 'log', spyLog);
+                helpers.stub(generator, 'log', spyLog);
                 done();
-            }.bind(this));
+            });
 
     });
 

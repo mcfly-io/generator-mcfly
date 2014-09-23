@@ -139,6 +139,10 @@ var AppGenerator = Class.extend({
         }
     },
 
+    install: function() {
+
+    },
+
     end: function() {
         this.installDependencies({
             skipInstall: this.options['skip-install'],
