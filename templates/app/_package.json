@@ -2,7 +2,7 @@
     "name": "<%= _.slugify(appname) %>",
     "version": "0.0.1",
     "scripts": {
-        "prepublish": "bash ./deploy/prepublish.sh",
+        "prepublish": "bash ./bin/prepublish.sh",
         "test": "gulp test"
     },
     "dependencies": {},

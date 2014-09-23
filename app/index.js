@@ -19,10 +19,15 @@ var AppGenerator = Class.extend({
     },
 
     initializing: function() {
+
         var done = this.async();
+
         this.pkg = require('../package.json');
         //this.checkGit();
-        this.checkTravis().then(done);
+
+        this.checkTravis().then(function() {
+            done();
+        });
 
     },
 
@@ -34,6 +39,7 @@ var AppGenerator = Class.extend({
             }
 
             this.composeWith('sublime:app');
+            this.composeWith('sublime:gulps');
         },
         askFor: function() {
             var done = this.async();
@@ -116,6 +122,7 @@ var AppGenerator = Class.extend({
             this.template('_package.json', 'package.json');
             this.template('_bower.json', 'bower.json');
             this.template('karma.conf.js');
+            this.template('bin/prepublish.sh');
         },
 
         clientfiles: function() {

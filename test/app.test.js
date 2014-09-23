@@ -29,6 +29,7 @@ describe('angular-famous-ionic:app', function() {
                 'package.json',
                 'bower.json',
                 'karma.conf.js',
+                'bin/prepublish.sh',
                 'client/index.html',
                 'client/styles/main.css',
                 'client/scripts/main.js'
@@ -36,4 +37,9 @@ describe('angular-famous-ionic:app', function() {
         });
 
     });
+
+    it('package.json should reference prepublish.sh');
+
+    it('should display woot message if installation is successfull');
+
 });
