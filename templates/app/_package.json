@@ -2,7 +2,7 @@
     "name": "<%= _.slugify(appname) %>",
     "version": "0.0.1",
     "scripts": {
-        "prepublish": "bash ./deploy/prepublish.sh",
+        "prepublish": "bash ./bin/prepublish.sh",
         "test": "gulp test"
     },
     "dependencies": {},
@@ -38,5 +38,33 @@
     },
     "engines": {
         "node": ">=0.10.0"
+    },
+    "browser": {
+        "angular": "./bower_components/angular/angular.js",
+        "angular-mocks": "./bower_components/angular-mocks/angular-mocks.js"
+    },
+    "browserify": {
+        "transform": [
+            "html2js-browserify",
+            "browserify-shim"
+        ]
+    },
+    "browserify-shim": {
+        "angular": {
+            "exports": "angular"
+        },
+        "angular-mocks": {
+            "depends": [
+                "angular"
+            ]
+        },
+        "angular-ui-router": {
+            "depends": [
+                "angular"
+            ]
+        },
+        "famous": {
+            "exports": "famous"
+        }
     }
 }

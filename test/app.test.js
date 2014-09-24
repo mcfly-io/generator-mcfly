@@ -15,11 +15,11 @@ describe('angular-famous-ionic:app', function() {
             .withPrompt({
                 someOption: true
             })
-            .on('ready', function() {
+            .on('ready', function(generator) {
                 var spyLog = sinon.spy();
-                helpers.stub(this.runGen.generator, 'log', spyLog);
+                helpers.stub(generator, 'log', spyLog);
                 done();
-            }.bind(this));
+            });
 
     });
 
@@ -27,9 +27,19 @@ describe('angular-famous-ionic:app', function() {
         this.runGen.on('end', function() {
             assert.file([
                 'package.json',
-                'bower.json'
+                'bower.json',
+                'karma.conf.js',
+                'bin/prepublish.sh',
+                'client/index.html',
+                'client/styles/main.css',
+                'client/scripts/main.js'
             ]);
         });
 
     });
+
+    it('package.json should reference prepublish.sh');
+
+    it('should display woot message if installation is successfull');
+
 });

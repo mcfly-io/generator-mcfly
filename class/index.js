@@ -47,6 +47,12 @@ module.exports = Base.extend({
             type: 'Boolean',
             defaults: true
         });
+
+        this.option('skip-welcome-message', {
+            desc: 'Skip the welcome message',
+            type: 'Boolean',
+            defaults: false
+        });
     },
 
     /**
