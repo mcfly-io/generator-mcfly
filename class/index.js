@@ -4,6 +4,8 @@ var updateNotifier = require('update-notifier');
 var Base = yeoman.generators.Base;
 var shell = require('shelljs');
 var chalk = require('chalk');
+var fs = require('fs');
+var path = require('path');
 var Q = require('q');
 
 /**
@@ -142,6 +144,30 @@ module.exports = Base.extend({
         choices.forEach(function(choice) {
             this[choice.value] = this.hasListOption(answers, name, choice.value);
         }.bind(this));
+    },
+
+    /**
+     * Get the list of directories given a path
+     * @param {String} dirPath - The path to start looking for sub diretories
+     *
+     * @returns {String[]} - An array of sub directories names
+     */
+    getDirectories: function(dirPath) {
+        var deferred = Q.defer();
+        fs.readdir(dirPath, function(err, files) {
+            if(err) {
+                deferred.reject(err);
+                return deferred.promise;
+            }
+
+            var result = files.filter(function(file) {
+                return fs.statSync(path.join(dirPath, file)).isDirectory();
+            });
+            deferred.resolve(result);
+
+        });
+
+        return deferred.promise;
     }
 
 });
