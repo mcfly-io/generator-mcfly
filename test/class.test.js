@@ -242,4 +242,11 @@ describe('generator:class', function() {
             assert.equal(err.name, 'Error');
         });
     });
+
+    it('#getClientModules should succeed', function() {
+        return generator.getClientModules().then(function(values) {
+            assert(Array.isArray(values));
+            assert.equal(values.length, 0);
+        });
+    });
 });

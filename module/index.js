@@ -4,11 +4,6 @@ var path = require('path');
 var _ = require('lodash');
 var Class = require('../class');
 
-// TODO : Implement this function
-var getClientModules = function() {
-    return [];
-};
-
 var ModuleGenerator = Class.extend({
     constructor: function() {
         Class.apply(this, arguments);
@@ -22,17 +17,26 @@ var ModuleGenerator = Class.extend({
     },
 
     initializing: function() {
-
+        var done = this.async();
+        var that = this;
+        this.clientModules = [];
+        this.getClientModules()
+            .then(function(modules) {
+                that.clientModules = modules;
+                done();
+            }, function() {
+                done();
+            });
     },
 
     prompting: function() {
 
         var done = this.async();
-
+        var that = this;
         var prompts = [{
             name: 'modulename',
             when: function() {
-                return !this.modulename || this.modulename.length <= 0;
+                return !that.modulename || that.modulename.length <= 0;
             },
             message: 'What is the name of your module ?',
             default: this.modulename,
@@ -41,31 +45,15 @@ var ModuleGenerator = Class.extend({
                 if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
                     return 'Please enter a non empty name';
                 }
-                if(_.contains(getClientModules(), value)) {
+                if(_.contains(that.clientModules, value)) {
                     return 'The module name ' + value + ' already exists';
                 }
-                return true;
-            }
-        }, {
-            name: 'servicename',
-            when: function() {
-                return this.servicename && this.servicename.length > 0;
-            },
-            message: 'What is the name of your service ?',
-            default: this.servicename,
-            validate: function(value) {
-                value = _.str.trim(value);
-                if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
-                    return 'Please enter a non empty name';
-                }
-
                 return true;
             }
         }];
 
         this.prompt(prompts, function(answers) {
             this.modulename = answers.modulename;
-            this.servicename = answers.servicename;
             done();
         }.bind(this));
 

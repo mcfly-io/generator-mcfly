@@ -9,7 +9,7 @@ var path = require('path');
 var Q = require('q');
 
 /**
- * The `Easy` generator has several helpers method to help with creating a new generator.
+ * The `Class` generator has several helpers method to help with creating a new generator.
  *
  * It can be used in place of the `Base` generator
  *
@@ -147,7 +147,7 @@ module.exports = Base.extend({
     },
 
     /**
-     * Get the list of directories given a path
+     * Get the list of directories given a path (Promise)
      * @param {String} dirPath - The path to start looking for sub diretories
      *
      * @returns {String[]} - An array of sub directories names
@@ -168,6 +168,15 @@ module.exports = Base.extend({
         });
 
         return deferred.promise;
+    },
+
+    /**
+     * Return the list of angularjs client modules (Promise)
+     *
+     * @returns {String[]} - An array of client modules
+     */
+    getClientModules: function() {
+        return this.getDirectories(path.join(this.destinationRoot(), 'client', 'scripts'));
     }
 
 });

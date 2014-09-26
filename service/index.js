@@ -4,11 +4,6 @@ var path = require('path');
 var _ = require('lodash');
 var Class = require('../class');
 
-// TODO : Implement this function
-var getClientModules = function() {
-    return [];
-};
-
 var ServiceGenerator = Class.extend({
     constructor: function() {
 
@@ -29,37 +24,70 @@ var ServiceGenerator = Class.extend({
     },
 
     initializing: function() {
-
+        var done = this.async();
+        var that = this;
+        this.clientModules = [];
+        this.getClientModules()
+            .then(function(modules) {
+                that.clientModules = modules;
+                done();
+            }, function() {
+                done();
+            });
     },
 
     prompting: function() {
 
         var done = this.async();
+        var that = this;
+
+        var choices = _.map(this.clientModules, function(module) {
+            return {
+                name: module,
+                value: module
+            };
+        });
 
         var prompts = [{
             name: 'modulename',
+            type: 'list',
+            choices: choices,
             when: function() {
-                return !this.modulename || this.modulename.length <= 0;
+                var result = !that.modulename || that.modulename.length <= 0;
+                return result;
             },
             message: 'What is the name of your module ?',
-            default: this.modulename,
+            default: that.modulename,
             validate: function(value) {
                 value = _.str.trim(value);
                 if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
                     return 'Please enter a non empty name';
                 }
-                if(_.contains(getClientModules(), value)) {
-                    return 'The module name ' + value + ' already exists';
+                if(!_.contains(that.clientModules, value)) {
+                    return 'The module name ' + value + ' does not exist';
+                }
+                return true;
+            }
+        }, {
+            name: 'servicename',
+            when: function() {
+                return !that.servicename || that.servicename.length <= 0;
+            },
+            message: 'How would like to name your service ?',
+            validate: function(value) {
+                value = _.str.trim(value);
+                if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
+                    return 'Please enter a non empty name';
                 }
                 return true;
             }
         }];
 
         this.prompt(prompts, function(answers) {
-            this.modulename = answers.modulename;
-            this.servicename = answers.servicename;
+            that.modulename = answers.modulename;
+            that.servicename = answers.servicename;
             done();
-        }.bind(this));
+        });
 
     },
 

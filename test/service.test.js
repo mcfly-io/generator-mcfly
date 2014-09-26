@@ -2,12 +2,12 @@
 
 var helpers = require('yeoman-generator').test;
 var testHelper = require('./testHelper');
-
+var _ = require('lodash');
 var modulename = 'common';
 var servicename = 'myService';
 
 describe('angular-famous-ionic:service', function() {
-    before(function(done) {
+    beforeEach(function() {
         this.runGen = testHelper.runGenerator('service')
             .withOptions({
                 'skip-install': true,
@@ -19,9 +19,14 @@ describe('angular-famous-ionic:service', function() {
                 servicename: servicename
             })
             .on('ready', function() {
+
+                this.runGen.generator.mkdir('client/scripts/toto');
+                this.runGen.generator.mkdir('client/scripts/tata');
+                this.runGen.generator.mkdir('client/scripts/common');
+
                 var spyLog = sinon.spy();
                 helpers.stub(this.runGen.generator, 'log', spyLog);
-                done();
+
             }.bind(this));
 
     });
@@ -35,4 +40,70 @@ describe('angular-famous-ionic:service', function() {
         });
 
     });
+
+    it('#getClientModules() should succeed', function(done) {
+        this.runGen.on('end', function() {
+            this.runGen.generator.getClientModules()
+                .then(function(modules) {
+                    assert(_.isEqual(modules, ['common', 'tata', 'toto']));
+                    done();
+                });
+        }.bind(this));
+    });
+
+    it('with empty servicename should throw an error', function(done) {
+        this.runGen
+            .withPrompt({
+                modulename: modulename,
+                servicename: ''
+            })
+            .on('end', function() {
+                assert(_.isEqual(this.runGen.generator.prompt.errors, [{
+                    name: 'servicename',
+                    message: 'Please enter a non empty name'
+                }]));
+                done();
+            }.bind(this));
+    });
+
+    it('with empty modulename should throw an error', function(done) {
+        this.runGen
+            .withPrompt({
+                modulename: ''
+            })
+            .on('end', function() {
+                assert(_.isEqual(this.runGen.generator.prompt.errors, [{
+                    name: 'modulename',
+                    message: 'Please enter a non empty name'
+                }]));
+                done();
+            }.bind(this));
+    });
+
+    it('with unknown modulename should throw an error', function(done) {
+        var missingModulename = 'dummy';
+        this.runGen
+            .withPrompt({
+                modulename: missingModulename
+            })
+            .on('end', function() {
+                assert(_.isEqual(this.runGen.generator.prompt.errors, [{
+                    name: 'modulename',
+                    message: 'The module name ' + missingModulename + ' does not exist'
+                }]));
+                done();
+            }.bind(this));
+    });
+
+    it('with argument modulename and servicename should not prompt', function(done) {
+        this.runGen
+            .withArguments([modulename, servicename])
+            .on('end', function() {
+                assert.equal(this.runGen.generator.modulename, modulename);
+                assert.equal(this.runGen.generator.servicename, servicename);
+                assert.equal(this.runGen.generator.prompt.errors, undefined);
+                done();
+            }.bind(this));
+    });
+
 });
