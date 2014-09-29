@@ -1,10 +1,10 @@
 'use strict';
 var serviceName = '<%= this.servicename %>';
 
-module.exports = function (app) {
+module.exports = function(app) {
 
-	app.factory(app.name + '.' + servicename, function () {
-		return {};
-	});
+    app.factory(app.name + '.' + servicename, function() {
+        return {};
+    });
 
-}; %
+};

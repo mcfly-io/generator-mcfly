@@ -17,12 +17,15 @@ describe('angular-famous-ionic:module', function() {
             .withPrompt({
                 modulename: modulename
             })
-            .on('ready', function() {
-                this.runGen.generator.mkdir('client/scripts/toto');
-                this.runGen.generator.mkdir('client/scripts/tata');
+            .on('ready', function(generator) {
+                if(!generator) {
+                    console.log('NO GENERATOR');
+                }
+                generator.mkdir('client/scripts/toto');
+                generator.mkdir('client/scripts/tata');
 
                 var spyLog = sinon.spy();
-                helpers.stub(this.runGen.generator, 'log', spyLog);
+                helpers.stub(generator, 'log', spyLog);
             }.bind(this));
 
     });

@@ -1,14 +1,20 @@
 'use strict';
 var moduleName = '<%= this.modulename %>';
 
-module.exports = function (namespace) {
+module.exports = function(namespace) {
 
-	var fullname = namespace + '.' + moduleName;
+    var fullname = namespace + '.' + moduleName;
 
-	var angular = require('angular');
-	var app = angular.module(fullname, []);
+    var angular = require('angular');
+    var app = angular.module(fullname, []);
 
-	require('./controllers')(app);
-	require('./directives')(app);
-	return app;
+    require('./configs')(app);
+    require('./constants')(app);
+    require('./controllers')(app);
+    require('./directives')(app);
+    require('./filters')(app);
+    require('./services')(app);
+    require('./values')(app);
+
+    return app;
 };
