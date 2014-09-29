@@ -3,6 +3,7 @@
 var path = require('path');
 var _ = require('lodash');
 var Class = require('../class');
+var utils = require('../utils');
 
 var ModuleGenerator = Class.extend({
     constructor: function() {
@@ -53,14 +54,19 @@ var ModuleGenerator = Class.extend({
         }];
 
         this.prompt(prompts, function(answers) {
-            this.modulename = answers.modulename;
+            this.modulename = this.modulename || answers.modulename;
             done();
         }.bind(this));
 
     },
 
     configuring: function() {
-
+        if(_.contains(this.clientModules, this.modulename)) {
+            var msg = 'The module name ' + this.modulename + ' already exists';
+            this.log(this.utils.chalk.red.bold('(ERROR) ') + msg);
+            var error = new Error(msg);
+            this.emit('error', error);
+        }
     },
 
     writing: function() {
@@ -71,7 +77,9 @@ var ModuleGenerator = Class.extend({
     },
 
     end: function() {
-
+        var done = this.async();
+        this.clientModules.push(this.modulename);
+        utils.injectModules(this.getClientScriptFolder(), this.clientModules).then(done);
     }
 });
 

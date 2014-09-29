@@ -249,4 +249,9 @@ describe('generator:class', function() {
             assert.equal(values.length, 0);
         });
     });
+
+    it('#getClientScriptFolder should succeed', function() {
+        var result = generator.getClientScriptFolder();
+        assert(_.endsWith(result, 'temp-test/client/scripts'));
+    });
 });

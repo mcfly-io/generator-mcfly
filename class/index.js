@@ -31,6 +31,7 @@ module.exports = Base.extend({
         };
         this.utils.shell = shell;
         this.utils.updateNotifier = updateNotifier;
+        this.utils.chalk = chalk;
     },
 
     /**
@@ -176,7 +177,16 @@ module.exports = Base.extend({
      * @returns {String[]} - An array of client modules
      */
     getClientModules: function() {
-        return this.getDirectories(path.join(this.destinationRoot(), 'client', 'scripts'));
+        return this.getDirectories(this.getClientScriptFolder());
+    },
+
+    /**
+     * Return the client script folder
+     *
+     * @returns {String} - The path of the client script folder
+     */
+    getClientScriptFolder: function() {
+        return path.join(this.destinationRoot(), 'client', 'scripts');
     }
 
 });

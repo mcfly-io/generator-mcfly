@@ -84,8 +84,8 @@ var ServiceGenerator = Class.extend({
         }];
 
         this.prompt(prompts, function(answers) {
-            that.modulename = answers.modulename;
-            that.servicename = answers.servicename;
+            that.modulename = that.modulename || answers.modulename;
+            that.servicename = that.servicename || answers.servicename;
             done();
         });
 

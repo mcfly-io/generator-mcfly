@@ -18,10 +18,8 @@ describe('angular-famous-ionic:module', function() {
                 modulename: modulename
             })
             .on('ready', function() {
-
                 this.runGen.generator.mkdir('client/scripts/toto');
                 this.runGen.generator.mkdir('client/scripts/tata');
-                this.runGen.generator.mkdir('client/scripts/common');
 
                 var spyLog = sinon.spy();
                 helpers.stub(this.runGen.generator, 'log', spyLog);
@@ -53,21 +51,32 @@ describe('angular-famous-ionic:module', function() {
             }.bind(this));
     });
 
-    it('with existing modulename should throw an error', function(done) {
+    it('with passing existing modulename should throw an error', function(done) {
         this.runGen
             .withPrompt({
-                modulename: modulename
+                modulename: 'toto'
             })
-            .on('end', function() {
+            .on('error', function(err) {
+                assert(err instanceof Error);
+                done();
+            });
+    });
+
+    it('with prompting existing modulename should throw an error', function(done) {
+        this.runGen
+            .withPrompt({
+                modulename: 'toto'
+            })
+            .on('error', function() {
                 assert(_.isEqual(this.runGen.generator.prompt.errors, [{
                     name: 'modulename',
-                    message: 'The module name ' + modulename + ' already exists'
+                    message: 'The module name toto already exists'
                 }]));
                 done();
             }.bind(this));
     });
 
-    it('with new modulename should throw an error', function(done) {
+    it('with new modulename should succeed', function(done) {
         this.runGen
             .withPrompt({
                 modulename: 'dummy'
@@ -78,7 +87,7 @@ describe('angular-famous-ionic:module', function() {
             }.bind(this));
     });
 
-    it('with argument modulename and servicename should not prompt', function(done) {
+    it('with argument modulename should not prompt', function(done) {
         this.runGen
             .withArguments([modulename])
             .on('end', function() {
