@@ -3,7 +3,6 @@
 var helpers = require('yeoman-generator').test;
 var testHelper = require('./testHelper');
 var _ = require('lodash');
-
 var modulename = 'common';
 
 describe('angular-famous-ionic:module', function() {
@@ -18,26 +17,41 @@ describe('angular-famous-ionic:module', function() {
                 modulename: modulename
             })
             .on('ready', function(generator) {
-                if(!generator) {
-                    console.log('NO GENERATOR');
-                }
                 generator.mkdir('client/scripts/toto');
                 generator.mkdir('client/scripts/tata');
 
                 var spyLog = sinon.spy();
                 helpers.stub(generator, 'log', spyLog);
-            }.bind(this));
+            });
 
     });
 
     it('creates files', function(done) {
         this.runGen.on('end', function() {
+            var folder = 'client/scripts/' + modulename;
+            var file = folder + '/index.js';
             assert.file([
-                'client/scripts/' + modulename + '/index.js'
+                file,
+                folder + '/configs/index.js',
+                folder + '/constants/index.js',
+                folder + '/controllers/index.js',
+                folder + '/directives/index.js',
+                folder + '/filters/index.js',
+                folder + '/services/index.js',
+                folder + '/values/index.js'
             ]);
             done();
         });
 
+    });
+
+    it('module file should contain module name', function(done) {
+        this.runGen.on('end', function() {
+            var file = 'client/scripts/' + modulename + '/index.js';
+            var body = testHelper.readTextFile(file);
+            assert(_.contains(body, 'var moduleName = \'' + modulename + '\';'));
+            done();
+        });
     });
 
     it('with empty modulename should throw an error', function(done) {

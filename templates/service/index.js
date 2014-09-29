@@ -1,5 +1,5 @@
 'use strict';
-var serviceName = '<%= this.servicename %>';
+var serviceName = '<%= servicename %>';
 
 module.exports = function(app) {
 

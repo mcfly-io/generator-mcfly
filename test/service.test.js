@@ -18,27 +18,54 @@ describe('angular-famous-ionic:service', function() {
                 modulename: modulename,
                 servicename: servicename
             })
-            .on('ready', function() {
+            .on('ready', function(generator) {
+                // create modules
+                generator.mkdir('client/scripts/toto');
+                generator.mkdir('client/scripts/tata');
+                generator.mkdir('client/scripts/common');
 
-                this.runGen.generator.mkdir('client/scripts/toto');
-                this.runGen.generator.mkdir('client/scripts/tata');
-                this.runGen.generator.mkdir('client/scripts/common');
+                // create an index file for common/services
+                generator.template('../../templates/module/services/index.js', 'client/scripts/common/services/index.js');
 
                 var spyLog = sinon.spy();
-                helpers.stub(this.runGen.generator, 'log', spyLog);
+                helpers.stub(generator, 'log', spyLog);
 
-            }.bind(this));
+            });
 
     });
 
     it('creates files', function(done) {
         this.runGen.on('end', function() {
+            var file = 'client/scripts/' + modulename + '/services/' + servicename + '.js';
             assert.file([
-                'client/scripts/' + modulename + '/services/' + servicename + '.js'
+                file
             ]);
+
             done();
         });
 
+    });
+
+    it('service file should contain service name', function(done) {
+        this.runGen.on('end', function() {
+            var folder = 'client/scripts/' + modulename + '/services';
+            var file = folder + '/' + servicename + '.js';
+            var body = testHelper.readTextFile(file);
+            assert(_.contains(body, 'var serviceName = \'' + servicename + '\';'));
+            done();
+        });
+    });
+
+    it('service index should reference service file', function(done) {
+        this.runGen.on('end', function() {
+            setTimeout(function() {
+                var folder = 'client/scripts/' + modulename + '/services';
+                var body = testHelper.readTextFile(folder + '/index.js');
+                assert(_.contains(body, 'require(\'./' + servicename + '\')(app);'));
+                done();
+            }, 200);
+
+        });
     });
 
     it('#getClientModules() should succeed', function(done) {

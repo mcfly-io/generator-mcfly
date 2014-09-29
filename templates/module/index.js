@@ -1,5 +1,5 @@
 'use strict';
-var moduleName = '<%= this.modulename %>';
+var moduleName = '<%= modulename %>';
 
 module.exports = function(namespace) {
 

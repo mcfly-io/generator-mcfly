@@ -2,12 +2,21 @@
 //var util = require('util');
 var path = require('path');
 var _ = require('lodash');
+var utils = require('../utils');
 var Class = require('../class');
 
 var ServiceGenerator = Class.extend({
     constructor: function() {
 
         Class.apply(this, arguments);
+        this.on('end', function() {
+            var done = this.async();
+            utils.injectComponent(path.join(this.getClientScriptFolder(), this.modulename, 'services')).then(function() {
+
+                done();
+            });
+        }.bind(this));
+
         this.createOptions();
 
         this.argument('modulename', {
@@ -96,10 +105,13 @@ var ServiceGenerator = Class.extend({
     },
 
     writing: function() {
+        var done = this.async();
         this.sourceRoot(path.join(__dirname, '../templates/service'));
         var targetDir = path.join('client', 'scripts', this.modulename, 'services');
         this.mkdir(targetDir);
         this.template('index.js', path.join(targetDir, this.servicename + '.js'));
+        done();
+
     },
 
     end: function() {
