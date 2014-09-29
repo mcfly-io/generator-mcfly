@@ -49,7 +49,7 @@ describe('angular-famous-ionic:module', function() {
         this.runGen.on('end', function() {
             var file = 'client/scripts/' + modulename + '/index.js';
             var body = testHelper.readTextFile(file);
-            assert(_.contains(body, 'var moduleName = \'' + modulename + '\';'));
+            assert(_.contains(body, 'var modulename = \'' + modulename + '\';'));
             done();
         });
     });

@@ -4,11 +4,11 @@ var helpers = require('yeoman-generator').test;
 var testHelper = require('./testHelper');
 var _ = require('lodash');
 var modulename = 'common';
-var servicename = 'myService';
+var controllername = 'myController';
 
-describe('angular-famous-ionic:service', function() {
+describe('angular-famous-ionic:controller', function() {
     beforeEach(function() {
-        this.runGen = testHelper.runGenerator('service')
+        this.runGen = testHelper.runGenerator('controller')
             .withOptions({
                 'skip-install': true,
                 'check-travis': false,
@@ -16,7 +16,7 @@ describe('angular-famous-ionic:service', function() {
             })
             .withPrompt({
                 modulename: modulename,
-                servicename: servicename
+                controllername: controllername
             })
             .on('ready', function(generator) {
                 // create modules
@@ -24,8 +24,8 @@ describe('angular-famous-ionic:service', function() {
                 generator.mkdir('client/scripts/tata');
                 generator.mkdir('client/scripts/common');
 
-                // create an index file for common/services
-                generator.template('../../templates/module/services/index.js', 'client/scripts/common/services/index.js');
+                // create an index file for common/controllers
+                generator.template('../../templates/module/controllers/index.js', 'client/scripts/common/controllers/index.js');
 
                 var spyLog = sinon.spy();
                 helpers.stub(generator, 'log', spyLog);
@@ -36,9 +36,9 @@ describe('angular-famous-ionic:service', function() {
 
     it('creates files', function(done) {
         this.runGen.on('end', function() {
-            var folder = 'client/scripts/' + modulename + '/services';
-            var file = folder + '/' + servicename + '.js';
-            var filetest = folder + '/' + servicename + '.test.js';
+            var folder = 'client/scripts/' + modulename + '/controllers';
+            var file = folder + '/' + controllername + '.js';
+            var filetest = folder + '/' + controllername + '.test.js';
             assert.file([
                 file,
                 filetest
@@ -49,22 +49,22 @@ describe('angular-famous-ionic:service', function() {
 
     });
 
-    it('service file should contain service name', function(done) {
+    it('controller file should contain controller name', function(done) {
         this.runGen.on('end', function() {
-            var folder = 'client/scripts/' + modulename + '/services';
-            var file = folder + '/' + servicename + '.js';
+            var folder = 'client/scripts/' + modulename + '/controllers';
+            var file = folder + '/' + controllername + '.js';
             var body = testHelper.readTextFile(file);
-            assert(_.contains(body, 'var servicename = \'' + servicename + '\';'));
+            assert(_.contains(body, 'var controllername = \'' + controllername + '\';'));
             done();
         });
     });
 
-    it('service index should reference service file', function(done) {
+    it('controllers index should reference controller file', function(done) {
         this.runGen.on('end', function() {
             setTimeout(function() {
-                var folder = 'client/scripts/' + modulename + '/services';
+                var folder = 'client/scripts/' + modulename + '/controllers';
                 var body = testHelper.readTextFile(folder + '/index.js');
-                assert(_.contains(body, 'require(\'./' + servicename + '\')(app);'));
+                assert(_.contains(body, 'require(\'./' + controllername + '\')(app);'));
                 done();
             }, 200);
 
@@ -81,15 +81,15 @@ describe('angular-famous-ionic:service', function() {
         }.bind(this));
     });
 
-    it('with empty servicename should throw an error', function(done) {
+    it('with empty controllername should throw an error', function(done) {
         this.runGen
             .withPrompt({
                 modulename: modulename,
-                servicename: ''
+                controllername: ''
             })
             .on('end', function() {
                 assert(_.isEqual(this.runGen.generator.prompt.errors, [{
-                    name: 'servicename',
+                    name: 'controllername',
                     message: 'Please enter a non empty name'
                 }]));
                 done();
@@ -125,12 +125,12 @@ describe('angular-famous-ionic:service', function() {
             }.bind(this));
     });
 
-    it('with argument modulename and servicename should not prompt', function(done) {
+    it('with argument modulename and controllername should not prompt', function(done) {
         this.runGen
-            .withArguments([modulename, servicename])
+            .withArguments([modulename, controllername])
             .on('end', function() {
                 assert.equal(this.runGen.generator.modulename, modulename);
-                assert.equal(this.runGen.generator.servicename, servicename);
+                assert.equal(this.runGen.generator.controllername, controllername);
                 assert.equal(this.runGen.generator.prompt.errors, undefined);
                 done();
             }.bind(this));

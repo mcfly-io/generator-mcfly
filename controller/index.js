@@ -5,14 +5,14 @@ var _ = require('lodash');
 var utils = require('../utils');
 var Class = require('../class');
 
-var ServiceGenerator = Class.extend({
+var ControllerGenerator = Class.extend({
     constructor: function() {
 
         Class.apply(this, arguments);
-
+        
         this.on('end', function() {
             var done = this.async();
-            utils.injectComponent(path.join(this.getClientScriptFolder(), this.modulename, 'services')).then(function() {
+            utils.injectComponent(path.join(this.getClientScriptFolder(), this.modulename, 'controllers')).then(function() {
                 done();
             });
         }.bind(this));
@@ -24,12 +24,12 @@ var ServiceGenerator = Class.extend({
             required: false
         });
 
-        this.argument('servicename', {
+        this.argument('controllername', {
             type: String,
             required: false
         });
         this.modulename = this._.camelize(this._.slugify(this._.humanize(this.modulename)));
-        this.servicename = this._.camelize(this._.slugify(this._.humanize(this.servicename)));
+        this.controllername = this._.camelize(this._.slugify(this._.humanize(this.controllername)));
     },
 
     initializing: function() {
@@ -78,11 +78,11 @@ var ServiceGenerator = Class.extend({
                 return true;
             }
         }, {
-            name: 'servicename',
+            name: 'controllername',
             when: function() {
-                return !that.servicename || that.servicename.length <= 0;
+                return !that.controllername || that.controllername.length <= 0;
             },
-            message: 'How would like to name your service ?',
+            message: 'How would like to name your controller ?',
             validate: function(value) {
                 value = _.str.trim(value);
                 if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
@@ -94,7 +94,7 @@ var ServiceGenerator = Class.extend({
 
         this.prompt(prompts, function(answers) {
             that.modulename = that.modulename || answers.modulename;
-            that.servicename = that.servicename || answers.servicename;
+            that.controllername = that.controllername || answers.controllername;
             done();
         });
 
@@ -106,11 +106,11 @@ var ServiceGenerator = Class.extend({
 
     writing: function() {
         var done = this.async();
-        this.sourceRoot(path.join(__dirname, '../templates/service'));
-        var targetDir = path.join('client', 'scripts', this.modulename, 'services');
+        this.sourceRoot(path.join(__dirname, '../templates/controller'));
+        var targetDir = path.join('client', 'scripts', this.modulename, 'controllers');
         this.mkdir(targetDir);
-        this.template('index.js', path.join(targetDir, this.servicename + '.js'));
-        this.template('index.test.js', path.join(targetDir, this.servicename + '.test.js'));
+        this.template('index.js', path.join(targetDir, this.controllername + '.js'));
+        this.template('index.test.js', path.join(targetDir, this.controllername + '.test.js'));
         done();
 
     },
@@ -120,4 +120,4 @@ var ServiceGenerator = Class.extend({
     }
 });
 
-module.exports = ServiceGenerator;
+module.exports = ControllerGenerator;

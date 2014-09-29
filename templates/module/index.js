@@ -1,9 +1,9 @@
 'use strict';
-var moduleName = '<%= modulename %>';
+var modulename = '<%= modulename %>';
 
 module.exports = function(namespace) {
 
-    var fullname = namespace + '.' + moduleName;
+    var fullname = namespace + '.' + modulename;
 
     var angular = require('angular');
     var app = angular.module(fullname, []);
