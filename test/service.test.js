@@ -36,9 +36,12 @@ describe('angular-famous-ionic:service', function() {
 
     it('creates files', function(done) {
         this.runGen.on('end', function() {
-            var file = 'client/scripts/' + modulename + '/services/' + servicename + '.js';
+            var folder = 'client/scripts/' + modulename + '/services';
+            var file = folder + '/' + servicename + '.js';
+            var filetest = folder + '/' + servicename + '.test.js';
             assert.file([
-                file
+                file,
+                filetest
             ]);
 
             done();
