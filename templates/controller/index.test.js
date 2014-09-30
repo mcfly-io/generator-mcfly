@@ -1,3 +1,5 @@
+'use strict';
+
 require('angular-mocks');
 var app = require('../')('app');
 var controllername = '<%= controllername %>';

@@ -30,6 +30,7 @@ describe('angular-famous-ionic:app', function() {
                 'bower.json',
                 'karma.conf.js',
                 'bin/prepublish.sh',
+                'client/.eslintrc',
                 'client/index.html',
                 'client/styles/main.css',
                 'client/scripts/main.js'

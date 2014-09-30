@@ -2,8 +2,8 @@
 var controllername = '<%= controllername %>';
 
 module.exports = function(app) {
-
-    app.factory(app.name + '.' + controllername, <%= controllername %>);
+    /*jshint validthis: true */
+    app.controller(app.name + '.' + controllername, <%= controllername %>);
 
     <%= controllername %>.$inject = [];
 
