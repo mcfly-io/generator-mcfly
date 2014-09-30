@@ -24,8 +24,8 @@ describe('angular-famous-ionic:service', function() {
                 generator.mkdir('client/scripts/tata');
                 generator.mkdir('client/scripts/common');
 
-                // create an index file for common/services
-                //generator.template('../../templates/module/services/index.js', 'client/scripts/common/services/index.js');
+                // create an index file for common
+                generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
 
                 var spyLog = sinon.spy();
                 helpers.stub(generator, 'log', spyLog);
@@ -56,6 +56,18 @@ describe('angular-famous-ionic:service', function() {
             var body = testHelper.readTextFile(file);
             assert(_.contains(body, 'var servicename = \'' + servicename + '\';'));
             done();
+        });
+    });
+
+    it('module should reference services folder', function(done) {
+        this.runGen.on('end', function() {
+            setTimeout(function() {
+                var folder = 'client/scripts/' + modulename;
+                var body = testHelper.readTextFile(folder + '/index.js');
+                assert(_.contains(body, 'require(\'./services\')(app);'));
+                done();
+            }, 200);
+
         });
     });
 

@@ -24,8 +24,8 @@ describe('angular-famous-ionic:controller', function() {
                 generator.mkdir('client/scripts/tata');
                 generator.mkdir('client/scripts/common');
 
-                // create an index file for common/controllers
-                // generator.template('../../templates/module/controllers/index.js', 'client/scripts/common/controllers/index.js');
+                // create an index file for common
+                generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
 
                 var spyLog = sinon.spy();
                 helpers.stub(generator, 'log', spyLog);
@@ -56,6 +56,18 @@ describe('angular-famous-ionic:controller', function() {
             var body = testHelper.readTextFile(file);
             assert(_.contains(body, 'var controllername = \'' + controllername + '\';'));
             done();
+        });
+    });
+
+    it('module should reference controllers folder', function(done) {
+        this.runGen.on('end', function() {
+            setTimeout(function() {
+                var folder = 'client/scripts/' + modulename;
+                var body = testHelper.readTextFile(folder + '/index.js');
+                assert(_.contains(body, 'require(\'./controllers\')(app);'));
+                done();
+            }, 200);
+
         });
     });
 

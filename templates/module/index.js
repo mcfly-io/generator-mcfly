@@ -7,14 +7,8 @@ module.exports = function(namespace) {
 
     var angular = require('angular');
     var app = angular.module(fullname, []);
+    // inject:folders start
 
-    require('./configs')(app);
-    require('./constants')(app);
-    require('./controllers')(app);
-    require('./directives')(app);
-    require('./filters')(app);
-    require('./services')(app);
-    require('./values')(app);
-
+    // inject:folders end
     return app;
 };

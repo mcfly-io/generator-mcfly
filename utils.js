@@ -39,6 +39,44 @@ exports.injectModules = function(directory, modules) {
 };
 
 /**
+ * Inject the list of angular sub components of the module file
+ * @param {Generator} generator - The generator
+ * @param {String} directory - The module folder
+ *
+ * @returns {Promise} - An empty promise after the injection is done
+ */
+exports.injectSubComponent = function(generator, directory) {
+    var deferred = Q.defer();
+    var mainFile = path.join(directory, 'index.js');
+
+    generator.getDirectories(directory)
+        .then(function(components) {
+            gulp.src(mainFile)
+                .pipe(ginject(gulp.src(mainFile, {
+                    read: false
+                }), {
+                    starttag: '// inject:folders start',
+                    endtag: '// inject:folders end',
+                    transform: function() {
+                        return _.map(_.sortBy(_.uniq(components)), function(component) {
+                            return 'require(\'./' + component + '\')(app);';
+                        }).join('\n    ') + '\n';
+                    }
+                }))
+                .pipe(gulp.dest(directory))
+                .on('error', function(err) {
+                    deferred.reject(err);
+                })
+                .on('end', function() {
+                    deferred.resolve();
+                });
+
+        });
+
+    return deferred.promise;
+};
+
+/**
  * Inject the list of angular components of the same kind in their index.js file
  * @param {String} directory - The folder containing the components
  *

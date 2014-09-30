@@ -9,12 +9,16 @@ var ControllerGenerator = Class.extend({
     constructor: function() {
 
         Class.apply(this, arguments);
-        
+        var that = this;
         this.on('end', function() {
-            var done = this.async();
-            utils.injectComponent(path.join(this.getClientScriptFolder(), this.modulename, 'controllers')).then(function() {
-                done();
-            });
+            var done = that.async();
+            utils.injectComponent(path.join(that.getClientScriptFolder(), that.modulename, 'controllers'))
+                .then(function() {
+                    return utils.injectSubComponent(that, path.join(that.getClientScriptFolder(), that.modulename));
+                })
+                .then(function() {
+                    done();
+                });
         }.bind(this));
 
         this.createOptions();
@@ -109,10 +113,10 @@ var ControllerGenerator = Class.extend({
         this.sourceRoot(path.join(__dirname, '../templates/controller'));
         var targetDir = path.join('client', 'scripts', this.modulename, 'controllers');
         this.mkdir(targetDir);
-        
+
         // make sure the controllers/index.js exist
         utils.createIndexFile(this, targetDir, '../module/controllers');
-      
+
         this.template('index.js', path.join(targetDir, this.controllername + '.js'));
         this.template('index.test.js', path.join(targetDir, this.controllername + '.test.js'));
         done();

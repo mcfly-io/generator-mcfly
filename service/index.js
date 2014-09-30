@@ -9,13 +9,17 @@ var ServiceGenerator = Class.extend({
     constructor: function() {
 
         Class.apply(this, arguments);
-
+        var that = this;
         this.on('end', function() {
-            var done = this.async();
-            utils.injectComponent(path.join(this.getClientScriptFolder(), this.modulename, 'services')).then(function() {
-                done();
-            });
-        }.bind(this));
+            var done = that.async();
+            utils.injectComponent(path.join(that.getClientScriptFolder(), that.modulename, 'services'))
+                .then(function() {
+                    return utils.injectSubComponent(that, path.join(that.getClientScriptFolder(), that.modulename));
+                })
+                .then(function() {
+                    done();
+                });
+        });
 
         this.createOptions();
 
