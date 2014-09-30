@@ -31,14 +31,7 @@ describe('angular-famous-ionic:module', function() {
             var folder = 'client/scripts/' + modulename;
             var file = folder + '/index.js';
             assert.file([
-                file,
-                folder + '/configs/index.js',
-                folder + '/constants/index.js',
-                folder + '/controllers/index.js',
-                folder + '/directives/index.js',
-                folder + '/filters/index.js',
-                folder + '/services/index.js',
-                folder + '/values/index.js'
+                file
             ]);
             done();
         });

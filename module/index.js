@@ -82,14 +82,14 @@ var ModuleGenerator = Class.extend({
         },
 
         writeFiles: function() {
-            var done = this.async();
-            var that = this;
-            this.getDirectories(this.sourceDir).then(function(components) {
-                _.forEach(components, function(component) {
-                    that.template(component + '/index.js', path.join(that.targetDir, component, 'index.js'));
-                });
-                done();
-            });
+            //var done = this.async();
+            //var that = this;
+            //this.getDirectories(this.sourceDir).then(function(components) {
+            //    _.forEach(components, function(component) {
+            //        that.template(component + '/index.js', path.join(that.targetDir, component, 'index.js'));
+            //    });
+            //    done();
+            //});
         }
     },
 

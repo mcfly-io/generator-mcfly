@@ -25,7 +25,7 @@ describe('angular-famous-ionic:service', function() {
                 generator.mkdir('client/scripts/common');
 
                 // create an index file for common/services
-                generator.template('../../templates/module/services/index.js', 'client/scripts/common/services/index.js');
+                //generator.template('../../templates/module/services/index.js', 'client/scripts/common/services/index.js');
 
                 var spyLog = sinon.spy();
                 helpers.stub(generator, 'log', spyLog);
@@ -59,7 +59,7 @@ describe('angular-famous-ionic:service', function() {
         });
     });
 
-    it('service index should reference service file', function(done) {
+    it('services/index.js should reference service file', function(done) {
         this.runGen.on('end', function() {
             setTimeout(function() {
                 var folder = 'client/scripts/' + modulename + '/services';

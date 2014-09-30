@@ -25,7 +25,7 @@ describe('angular-famous-ionic:controller', function() {
                 generator.mkdir('client/scripts/common');
 
                 // create an index file for common/controllers
-                generator.template('../../templates/module/controllers/index.js', 'client/scripts/common/controllers/index.js');
+                // generator.template('../../templates/module/controllers/index.js', 'client/scripts/common/controllers/index.js');
 
                 var spyLog = sinon.spy();
                 helpers.stub(generator, 'log', spyLog);
@@ -59,7 +59,7 @@ describe('angular-famous-ionic:controller', function() {
         });
     });
 
-    it('controllers index should reference controller file', function(done) {
+    it('controllers/index.js should reference controller file', function(done) {
         this.runGen.on('end', function() {
             setTimeout(function() {
                 var folder = 'client/scripts/' + modulename + '/controllers';

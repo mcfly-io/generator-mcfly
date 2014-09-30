@@ -4,7 +4,15 @@ var ginject = require('gulp-inject');
 var Q = require('q');
 var path = require('path');
 var _ = require('lodash');
+var fs = require('fs');
 
+/**
+ * Inject the list of angular modules of the main.js file
+ * @param {String} directory - The folder containing the modules
+ * @param {String[]} modules - The list of modules
+ *
+ * @returns {Promise} - An empty promise after the injection is done
+ */
 exports.injectModules = function(directory, modules) {
     var deferred = Q.defer();
     var mainFile = path.join(directory, 'main.js');
@@ -30,6 +38,12 @@ exports.injectModules = function(directory, modules) {
     return deferred.promise;
 };
 
+/**
+ * Inject the list of angular components of the same kind in their index.js file
+ * @param {String} directory - The folder containing the components
+ *
+ * @returns {Promise} - An empty promise after the injection is done
+ */
 exports.injectComponent = function(directory) {
     var deferred = Q.defer();
     var mainFile = path.join(directory, 'index.js');
@@ -64,4 +78,19 @@ exports.injectComponent = function(directory) {
             deferred.resolve();
         });
     return deferred.promise;
+};
+
+/**
+ * Create an index.js file for an angular component (service, directive, etc..)
+ * for referencing all the components of same kind in the folder
+ * @param {Generator} generator - The generator
+ * @param {String} targetDir - The folder were the file should be created
+ * @param {String} sourceDir - The folder were the template file is located (for example '../module/services')
+ *
+ * @returns {void}
+ */
+exports.createIndexFile = function(generator, targetDir, sourceDir) {
+    if(!fs.existsSync(path.join(targetDir, 'index.js'))) {
+        generator.template(sourceDir + '/index.js', path.join(targetDir, 'index.js'));
+    }
 };

@@ -109,6 +109,10 @@ var ServiceGenerator = Class.extend({
         this.sourceRoot(path.join(__dirname, '../templates/service'));
         var targetDir = path.join('client', 'scripts', this.modulename, 'services');
         this.mkdir(targetDir);
+
+        // make sure the services/index.js exist
+        utils.createIndexFile(this, targetDir, '../module/services');
+
         this.template('index.js', path.join(targetDir, this.servicename + '.js'));
         this.template('index.test.js', path.join(targetDir, this.servicename + '.test.js'));
         done();
