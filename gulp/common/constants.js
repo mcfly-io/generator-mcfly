@@ -24,7 +24,7 @@ module.exports = function() {
         },
 
         mocha: {
-            libs: ['app/**/*.js', 'class/**/*.js', 'module/**/*.js', 'service/**/*.js'],
+            libs: ['app/**/*.js', 'class/**/*.js', 'module/**/*.js', 'controller/**/*.js', 'service/**/*.js'],
             tests: ['test/**/*.js'],
             globals: 'test/helpers/globals.js',
             timeout: 5000
