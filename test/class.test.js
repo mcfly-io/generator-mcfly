@@ -2,6 +2,8 @@
 
 var testHelper = require('./testHelper');
 var chalk = require('chalk');
+var _ = require('lodash');
+var path = require('path');
 var Class = require('../class');
 
 describe('generator:class', function() {
@@ -225,5 +227,31 @@ describe('generator:class', function() {
             assert(generator.cookiesModule === false);
             assert(generator.resourceModule === false);
         });
+    });
+
+    it('#getDirectories() with a valid path should resolve the promise', function() {
+        var dir = path.join(__dirname, '..');
+        return generator.getDirectories(dir).then(function(directories) {
+            assert(_.contains(directories, 'class'));
+            assert.equal(_.contains(directories, 'gulpfile.js'), false);
+        });
+    });
+
+    it('#getDirectories() with an invalid path should reject the promise', function() {
+        return generator.getDirectories('dummy').then(undefined, function(err) {
+            assert.equal(err.name, 'Error');
+        });
+    });
+
+    it('#getClientModules should succeed', function() {
+        return generator.getClientModules().then(function(values) {
+            assert(Array.isArray(values));
+            assert.equal(values.length, 0);
+        });
+    });
+
+    it('#getClientScriptFolder should succeed', function() {
+        var result = generator.getClientScriptFolder();
+        assert(_.endsWith(result, 'temp-test/client/scripts'));
     });
 });

@@ -1,0 +1,12 @@
+{
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "angular": true,
+    "inject": true
+  },
+  "rules": {
+    "consistent-this": [1,  "vm"]
+  }
+}

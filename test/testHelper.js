@@ -107,10 +107,15 @@ var testHelper = {
         var deps = _.map(subs, function(sub) {
             return [helpers.createDummyGenerator(), sub];
         });
-        return helpers
+        var runGen = helpers
             .run(path.join(__dirname, '../' + name))
             .inDir(path.join(os.tmpdir(), './temp-test'))
-            .withGenerators(deps);
+            .withGenerators(deps)
+            .on('ready', function() {
+                // TODO : Monkey patching waiting for pull request #648
+                runGen.generator.on('error', runGen.emit.bind(runGen, 'error'));
+            });
+        return runGen;
     },
 
     /**

@@ -23,17 +23,19 @@ describe('angular-famous-ionic:app', function() {
 
     });
 
-    it('creates files', function() {
+    it('creates files', function(done) {
         this.runGen.on('end', function() {
             assert.file([
                 'package.json',
                 'bower.json',
                 'karma.conf.js',
                 'bin/prepublish.sh',
+                'client/.eslintrc',
                 'client/index.html',
                 'client/styles/main.css',
                 'client/scripts/main.js'
             ]);
+            done();
         });
 
     });

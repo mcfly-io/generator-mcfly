@@ -19,7 +19,10 @@
   },
   "files": [
     "app",
-    "templates"
+    "module",
+    "service",
+    "templates",
+    "utils.js"
   ],
   "preferGlobal": true,
   "keywords": [
@@ -35,6 +38,9 @@
   ],
   "dependencies": {
     "chalk": "^0.5.1",
+    "gulp": "^3.8.8",
+    "gulp-inject": "^1.0.2",
+    "lodash": "^2.4.1",
     "marked": "^0.3.2",
     "q": "^1.0.1",
     "shelljs": "^0.3.0",
@@ -62,7 +68,6 @@
     "jshint-stylish": "^0.4.0",
     "karma": "^0.12.23",
     "karma-growl-reporter": "^0.1.1",
-    "lodash": "^2.4.1",
     "map-stream": "^0.1.0",
     "marked": "^0.3.2",
     "mocha": "^1.21.4",
@@ -78,6 +83,6 @@
   },
   "peerDependencies": {
     "yo": ">=1.0.0",
-    "generator-sublime": ">=1.1.19"
+    "generator-sublime": ">=1.1.13"
   }
 }
