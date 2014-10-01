@@ -35,7 +35,7 @@ var AppGenerator = Class.extend({
         welcome: function() {
             // Have Yeoman greet the user.
             if(!this.options['skip-welcome-message']) {
-                this.log(yosay('Welcome to the bedazzling AngularFamousIonic generator!'));
+                this.log(yosay('Welcome to the amazing angular-famous-ionic generator!'));
             }
 
             this.composeWith('sublime:app');
