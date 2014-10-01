@@ -21,7 +21,7 @@ describe(app.name, function() {
                 });
             }));
 
-            it('controller should be defined', function() {
+            it('should be defined', function() {
                 expect(this.controller).toBeDefined();
             });
             

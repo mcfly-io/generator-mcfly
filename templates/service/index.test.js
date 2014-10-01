@@ -16,7 +16,7 @@ describe(app.name, function() {
                 this.service = $injector.get(app.name + '.' + servicename);
             }));
 
-            it('should_be_defined', function() {
+            it('should be defined', function() {
                 expect(this.service).toBeDefined();
             });
 

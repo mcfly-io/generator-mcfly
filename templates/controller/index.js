@@ -9,12 +9,9 @@ module.exports = function(app) {
 
     function <%= controllername %>() {
         var vm = this;
-
+        var activate = function() {
+            
+        };
         activate();
-
-        function activate() {
-
-        }
-
-    };
+    }
 };

@@ -3,19 +3,19 @@ var servicename = '<%= servicename %>';
 
 module.exports = function(app) {
 
-    app.factory(app.name + '.' + servicename, <%= servicename %>); 
-
-    <%= servicename %>.$inject = [];
-
+    var dependencies = [];
     function <%= servicename %>() {
-        var service = {
-            add: add
-        };
-        return service;
-        //////////////////
 
-        function add(a, b) {
+        var add = function(a, b) {
             return a + b;
-        }
-    };
+        };
+
+        return {
+            add : add
+        };
+    }
+
+    <%= servicename %>.$inject = dependencies;
+    app.factory(app.name + '.' + servicename, <%= servicename %>);
+
 };

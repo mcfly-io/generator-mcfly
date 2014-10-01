@@ -24,8 +24,8 @@ exports.injectModules = function(directory, modules) {
             endtag: ']);',
             transform: function() {
                 return _.map(_.sortBy(_.uniq(modules)), function(module) {
-                    return 'require(\'./' + module + '\')(namespace).name';
-                }).join(',' + '\n    ') + '\n';
+                    return '    require(\'./' + module + '\')(namespace).name';
+                }).join(',' + '\n');
             }
         }))
         .pipe(gulp.dest(directory))
@@ -98,13 +98,12 @@ exports.injectComponent = function(directory) {
         .pipe(ginject(gulp.src(searchFiles, {
             read: false
         }), {
-            starttag: 'module.exports = function(app) {',
-            endtag: '};',
+            starttag: '// inject:start',
+            endtag: '// inject:end',
             transform: function(filepath) {
                 var paths = filepath.split('/');
                 var filename = paths[paths.length - 1];
                 filename = filename.replace('.js', '');
-
                 return 'require(\'./' + filename + '\')(app);';
             }
         }))

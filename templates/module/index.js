@@ -8,7 +8,6 @@ module.exports = function(namespace) {
     var angular = require('angular');
     var app = angular.module(fullname, []);
     // inject:folders start
-
     // inject:folders end
     return app;
 };
