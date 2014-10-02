@@ -2,9 +2,11 @@
 
 var namespace = 'main';
 
-require('angular');
+var angular = require('angular');
 
 var app = angular.module(namespace, [
+    // inject:modules start
+    // inject:modules end
 ]);
 
 module.exports = app;

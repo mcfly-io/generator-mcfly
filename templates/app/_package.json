@@ -41,7 +41,12 @@
     },
     "browser": {
         "angular": "./bower_components/angular/angular.js",
-        "angular-mocks": "./bower_components/angular-mocks/angular-mocks.js"
+        "angular-mocks": "./bower_components/angular-mocks/angular-mocks.js"<% if(ionic) { %>,
+        "angular-ui-router": "./bower_components/angular-ui-router/release/angular-ui-router.js",
+        "angular-animate": "./bower_components/angular-animate/angular-animate.js",
+        "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.js",
+        "ionic": "./bower_components/ionic/release/js/ionic.js",  
+        "angular-ionic": "./bower_components/ionic/release/js/ionic-angular.js"<% } %>
     },
     "browserify": {
         "transform": [
@@ -54,6 +59,7 @@
             "exports": "angular"
         },
         "angular-mocks": {
+            "exports": "angular",
             "depends": [
                 "angular"
             ]
@@ -63,6 +69,18 @@
                 "angular"
             ]
         },
+        <% if(ionic) { %>
+        "angular-ionic": {
+          "exports": "ionic",
+          "depends": [
+            "ionic",
+            "angular",
+            "angular-animate",
+            "angular-sanitize",
+            "angular-ui-router"
+          ]
+        },
+        <% } %>
         "famous": {
             "exports": "famous"
         }

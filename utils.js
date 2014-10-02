@@ -20,12 +20,12 @@ exports.injectModules = function(directory, modules) {
         .pipe(ginject(gulp.src(mainFile, {
             read: false
         }), {
-            starttag: 'var app = angular.module(namespace, [',
-            endtag: ']);',
+            starttag: '// inject:modules start',
+            endtag: '// inject:modules end',
             transform: function() {
                 return _.map(_.sortBy(_.uniq(modules)), function(module) {
-                    return '    require(\'./' + module + '\')(namespace).name';
-                }).join(',' + '\n');
+                    return 'require(\'./' + module + '\')(namespace).name';
+                }).join(',' + '\n    ');
             }
         }))
         .pipe(gulp.dest(directory))
