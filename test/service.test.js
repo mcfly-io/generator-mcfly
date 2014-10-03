@@ -1,6 +1,5 @@
 'use strict';
 
-var helpers = require('yeoman-generator').test;
 var testHelper = require('./testHelper');
 var _ = require('lodash');
 var modulename = 'common';
@@ -19,6 +18,8 @@ describe('angular-famous-ionic:service', function() {
                 servicename: servicename
             })
             .on('ready', function(generator) {
+                generator.log = sinon.spy();
+
                 // create modules
                 generator.mkdir('client/scripts/toto');
                 generator.mkdir('client/scripts/tata');
@@ -26,9 +27,6 @@ describe('angular-famous-ionic:service', function() {
 
                 // create an index file for common
                 generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
-
-                var spyLog = sinon.spy();
-                helpers.stub(generator, 'log', spyLog);
 
             });
 

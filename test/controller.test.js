@@ -1,7 +1,7 @@
 'use strict';
 
-var helpers = require('yeoman-generator').test;
 var testHelper = require('./testHelper');
+var Q = require('q');
 var _ = require('lodash');
 var modulename = 'common';
 var controllername = 'myController';
@@ -19,6 +19,7 @@ describe('angular-famous-ionic:controller', function() {
                 controllername: controllername
             })
             .on('ready', function(generator) {
+                generator.log = sinon.spy();
                 // create modules
                 generator.mkdir('client/scripts/toto');
                 generator.mkdir('client/scripts/tata');
@@ -26,9 +27,6 @@ describe('angular-famous-ionic:controller', function() {
 
                 // create an index file for common
                 generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
-
-                var spyLog = sinon.spy();
-                helpers.stub(generator, 'log', spyLog);
 
             });
 
@@ -81,6 +79,37 @@ describe('angular-famous-ionic:controller', function() {
             }, 200);
 
         });
+    });
+
+    it('should emit error when no module', function(done) {
+        this.runGen.on('ready', function() {
+
+        }).on('end', function() {
+            var ctx = testHelper.runGenerator('controller')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename,
+                    controllername: controllername
+                })
+                .on('ready', function(generator) {
+                    generator.log = sinon.spy();
+                    generator.getClientModules = function() {
+                        var deferred = Q.defer();
+                        deferred.reject('an error occured');
+                        return deferred.promise;
+                    };
+                })
+                .on('error', function(err) {
+                    assert(ctx.generator.log.calledOnce);
+                    assert.equal(err, 'No module found');
+                    done();
+                });
+        });
+
     });
 
     it('#getClientModules() should succeed', function(done) {

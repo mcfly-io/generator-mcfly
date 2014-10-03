@@ -39,8 +39,8 @@ var AppGenerator = Class.extend({
             }
 
             this.composeWith('sublime:app', {
-                options : {
-                    'skip-welcome-message' : true
+                options: {
+                    'skip-welcome-message': true
                 }
             });
             this.composeWith('sublime:gulps');
@@ -113,7 +113,9 @@ var AppGenerator = Class.extend({
     },
 
     configuring: function() {
-
+        this.config.set('ionic', this.ionic);
+        this.config.set('famous', this.famous);
+        this.config.set('bootstrap', this.bootstrap);
     },
 
     writing: {
