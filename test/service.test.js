@@ -1,6 +1,7 @@
 'use strict';
 
 var testHelper = require('./testHelper');
+var Q = require('q');
 var _ = require('lodash');
 var modulename = 'common';
 var servicename = 'myService';
@@ -146,4 +147,33 @@ describe('angular-famous-ionic:service', function() {
             }.bind(this));
     });
 
+    it('should emit error when no module', function(done) {
+        this.runGen.on('ready', function() {
+
+        }).on('end', function() {
+            var ctx = testHelper.runGenerator('service')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename,
+                    servicename: servicename
+                })
+                .on('ready', function(generator) {
+                    generator.log = sinon.spy();
+                    generator.getClientModules = function() {
+                        var deferred = Q.defer();
+                        deferred.reject('an error occured');
+                        return deferred.promise;
+                    };
+                })
+                .on('error', function(err) {
+                    assert(ctx.generator.log.calledOnce);
+                    assert.equal(err, 'No module found');
+                    done();
+                });
+        });
+    });
 });

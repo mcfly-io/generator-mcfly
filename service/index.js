@@ -45,7 +45,8 @@ var ServiceGenerator = Class.extend({
                 that.clientModules = modules;
                 done();
             }, function() {
-                done();
+                that.log(that.utils.chalk.red('No module could be found. Please run \'yo angular-famous-ionic:module\' to create one.'));
+                that.emit('error', 'No module found');
             });
     },
 
