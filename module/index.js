@@ -26,6 +26,7 @@ var ModuleGenerator = Class.extend({
                 that.clientModules = modules;
                 done();
             }, function() {
+                that.emit('error', 'No module found');
                 done();
             });
     },
@@ -79,17 +80,6 @@ var ModuleGenerator = Class.extend({
             this.mkdir(this.targetDir);
             this.template('index.js', path.join(this.targetDir, 'index.js'));
             done();
-        },
-
-        writeFiles: function() {
-            //var done = this.async();
-            //var that = this;
-            //this.getDirectories(this.sourceDir).then(function(components) {
-            //    _.forEach(components, function(component) {
-            //        that.template(component + '/index.js', path.join(that.targetDir, component, 'index.js'));
-            //    });
-            //    done();
-            //});
         }
     },
 

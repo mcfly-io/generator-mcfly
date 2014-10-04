@@ -103,13 +103,13 @@ var testHelper = {
      * @returns {RunContext} - runContext
      */
     runGenerator: function(name, subs) {
-
         var deps = _.map(subs, function(sub) {
             return [helpers.createDummyGenerator(), sub];
         });
         var runGen = helpers
             .run(path.join(__dirname, '../' + name))
-            .inDir(path.join(os.tmpdir(), './temp-test'))
+        //.inDir(path.join(os.tmpdir(), guid, 'temp-test'))
+        .inDir(path.join(os.tmpdir(), './temp-test'))
             .withGenerators(deps)
             .on('ready', function() {
                 // TODO : Monkey patching waiting for pull request #648
@@ -139,6 +139,15 @@ var testHelper = {
         var env = this.env = generators();
         env.registerStub(baseClass.extend(methods), 'dummy');
         return env.create('dummy');
+    },
+
+    /**
+     * Generate a 16 characters random string
+     *
+     * @returns {String} - A 16 characters randome string
+     */
+    generateRandomString: function() {
+        return Math.random().toString(36).slice(2);
     }
 };
 

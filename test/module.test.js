@@ -2,107 +2,144 @@
 
 var testHelper = require('./testHelper');
 var _ = require('lodash');
+var Q = require('q');
 var modulename = 'common';
 
 describe('angular-famous-ionic:module', function() {
-    beforeEach(function() {
-        this.runGen = testHelper.runGenerator('module')
-            .withOptions({
-                'skip-install': true,
-                'check-travis': false,
-                'check-git': true
-            })
-            .withPrompt({
-                modulename: modulename
-            })
-            .on('ready', function(generator) {
-                generator.log = sinon.spy();
 
-                generator.mkdir('client/scripts/toto');
-                generator.mkdir('client/scripts/tata');
+    describe('general test', function() {
+        beforeEach(function() {
+            this.runGen = testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.log = sinon.spy();
 
-            });
+                    generator.mkdir('client/scripts/toto');
+                    generator.mkdir('client/scripts/tata');
 
-    });
+                });
 
-    it('creates files', function(done) {
-        this.runGen.on('end', function() {
-            var folder = 'client/scripts/' + modulename;
-            var file = folder + '/index.js';
-            assert.file([
-                file
-            ]);
-            done();
         });
 
-    });
+        it('creates files', function(done) {
+            this.runGen.on('end', function() {
+                var folder = 'client/scripts/' + modulename;
+                var file = folder + '/index.js';
+                assert.file([
+                    file
+                ]);
+                done();
+            });
 
-    it('module file should contain module name', function(done) {
-        this.runGen.on('end', function() {
-            var file = 'client/scripts/' + modulename + '/index.js';
-            var body = testHelper.readTextFile(file);
-            assert(_.contains(body, 'var modulename = \'' + modulename + '\';'));
-            done();
+        });
+
+        it('module file should contain module name', function(done) {
+            this.runGen.on('end', function() {
+                var file = 'client/scripts/' + modulename + '/index.js';
+                var body = testHelper.readTextFile(file);
+                assert(_.contains(body, 'var modulename = \'' + modulename + '\';'));
+                done();
+            });
+        });
+
+        it('with empty modulename should throw an error', function(done) {
+            this.runGen
+                .withPrompt({
+                    modulename: ''
+                })
+                .on('end', function() {
+                    assert(_.isEqual(this.runGen.generator.prompt.errors, [{
+                        name: 'modulename',
+                        message: 'Please enter a non empty name'
+                    }]));
+                    done();
+                }.bind(this));
+        });
+
+        it('with passing existing modulename should throw an error', function(done) {
+            this.runGen
+                .withPrompt({
+                    modulename: 'toto'
+                })
+                .on('error', function(err) {
+                    assert(err instanceof Error);
+                    done();
+                });
+        });
+
+        it('with prompting existing modulename should throw an error', function(done) {
+            this.runGen
+                .withPrompt({
+                    modulename: 'toto'
+                })
+                .on('error', function() {
+                    assert(_.isEqual(this.runGen.generator.prompt.errors, [{
+                        name: 'modulename',
+                        message: 'The module name toto already exists'
+                    }]));
+                    done();
+                }.bind(this));
+        });
+
+        it('with new modulename should succeed', function(done) {
+            this.runGen
+                .withPrompt({
+                    modulename: 'dummy'
+                })
+                .on('end', function() {
+                    assert(_.isEqual(this.runGen.generator.prompt.errors, undefined));
+                    done();
+                }.bind(this));
+        });
+
+        it('with argument modulename should not prompt', function(done) {
+            this.runGen
+                .withArguments([modulename])
+                .on('end', function() {
+                    assert.equal(this.runGen.generator.modulename, modulename);
+                    assert.equal(this.runGen.generator.prompt.errors, undefined);
+                    done();
+                }.bind(this));
         });
     });
 
-    it('with empty modulename should throw an error', function(done) {
-        this.runGen
-            .withPrompt({
-                modulename: ''
-            })
-            .on('end', function() {
-                assert(_.isEqual(this.runGen.generator.prompt.errors, [{
-                    name: 'modulename',
-                    message: 'Please enter a non empty name'
-                }]));
-                done();
-            }.bind(this));
+    describe('when getClientModules fails', function() {
+
+        it('should emit error when #getClientModules() fails', function(done) {
+            testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.log = sinon.spy();
+                    generator.getClientModules = function() {
+
+                        var deferred = Q.defer();
+                        deferred.reject('an error occured');
+                        return deferred.promise;
+                    };
+                })
+                .on('error', function(err) {
+                    assert.equal(err, 'No module found');
+                    //done();
+                })
+                .on('end', function() {
+                    done();
+                });
+
+        });
     });
 
-    it('with passing existing modulename should throw an error', function(done) {
-        this.runGen
-            .withPrompt({
-                modulename: 'toto'
-            })
-            .on('error', function(err) {
-                assert(err instanceof Error);
-                done();
-            });
-    });
-
-    it('with prompting existing modulename should throw an error', function(done) {
-        this.runGen
-            .withPrompt({
-                modulename: 'toto'
-            })
-            .on('error', function() {
-                assert(_.isEqual(this.runGen.generator.prompt.errors, [{
-                    name: 'modulename',
-                    message: 'The module name toto already exists'
-                }]));
-                done();
-            }.bind(this));
-    });
-
-    it('with new modulename should succeed', function(done) {
-        this.runGen
-            .withPrompt({
-                modulename: 'dummy'
-            })
-            .on('end', function() {
-                assert(_.isEqual(this.runGen.generator.prompt.errors, undefined));
-                done();
-            }.bind(this));
-    });
-
-    it('with argument modulename should not prompt', function(done) {
-        this.runGen
-            .withArguments([modulename])
-            .on('end', function() {
-                assert.equal(this.runGen.generator.modulename, modulename);
-                assert.equal(this.runGen.generator.prompt.errors, undefined);
-                done();
-            }.bind(this));
-    });
 });
