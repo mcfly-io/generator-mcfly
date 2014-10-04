@@ -116,6 +116,7 @@ var AppGenerator = Class.extend({
         this.config.set('ionic', this.ionic);
         this.config.set('famous', this.famous);
         this.config.set('bootstrap', this.bootstrap);
+        this.config.forceSave();
     },
 
     writing: {
