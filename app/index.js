@@ -38,7 +38,11 @@ var AppGenerator = Class.extend({
                 this.log(yosay('Welcome to the amazing angular-famous-ionic generator!'));
             }
 
-            this.composeWith('sublime:app');
+            this.composeWith('sublime:app', {
+                options: {
+                    'skip-welcome-message': true
+                }
+            });
             this.composeWith('sublime:gulps');
         },
         askFor: function() {
@@ -109,7 +113,9 @@ var AppGenerator = Class.extend({
     },
 
     configuring: function() {
-
+        this.config.set('ionic', this.ionic);
+        this.config.set('famous', this.famous);
+        this.config.set('bootstrap', this.bootstrap);
     },
 
     writing: {

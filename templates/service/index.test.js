@@ -1,5 +1,5 @@
 'use strict';
-require('angular-mocks');
+var angular = require('angular-mocks');
 var app = require('../')('app');
 var servicename = '<%= servicename %>';
 describe(app.name, function() {

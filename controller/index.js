@@ -40,12 +40,20 @@ var ControllerGenerator = Class.extend({
         var done = this.async();
         var that = this;
         this.clientModules = [];
+        var emitError = function() {
+            that.log(that.utils.chalk.red('No module could be found. Please run \'yo angular-famous-ionic:module\' to create one.'));
+            that.emit('error', 'No module found');
+            done();
+        };
         this.getClientModules()
             .then(function(modules) {
+                if(!_.isArray(modules) || modules.length <= 0) {
+                    emitError();
+                }
                 that.clientModules = modules;
                 done();
             }, function() {
-                done();
+                emitError();
             });
     },
 

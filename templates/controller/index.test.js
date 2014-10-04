@@ -1,6 +1,6 @@
 'use strict';
 
-require('angular-mocks');
+var angular = require('angular-mocks');
 var app = require('../')('app');
 var controllername = '<%= controllername %>';
 describe(app.name, function() {
@@ -24,7 +24,7 @@ describe(app.name, function() {
             it('should be defined', function() {
                 expect(this.controller).toBeDefined();
             });
-            
+
         });
     });
 });
