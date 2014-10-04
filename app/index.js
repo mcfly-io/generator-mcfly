@@ -138,7 +138,7 @@ var AppGenerator = Class.extend({
             this.mkdir('client/scripts');
             this.template('client/_eslintrc', 'client/.eslintrc');
             this.template('client/index.html');
-            this.template('client/styles/main.css');
+            this.template('client/styles/main.scss');
             this.template('client/scripts/main.js');
         },
 

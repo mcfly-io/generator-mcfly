@@ -1,0 +1,12 @@
+<% if(ionic) { %>
+@import "../../bower_components/ionic/scss/ionic.scss";
+<% } %>
+
+body {
+    background-color: white;
+}
+
+h1 {
+    color:red;
+	text-decoration: underline
+}
