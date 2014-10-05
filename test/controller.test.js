@@ -20,6 +20,7 @@ describe('angular-famous-ionic:controller', function() {
                     controllername: controllername
                 })
                 .on('ready', function(generator) {
+
                     generator.log = sinon.spy();
                     // create modules
                     generator.mkdir('client/scripts/toto');
@@ -27,6 +28,7 @@ describe('angular-famous-ionic:controller', function() {
                     generator.mkdir('client/scripts/common');
 
                     // create an index file for common
+                    generator.ionic = true;
                     generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
 
                 });

@@ -19,6 +19,7 @@ var ModuleGenerator = Class.extend({
 
     initializing: function() {
         var done = this.async();
+        this.ionic = this.config.get('ionic');
         var that = this;
         this.clientModules = [];
         this.getClientModules()

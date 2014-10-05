@@ -30,7 +30,7 @@ var readJsonFile = function(filename) {
  * - or -
  * gulp bump --ver=1.2.3
  *
- * @returns {void} - void
+ * @returns {void}
  */
 gulp.task('bump', function() {
     var bumpType = 'patch';

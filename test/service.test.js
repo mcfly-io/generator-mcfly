@@ -29,6 +29,7 @@ describe('angular-famous-ionic:service', function() {
                     generator.mkdir('client/scripts/common');
 
                     // create an index file for common
+                    generator.ionic = true;
                     generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
 
                 });

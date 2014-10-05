@@ -31,7 +31,7 @@ describe('angular-famous-ionic:app', function() {
                 'bin/prepublish.sh',
                 'client/.eslintrc',
                 'client/index.html',
-                'client/styles/main.css',
+                'client/styles/main.scss',
                 'client/scripts/main.js'
             ]);
             done();
