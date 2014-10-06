@@ -1,10 +1,7 @@
 'use strict';
-<% if (ionic) { %>
-require('angular-ionic');
-<% } %>
-<% if (famous) { %>    
-require('famous-angular');
-<% } %>
+<% if (ionic) { %>require('angular-ionic');<% } %>
+<% if (famous) { %>require('famous-angular');<% } %>
+
 var modulename = '<%= modulename %>';
 
 module.exports = function(namespace) {
