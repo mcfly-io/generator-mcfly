@@ -29,6 +29,8 @@ describe('angular-famous-ionic:controller', function() {
 
                     // create an index file for common
                     generator.ionic = true;
+                    generator.famous = true;
+                    generator.ngModules = [];
                     generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
 
                 });

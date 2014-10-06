@@ -46,7 +46,9 @@
         "angular-animate": "./bower_components/angular-animate/angular-animate.js",
         "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.js",
         "ionic": "./bower_components/ionic/release/js/ionic.js",  
-        "angular-ionic": "./bower_components/ionic/release/js/ionic-angular.js"<% } %>
+        "angular-ionic": "./bower_components/ionic/release/js/ionic-angular.js"<% } %><% if(famous) { %>,
+        "famous": "./bower_components/famous/famous-global.js",
+        "famous-angular": "./bower_components/famous-angular/dist/famous-angular.js"<% } %>
     },
     "browserify": {
         "transform": [
@@ -68,8 +70,7 @@
             "depends": [
                 "angular"
             ]
-        },
-        <% if(ionic) { %>
+        }<% if(ionic) { %>,
         "angular-ionic": {
           "exports": "ionic",
           "depends": [
@@ -79,10 +80,18 @@
             "angular-sanitize",
             "angular-ui-router"
           ]
-        },
-        <% } %>
+        }<% } %><% if(famous) { %>,
         "famous": {
             "exports": "famous"
-        }
+        },
+        "famous-angular": {
+            "depends": [
+              "famous",
+              "angular",
+              "angular-animate",
+              "angular-sanitize",
+              "angular-ui-router"
+          ]
+        }<% } %>
     }
 }
