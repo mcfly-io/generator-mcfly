@@ -123,7 +123,7 @@ var ControllerGenerator = Class.extend({
         this.mkdir(targetDir);
 
         // make sure the controllers/index.js exist
-        utils.createIndexFile(this, targetDir, '../module/controllers');
+        utils.createIndexFile(this, '../component', targetDir);
 
         this.template('index.js', path.join(targetDir, this.controllername + '.js'));
         this.template('index.test.js', path.join(targetDir, this.controllername + '.test.js'));

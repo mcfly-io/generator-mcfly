@@ -1,5 +1,5 @@
 'use strict';
-//var util = require('util');
+
 var path = require('path');
 var _ = require('lodash');
 var Class = require('../class');
@@ -19,12 +19,19 @@ var ModuleGenerator = Class.extend({
 
     initializing: function() {
         var done = this.async();
+        Class.prototype.afterInitializing = function() {
+            // for unit test only
+        };
         this.ionic = this.config.get('ionic');
+        this.famous = this.config.get('famous');
+        this.ngModules = utils.getNgModules(this);
+
         var that = this;
         this.clientModules = [];
         this.getClientModules()
             .then(function(modules) {
                 that.clientModules = modules;
+                that.afterInitializing();
                 done();
             }, function() {
                 that.emit('error', 'No module found');

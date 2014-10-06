@@ -3,6 +3,7 @@
 var testHelper = require('./testHelper');
 var _ = require('lodash');
 var Q = require('q');
+var utils = require('../utils');
 var modulename = 'common';
 
 describe('angular-famous-ionic:module', function() {
@@ -140,6 +141,106 @@ describe('angular-famous-ionic:module', function() {
                 });
 
         });
+    });
+
+    describe('angular modules', function() {
+
+        it('should include angular-ionic with ionic', function(done) {
+            testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.log = sinon.spy();
+
+                    generator.afterInitializing = function() {
+                        generator.ionic = true;
+                        generator.ngModules = utils.getNgModules(generator);
+
+                    };
+                    generator.mkdir('client/scripts/toto');
+                    generator.mkdir('client/scripts/tata');
+                })
+                .on('end', function() {
+                    var file = 'client/scripts/' + modulename + '/index.js';
+                    var body = testHelper.readTextFile(file);
+                    assert(_.contains(body, 'require(\'angular-ionic\');'));
+                    assert(_.contains(body, 'angular.module(fullname, [\'ionic\']);'));
+                    done();
+                });
+
+        });
+
+        it('should include famous-angular with famous', function(done) {
+            testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.log = sinon.spy();
+
+                    generator.afterInitializing = function() {
+                        generator.famous = true;
+                        generator.ngModules = utils.getNgModules(generator);
+
+                    };
+                    generator.mkdir('client/scripts/toto');
+                    generator.mkdir('client/scripts/tata');
+                })
+                .on('end', function() {
+                    var file = 'client/scripts/' + modulename + '/index.js';
+                    var body = testHelper.readTextFile(file);
+                    assert(_.contains(body, 'require(\'famous-angular\');'));
+                    assert(_.contains(body, 'angular.module(fullname, [\'famous.angular\']);'));
+                    done();
+                });
+
+        });
+
+        it('should include famous-angular and angular-ionic with famous and ionic', function(done) {
+            testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.log = sinon.spy();
+
+                    generator.afterInitializing = function() {
+                        generator.famous = true;
+                        generator.ionic = true;
+                        generator.ngModules = utils.getNgModules(generator);
+
+                    };
+                    generator.mkdir('client/scripts/toto');
+                    generator.mkdir('client/scripts/tata');
+                })
+                .on('end', function() {
+                    var file = 'client/scripts/' + modulename + '/index.js';
+                    var body = testHelper.readTextFile(file);
+
+                    assert(_.contains(body, 'require(\'famous-angular\');'));
+                    assert(_.contains(body, 'require(\'angular-ionic\');'));
+                    assert(_.contains(body, 'angular.module(fullname, [\'ionic\', \'famous.angular\']);'));
+                    done();
+                });
+
+        });
+
     });
 
 });

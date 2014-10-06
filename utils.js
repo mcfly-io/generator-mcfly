@@ -121,13 +121,29 @@ exports.injectComponent = function(directory) {
  * Create an index.js file for an angular component (service, directive, etc..)
  * for referencing all the components of same kind in the folder
  * @param {Generator} generator - The generator
+ * @param {String} sourceDir - The folder were the template file is located (for example '../module/services' or '../component')
  * @param {String} targetDir - The folder were the file should be created
- * @param {String} sourceDir - The folder were the template file is located (for example '../module/services')
  *
  * @returns {void}
  */
-exports.createIndexFile = function(generator, targetDir, sourceDir) {
+exports.createIndexFile = function(generator, sourceDir, targetDir) {
     if(!fs.existsSync(path.join(targetDir, 'index.js'))) {
         generator.template(sourceDir + '/index.js', path.join(targetDir, 'index.js'));
     }
+};
+
+/**
+ * Get the angular modules list based on the choice of frameworks (ionic, famous, etc...) for the generator
+ * @param {Generator} generator - The generator
+ * @returns {String} - The list of ng modules as a comma separated string
+ */
+exports.getNgModules = function(generator) {
+    var retVal = [];
+    if(generator.ionic) {
+        retVal.push('\'ionic\'');
+    }
+    if(generator.famous) {
+        retVal.push('\'famous.angular\'');
+    }
+    return retVal.join(', ');
 };
