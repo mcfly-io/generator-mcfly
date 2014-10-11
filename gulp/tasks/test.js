@@ -5,6 +5,7 @@ var $ = require('gulp-load-plugins')();
 var mocha = $.mocha;
 var istanbul = $.istanbul;
 var karma = $.karma;
+var plumber = $.plumber;
 var gutil = require('gulp-util');
 var chalk = require('chalk');
 
@@ -17,6 +18,7 @@ gulp.task('mocha', function(done) {
         }))
         .on('finish', function() {
             gulp.src(constants.mocha.tests)
+                .pipe(plumber())
                 .pipe(mocha({
                     reporter: 'spec',
                     globals: './test/helpers/global.js',
@@ -41,8 +43,7 @@ gulp.task('karma', function() {
 
 gulp.task('test', function(done) {
     runSequence(
-        'lint',
-        ['mocha'],
+        'lint', ['mocha'],
         done
     );
 });
