@@ -1,0 +1,6 @@
+{
+  "globals": {
+    "element": true,
+    "by": true
+  }
+}

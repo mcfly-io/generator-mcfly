@@ -28,11 +28,15 @@ describe('angular-famous-ionic:app', function() {
                 'package.json',
                 'bower.json',
                 'karma.conf.js',
+                'protractor.conf.js',
                 'bin/prepublish.sh',
                 'client/.eslintrc',
                 'client/index.html',
+                'client/404.html',
                 'client/styles/main.scss',
-                'client/scripts/main.js'
+                'client/scripts/main.js',
+                'test/e2e/e2e.test.js',
+                'test/e2e/.eslintrc'
             ]);
             done();
         });

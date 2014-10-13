@@ -135,6 +135,7 @@ var AppGenerator = Class.extend({
             this.template('_package.json', 'package.json');
             this.template('_bower.json', 'bower.json');
             this.template('karma.conf.js');
+            this.template('protractor.conf.js');
             this.template('bin/prepublish.sh');
         },
 
@@ -144,8 +145,16 @@ var AppGenerator = Class.extend({
             this.mkdir('client/scripts');
             this.template('client/_eslintrc', 'client/.eslintrc');
             this.template('client/index.html');
+            this.template('client/404.html');
             this.template('client/styles/main.scss');
             this.template('client/scripts/main.js');
+        },
+
+        e2eFiles: function() {
+            this.mkdir('test');
+            this.mkdir('test/e2e');
+            this.template('test/e2e/e2e.test.js');
+            this.template('test/e2e/_eslintrc', 'test/e2e/.eslintrc');
         },
 
         serverfiles: function() {
