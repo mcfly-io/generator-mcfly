@@ -5,11 +5,13 @@
         "prepublish": "bash ./bin/prepublish.sh",
         "test": "gulp test"
     },
-    "dependencies": {},
+    "dependencies": {<% if (famous) { %>
+        "famous-polyfills": "^0.3.0"<% } %>
+    },
     "devDependencies": {
         "browserify": "^5.13.1",
         "browserify-istanbul": "^0.1.2",
-        "browserify-shim": "^3.7.0",
+        "browserify-shim": "^3.8.0",
         "chalk": "^0.5.1",
         "conventional-changelog": "0.0.11",
         "coveralls": "^2.11.1",
@@ -86,6 +88,7 @@
         },
         "famous-angular": {
             "depends": [
+              "famous-polyfills",  
               "famous",
               "angular",
               "angular-animate",

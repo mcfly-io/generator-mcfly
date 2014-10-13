@@ -20,9 +20,10 @@ var AppGenerator = Class.extend({
 
     initializing: function() {
 
-        var done = this.async();
-
         this.pkg = require('../package.json');
+        this.notifyUpdate(this.pkg);
+
+        var done = this.async();
         //this.checkGit();
 
         this.checkTravis().then(function() {
@@ -43,7 +44,7 @@ var AppGenerator = Class.extend({
                     'skip-welcome-message': true
                 }
             });
-            this.composeWith('sublime:gulps');
+
         },
         askFor: function() {
             var done = this.async();
@@ -70,7 +71,12 @@ var AppGenerator = Class.extend({
                 this.bootstrap = answers.bootstrap;
                 this.ionic = answers.ionic;
                 this.famous = answers.famous;
-
+                this.composeWith('sublime:gulps', {
+                    options: {
+                        ionic: answers.ionic,
+                        famous: answers.famous
+                    }
+                });
                 done();
             }.bind(this));
 
