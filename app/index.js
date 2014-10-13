@@ -150,11 +150,14 @@ var AppGenerator = Class.extend({
             this.template('client/scripts/main.js');
         },
 
-        e2eFiles: function() {
+        testFiles: function() {
             this.mkdir('test');
+            this.mkdir('test/mocha');
+            this.mkdir('test/mocha/helpers');
             this.mkdir('test/e2e');
             this.template('test/e2e/e2e.test.js');
             this.template('test/e2e/_eslintrc', 'test/e2e/.eslintrc');
+            this.template('test/mocha/helpers/globals.js', 'test/mocha/helpers/globals.js');
         },
 
         serverfiles: function() {
