@@ -28,11 +28,16 @@ describe('angular-famous-ionic:app', function() {
                 'package.json',
                 'bower.json',
                 'karma.conf.js',
+                'protractor.conf.js',
                 'bin/prepublish.sh',
                 'client/.eslintrc',
                 'client/index.html',
+                'client/404.html',
                 'client/styles/main.scss',
-                'client/scripts/main.js'
+                'client/scripts/main.js',
+                'test/e2e/e2e.test.js',
+                'test/e2e/.eslintrc',
+                'test/mocha/helpers/globals.js'
             ]);
             done();
         });
@@ -71,8 +76,8 @@ describe('angular-famous-ionic:app', function() {
                 '.yo-rc.json'
             ]);
             var config = testHelper.readJsonFile('.yo-rc.json');
+            //assert(config['generator-angular-famous-ionic'].bootstrap !== undefined, 'bootrap does not exist in .yo-rc.json');
             assert(config['generator-angular-famous-ionic'].ionic !== undefined, 'ionic does not exist in .yo-rc.json');
-            assert(config['generator-angular-famous-ionic'].bootstrap !== undefined, 'bootrap does not exist in .yo-rc.json');
             assert(config['generator-angular-famous-ionic'].famous !== undefined, 'famous does not exist in .yo-rc.json');
             done();
         });
