@@ -22,11 +22,4 @@ describe('angularjs homepage', function() {
         expect(latestResult.getText()).toEqual('3');
     });
 
-    it('should add four and six', function() {
-        firstNumber.sendKeys(4);
-        secondNumber.sendKeys(6);
-
-        goButton.click();
-        expect(latestResult.getText()).toEqual('10');
-    });
 });

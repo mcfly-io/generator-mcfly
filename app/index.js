@@ -50,11 +50,6 @@ var AppGenerator = Class.extend({
             var done = this.async();
 
             var prompts = [{
-                name: 'bootstrap',
-                type: 'confirm',
-                message: 'Would you like to include Bootstrap?',
-                default: true
-            }, {
                 name: 'ionic',
                 type: 'confirm',
                 message: 'Would you like to include ionic framework?',
@@ -80,48 +75,48 @@ var AppGenerator = Class.extend({
                 done();
             }.bind(this));
 
-        },
-
-        askForModules: function() {
-            var done = this.async();
-
-            var choicesModules = [{
-                value: 'animateModule',
-                name: 'angular-animate.js',
-                checked: true
-            }, {
-                value: 'cookiesModule',
-                name: 'angular-cookies.js',
-                checked: false
-            }, {
-                value: 'resourceModule',
-                name: 'angular-resource.js',
-                checked: false
-            }, {
-                value: 'sanitizeModule',
-                name: 'angular-sanitize.js',
-                checked: true
-            }];
-            var prompts = [{
-                type: 'checkbox',
-                name: 'modules',
-                message: 'Which modules would you like to include?',
-                choices: choicesModules
-            }];
-
-            this.prompt(prompts, function(answers) {
-                // transform the choices into boolean properties on 'this' : this.sanitizeModule
-                this.choicesToProperties(answers, choicesModules, 'modules');
-
-                done();
-            }.bind(this));
         }
+
+        //         _askForModules: function() {
+        //             var done = this.async();
+
+        //             var choicesModules = [{
+        //                 value: 'animateModule',
+        //                 name: 'angular-animate.js',
+        //                 checked: true
+        //             }, {
+        //                 value: 'cookiesModule',
+        //                 name: 'angular-cookies.js',
+        //                 checked: false
+        //             }, {
+        //                 value: 'resourceModule',
+        //                 name: 'angular-resource.js',
+        //                 checked: false
+        //             }, {
+        //                 value: 'sanitizeModule',
+        //                 name: 'angular-sanitize.js',
+        //                 checked: true
+        //             }];
+        //             var prompts = [{
+        //                 type: 'checkbox',
+        //                 name: 'modules',
+        //                 message: 'Which modules would you like to include?',
+        //                 choices: choicesModules
+        //             }];
+
+        //             this.prompt(prompts, function(answers) {
+        //                 // transform the choices into boolean properties on 'this' : this.sanitizeModule
+        //                 this.choicesToProperties(answers, choicesModules, 'modules');
+
+        //                 done();
+        //             }.bind(this));
+        //         }
     },
 
     configuring: function() {
         this.config.set('ionic', this.ionic);
         this.config.set('famous', this.famous);
-        this.config.set('bootstrap', this.bootstrap);
+        //this.config.set('bootstrap', this.bootstrap);
         this.config.forceSave();
     },
 
