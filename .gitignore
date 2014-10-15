@@ -12,6 +12,8 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage/
+# Reports directory used by tools like protractor
+reports/
 
 # Build
 build/
@@ -34,3 +36,12 @@ test/temp
 
 # Shippable directory
 shippable/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
