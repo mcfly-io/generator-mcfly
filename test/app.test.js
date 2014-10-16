@@ -27,6 +27,7 @@ describe('angular-famous-ionic:app', function() {
             assert.file([
                 'package.json',
                 'bower.json',
+                '.bowerrc',
                 'karma.conf.js',
                 'protractor.conf.js',
                 'bin/prepublish.sh',

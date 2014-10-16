@@ -129,6 +129,7 @@ var AppGenerator = Class.extend({
         projectfiles: function() {
             this.template('_package.json', 'package.json');
             this.template('_bower.json', 'bower.json');
+            this.template('_bowerrc', '.bowerrc');
             this.template('karma.conf.js');
             this.template('protractor.conf.js');
             this.template('bin/prepublish.sh');
