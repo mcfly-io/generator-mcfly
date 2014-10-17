@@ -23,6 +23,7 @@
     "module",
     "service",
     "controller",
+    "filter",
     "templates",
     "utils.js"
   ],

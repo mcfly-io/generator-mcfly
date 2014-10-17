@@ -5,14 +5,14 @@ var _ = require('lodash');
 var utils = require('../utils');
 var Class = require('../class');
 
-var ControllerGenerator = Class.extend({
+var FilterGenerator = Class.extend({
     constructor: function() {
 
         Class.apply(this, arguments);
         var that = this;
         this.on('end', function() {
             var done = that.async();
-            utils.injectComponent(path.join(that.getClientScriptFolder(), that.modulename, 'controllers'))
+            utils.injectComponent(path.join(that.getClientScriptFolder(), that.modulename, 'filters'))
                 .then(function() {
                     return utils.injectSubComponent(that, path.join(that.getClientScriptFolder(), that.modulename));
                 })
@@ -28,12 +28,12 @@ var ControllerGenerator = Class.extend({
             required: false
         });
 
-        this.argument('controllername', {
+        this.argument('filtername', {
             type: String,
             required: false
         });
         this.modulename = this._.camelize(this._.slugify(this._.humanize(this.modulename)));
-        this.controllername = this._.camelize(this._.slugify(this._.humanize(this.controllername)));
+        this.filtername = this._.camelize(this._.slugify(this._.humanize(this.filtername)));
     },
 
     initializing: function() {
@@ -90,11 +90,11 @@ var ControllerGenerator = Class.extend({
                 return true;
             }
         }, {
-            name: 'controllername',
+            name: 'filtername',
             when: function() {
-                return !that.controllername || that.controllername.length <= 0;
+                return !that.filtername || that.filtername.length <= 0;
             },
-            message: 'How would like to name your controller ?',
+            message: 'How would like to name your filter ?',
             validate: function(value) {
                 value = _.str.trim(value);
                 if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
@@ -106,7 +106,7 @@ var ControllerGenerator = Class.extend({
 
         this.prompt(prompts, function(answers) {
             that.modulename = that.modulename || answers.modulename;
-            that.controllername = that.controllername || answers.controllername;
+            that.filtername = that.filtername || answers.filtername;
             done();
         });
 
@@ -118,15 +118,15 @@ var ControllerGenerator = Class.extend({
 
     writing: function() {
         var done = this.async();
-        this.sourceRoot(path.join(__dirname, '../templates/controller'));
-        var targetDir = path.join('client', 'scripts', this.modulename, 'controllers');
+        this.sourceRoot(path.join(__dirname, '../templates/filter'));
+        var targetDir = path.join('client', 'scripts', this.modulename, 'filters');
         this.mkdir(targetDir);
 
-        // make sure the controllers/index.js exist
+        // make sure the fitlers/index.js exist
         utils.createIndexFile(this, '../component', targetDir);
 
-        this.template('index.js', path.join(targetDir, this.controllername + '.js'));
-        this.template('index.test.js', path.join(targetDir, this.controllername + '.test.js'));
+        this.template('index.js', path.join(targetDir, this.filtername + '.js'));
+        this.template('index.test.js', path.join(targetDir, this.filtername + '.test.js'));
         done();
 
     },
@@ -136,4 +136,4 @@ var ControllerGenerator = Class.extend({
     }
 });
 
-module.exports = ControllerGenerator;
+module.exports = FilterGenerator;
