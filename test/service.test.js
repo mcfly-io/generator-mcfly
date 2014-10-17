@@ -216,6 +216,7 @@ describe('angular-famous-ionic:service', function() {
     });
 
     it('with invalid servicetype option should throw an error', function(done) {
+
         var ctx = testHelper.runGenerator('service')
             .withOptions({
                 'skip-install': true,
@@ -236,11 +237,13 @@ describe('angular-famous-ionic:service', function() {
                 };
             })
             .on('error', function(err) {
+
                 assert(ctx.generator.log.calledOnce);
                 assert.equal(err, 'Invalid service type');
                 //done();
             })
             .on('end', function() {
+
                 done();
             });
     });
