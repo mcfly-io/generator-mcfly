@@ -6,7 +6,7 @@ module.exports = function(app) {
 
     var deps = [];
 
-    function <%= controllername %>() {
+    function controller() {
         var vm = this;
         vm.message = 'Hello World';
         var activate = function() {
@@ -15,6 +15,6 @@ module.exports = function(app) {
         activate();
     }
 
-    <%= controllername %>.$inject = deps;
-    app.controller(app.name + '.' + controllername, <%= controllername %>);
+    controller.$inject = deps;
+    app.controller(app.name + '.' + controllername, controller);
 };

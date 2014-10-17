@@ -1,5 +1,5 @@
 'use strict';
-//var util = require('util');
+
 var path = require('path');
 var _ = require('lodash');
 var utils = require('../utils');
@@ -23,6 +23,12 @@ var ServiceGenerator = Class.extend({
 
         this.createOptions();
 
+        this.option('servicetype', {
+            desc: 'service type (service, factory, provider)',
+            type: 'String',
+            alias: 'type'
+        });
+
         this.argument('modulename', {
             type: String,
             required: false
@@ -34,6 +40,9 @@ var ServiceGenerator = Class.extend({
         });
         this.modulename = this._.camelize(this._.slugify(this._.humanize(this.modulename)));
         this.servicename = this._.camelize(this._.slugify(this._.humanize(this.servicename)));
+
+        this.servicetype = this.options.servicetype || this.options.type || 'factory';
+
     },
 
     initializing: function() {
@@ -45,6 +54,15 @@ var ServiceGenerator = Class.extend({
             that.emit('error', 'No module found');
             done();
         };
+
+        var serviceTypes = ['service', 'factory', 'provider'];
+
+        if(!_.contains(serviceTypes, that.servicetype)) {
+            that.log(that.utils.chalk.red('Invalid service type. The possible values are : ' + serviceTypes.join(', ')));
+            this.emit('error', 'Invalid service type');
+            done();
+        }
+
         this.getClientModules()
             .then(function(modules) {
                 if(!_.isArray(modules) || modules.length <= 0) {

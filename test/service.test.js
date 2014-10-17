@@ -215,4 +215,34 @@ describe('angular-famous-ionic:service', function() {
 
     });
 
+    it('with invalid servicetype option should throw an error', function(done) {
+        var ctx = testHelper.runGenerator('service')
+            .withOptions({
+                'skip-install': true,
+                'check-travis': false,
+                'check-git': true,
+                'servicetype': 'dummy'
+            })
+            .withPrompt({
+                modulename: modulename,
+                servicename: servicename
+            })
+            .on('ready', function(generator) {
+                generator.log = sinon.spy();
+                generator.getClientModules = function() {
+                    var deferred = Q.defer();
+                    deferred.resolve(['common']);
+                    return deferred.promise;
+                };
+            })
+            .on('error', function(err) {
+                assert(ctx.generator.log.calledOnce);
+                assert.equal(err, 'Invalid service type');
+                //done();
+            })
+            .on('end', function() {
+                done();
+            });
+    });
+
 });
