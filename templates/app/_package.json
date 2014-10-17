@@ -45,15 +45,15 @@
         "node": ">=0.10.0"
     },
     "browser": {
-        "angular": "./bower_components/angular/angular.js",
+        "angular": "./bower_components/angular/angular.bin.js",
         "angular-mocks": "./bower_components/angular-mocks/angular-mocks.js",
-        "angular-ui-router": "./bower_components/angular-ui-router/release/angular-ui-router.js",
-        "angular-animate": "./bower_components/angular-animate/angular-animate.js",
-        "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.js"<% if(ionic) { %>,
-        "ionic": "./bower_components/ionic/release/js/ionic.js",  
-        "angular-ionic": "./bower_components/ionic/release/js/ionic-angular.js"<% } %><% if(famous) { %>,
-        "famous": "./bower_components/famous/famous-global.js",
-        "famous-angular": "./bower_components/famous-angular/dist/famous-angular.js"<% } %>
+        "angular-ui-router": "./bower_components/angular-ui-router/release/angular-ui-router.bin.js",
+        "angular-animate": "./bower_components/angular-animate/angular-animate.bin.js",
+        "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.bin.js"<% if(ionic) { %>,
+        "ionic": "./bower_components/ionic/release/js/ionic.bin.js",  
+        "angular-ionic": "./bower_components/ionic/release/js/ionic-angular.bin.js"<% } %><% if(famous) { %>,
+        "famous": "./bower_components/famous/famous-global.bin.js",
+        "famous-angular": "./bower_components/famous-angular/dist/famous-angular.bin.js"<% } %>
     },
     "browserify": {
         "transform": [
