@@ -25,7 +25,8 @@
     "controller",
     "filter",
     "constant",
-    "value",  
+    "value",
+    "directive",
     "templates",
     "utils.js"
   ],
