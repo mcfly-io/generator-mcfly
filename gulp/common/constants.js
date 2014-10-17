@@ -14,7 +14,7 @@ module.exports = function() {
             failedIcon: path.join(cwd, 'node_modules/karma-growl-reporter/images/failed.png')
         },
 
-        lint: ['./app/**/*.js', './class/**/*.js', './module/**/*.js', './service/**/*.js', 'gulpfile.js', 'gulp/**/*.js', 'karam.conf.js', 'test/**/*.js', 'utils.js'],
+        lint: ['./app/**/*.js', './class/**/*.js', './module/**/*.js', './service/**/*.js', 'filter/**/*.js', 'constant/**/*.js', 'value/**/*.js', 'gulpfile.js', 'gulp/**/*.js', 'karam.conf.js', 'test/**/*.js', 'utils.js'],
 
         browserify: {
             src: './client/scripts/main.js',

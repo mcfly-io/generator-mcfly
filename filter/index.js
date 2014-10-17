@@ -19,7 +19,7 @@ var FilterGenerator = Class.extend({
                 .then(function() {
                     done();
                 });
-        }.bind(this));
+        });
 
         this.createOptions();
 

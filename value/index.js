@@ -2,7 +2,7 @@
 
 var Class = require('../class/component.js')('values', 'value');
 
-var ConstantGenerator = Class.extend({
+var ValueGenerator = Class.extend({
     constructor: function() {
 
         Class.apply(this, arguments);
@@ -16,13 +16,13 @@ var ConstantGenerator = Class.extend({
     },
 
     initializing: function() {
-        ConstantGenerator.__super__.initializing.apply(this, arguments);
+        ValueGenerator.__super__.initializing.apply(this, arguments);
     },
 
     prompting: function() {
 
         var done = this.async();
-        ConstantGenerator.__super__.prompting.call(this, done);
+        ValueGenerator.__super__.prompting.call(this, done);
     },
 
     configuring: function() {
@@ -30,7 +30,7 @@ var ConstantGenerator = Class.extend({
     },
 
     writing: function() {
-        ConstantGenerator.__super__.writing.apply(this, arguments);
+        ValueGenerator.__super__.writing.apply(this, arguments);
 
     },
 
@@ -39,4 +39,4 @@ var ConstantGenerator = Class.extend({
     }
 });
 
-module.exports = ConstantGenerator;
+module.exports = ValueGenerator;
