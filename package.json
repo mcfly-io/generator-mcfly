@@ -24,6 +24,8 @@
     "service",
     "controller",
     "filter",
+    "constant",
+    "value",  
     "templates",
     "utils.js"
   ],
