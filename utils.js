@@ -51,6 +51,12 @@ exports.injectSubComponent = function(generator, directory) {
 
     generator.getDirectories(directory)
         .then(function(components) {
+
+            // excluding the 'views' folder as it only contains html partials.
+            components = _.filter(components, function(comp) {
+                return comp !== 'views';
+            });
+
             gulp.src(mainFile)
                 .pipe(ginject(gulp.src(mainFile, {
                     read: false

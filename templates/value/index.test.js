@@ -14,12 +14,11 @@ describe(app.name, function() {
             });
 
             beforeEach(inject(function($injector) {
-                this.constant = $injector.get(app.name + '.' + valuename);
-
+                this.value = $injector.get(app.name + '.' + valuename);
             }));
 
             it('should be defined', function() {
-                expect(this.Ò).toBeDefined();
+                expect(this.value).toBeDefined();
             });
 
         });

@@ -23,7 +23,7 @@ describe(app.name, function() {
                 var element = angular.element('<<%= htmlname %>></<%= htmlname %>>');
                 this.$compile(element)(this.$scope);
                 this.$scope.$digest();
-                expect(element.html()).toBe('This is my directive : <%= htmlname %>');
+                expect(element.html().trim()).toBe('This is directive : <%= htmlname %>');
             });
 
         });

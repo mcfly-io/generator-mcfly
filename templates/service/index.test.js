@@ -28,7 +28,7 @@ describe(app.name, function() {
             it('should be initialized', function() {
                 expect(this.service.isInitialized).toBe(true);
             });
-<% } %>    
+<% } %>
         });
     });
 });

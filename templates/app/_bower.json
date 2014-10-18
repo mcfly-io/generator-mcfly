@@ -9,13 +9,13 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.26",
-    "angular-mocks": "~1.2.26",
-    "angular-animate": "~1.2.26",
-    "angular-sanitize": "~1.2.26",
-    "angular-ui-router": "0.2.11"<% if (ionic) { %>,
+    "angular": "~1.2.22",
+    "angular-mocks": "~1.2.22",
+    "angular-animate": "~1.2.22",
+    "angular-sanitize": "~1.2.22",
+    "angular-ui-router": "0.2.10"<% if (ionic) { %>,
     "collide": "1.0.0-beta.3",
     "ionic":"1.0.0-beta.13"<% } %><% if (famous) { %>,
-    "famous-angular": "~0.5.0"<% } %>
+    "famous-angular": "~0.4.0"<% } %>
   }
 }

@@ -4,8 +4,7 @@ var servicename = '<%= servicename %>';
 module.exports = function(app) {
 
     var dependencies = [];
-    function service() {
-<% if (servicetype === 'factory') { %>
+    function service() {<% if (servicetype === 'factory') { %>
         var add = function(a, b) {
             return a + b;
         };
@@ -13,8 +12,7 @@ module.exports = function(app) {
         return {
             add : add
         };
-<% } %>   
-<% if(servicetype === 'provider') { %>
+<% } %><% if(servicetype === 'provider') { %>
        var isInitialized = false;     
        var init = function() {
            isInitialized = true;
@@ -36,17 +34,15 @@ module.exports = function(app) {
                }
            ]
        };
-<% } %>    
+<% } %>
     }
-
     service.$inject = dependencies;
-<% if (servicetype === 'factory') { %>                                         
-    app.factory(app.name + '.' + servicename, service);
-<% } %>
-<% if (servicetype === 'service') { %>                                         
-    app.service(app.name + '.' + servicename, service);
-<% } %>
-<% if (servicetype === 'provider') { %>                                         
-    app.provider(app.name + '.' + servicename, service);
-<% } %>
+<% if (servicetype === 'factory') { %>    app.factory(app.name + '.' + servicename, service);
 };
+<% } %>
+<% if (servicetype === 'service') { %>    app.service(app.name + '.' + servicename, service);
+};
+<% } %>
+<% if (servicetype === 'provider') { %>   app.provider(app.name + '.' + servicename, service);
+};
+<% } %>

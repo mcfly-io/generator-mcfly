@@ -15,11 +15,10 @@ describe(app.name, function() {
 
             beforeEach(inject(function($injector) {
                 this.constant = $injector.get(app.name + '.' + constantname);
-               
             }));
 
             it('should be defined', function() {
-                expect(this.Ò).toBeDefined();
+                expect(this.constant).toBeDefined();
             });
 
         });

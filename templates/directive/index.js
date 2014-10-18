@@ -14,7 +14,7 @@ module.exports = function(app) {
             restrict: 'AEC',
             replace: true,
             scope: {
-                title: '@' // '@' reads attribute value, '=' provides 2-way binding, '&" works with functions 
+                title: '@' // '@' reads attribute value, '=' provides 2-way binding, '&" works with functions
             },
             controller: controller,
             template: require('./<%= directivename %>.html'),
