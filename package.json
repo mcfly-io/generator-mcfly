@@ -23,6 +23,10 @@
     "module",
     "service",
     "controller",
+    "filter",
+    "constant",
+    "value",
+    "directive",
     "templates",
     "utils.js"
   ],

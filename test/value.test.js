@@ -4,13 +4,12 @@ var testHelper = require('./testHelper');
 var Q = require('q');
 var _ = require('lodash');
 var modulename = 'common';
-var servicename = 'myService';
+var valuename = 'myValue';
 
-describe('angular-famous-ionic:service', function() {
+describe('angular-famous-ionic:value', function() {
     describe('with modules', function() {
-
         beforeEach(function() {
-            this.runGen = testHelper.runGenerator('service')
+            this.runGen = testHelper.runGenerator('value')
                 .withOptions({
                     'skip-install': true,
                     'check-travis': false,
@@ -18,11 +17,11 @@ describe('angular-famous-ionic:service', function() {
                 })
                 .withPrompt({
                     modulename: modulename,
-                    servicename: servicename
+                    valuename: valuename
                 })
                 .on('ready', function(generator) {
-                    generator.log = sinon.spy();
 
+                    generator.log = sinon.spy();
                     // create modules
                     generator.mkdir('client/scripts/toto');
                     generator.mkdir('client/scripts/tata');
@@ -40,9 +39,9 @@ describe('angular-famous-ionic:service', function() {
 
         it('creates files', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/services';
-                var file = folder + '/' + servicename + '.js';
-                var filetest = folder + '/' + servicename + '.test.js';
+                var folder = 'client/scripts/' + modulename + '/values';
+                var file = folder + '/' + valuename + '.js';
+                var filetest = folder + '/' + valuename + '.test.js';
                 assert.file([
                     file,
                     filetest
@@ -53,34 +52,34 @@ describe('angular-famous-ionic:service', function() {
 
         });
 
-        it('service file should contain service name', function(done) {
+        it('value file should contain value name', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/services';
-                var file = folder + '/' + servicename + '.js';
+                var folder = 'client/scripts/' + modulename + '/values';
+                var file = folder + '/' + valuename + '.js';
                 var body = testHelper.readTextFile(file);
-                assert(_.contains(body, 'var servicename = \'' + servicename + '\';'));
+                assert(_.contains(body, 'var valuename = \'' + valuename + '\';'));
                 done();
             });
         });
 
-        it('module should reference services folder', function(done) {
+        it('module should reference values folder', function(done) {
             this.runGen.on('end', function() {
                 setTimeout(function() {
                     var folder = 'client/scripts/' + modulename;
                     var body = testHelper.readTextFile(folder + '/index.js');
-                    assert(_.contains(body, 'require(\'./services\')(app);'));
+                    assert(_.contains(body, 'require(\'./values\')(app);'));
                     done();
                 }, 200);
 
             });
         });
 
-        it('services/index.js should reference service file', function(done) {
+        it('values/index.js should reference value file', function(done) {
             this.runGen.on('end', function() {
                 setTimeout(function() {
-                    var folder = 'client/scripts/' + modulename + '/services';
+                    var folder = 'client/scripts/' + modulename + '/values';
                     var body = testHelper.readTextFile(folder + '/index.js');
-                    assert(_.contains(body, 'require(\'./' + servicename + '\')(app);'));
+                    assert(_.contains(body, 'require(\'./' + valuename + '\')(app);'));
                     done();
                 }, 200);
 
@@ -97,15 +96,15 @@ describe('angular-famous-ionic:service', function() {
             }.bind(this));
         });
 
-        it('with empty servicename should throw an error', function(done) {
+        it('with empty valuename should throw an error', function(done) {
             this.runGen
                 .withPrompt({
                     modulename: modulename,
-                    servicename: ''
+                    valuename: ''
                 })
                 .on('end', function() {
                     assert(_.isEqual(this.runGen.generator.prompt.errors, [{
-                        name: 'servicename',
+                        name: 'valuename',
                         message: 'Please enter a non empty name'
                     }]));
                     done();
@@ -141,22 +140,23 @@ describe('angular-famous-ionic:service', function() {
                 }.bind(this));
         });
 
-        it('with argument modulename and servicename should not prompt', function(done) {
+        it('with argument modulename and valuename should not prompt', function(done) {
             this.runGen
-                .withArguments([modulename, servicename])
+                .withArguments([modulename, valuename])
                 .on('end', function() {
                     assert.equal(this.runGen.generator.modulename, modulename);
-                    assert.equal(this.runGen.generator.servicename, servicename);
+                    assert.equal(this.runGen.generator.valuename, valuename);
                     assert.equal(this.runGen.generator.prompt.errors, undefined);
                     done();
                 }.bind(this));
         });
+
     });
 
     describe('without modules', function() {
 
         it('should emit error when #getClientModules() fails', function(done) {
-            var ctx = testHelper.runGenerator('service')
+            var ctx = testHelper.runGenerator('value')
                 .withOptions({
                     'skip-install': true,
                     'check-travis': false,
@@ -164,7 +164,7 @@ describe('angular-famous-ionic:service', function() {
                 })
                 .withPrompt({
                     modulename: modulename,
-                    servicename: servicename
+                    valuename: valuename
                 })
                 .on('ready', function(generator) {
                     generator.log = sinon.spy();
@@ -182,10 +182,11 @@ describe('angular-famous-ionic:service', function() {
                 .on('end', function() {
                     done();
                 });
+
         });
 
         it('should emit error when no module', function(done) {
-            var ctx = testHelper.runGenerator('service')
+            var ctx = testHelper.runGenerator('value')
                 .withOptions({
                     'skip-install': true,
                     'check-travis': false,
@@ -193,7 +194,7 @@ describe('angular-famous-ionic:service', function() {
                 })
                 .withPrompt({
                     modulename: modulename,
-                    servicename: servicename
+                    valuename: valuename
                 })
                 .on('ready', function(generator) {
                     generator.log = sinon.spy();
@@ -212,40 +213,6 @@ describe('angular-famous-ionic:service', function() {
                     done();
                 });
         });
-
-    });
-
-    it('with invalid servicetype option should throw an error', function(done) {
-
-        var ctx = testHelper.runGenerator('service')
-            .withOptions({
-                'skip-install': true,
-                'check-travis': false,
-                'check-git': true,
-                'servicetype': 'dummy'
-            })
-            .withPrompt({
-                modulename: modulename,
-                servicename: servicename
-            })
-            .on('ready', function(generator) {
-                generator.log = sinon.spy();
-                generator.getClientModules = function() {
-                    var deferred = Q.defer();
-                    deferred.resolve(['common']);
-                    return deferred.promise;
-                };
-            })
-            .on('error', function(err) {
-
-                assert(ctx.generator.log.calledOnce);
-                assert.equal(err, 'Invalid service type');
-                //done();
-            })
-            .on('end', function() {
-
-                done();
-            });
     });
 
 });

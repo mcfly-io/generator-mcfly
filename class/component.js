@@ -3,16 +3,20 @@
 var path = require('path');
 var _ = require('lodash');
 var utils = require('../utils');
-var Class = require('../class');
-
-var ServiceGenerator = Class.extend({
+var Class = require('./index.js');
+var _clientFolder;
+var _templateFolder;
+var ComponentGenerator = Class.extend({
     constructor: function() {
-
         Class.apply(this, arguments);
         var that = this;
-        this.on('end', function() {
+
+        that.clientFolder = _clientFolder;
+        that.templateFolder = _templateFolder;
+
+        that.on('end', function() {
             var done = that.async();
-            utils.injectComponent(path.join(that.getClientScriptFolder(), that.modulename, 'services'))
+            utils.injectComponent(path.join(that.getClientScriptFolder(), that.modulename, that.clientFolder))
                 .then(function() {
                     return utils.injectSubComponent(that, path.join(that.getClientScriptFolder(), that.modulename));
                 })
@@ -23,26 +27,12 @@ var ServiceGenerator = Class.extend({
 
         this.createOptions();
 
-        this.option('servicetype', {
-            desc: 'service type (service, factory, provider)',
-            type: 'String',
-            alias: 'type'
-        });
-
         this.argument('modulename', {
             type: String,
             required: false
         });
 
-        this.argument('servicename', {
-            type: String,
-            required: false
-        });
         this.modulename = this._.camelize(this._.slugify(this._.humanize(this.modulename)));
-        this.servicename = this._.camelize(this._.slugify(this._.humanize(this.servicename)));
-
-        this.servicetype = this.options.servicetype || this.options.type || 'factory';
-
     },
 
     initializing: function() {
@@ -54,15 +44,6 @@ var ServiceGenerator = Class.extend({
             that.emit('error', 'No module found');
             done();
         };
-
-        var serviceTypes = ['service', 'factory', 'provider'];
-
-        if(!_.contains(serviceTypes, that.servicetype)) {
-            that.log(that.utils.chalk.red('Invalid service type. The possible values are : ' + serviceTypes.join(', ')));
-            this.emit('error', 'Invalid service type');
-            done();
-        }
-
         this.getClientModules()
             .then(function(modules) {
                 if(!_.isArray(modules) || modules.length <= 0) {
@@ -75,9 +56,8 @@ var ServiceGenerator = Class.extend({
             });
     },
 
-    prompting: function() {
+    prompting: function(done) {
 
-        var done = this.async();
         var that = this;
 
         var choices = _.map(this.clientModules, function(module) {
@@ -108,11 +88,11 @@ var ServiceGenerator = Class.extend({
                 return true;
             }
         }, {
-            name: 'servicename',
+            name: _templateFolder + 'name',
             when: function() {
-                return !that.servicename || that.servicename.length <= 0;
+                return !that[_templateFolder + 'name'] || that[_templateFolder + 'name'].length <= 0;
             },
-            message: 'How would like to name your service ?',
+            message: 'How would like to name your ' + _templateFolder + ' ?',
             validate: function(value) {
                 value = _.str.trim(value);
                 if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
@@ -121,37 +101,33 @@ var ServiceGenerator = Class.extend({
                 return true;
             }
         }];
-
         this.prompt(prompts, function(answers) {
             that.modulename = that.modulename || answers.modulename;
-            that.servicename = that.servicename || answers.servicename;
+            that[_templateFolder + 'name'] = that[_templateFolder + 'name'] || answers[_templateFolder + 'name'];
             done();
         });
 
     },
 
-    configuring: function() {
-
-    },
-
     writing: function() {
         var done = this.async();
-        this.sourceRoot(path.join(__dirname, '../templates/service'));
-        var targetDir = path.join('client', 'scripts', this.modulename, 'services');
+        this.sourceRoot(path.join(__dirname, '../templates/' + this.templateFolder));
+        var targetDir = path.join('client', 'scripts', this.modulename, this.clientFolder);
         this.mkdir(targetDir);
 
-        // make sure the services/index.js exist
+        // make sure the fitlers/index.js exist
         utils.createIndexFile(this, '../component', targetDir);
 
-        this.template('index.js', path.join(targetDir, this.servicename + '.js'));
-        this.template('index.test.js', path.join(targetDir, this.servicename + '.test.js'));
+        this.template('index.js', path.join(targetDir, this[_templateFolder + 'name'] + '.js'));
+        this.template('index.test.js', path.join(targetDir, this[_templateFolder + 'name'] + '.test.js'));
         done();
 
-    },
-
-    end: function() {
-
     }
+
 });
 
-module.exports = ServiceGenerator;
+module.exports = function(clientFolder, templateFolder) {
+    _clientFolder = clientFolder;
+    _templateFolder = templateFolder;
+    return ComponentGenerator;
+};

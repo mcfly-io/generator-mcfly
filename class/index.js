@@ -16,7 +16,7 @@ var Q = require('q');
  * @augments Base
  * @alias Easy
  */
-module.exports = Base.extend({
+var ClassGenerator = Base.extend({
 
     /**
      *  Ctor
@@ -190,3 +190,5 @@ module.exports = Base.extend({
     }
 
 });
+
+module.exports = ClassGenerator;
