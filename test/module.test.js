@@ -170,7 +170,7 @@ describe('angular-famous-ionic:module', function() {
                     var file = 'client/scripts/' + modulename + '/index.js';
                     var body = testHelper.readTextFile(file);
                     assert(_.contains(body, 'require(\'angular-ionic\');'));
-                    assert(_.contains(body, 'angular.module(fullname, [\'ionic\']);'));
+                    assert(_.contains(body, '\'ionic\''));
                     done();
                 });
 
@@ -201,7 +201,7 @@ describe('angular-famous-ionic:module', function() {
                     var file = 'client/scripts/' + modulename + '/index.js';
                     var body = testHelper.readTextFile(file);
                     assert(_.contains(body, 'require(\'famous-angular\');'));
-                    assert(_.contains(body, 'angular.module(fullname, [\'famous.angular\']);'));
+                    assert(_.contains(body, '\'famous.angular\''));
                     done();
                 });
 
@@ -235,7 +235,8 @@ describe('angular-famous-ionic:module', function() {
 
                     assert(_.contains(body, 'require(\'famous-angular\');'));
                     assert(_.contains(body, 'require(\'angular-ionic\');'));
-                    assert(_.contains(body, 'angular.module(fullname, [\'ionic\', \'famous.angular\']);'));
+                    assert(_.contains(body, '\'ionic\''));
+                    assert(_.contains(body, '\'famous.angular\''));
                     done();
                 });
 
