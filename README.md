@@ -36,8 +36,33 @@ Run `yo angular-famous-ionic`, optionally passing an app name:
 yo angular-famous-ionic [app-name]
 ```
 
-Run `gulp browsersync` for creating a browser-sync server.
+### Typical workflow
+A typical workflow would look like this:
+```
+mkdir test-app && cd test-app
+yo angular-famous-ionic
+yo angular-famous-ionic:module common
+yo angular-famous-ionic:controller common hello
+Add some content to client/index.html : <h2 ng-controller="main.common.hello as helloCtrl">{{helloCtrl.message}}</h2>
+gulp browsersync
+```
 
+
+## Gulp tasks
+Now that the project is created you have a set of simple gulp tasks command available
+```
+gulp help           # List the main gulp tasks
+gulp test           # Run lint, unit tests, and e2e tests
+gulp unit           # Run lint and unit tests (karma for client + mocha for server)
+gulp karma          # Run karma client unit tests
+gulp mocha          # Run mocha server unit tests
+gulp e2e            # Run protractor for end to end tests
+gulp browserify     # Generate a bundle.js file
+gulp style          # Generate a main.css file
+gulp browsersync    # Creates a browser-sync server, it will display its url, it watches for js / css / scss / html file changes and inject automatically the change in the browser
+```
+
+The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel free to modify it to your project needs.
 
 ## Generators
 
@@ -176,7 +201,21 @@ Produces:
 
 
 ## Testing
+To run unit test for the yeoman project use the following command:
+```
+gulp test
+```
 
+If you just want to run mocha and are not interested yet in linting your files you can run:
+```
+gulp mocha
+```
+
+If you just want to run some specific unit test use:
+```
+mocha test/app.test.js -r test/helpers/globals.js
+```
+This will tell mocha to run only the tests located in `test/app.test.js` (The -r option is necessary here to add global configuration file for mocha, when using gulp the `globals.js` is added automatically)
 
 ## Changelog
 
