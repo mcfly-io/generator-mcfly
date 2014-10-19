@@ -19,6 +19,10 @@ The project has the following capabilities:
 * browserSync
 
 
+> NOTE:
+> This generator is using generator-sublime to scaffold common dot files (.jshintrc, .eslintrc, etc...).   
+> Check it out https://www.npmjs.org/package/generator-sublime
+
 ## Usage
 
 Install `generator-angular-famous-ionic`:

@@ -91,6 +91,6 @@
   },
   "peerDependencies": {
     "yo": ">=1.2.1",
-    "generator-sublime": ">=1.2.20"
+    "generator-sublime": ">=1.2.21"
   }
 }
