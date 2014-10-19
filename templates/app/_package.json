@@ -52,7 +52,7 @@
         "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.min.js"<% if(ionic) { %>,
         "ionic": "./bower_components/ionic/release/js/ionic.min.js",  
         "angular-ionic": "./bower_components/ionic/release/js/ionic-angular.min.js"<% } %><% if(famous) { %>,
-        "famous": "./bower_components/famous/famous-global.min.js",
+        "famous": "./bower_components/famous/dist/famous-global.min.js",
         "famous-angular": "./bower_components/famous-angular/dist/famous-angular.min.js"<% } %>
     },
     "browserify": {

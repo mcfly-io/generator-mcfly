@@ -23,12 +23,12 @@ var AppGenerator = Class.extend({
         this.pkg = require('../package.json');
         this.notifyUpdate(this.pkg);
 
-        var done = this.async();
+        //var done = this.async();
         //this.checkGit();
 
-        this.checkTravis().then(function() {
-            done();
-        });
+        //this.checkTravis().then(function() {
+        //    done();
+        //});
 
     },
 
@@ -69,7 +69,14 @@ var AppGenerator = Class.extend({
                 this.composeWith('sublime:gulps', {
                     options: {
                         ionic: answers.ionic,
-                        famous: answers.famous
+                        famous: answers.famous,
+                        lint: true,
+                        serve: true,
+                        browserify: true,
+                        release: true,
+                        changelog: true,
+                        test: true,
+                        style: true
                     }
                 });
                 done();
