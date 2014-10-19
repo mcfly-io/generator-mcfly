@@ -87,6 +87,7 @@ var ModuleGenerator = Class.extend({
             this.targetDir = path.join(process.cwd(), 'client', 'scripts', this.modulename);
             this.mkdir(this.targetDir);
             this.template('index.js', path.join(this.targetDir, 'index.js'));
+            this.template('home.html', path.join(this.targetDir, 'views', 'home.html'));
             done();
         }
     },

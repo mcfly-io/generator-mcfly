@@ -59,7 +59,9 @@ var ServiceGenerator = Class.extend({
 
         if(!_.contains(serviceTypes, that.servicetype)) {
             that.log(that.utils.chalk.red('Invalid service type. The possible values are : ' + serviceTypes.join(', ')));
-            this.emit('error', 'Invalid service type');
+            that.emit('error', 'Invalid service type');
+            /*eslint no-process-exit:0 */
+            process.exit();
             done();
         }
 
@@ -76,7 +78,6 @@ var ServiceGenerator = Class.extend({
     },
 
     prompting: function() {
-
         var done = this.async();
         var that = this;
 
@@ -143,7 +144,7 @@ var ServiceGenerator = Class.extend({
         // make sure the services/index.js exist
         utils.createIndexFile(this, '../component', targetDir);
 
-        this.template('index.js', path.join(targetDir, this.servicename + '.js'));
+        this.template('index.' + this.servicetype + '.js', path.join(targetDir, this.servicename + '.js'));
         this.template('index.test.js', path.join(targetDir, this.servicename + '.test.js'));
         done();
 

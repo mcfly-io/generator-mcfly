@@ -237,7 +237,6 @@ describe('angular-famous-ionic:service', function() {
                 };
             })
             .on('error', function(err) {
-
                 assert(ctx.generator.log.calledOnce);
                 assert.equal(err, 'Invalid service type');
                 //done();
