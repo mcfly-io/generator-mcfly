@@ -10,6 +10,7 @@ module.exports = function() {
         versionFiles: ['./package.json', './bower.json'],
 
         growly: {
+            notify: false,
             successIcon: path.join(cwd, 'node_modules/karma-growl-reporter/images/success.png'),
             failedIcon: path.join(cwd, 'node_modules/karma-growl-reporter/images/failed.png')
         },
