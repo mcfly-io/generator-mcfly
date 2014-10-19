@@ -227,4 +227,4 @@ Recent changes can be viewed on Github on the [Releases Page](https://github.com
 
 ## License
 
-MIT
+BSD
