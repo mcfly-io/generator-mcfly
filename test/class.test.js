@@ -135,6 +135,59 @@ describe('generator:class', function() {
             });
     });
 
+    it('#checkPython() should log when Python is installed', function() {
+        generator.options['check-python'] = true;
+        generator.log = sinon.spy();
+        generator.shell2 = {
+            which: sinon.stub().returns(true),
+            exec: sinon.stub(),
+            exit: sinon.stub()
+        };
+        return generator
+            .checkPython()
+            .then(function() {
+                assert(generator.log.calledWith(chalk.gray('python is installed, continuing...\n')));
+            });
+
+    });
+
+    it('#checkPython() when check-python is false should do nothing', function() {
+        generator.options['check-python'] = false;
+        return generator
+            .checkPython()
+            .then(function(value) {
+                assert.equal(value, undefined);
+            });
+    });
+
+    it('#checkPython() when check-python is true and Python is installed should do nothing', function() {
+        generator.options['check-python'] = true;
+        generator.utils.shell = {
+            which: sinon.stub().returns(true)
+        };
+        return generator
+            .checkPython()
+            .then(function(value) {
+                assert.equal(value, true);
+            });
+    });
+
+    it('#checkPython() when check-python is true and Python is not installed should throw', function() {
+        generator.options['check-python'] = true;
+        generator.utils.shell = {
+            which: sinon.stub().returns(false),
+            exec: sinon.stub(),
+            exit: sinon.stub()
+        };
+        return generator
+            .checkPython()
+            .then(undefined, function(err) {
+                assert.equal(err.name, 'Error');
+            }).then(function() {
+                assert(generator.utils.shell.exit.calledWith(1));
+            });
+    });
+
     it('#notifyUpdate() should exit when there is a new version', function(done) {
         var notifierCallback = sinon.spy();
         generator.utils.shell = {
@@ -184,6 +237,7 @@ describe('generator:class', function() {
         assert(generator.utils.shell.exit.notCalled);
         done();
     });
+
     describe('#choicesToProperties()', function() {
         var choices = [{
             value: 'animateModule',

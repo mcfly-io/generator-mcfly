@@ -9,6 +9,12 @@ var AppGenerator = Class.extend({
         Class.apply(this, arguments);
         this.createOptions();
 
+        this.option('check-travis', {
+            desc: 'Check if travis cli is installed',
+            type: 'Boolean',
+            defaults: true
+        });
+
         this.argument('appname', {
             type: String,
             required: false
@@ -23,8 +29,11 @@ var AppGenerator = Class.extend({
         this.pkg = require('../package.json');
         this.notifyUpdate(this.pkg);
 
-        //var done = this.async();
-        //this.checkGit();
+        var done = this.async();
+
+        this.checkPython().then(function() {
+            done();
+        });
 
         //this.checkTravis().then(function() {
         //    done();
