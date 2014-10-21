@@ -7,7 +7,7 @@ describe(app.name, function() {
 
     describe('Values', function() {
 
-        describe('<%= valuename %>', function() {
+        describe(valuename, function() {
 
             beforeEach(function() {
                 angular.mock.module(app.name);

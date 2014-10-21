@@ -7,7 +7,7 @@ describe(app.name, function() {
 
     describe('Controllers', function() {
 
-        describe('<%= controllername %>', function() {
+        describe(controllername, function() {
 
             beforeEach(function() {
                 angular.mock.module(app.name);
