@@ -80,6 +80,7 @@
     "mocha": "^1.21.5",
     "mocha-lcov-reporter": "^0.0.1",
     "mockery": "^1.4.0",
+    "npm": "^2.1.4",
     "q": "^1.0.1",
     "require-dir": "^0.1.0",
     "run-sequence": "^1.0.1",
