@@ -120,6 +120,15 @@ var ClassGenerator = Base.extend({
             }.bind(this));
     },
 
+    /**
+     * Check if Python is installed
+     *
+     * @returns {Q.promise} - A promise returning undefined if check was skipped, false if  not installed or true if installed
+     */
+    checkPython: function() {
+        return this.checkCmd('python', true);
+    },
+
     notifyUpdate: function(pkg) {
         var notifier = this.utils.updateNotifier({
             packageName: pkg.name,

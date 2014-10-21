@@ -61,7 +61,7 @@ var ServiceGenerator = Class.extend({
             that.log(that.utils.chalk.red('Invalid service type. The possible values are : ' + serviceTypes.join(', ')));
             that.emit('error', 'Invalid service type');
             /*eslint no-process-exit:0 */
-            process.exit();
+            //process.exit();
             done();
         }
 
