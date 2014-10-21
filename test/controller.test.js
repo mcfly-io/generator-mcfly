@@ -69,7 +69,7 @@ describe('angular-famous-ionic:controller', function() {
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./controllers\')(app);'));
                     done();
-                }, 200);
+                }, 300);
 
             });
         });
@@ -81,7 +81,7 @@ describe('angular-famous-ionic:controller', function() {
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./' + controllername + '\')(app);'));
                     done();
-                }, 200);
+                }, 300);
 
             });
         });
