@@ -7,7 +7,7 @@ describe(app.name, function() {
 
     describe('Filters', function() {
 
-        describe('<%= filtername %>', function() {
+        describe(filtername, function() {
 
             beforeEach(function() {
                 angular.mock.module(app.name);

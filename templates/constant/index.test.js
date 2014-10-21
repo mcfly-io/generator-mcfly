@@ -7,7 +7,7 @@ describe(app.name, function() {
 
     describe('Constants', function() {
 
-        describe('<%= constantname %>', function() {
+        describe(constantname, function() {
 
             beforeEach(function() {
                 angular.mock.module(app.name);
