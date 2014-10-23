@@ -1,7 +1,6 @@
-<% if(ionic) { %>
-@import "../../bower_components/ionic/scss/ionic.scss";
-<% } %>
-<% if(famous) { %>
+<% if (ionic) { %>@import "../../bower_components/ionic/scss/ionic.scss";<% } %>
+<% if (fontawesome) { %>@import "../../bower_components/font-awesome/scss/font-awesome.scss";<% } %>
+<% if (famous) { %>
 .full-screen {
     position: fixed;
     bottom: 0;

@@ -50,7 +50,7 @@
         "angular-ui-router": "./bower_components/angular-ui-router/release/angular-ui-router.min.js",
         "angular-animate": "./bower_components/angular-animate/angular-animate.min.js",
         "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.min.js"<% if(ionic) { %>,
-        "ionic": "./bower_components/ionic/release/js/ionic.min.js",  
+        "ionic": "./bower_components/ionic/release/js/ionic.min.js",
         "angular-ionic": "./bower_components/ionic/release/js/ionic-angular.min.js"<% } %><% if(famous) { %>,
         "famous": "./bower_components/famous/dist/famous-global.min.js",
         "famous-angular": "./bower_components/famous-angular/dist/famous-angular.min.js"<% } %>
@@ -91,7 +91,7 @@
         },
         "famous-angular": {
             "depends": [
-              "famous-polyfills",  
+              "famous-polyfills",
               "famous",
               "angular",
               "angular-animate",
