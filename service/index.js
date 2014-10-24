@@ -97,7 +97,7 @@ var ServiceGenerator = Class.extend({
                 return result;
             },
             message: 'What is the name of your module ?',
-            default: that.modulename,
+            default: that.modulename || (choices && choices.length >= 1) ? choices[0].value : that.modulename,
             validate: function(value) {
                 value = _.str.trim(value);
                 if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {

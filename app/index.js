@@ -61,13 +61,23 @@ var AppGenerator = Class.extend({
             var prompts = [{
                 name: 'ionic',
                 type: 'confirm',
-                message: 'Would you like to include ionic framework?',
+                message: 'Would you like to include ionic framework ?',
                 default: true
             }, {
                 name: 'famous',
                 type: 'confirm',
-                message: 'Would you like to include famous-angular?',
+                message: 'Would you like to include famous-angular ?',
                 default: true
+            }, {
+                name: 'fontawesome',
+                type: 'confirm',
+                message: 'Would you like to include font-awesome ?',
+                default: false
+            }, {
+                name: 'bootstrap',
+                type: 'confirm',
+                message: 'Would you like to include bootstrap ?',
+                default: false
             }];
 
             this.prompt(prompts, function(answers) {
@@ -75,10 +85,14 @@ var AppGenerator = Class.extend({
                 this.bootstrap = answers.bootstrap;
                 this.ionic = answers.ionic;
                 this.famous = answers.famous;
+                this.fontawesome = answers.fontawesome;
+                this.bootstrap = answers.bootstrap;
                 this.composeWith('sublime:gulps', {
                     options: {
                         ionic: answers.ionic,
                         famous: answers.famous,
+                        fontawesome: answers.fontawesome,
+                        bootstrap: answers.bootstrap,
                         lint: true,
                         serve: true,
                         browserify: true,
@@ -132,7 +146,8 @@ var AppGenerator = Class.extend({
     configuring: function() {
         this.config.set('ionic', this.ionic);
         this.config.set('famous', this.famous);
-        //this.config.set('bootstrap', this.bootstrap);
+        this.config.set('fontawesome', this.fontawesome);
+        this.config.set('bootstrap', this.bootstrap);
         this.config.forceSave();
     },
 

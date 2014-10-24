@@ -51,6 +51,13 @@ Add some content to client/index.html : <h2 ng-controller="main.common.hello as 
 gulp browsersync
 ```
 
+## Upgrade
+I like to publish new versions as soon as possible. So here is the upgrade process.
+
+Because `generator-angular-famous-ionic` has a dependency on `generator-sublime` you should execute the following command:
+```
+npm update -g generator-famous-ionic generator-sublime
+```
 
 ## Gulp tasks
 Now that the project is created you have a set of simple gulp tasks command available
@@ -202,7 +209,14 @@ Produces:
 * `client/scripts/modulename/services/index.js`
 
 
+## Adding a third party bower package
+If you want to include a third party bower package do the following:
 
+* `bower install --save yourpackage`
+* modify `package.json` bower section to include a path to the global minified javascript file of the package
+* adjust the **font** gulp constants (`gulp/common/constants.js`) to include the relevant fonts of the package (if applicable)
+* if the package exposes a global `.scss` file import it into `client/styles/main.scss` and ajdust eventually the variable for the path font (should be `../fonts`)
+* if the package only exposes a `.css` file adjust the **css** file constants (`gulp/common/constants.js`) to include it
 
 ## Testing
 To run unit test for the yeoman project use the following command:
