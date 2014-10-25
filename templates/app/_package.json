@@ -9,12 +9,15 @@
         "famous-polyfills": "^0.3.0"<% } %>
     },
     "devDependencies": {
+        "brfs": "^1.2.0",
         "browserify": "^5.13.1",
         "browserify-istanbul": "^0.1.2",
         "browserify-shim": "^3.8.0",
         "chalk": "^0.5.1",
         "conventional-changelog": "0.0.11",
         "coveralls": "^2.11.1",
+        "cssify": "^0.6.0",
+        "deamdify": "^0.1.1",
         "growly": "*",
         "gulp": "^3.8.8",
         "gulp-jscs": "*",
@@ -58,7 +61,10 @@
     "browserify": {
         "transform": [
             "html2js-browserify",
-            "browserify-shim"
+            "cssify",
+            "browserify-shim",
+            "deamdify",
+            "brfs"
         ]
     },
     "browserify-shim": {
