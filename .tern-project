@@ -7,7 +7,6 @@
   ],
   "exclude": ["wordpress/**"],
   "plugins": {
-    "angular": "./",
-    "node":"./"
+    "angular": "./"
   }
 }
