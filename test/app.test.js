@@ -36,6 +36,7 @@ describe('angular-famous-ionic:app', function() {
                 'client/404.html',
                 'client/styles/main.scss',
                 'client/scripts/main.js',
+                'client/scripts/main.test.js',
                 'test/e2e/e2e.test.js',
                 'test/e2e/.eslintrc',
                 'test/mocha/helpers/globals.js'
