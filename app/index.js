@@ -175,6 +175,7 @@ var AppGenerator = Class.extend({
             this.template('client/404.html');
             this.template('client/styles/main.scss');
             this.template('client/scripts/main.js');
+            this.template('client/scripts/main.test.js');
         },
 
         testFiles: function() {
