@@ -13,12 +13,14 @@ module.exports = function(namespace) {
     var app = angular.module(fullname, ['ui.router', <%= ngModules %>]);
     // inject:folders start
     // inject:folders end
-    app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/');
-        $stateProvider.state('home', {
-            url : '/',
-            template: require('./views/home.html')
-       });
-    }]);
+    app.config(['$stateProvider', '$urlRouterProvider',
+        function($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise('/');
+            $stateProvider.state('home', {
+                url: '/',
+                template: require('./views/home.html')
+            });
+        }
+    ]);
     return app;
 };
