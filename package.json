@@ -14,7 +14,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "prepublish": "bash ./bin/prepublish.sh",
+    "preinstall": "bash ./bin/prepublish.sh",
     "test": "gulp test"
   },
   "files": [
