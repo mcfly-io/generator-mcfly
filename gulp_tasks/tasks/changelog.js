@@ -65,7 +65,7 @@ gulp.task('changelog:script', function() {
         objectMode: true
     });
 
-    stream.queue(gulp.src('').pipe(exec('node ./gulp/common/changelog-script.js ' + version + ' ' + from, {
+    stream.queue(gulp.src('').pipe(exec('node ./gulp_tasks/common/changelog-script.js ' + version + ' ' + from, {
         pipeStdout: true
     })));
     stream.queue(gulp.src('CHANGELOG.md'));
