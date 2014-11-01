@@ -151,5 +151,8 @@ exports.getNgModules = function(generator) {
     if(generator.famous) {
         retVal.push('\'famous.angular\'');
     }
+    if(generator.ngCordova) {
+        retVal.push('\'ngCordova\'');
+    }
     return retVal.join(', ');
 };
