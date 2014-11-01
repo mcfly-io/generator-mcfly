@@ -40,6 +40,7 @@
     "famous",
     "famo.us",
     "famous-angular",
+    "ngCordova",
     "scaffold"
   ],
   "dependencies": {
