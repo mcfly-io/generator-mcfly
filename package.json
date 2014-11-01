@@ -18,6 +18,7 @@
     "test": "gulp test"
   },
   "files": [
+    "bin/prepublish.sh",
     "app",
     "class",
     "module",
@@ -92,6 +93,6 @@
   },
   "peerDependencies": {
     "yo": ">=1.0.0",
-    "generator-sublime": ">=1.2.25"
+    "generator-sublime": ">=1.2.26"
   }
 }
