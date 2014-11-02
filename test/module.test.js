@@ -237,7 +237,7 @@ describe('angular-famous-ionic:module', function() {
 
         });
 
-        it('should include famous-angular and angular-ionic with famous, ionic and ngCordova', function(done) {
+        it('should include famous-angular, angular-ionic and ngCordova with options famous, ionic and ngCordova', function(done) {
             testHelper.runGenerator('module')
                 .withOptions({
                     'skip-install': true,
