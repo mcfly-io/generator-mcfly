@@ -78,6 +78,9 @@ git config --global alias.pv '!git push --tag && git push'
 # Remote
 git config --global alias.r 'remote -v'
 
+# Pull request locally : git pr 14 (#14 is the id of the pull request)
+git config --global --add alias.pr '!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr-$1 && git checkout pr-$1; }; f'
+git config --global --add alias.pr-clean '!git for-each-ref refs/heads/pr-* --format="%(refname)" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done'
 
 #########
 # hooks
