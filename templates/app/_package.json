@@ -58,7 +58,7 @@
         "famous": "./bower_components/famous/dist/famous-global.min.js",
         "famous-angular": "./bower_components/famous-angular/dist/famous-angular.min.js"<% } %><% if(ngCordova) { %>,
         "ngCordova": "./bower_components/ngCordova/dist/ng-cordova.min.js",
-        "ngCordova": "./bower_components/ngCordova/dist/ng-cordova-mocks.min.js"<% } %>
+        "ngCordovaMocks": "./bower_components/ngCordova/dist/ng-cordova-mocks.min.js"<% } %>
     },
     "browserify": {
         "transform": [
