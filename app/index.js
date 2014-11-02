@@ -71,7 +71,7 @@ var AppGenerator = Class.extend({
             }, {
                 name: 'ngCordova',
                 type: 'confirm',
-                message: 'Would you like to include ng-cordova (to gain access to native capabillites in mobile phones)?',
+                message: 'Would you like to include ng-cordova?',
                 default: true
             }, {
                 name: 'fontawesome',
