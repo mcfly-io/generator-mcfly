@@ -207,7 +207,37 @@ describe('angular-famous-ionic:module', function() {
 
         });
 
-        it('should include famous-angular and angular-ionic with famous and ionic', function(done) {
+        it('should include ngCordova', function(done) {
+            testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.log = sinon.spy();
+
+                    generator.afterInitializing = function() {
+                        generator.ngCordova = true;
+                        generator.ngModules = utils.getNgModules(generator);
+
+                    };
+                    generator.mkdir('client/scripts/toto');
+                    generator.mkdir('client/scripts/tata');
+                })
+                .on('end', function() {
+                    var file = 'client/scripts/' + modulename + '/index.js';
+                    var body = testHelper.readTextFile(file);
+                    assert(_.contains(body, 'require(\'ngCordova\');'));
+                    done();
+                });
+
+        });
+
+        it('should include famous-angular, angular-ionic and ngCordova with options famous, ionic and ngCordova', function(done) {
             testHelper.runGenerator('module')
                 .withOptions({
                     'skip-install': true,
@@ -223,6 +253,7 @@ describe('angular-famous-ionic:module', function() {
                     generator.afterInitializing = function() {
                         generator.famous = true;
                         generator.ionic = true;
+                        generator.ngCordova = true;
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
@@ -235,6 +266,7 @@ describe('angular-famous-ionic:module', function() {
 
                     assert(_.contains(body, 'require(\'famous-angular\');'));
                     assert(_.contains(body, 'require(\'angular-ionic\');'));
+                    assert(_.contains(body, 'require(\'ngCordova\');'));
                     assert(_.contains(body, '\'ionic\''));
                     assert(_.contains(body, '\'famous.angular\''));
                     done();
