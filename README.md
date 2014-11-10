@@ -59,6 +59,10 @@ Because `generator-angular-famous-ionic` has a dependency on `generator-sublime`
 npm update -g generator-famous-ionic generator-sublime
 ```
 
+## Client folder
+The generator will ask you to provide the name of the folder containing the client source code, and it will save this value in `.yo-rc.json` file (`clientFolder` entry).   
+If you rename the client folder, make sure you also modify the value stored in `.yo-rc.json`
+
 ## Gulp tasks
 Now that the project is created you have a set of simple gulp tasks command available
 ```
@@ -91,7 +95,7 @@ Available generators:
 **Note: Generators are to be run from the root directory of your app.**
 
 ### App
-Sets up a new AngularJS app, generating all the boilerplate you need to get started. The appp generator also installs additional AngularJS modules, such as 
+Sets up a new AngularJS app, generating all the boilerplate you need to get started. The app generator also installs additional AngularJS modules, such as 
 * angular-mocks
 * angular-animate
 * angular-sanitize

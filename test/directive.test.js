@@ -5,7 +5,7 @@ var Q = require('q');
 var _ = require('lodash');
 var modulename = 'common';
 var directivename = 'myDirective';
-
+var clientFolder = 'www';
 describe('angular-famous-ionic:directive', function() {
     describe('with modules', function() {
         beforeEach(function() {
@@ -20,19 +20,19 @@ describe('angular-famous-ionic:directive', function() {
                     directivename: directivename
                 })
                 .on('ready', function(generator) {
-
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     // create modules
-                    generator.mkdir('client/scripts/toto');
-                    generator.mkdir('client/scripts/tata');
-                    generator.mkdir('client/scripts/common');
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/common');
 
                     // create an index file for common
                     generator.ionic = true;
                     generator.famous = true;
                     generator.ngCordova = true;
                     generator.ngModules = [];
-                    generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
+                    generator.template('../../templates/module/index.js', clientFolder + '/scripts/common/index.js');
 
                 });
 
@@ -40,7 +40,7 @@ describe('angular-famous-ionic:directive', function() {
 
         it('creates files', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/directives';
+                var folder = clientFolder + '/scripts/' + modulename + '/directives';
                 var file = folder + '/' + directivename + '.js';
                 var fileHtml = folder + '/' + directivename + '.html';
                 var filetest = folder + '/' + directivename + '.test.js';
@@ -57,7 +57,7 @@ describe('angular-famous-ionic:directive', function() {
 
         it('directive file should contain directive name', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/directives';
+                var folder = clientFolder + '/scripts/' + modulename + '/directives';
                 var file = folder + '/' + directivename + '.js';
                 var body = testHelper.readTextFile(file);
                 assert(_.contains(body, 'var directivename = \'' + directivename + '\';'));
@@ -68,7 +68,7 @@ describe('angular-famous-ionic:directive', function() {
         it('module should reference directives folder', function(done) {
             this.runGen.on('end', function() {
                 setTimeout(function() {
-                    var folder = 'client/scripts/' + modulename;
+                    var folder = clientFolder + '/scripts/' + modulename;
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./directives\')(app);'));
                     done();
@@ -80,7 +80,7 @@ describe('angular-famous-ionic:directive', function() {
         it('directives/index.js should reference directive file', function(done) {
             this.runGen.on('end', function() {
                 setTimeout(function() {
-                    var folder = 'client/scripts/' + modulename + '/directives';
+                    var folder = clientFolder + '/scripts/' + modulename + '/directives';
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./' + directivename + '\')(app);'));
                     done();
@@ -170,6 +170,7 @@ describe('angular-famous-ionic:directive', function() {
                     directivename: directivename
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
                         var deferred = Q.defer();
@@ -200,6 +201,7 @@ describe('angular-famous-ionic:directive', function() {
                     directivename: directivename
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
                         var deferred = Q.defer();

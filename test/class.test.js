@@ -4,6 +4,7 @@ var testHelper = require('./testHelper');
 var chalk = require('chalk');
 var _ = require('lodash');
 var path = require('path');
+var Q = require('q');
 var Class = require('../class');
 
 describe('generator:class', function() {
@@ -12,10 +13,11 @@ describe('generator:class', function() {
     beforeEach(function() {
         // create an instance of the generator
         generator = testHelper.createGenerator(Class);
-        // mock log as we don't want to polute output
+        // mock log as we don't want to pollute output
         generator.log = sinon.spy();
         // create the options
         generator.createOptions();
+        generator.clientFolder = 'www';
     });
 
     it('#ctor() should set version for travis', function() {
@@ -298,6 +300,9 @@ describe('generator:class', function() {
     });
 
     it('#getClientModules should succeed', function() {
+        generator.getDirectories = function() {
+            return Q.when([]);
+        };
         return generator.getClientModules().then(function(values) {
             assert(Array.isArray(values));
             assert.equal(values.length, 0);
@@ -306,6 +311,11 @@ describe('generator:class', function() {
 
     it('#getClientScriptFolder should succeed', function() {
         var result = generator.getClientScriptFolder();
-        assert(_.endsWith(result, 'temp-test/client/scripts'));
+        assert(_.endsWith(result, generator.clientFolder + '/scripts'));
+    });
+
+    it('#getClientFolder should default to client', function() {
+        var result = generator.getClientFolder();
+        assert.equal(result, 'client');
     });
 });

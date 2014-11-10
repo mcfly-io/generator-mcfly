@@ -34,7 +34,7 @@ var DirectiveGenerator = Class.extend({
     writing: function() {
         var done = this.async();
         this.sourceRoot(path.join(__dirname, '../templates/' + 'directive'));
-        var targetDir = path.join('client', 'scripts', this.modulename, 'directives');
+        var targetDir = path.join(this.clientFolder, 'scripts', this.modulename, 'directives');
         this.mkdir(targetDir);
 
         // make sure the fitlers/index.js exist

@@ -6,6 +6,8 @@ var _ = require('lodash');
 var modulename = 'common';
 var controllername = 'myController';
 
+var clientFolder = 'www';
+
 describe('angular-famous-ionic:controller', function() {
     describe('with modules', function() {
         beforeEach(function() {
@@ -20,19 +22,19 @@ describe('angular-famous-ionic:controller', function() {
                     controllername: controllername
                 })
                 .on('ready', function(generator) {
-
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     // create modules
-                    generator.mkdir('client/scripts/toto');
-                    generator.mkdir('client/scripts/tata');
-                    generator.mkdir('client/scripts/common');
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/common');
 
                     // create an index file for common
                     generator.ionic = true;
                     generator.famous = true;
                     generator.ngCordova = true;
                     generator.ngModules = [];
-                    generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
+                    generator.template('../../templates/module/index.js', clientFolder + '/scripts/common/index.js');
 
                 });
 
@@ -40,7 +42,7 @@ describe('angular-famous-ionic:controller', function() {
 
         it('creates files', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/controllers';
+                var folder = clientFolder + '/scripts/' + modulename + '/controllers';
                 var file = folder + '/' + controllername + '.js';
                 var filetest = folder + '/' + controllername + '.test.js';
                 assert.file([
@@ -55,7 +57,7 @@ describe('angular-famous-ionic:controller', function() {
 
         it('controller file should contain controller name', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/controllers';
+                var folder = clientFolder + '/scripts/' + modulename + '/controllers';
                 var file = folder + '/' + controllername + '.js';
                 var body = testHelper.readTextFile(file);
                 assert(_.contains(body, 'var controllername = \'' + controllername + '\';'));
@@ -66,7 +68,7 @@ describe('angular-famous-ionic:controller', function() {
         it('module should reference controllers folder', function(done) {
             this.runGen.on('end', function() {
                 setTimeout(function() {
-                    var folder = 'client/scripts/' + modulename;
+                    var folder = clientFolder + '/scripts/' + modulename;
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./controllers\')(app);'));
                     done();
@@ -78,7 +80,7 @@ describe('angular-famous-ionic:controller', function() {
         it('controllers/index.js should reference controller file', function(done) {
             this.runGen.on('end', function() {
                 setTimeout(function() {
-                    var folder = 'client/scripts/' + modulename + '/controllers';
+                    var folder = clientFolder + '/scripts/' + modulename + '/controllers';
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./' + controllername + '\')(app);'));
                     done();
@@ -168,6 +170,7 @@ describe('angular-famous-ionic:controller', function() {
                     controllername: controllername
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
                         var deferred = Q.defer();
@@ -198,6 +201,7 @@ describe('angular-famous-ionic:controller', function() {
                     controllername: controllername
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
                         var deferred = Q.defer();

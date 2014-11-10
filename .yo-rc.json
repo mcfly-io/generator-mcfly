@@ -1,3 +1,6 @@
 {
-  "generator-generator": {}
+  "generator-generator": {},
+  "generator-angular-famous-ionic": {
+    "clientFolder": "client"
+  }
 }

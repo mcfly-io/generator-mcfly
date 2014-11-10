@@ -4,19 +4,19 @@ var path = require('path');
 var _ = require('lodash');
 var utils = require('../utils');
 var Class = require('./index.js');
-var _clientFolder;
+var _localFolder;
 var _templateFolder;
 var ComponentGenerator = Class.extend({
     constructor: function() {
         Class.apply(this, arguments);
         var that = this;
 
-        that.clientFolder = _clientFolder;
+        that.localFolder = _localFolder;
         that.templateFolder = _templateFolder;
-
+        that.clientFolder = that.getClientFolder();
         that.on('end', function() {
             var done = that.async();
-            utils.injectComponent(path.join(that.getClientScriptFolder(), that.modulename, that.clientFolder))
+            utils.injectComponent(path.join(that.getClientScriptFolder(), that.modulename, that.localFolder))
                 .then(function() {
                     return utils.injectSubComponent(that, path.join(that.getClientScriptFolder(), that.modulename));
                 })
@@ -112,7 +112,7 @@ var ComponentGenerator = Class.extend({
     writing: function() {
         var done = this.async();
         this.sourceRoot(path.join(__dirname, '../templates/' + this.templateFolder));
-        var targetDir = path.join('client', 'scripts', this.modulename, this.clientFolder);
+        var targetDir = path.join(this.clientFolder, 'scripts', this.modulename, this.localFolder);
         this.mkdir(targetDir);
 
         // make sure the fitlers/index.js exist
@@ -126,8 +126,8 @@ var ComponentGenerator = Class.extend({
 
 });
 
-module.exports = function(clientFolder, templateFolder) {
-    _clientFolder = clientFolder;
+module.exports = function(localFolder, templateFolder) {
+    _localFolder = localFolder;
     _templateFolder = templateFolder;
     return ComponentGenerator;
 };

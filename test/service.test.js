@@ -5,6 +5,7 @@ var Q = require('q');
 var _ = require('lodash');
 var modulename = 'common';
 var servicename = 'myService';
+var clientFolder = 'www';
 
 describe('angular-famous-ionic:service', function() {
     describe('with modules', function() {
@@ -21,19 +22,20 @@ describe('angular-famous-ionic:service', function() {
                     servicename: servicename
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
 
                     // create modules
-                    generator.mkdir('client/scripts/toto');
-                    generator.mkdir('client/scripts/tata');
-                    generator.mkdir('client/scripts/common');
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/common');
 
                     // create an index file for common
                     generator.ionic = true;
                     generator.famous = true;
                     generator.ngCordova = true;
                     generator.ngModules = [];
-                    generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
+                    generator.template('../../templates/module/index.js', clientFolder + '/scripts/common/index.js');
 
                 });
 
@@ -41,7 +43,7 @@ describe('angular-famous-ionic:service', function() {
 
         it('creates files', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/services';
+                var folder = clientFolder + '/scripts/' + modulename + '/services';
                 var file = folder + '/' + servicename + '.js';
                 var filetest = folder + '/' + servicename + '.test.js';
                 assert.file([
@@ -56,7 +58,7 @@ describe('angular-famous-ionic:service', function() {
 
         it('service file should contain service name', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/services';
+                var folder = clientFolder + '/scripts/' + modulename + '/services';
                 var file = folder + '/' + servicename + '.js';
                 var body = testHelper.readTextFile(file);
                 assert(_.contains(body, 'var servicename = \'' + servicename + '\';'));
@@ -67,7 +69,7 @@ describe('angular-famous-ionic:service', function() {
         it('module should reference services folder', function(done) {
             this.runGen.on('end', function() {
                 setTimeout(function() {
-                    var folder = 'client/scripts/' + modulename;
+                    var folder = clientFolder + '/scripts/' + modulename;
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./services\')(app);'));
                     done();
@@ -79,7 +81,7 @@ describe('angular-famous-ionic:service', function() {
         it('services/index.js should reference service file', function(done) {
             this.runGen.on('end', function() {
                 setTimeout(function() {
-                    var folder = 'client/scripts/' + modulename + '/services';
+                    var folder = clientFolder + '/scripts/' + modulename + '/services';
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./' + servicename + '\')(app);'));
                     done();
@@ -168,6 +170,7 @@ describe('angular-famous-ionic:service', function() {
                     servicename: servicename
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
                         var deferred = Q.defer();
@@ -197,6 +200,7 @@ describe('angular-famous-ionic:service', function() {
                     servicename: servicename
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
                         var deferred = Q.defer();
@@ -230,6 +234,7 @@ describe('angular-famous-ionic:service', function() {
                 servicename: servicename
             })
             .on('ready', function(generator) {
+                generator.clientFolder = clientFolder;
                 generator.log = sinon.spy();
                 generator.getClientModules = function() {
                     var deferred = Q.defer();
