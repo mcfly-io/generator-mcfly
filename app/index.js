@@ -71,7 +71,7 @@ var AppGenerator = Class.extend({
             }, {
                 name: 'ngCordova',
                 type: 'confirm',
-                message: 'Would you like to include ng-cordova (to gain access to native capabillites in mobile phones)?',
+                message: 'Would you like to include ngCordova?',
                 default: true
             }, {
                 name: 'fontawesome',
@@ -178,6 +178,7 @@ var AppGenerator = Class.extend({
             this.mkdir('client');
             this.mkdir('client/styles');
             this.mkdir('client/scripts');
+            this.mkdir('client/images');
             this.template('client/_eslintrc', 'client/.eslintrc');
             this.template('client/index.html');
             this.template('client/404.html');
