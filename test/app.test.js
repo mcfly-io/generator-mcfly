@@ -36,6 +36,7 @@ describe('angular-famous-ionic:app', function() {
                 clientFolder + '/.eslintrc',
                 clientFolder + '/index.html',
                 clientFolder + '/404.html',
+                clientFolder + '/robots.txt',
                 clientFolder + '/styles/main.scss',
                 clientFolder + '/scripts/main.js',
                 clientFolder + '/scripts/main.test.js',
