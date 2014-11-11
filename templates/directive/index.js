@@ -3,13 +3,13 @@ var directivename = '<%= directivename %>';
 
 module.exports = function(app) {
 
-    var deps = [];
+    var controllerDeps = [];
     var controller = function() {
 
     };
-    controller.$inject = deps;
 
-    function directive() {
+    var directiveDeps = [];
+    var directive = function() {
         return {
             restrict: 'AEC',
             replace: true,
@@ -22,7 +22,10 @@ module.exports = function(app) {
 
             }
         };
-    }
+    };
+
+    controller.$inject = controllerDeps;
+    directive.$inject = directiveDeps;
 
     app.directive(directivename, directive);
 };
