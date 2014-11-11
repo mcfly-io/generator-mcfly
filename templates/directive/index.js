@@ -3,11 +3,14 @@ var directivename = '<%= directivename %>';
 
 module.exports = function(app) {
 
+    // controller
     var controllerDeps = [];
     var controller = function() {
 
     };
+    controller.$inject = controllerDeps;
 
+    // directive
     var directiveDeps = [];
     var directive = function() {
         return {
@@ -23,8 +26,6 @@ module.exports = function(app) {
             }
         };
     };
-
-    controller.$inject = controllerDeps;
     directive.$inject = directiveDeps;
 
     app.directive(directivename, directive);
