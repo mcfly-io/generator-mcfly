@@ -99,6 +99,7 @@ var AppGenerator = Class.extend({
                 this.bootstrap = answers.bootstrap;
                 this.composeWith('sublime:gulps', {
                     options: {
+                        clientFolder: answers.clientFolder,
                         ionic: answers.ionic,
                         famous: answers.famous,
                         fontawesome: answers.fontawesome,

@@ -9,6 +9,14 @@ which codeclimate || npm install -g codeclimate-test-reporter
 which browserify || npm install -g browserify
 which watchify || npm install -g watchify
 
+npm install -g cordova
+npm install -g ionic
+
+# only if on MacOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    npm install -g ios-sim
+fi
+
 bower install
 
 echo "prepublish executed sucessfully"
