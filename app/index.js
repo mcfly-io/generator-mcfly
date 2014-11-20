@@ -188,6 +188,7 @@ var AppGenerator = Class.extend({
             this.template('client/index.html', this.clientFolder + '/index.html');
             this.template('client/404.html', this.clientFolder + '/404.html');
             this.template('client/robots.txt', this.clientFolder + '/robots.txt');
+            this.template('client/favicon.ico', this.clientFolder + '/favicon.ico');
             this.template('client/styles/main.scss', this.clientFolder + '/styles/main.scss');
             this.template('client/scripts/main.js', this.clientFolder + '/scripts/main.js');
             this.template('client/scripts/main.test.js', this.clientFolder + '/scripts/main.test.js');

@@ -37,6 +37,7 @@ describe('angular-famous-ionic:app', function() {
                 clientFolder + '/index.html',
                 clientFolder + '/404.html',
                 clientFolder + '/robots.txt',
+                clientFolder + '/favicon.ico',
                 clientFolder + '/styles/main.scss',
                 clientFolder + '/scripts/main.js',
                 clientFolder + '/scripts/main.test.js',
