@@ -9,6 +9,15 @@ describe('angularjs homepage', function() {
         browser.get('http://juliemr.github.io/protractor-demo/');
     });
 
+    afterEach(function() {
+        browser.manage().logs().get('browser').then(function(browserlog) {
+            expect(browserlog.length).toEqual(0);
+            if(browserlog.length) {
+                console.error('Error log: ' + JSON.stringify(browserlog));
+            }
+        });
+    });
+
     it('should have a title', function() {
         expect(browser.getTitle()).toEqual('Super Calculator');
     });

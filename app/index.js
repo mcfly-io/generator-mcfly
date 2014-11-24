@@ -59,6 +59,10 @@ var AppGenerator = Class.extend({
             var done = this.async();
 
             var prompts = [{
+                name: 'clientFolder',
+                message: 'How would you like to name the client folder?',
+                default: 'www'
+            }, {
                 name: 'ionic',
                 type: 'confirm',
                 message: 'Would you like to include ionic framework?',
@@ -71,7 +75,7 @@ var AppGenerator = Class.extend({
             }, {
                 name: 'ngCordova',
                 type: 'confirm',
-                message: 'Would you like to include ng-cordova (to gain access to native capabillites in mobile phones)?',
+                message: 'Would you like to include ngCordova?',
                 default: true
             }, {
                 name: 'fontawesome',
@@ -86,7 +90,7 @@ var AppGenerator = Class.extend({
             }];
 
             this.prompt(prompts, function(answers) {
-
+                this.clientFolder = answers.clientFolder;
                 this.bootstrap = answers.bootstrap;
                 this.ionic = answers.ionic;
                 this.famous = answers.famous;
@@ -95,9 +99,9 @@ var AppGenerator = Class.extend({
                 this.bootstrap = answers.bootstrap;
                 this.composeWith('sublime:gulps', {
                     options: {
+                        clientFolder: answers.clientFolder,
                         ionic: answers.ionic,
                         famous: answers.famous,
-                        ngCordova: answers.ngCordova,
                         fontawesome: answers.fontawesome,
                         bootstrap: answers.bootstrap,
                         lint: true,
@@ -151,6 +155,7 @@ var AppGenerator = Class.extend({
     },
 
     configuring: function() {
+        this.config.set('clientFolder', this.clientFolder);
         this.config.set('ionic', this.ionic);
         this.config.set('famous', this.famous);
         this.config.set('ngCordova', this.ngCordova);
@@ -175,15 +180,18 @@ var AppGenerator = Class.extend({
         },
 
         clientfiles: function() {
-            this.mkdir('client');
-            this.mkdir('client/styles');
-            this.mkdir('client/scripts');
-            this.template('client/_eslintrc', 'client/.eslintrc');
-            this.template('client/index.html');
-            this.template('client/404.html');
-            this.template('client/styles/main.scss');
-            this.template('client/scripts/main.js');
-            this.template('client/scripts/main.test.js');
+            this.mkdir(this.clientFolder);
+            this.mkdir(this.clientFolder + '/styles');
+            this.mkdir(this.clientFolder + '/scripts');
+            this.mkdir(this.clientFolder + '/images');
+            this.template('client/_eslintrc', this.clientFolder + '/.eslintrc');
+            this.template('client/index.html', this.clientFolder + '/index.html');
+            this.template('client/404.html', this.clientFolder + '/404.html');
+            this.template('client/robots.txt', this.clientFolder + '/robots.txt');
+            this.template('client/favicon.ico', this.clientFolder + '/favicon.ico');
+            this.template('client/styles/main.scss', this.clientFolder + '/styles/main.scss');
+            this.template('client/scripts/main.js', this.clientFolder + '/scripts/main.js');
+            this.template('client/scripts/main.test.js', this.clientFolder + '/scripts/main.test.js');
         },
 
         testFiles: function() {

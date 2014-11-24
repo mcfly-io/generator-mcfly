@@ -24,6 +24,8 @@ describe('angular-famous-ionic:app', function() {
 
     it('creates files', function(done) {
         this.runGen.on('end', function() {
+            var clientFolder = this.runGen.generator.config.get('clientFolder');
+
             assert.file([
                 'package.json',
                 'bower.json',
@@ -31,18 +33,21 @@ describe('angular-famous-ionic:app', function() {
                 'karma.conf.js',
                 'protractor.conf.js',
                 'bin/prepublish.sh',
-                'client/.eslintrc',
-                'client/index.html',
-                'client/404.html',
-                'client/styles/main.scss',
-                'client/scripts/main.js',
-                'client/scripts/main.test.js',
+                clientFolder + '/.eslintrc',
+                clientFolder + '/index.html',
+                clientFolder + '/404.html',
+                clientFolder + '/robots.txt',
+                clientFolder + '/favicon.ico',
+                clientFolder + '/styles/main.scss',
+                clientFolder + '/scripts/main.js',
+                clientFolder + '/scripts/main.test.js',
+                clientFolder + '/images',
                 'test/e2e/e2e.test.js',
                 'test/e2e/.eslintrc',
                 'test/mocha/helpers/globals.js'
             ]);
             done();
-        });
+        }.bind(this));
 
     });
 
@@ -82,6 +87,8 @@ describe('angular-famous-ionic:app', function() {
             assert(config['generator-angular-famous-ionic'].ionic !== undefined, 'ionic does not exist in .yo-rc.json');
             assert(config['generator-angular-famous-ionic'].famous !== undefined, 'famous does not exist in .yo-rc.json');
             assert(config['generator-angular-famous-ionic'].ngCordova !== undefined, 'ngCordova does not exist in .yo-rc.json');
+            assert(config['generator-angular-famous-ionic'].clientFolder !== undefined, 'clientFolder does not exist in .yo-rc.json');
+
             done();
         });
     });

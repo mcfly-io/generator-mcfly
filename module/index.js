@@ -15,6 +15,11 @@ var ModuleGenerator = Class.extend({
             required: false
         });
         this.modulename = this._.camelize(this._.slugify(this._.humanize(this.modulename)));
+        this.clientFolder = this.getClientFolder();
+        this.ionic = this.config.get('ionic');
+        this.famous = this.config.get('famous');
+        this.ngCordova = this.config.get('ngCordova');
+        this.ngModules = utils.getNgModules(this);
     },
 
     initializing: function() {
@@ -22,10 +27,6 @@ var ModuleGenerator = Class.extend({
         Class.prototype.afterInitializing = function() {
             // for unit test only
         };
-        this.ionic = this.config.get('ionic');
-        this.famous = this.config.get('famous');
-        this.ngCordova = this.config.get('ngCordova');
-        this.ngModules = utils.getNgModules(this);
 
         var that = this;
         this.clientModules = [];
@@ -85,7 +86,7 @@ var ModuleGenerator = Class.extend({
             var done = this.async();
             this.sourceDir = path.join(__dirname, '../templates/module');
             this.sourceRoot(this.sourceDir);
-            this.targetDir = path.join(process.cwd(), 'client', 'scripts', this.modulename);
+            this.targetDir = path.join(process.cwd(), this.clientFolder, 'scripts', this.modulename);
             this.mkdir(this.targetDir);
             this.template('index.js', path.join(this.targetDir, 'index.js'));
             this.template('home.html', path.join(this.targetDir, 'views', 'home.html'));

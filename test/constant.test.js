@@ -5,6 +5,7 @@ var Q = require('q');
 var _ = require('lodash');
 var modulename = 'common';
 var constantname = 'myConstant';
+var clientFolder = 'www';
 
 describe('angular-famous-ionic:constant', function() {
     describe('with modules', function() {
@@ -21,18 +22,20 @@ describe('angular-famous-ionic:constant', function() {
                 })
                 .on('ready', function(generator) {
 
+                    generator.clientFolder = clientFolder;
+
                     generator.log = sinon.spy();
                     // create modules
-                    generator.mkdir('client/scripts/toto');
-                    generator.mkdir('client/scripts/tata');
-                    generator.mkdir('client/scripts/common');
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/common');
 
                     // create an index file for common
                     generator.ionic = true;
                     generator.famous = true;
                     generator.ngCordova = true;
                     generator.ngModules = [];
-                    generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
+                    generator.template('../../templates/module/index.js', clientFolder + '/scripts/common/index.js');
 
                 });
 
@@ -40,7 +43,7 @@ describe('angular-famous-ionic:constant', function() {
 
         it('creates files', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/constants';
+                var folder = clientFolder + '/scripts/' + modulename + '/constants';
                 var file = folder + '/' + constantname + '.js';
                 var filetest = folder + '/' + constantname + '.test.js';
                 assert.file([
@@ -55,7 +58,7 @@ describe('angular-famous-ionic:constant', function() {
 
         it('constant file should contain constant name', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/constants';
+                var folder = clientFolder + '/scripts/' + modulename + '/constants';
                 var file = folder + '/' + constantname + '.js';
                 var body = testHelper.readTextFile(file);
                 assert(_.contains(body, 'var constantname = \'' + constantname + '\';'));
@@ -65,8 +68,9 @@ describe('angular-famous-ionic:constant', function() {
 
         it('module should reference constants folder', function(done) {
             this.runGen.on('end', function() {
+
                 setTimeout(function() {
-                    var folder = 'client/scripts/' + modulename;
+                    var folder = clientFolder + '/scripts/' + modulename;
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./constants\')(app);'));
                     done();
@@ -77,8 +81,9 @@ describe('angular-famous-ionic:constant', function() {
 
         it('constants/index.js should reference constant file', function(done) {
             this.runGen.on('end', function() {
+
                 setTimeout(function() {
-                    var folder = 'client/scripts/' + modulename + '/constants';
+                    var folder = clientFolder + '/scripts/' + modulename + '/constants';
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./' + constantname + '\')(app);'));
                     done();
@@ -168,6 +173,7 @@ describe('angular-famous-ionic:constant', function() {
                     constantname: constantname
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
                         var deferred = Q.defer();
@@ -198,6 +204,7 @@ describe('angular-famous-ionic:constant', function() {
                     constantname: constantname
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
                         var deferred = Q.defer();

@@ -3,26 +3,31 @@ var directivename = '<%= directivename %>';
 
 module.exports = function(app) {
 
-    var deps = [];
+    // controller
+    var controllerDeps = [];
     var controller = function() {
 
     };
-    controller.$inject = deps;
+    controller.$inject = controllerDeps;
 
-    function directive() {
+    // directive
+    var directiveDeps = [];
+    var directive = function() {
         return {
-            restrict: 'AEC',
-            replace: true,
+            restrict: 'AE',
             scope: {
                 title: '@' // '@' reads attribute value, '=' provides 2-way binding, '&" works with functions
             },
             controller: controller,
+            controllerAs: 'ctrl',
+            bindToController: true,
             template: require('./<%= directivename %>.html'),
-            link: function($scope, element, attrs) {
+            link: function(scope, element, attrs) {
 
             }
         };
-    }
+    };
+    directive.$inject = directiveDeps;
 
     app.directive(directivename, directive);
 };

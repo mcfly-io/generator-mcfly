@@ -195,7 +195,21 @@ var ClassGenerator = Base.extend({
      * @returns {String} - The path of the client script folder
      */
     getClientScriptFolder: function() {
-        return path.join(this.destinationRoot(), 'client', 'scripts');
+        return path.join(this.destinationRoot(), this.clientFolder, 'scripts');
+    },
+
+    /** Return the client folder from .yo-rc.json file, or create it
+     *
+     * @returns {String} - The name of the client folder
+     */
+    getClientFolder: function() {
+        var retval = this.config.get('clientFolder');
+        if(!retval) {
+            retval = 'client';
+            this.config.set('clientFolder', retval);
+            this.config.save();
+        }
+        return retval;
     }
 
 });

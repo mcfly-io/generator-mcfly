@@ -5,6 +5,7 @@ var _ = require('lodash');
 var Q = require('q');
 var utils = require('../utils');
 var modulename = 'common';
+var clientFolder = 'www';
 
 describe('angular-famous-ionic:module', function() {
 
@@ -20,10 +21,11 @@ describe('angular-famous-ionic:module', function() {
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
 
-                    generator.mkdir('client/scripts/toto');
-                    generator.mkdir('client/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
 
                 });
 
@@ -31,7 +33,7 @@ describe('angular-famous-ionic:module', function() {
 
         it('creates files', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename;
+                var folder = clientFolder + '/scripts/' + modulename;
                 var file = folder + '/index.js';
                 assert.file([
                     file
@@ -43,7 +45,7 @@ describe('angular-famous-ionic:module', function() {
 
         it('module file should contain module name', function(done) {
             this.runGen.on('end', function() {
-                var file = 'client/scripts/' + modulename + '/index.js';
+                var file = clientFolder + '/scripts/' + modulename + '/index.js';
                 var body = testHelper.readTextFile(file);
                 assert(_.contains(body, 'var modulename = \'' + modulename + '\';'));
                 done();
@@ -124,6 +126,7 @@ describe('angular-famous-ionic:module', function() {
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
 
@@ -156,6 +159,7 @@ describe('angular-famous-ionic:module', function() {
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
 
                     generator.afterInitializing = function() {
@@ -163,11 +167,11 @@ describe('angular-famous-ionic:module', function() {
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
-                    generator.mkdir('client/scripts/toto');
-                    generator.mkdir('client/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
                 })
                 .on('end', function() {
-                    var file = 'client/scripts/' + modulename + '/index.js';
+                    var file = clientFolder + '/scripts/' + modulename + '/index.js';
                     var body = testHelper.readTextFile(file);
                     assert(_.contains(body, 'require(\'angular-ionic\');'));
                     assert(_.contains(body, '\'ionic\''));
@@ -187,6 +191,7 @@ describe('angular-famous-ionic:module', function() {
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
 
                     generator.afterInitializing = function() {
@@ -194,11 +199,11 @@ describe('angular-famous-ionic:module', function() {
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
-                    generator.mkdir('client/scripts/toto');
-                    generator.mkdir('client/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
                 })
                 .on('end', function() {
-                    var file = 'client/scripts/' + modulename + '/index.js';
+                    var file = clientFolder + '/scripts/' + modulename + '/index.js';
                     var body = testHelper.readTextFile(file);
                     assert(_.contains(body, 'require(\'famous-angular\');'));
                     assert(_.contains(body, '\'famous.angular\''));
@@ -218,6 +223,7 @@ describe('angular-famous-ionic:module', function() {
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
 
                     generator.afterInitializing = function() {
@@ -225,11 +231,11 @@ describe('angular-famous-ionic:module', function() {
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
-                    generator.mkdir('client/scripts/toto');
-                    generator.mkdir('client/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
                 })
                 .on('end', function() {
-                    var file = 'client/scripts/' + modulename + '/index.js';
+                    var file = clientFolder + '/scripts/' + modulename + '/index.js';
                     var body = testHelper.readTextFile(file);
                     assert(_.contains(body, 'require(\'ngCordova\');'));
                     done();
@@ -248,6 +254,7 @@ describe('angular-famous-ionic:module', function() {
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
 
                     generator.afterInitializing = function() {
@@ -257,11 +264,11 @@ describe('angular-famous-ionic:module', function() {
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
-                    generator.mkdir('client/scripts/toto');
-                    generator.mkdir('client/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
                 })
                 .on('end', function() {
-                    var file = 'client/scripts/' + modulename + '/index.js';
+                    var file = clientFolder + '/scripts/' + modulename + '/index.js';
                     var body = testHelper.readTextFile(file);
 
                     assert(_.contains(body, 'require(\'famous-angular\');'));

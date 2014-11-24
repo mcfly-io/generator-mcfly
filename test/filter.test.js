@@ -5,6 +5,7 @@ var Q = require('q');
 var _ = require('lodash');
 var modulename = 'common';
 var filtername = 'myFilter';
+var clientFolder = 'www';
 
 describe('angular-famous-ionic:filter', function() {
     describe('with modules', function() {
@@ -20,19 +21,19 @@ describe('angular-famous-ionic:filter', function() {
                     filtername: filtername
                 })
                 .on('ready', function(generator) {
-
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     // create modules
-                    generator.mkdir('client/scripts/toto');
-                    generator.mkdir('client/scripts/tata');
-                    generator.mkdir('client/scripts/common');
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/common');
 
                     // create an index file for common
                     generator.ionic = true;
                     generator.famous = true;
                     generator.ngCordova = true;
                     generator.ngModules = [];
-                    generator.template('../../templates/module/index.js', 'client/scripts/common/index.js');
+                    generator.template('../../templates/module/index.js', clientFolder + '/scripts/common/index.js');
 
                 });
 
@@ -40,7 +41,7 @@ describe('angular-famous-ionic:filter', function() {
 
         it('creates files', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/filters';
+                var folder = clientFolder + '/scripts/' + modulename + '/filters';
                 var file = folder + '/' + filtername + '.js';
                 var filetest = folder + '/' + filtername + '.test.js';
                 assert.file([
@@ -55,7 +56,7 @@ describe('angular-famous-ionic:filter', function() {
 
         it('filter file should contain filter name', function(done) {
             this.runGen.on('end', function() {
-                var folder = 'client/scripts/' + modulename + '/filters';
+                var folder = clientFolder + '/scripts/' + modulename + '/filters';
                 var file = folder + '/' + filtername + '.js';
                 var body = testHelper.readTextFile(file);
                 assert(_.contains(body, 'var filtername = \'' + filtername + '\';'));
@@ -66,7 +67,7 @@ describe('angular-famous-ionic:filter', function() {
         it('module should reference filters folder', function(done) {
             this.runGen.on('end', function() {
                 setTimeout(function() {
-                    var folder = 'client/scripts/' + modulename;
+                    var folder = clientFolder + '/scripts/' + modulename;
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./filters\')(app);'));
                     done();
@@ -78,7 +79,7 @@ describe('angular-famous-ionic:filter', function() {
         it('filters/index.js should reference filter file', function(done) {
             this.runGen.on('end', function() {
                 setTimeout(function() {
-                    var folder = 'client/scripts/' + modulename + '/filters';
+                    var folder = clientFolder + '/scripts/' + modulename + '/filters';
                     var body = testHelper.readTextFile(folder + '/index.js');
                     assert(_.contains(body, 'require(\'./' + filtername + '\')(app);'));
                     done();
@@ -168,6 +169,7 @@ describe('angular-famous-ionic:filter', function() {
                     filtername: filtername
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
                         var deferred = Q.defer();
@@ -198,6 +200,7 @@ describe('angular-famous-ionic:filter', function() {
                     filtername: filtername
                 })
                 .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
                         var deferred = Q.defer();

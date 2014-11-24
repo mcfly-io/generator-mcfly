@@ -9,6 +9,7 @@ var ServiceGenerator = Class.extend({
     constructor: function() {
 
         Class.apply(this, arguments);
+        this.clientFolder = this.getClientFolder();
         var that = this;
         this.on('end', function() {
             var done = that.async();
@@ -138,7 +139,7 @@ var ServiceGenerator = Class.extend({
     writing: function() {
         var done = this.async();
         this.sourceRoot(path.join(__dirname, '../templates/service'));
-        var targetDir = path.join('client', 'scripts', this.modulename, 'services');
+        var targetDir = path.join(this.clientFolder, 'scripts', this.modulename, 'services');
         this.mkdir(targetDir);
 
         // make sure the services/index.js exist
