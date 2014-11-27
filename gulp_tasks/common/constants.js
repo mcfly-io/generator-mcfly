@@ -15,7 +15,7 @@ module.exports = function() {
             failedIcon: path.join(cwd, 'node_modules/karma-growl-reporter/images/failed.png')
         },
 
-        lint: ['./app/**/*.js', './class/**/*.js', './module/**/*.js', './service/**/*.js', 'filter/**/*.js', 'constant/**/*.js', 'value/**/*.js', 'directive/**/*.js', 'gulpfile.js', 'gulp/**/*.js', 'karam.conf.js', 'test/**/*.js', 'utils.js'],
+        lint: ['./app/**/*.js', './class/**/*.js', './module/**/*.js', './service/**/*.js', 'filter/**/*.js', 'constant/**/*.js', 'value/**/*.js', 'directive/**/*.js', 'target/**/*.js', 'gulpfile.js', 'gulp/**/*.js', 'karam.conf.js', 'test/**/*.js', 'utils.js'],
 
         browserify: {
             src: './client/scripts/main.js',
@@ -31,7 +31,7 @@ module.exports = function() {
         },
 
         mocha: {
-            libs: ['app/**/*.js', 'class/**/*.js', 'module/**/*.js', 'controller/**/*.js', 'service/**/*.js', 'filter/**/*.js', 'constant/**/*.js', 'value/**/*.js', 'directive/**/*.js'],
+            libs: ['app/**/*.js', 'class/**/*.js', 'module/**/*.js', 'controller/**/*.js', 'service/**/*.js', 'filter/**/*.js', 'constant/**/*.js', 'value/**/*.js', 'directive/**/*.js', 'target/**/*.js'],
             tests: ['test/**/*.js'],
             globals: 'test/helpers/globals.js',
             timeout: 5000

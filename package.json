@@ -28,6 +28,7 @@
     "constant",
     "value",
     "directive",
+    "target",
     "templates",
     "utils.js"
   ],
@@ -46,6 +47,7 @@
   ],
   "dependencies": {
     "chalk": "^0.5.1",
+    "glob-to-regexp": "0.0.1",
     "gulp": "^3.8.9",
     "gulp-inject": "^1.0.2",
     "lodash": "^2.4.1",

@@ -84,6 +84,7 @@ The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel
 Available generators:
 
 * [angular-famous-ionic](#app) (aka [angular-famous-ionic:app] (#app))
+* [angular-famous-ionic:target](#target)
 * [angular-famous-ionic:module](#module)
 * [angular-famous-ionic:controller](#controller)
 * [angular-famous-ionic:directive](#directive)
@@ -91,6 +92,7 @@ Available generators:
 * [angular-famous-ionic:service](#service)
 * [angular-famous-ionic:value](#value)
 * [angular-famous-ionic:constant](#constant)
+
 
 **Note: Generators are to be run from the root directory of your app.**
 
@@ -107,6 +109,23 @@ Example:
 ```
 yo angular-famous-ionic
 ```
+
+### Target
+Generate a new target application.   
+This is usefull if you want to share code between several applications (mobile, web, etc...).
+
+Example:
+```
+yo angular-famous-ionic:target web
+```
+
+Produces: 
+* `client/index-web.html`
+* `client/scripts/main-web.js`
+* `client/styles/main-web.scss`
+
+> ** NOTE: **    
+> By default the app generate a default application with no suffix. This is equivalent to running the `target` generator with argument `app`
 
 ### Module
 Generates a new module.

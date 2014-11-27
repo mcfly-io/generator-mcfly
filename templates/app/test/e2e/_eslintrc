@@ -2,5 +2,8 @@
   "globals": {
     "element": true,
     "by": true
+  },
+  "rules": {
+    "no-console": 0
   }
 }

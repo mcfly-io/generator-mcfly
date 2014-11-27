@@ -34,11 +34,9 @@ var ModuleGenerator = Class.extend({
             .then(function(modules) {
                 that.clientModules = modules;
                 that.afterInitializing();
-                done();
             }, function() {
                 that.emit('error', 'No module found');
-                done();
-            });
+            }).finally(done);
     },
 
     prompting: function() {

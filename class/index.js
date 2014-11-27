@@ -6,6 +6,8 @@ var shell = require('shelljs');
 var chalk = require('chalk');
 var fs = require('fs');
 var path = require('path');
+var _ = require('lodash');
+var globToRegexp = require('glob-to-regexp');
 var Q = require('q');
 
 /**
@@ -157,12 +159,15 @@ var ClassGenerator = Base.extend({
     },
 
     /**
-     * Get the list of directories given a path (Promise)
-     * @param {String} dirPath - The path to start looking for sub diretories
+     * Get the list of directories or files given a path (Promise)
+     * @param {String} dirPath - The path to start looking for sub directories
+     * @param {Boolean} isDirectory - true to retreive directories, false to retreive files
+     *
+     * @private
      *
      * @returns {String[]} - An array of sub directories names
      */
-    getDirectories: function(dirPath) {
+    readDir: function(dirPath, isDirectory) {
         var deferred = Q.defer();
         fs.readdir(dirPath, function(err, files) {
             if(err) {
@@ -171,15 +176,33 @@ var ClassGenerator = Base.extend({
             }
 
             var result = files.filter(function(file) {
-                return fs.statSync(path.join(dirPath, file)).isDirectory();
+                return fs.statSync(path.join(dirPath, file)).isDirectory() === isDirectory;
             });
             deferred.resolve(result);
-
         });
 
         return deferred.promise;
     },
 
+    /**
+     * Get the list of directories given a path (Promise)
+     * @param {String} dirPath - The path to start looking for sub directories
+     *
+     * @returns {String[]} - An array of sub directories names
+     */
+    getDirectories: function(dirPath) {
+        return this.readDir(dirPath, true);
+    },
+
+    /**
+     * Get the list of directories given a path (Promise)
+     * @param {String} dirPath - The path to start looking for sub diretories
+     *
+     * @returns {String[]} - An array of sub directories names
+     */
+    getFiles: function(dirPath) {
+        return this.readDir(dirPath, false);
+    },
     /**
      * Return the list of angularjs client modules (Promise)
      *
@@ -210,6 +233,33 @@ var ClassGenerator = Base.extend({
             this.config.save();
         }
         return retval;
+    },
+
+    /**
+     * Return the list of client targets (Promise)
+     *
+     * @returns {String[]} - An array of client targets
+     */
+    getClientTargets: function() {
+        var re = globToRegexp('{index-*.html,index.html}', {
+            extended: true
+        });
+        return this
+            .getFiles(path.join(this.destinationRoot(), this.clientFolder))
+            .then(function(files) {
+                var result = _(files)
+                    .filter(function(name) {
+                        return re.test(name);
+                    })
+                    .map(function(name) {
+                        var appname = path.basename(name, '.html');
+                        appname = appname === 'index' ? 'app' : _(appname.split('-')).last();
+                        return appname;
+                    })
+                    .value();
+                return result;
+            });
+
     }
 
 });
