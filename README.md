@@ -79,6 +79,16 @@ gulp browsersync    # Creates a browser-sync server, it will display its url, it
 
 The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel free to modify it to your project needs.
 
+## Browserify and namespaces
+At the heart of the generator we use `browserify` to bundle together the client javascript files.   
+Also because angular modules do not prevent name collision, each scaffolded component gets an unique full name composed like this:
+```
+[main app name].[module name].[component name]
+```
+
+Make sure you se that full name with DI.
+
+
 ## Generators
 
 Available generators:
@@ -92,6 +102,7 @@ Available generators:
 * [angular-famous-ionic:service](#service)
 * [angular-famous-ionic:value](#value)
 * [angular-famous-ionic:constant](#constant)
+* [angular-famous-ionic:require](#require)
 
 
 **Note: Generators are to be run from the root directory of your app.**
@@ -231,6 +242,15 @@ Produces:
 * `client/scripts/modulename/services/servicename.test.js`
 * `client/scripts/modulename/services/index.js`
 
+
+### Require
+This generator will not scaffold any files.   
+Instead it inspects the existing `client` folder and will refresh the needed injected require statements in every file where it is relevant.   
+
+Example:
+```
+yo angular-famous-ionic:require
+```
 
 ## Adding a third party bower package
 If you want to include a third party bower package do the following:

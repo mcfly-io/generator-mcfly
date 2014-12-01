@@ -12,11 +12,10 @@ var RequireGenerator = Class.extend({
             finally(done);
         });
 
-        this.createOptions();
-
     },
 
-    end: function() {
+    //making sure the generator is not empty
+    dummy: function() {
 
     }
 
