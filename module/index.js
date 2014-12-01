@@ -4,12 +4,17 @@ var path = require('path');
 var _ = require('lodash');
 var Class = require('../class');
 var utils = require('../utils.js');
-//var Q = require('q');
 
 var ModuleGenerator = Class.extend({
     constructor: function() {
         Class.apply(this, arguments);
         this.createOptions();
+
+        this.option('no-route', {
+            desc: 'Indicates that the module does not expose routes',
+            type: 'Boolean',
+            defaults: false
+        });
 
         this.argument('modulename', {
             type: String,
@@ -72,6 +77,7 @@ var ModuleGenerator = Class.extend({
     },
 
     configuring: function() {
+        this.skipRoute = this.options['skip-route'];
         if(_.contains(this.clientModules, this.modulename)) {
             var msg = 'The module name ' + this.modulename + ' already exists';
             this.log(this.utils.chalk.red.bold('(ERROR) ') + msg);
@@ -89,7 +95,9 @@ var ModuleGenerator = Class.extend({
             this.targetDir = path.join(process.cwd(), this.clientFolder, 'scripts', this.modulename);
             this.mkdir(this.targetDir);
             this.template('index.js', path.join(this.targetDir, 'index.js'));
-            this.template('home.html', path.join(this.targetDir, 'views', 'home.html'));
+            if(!this.skipRoute) {
+                this.template('home.html', path.join(this.targetDir, 'views', 'home.html'));
+            }
             done();
         }
     },

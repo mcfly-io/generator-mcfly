@@ -33,6 +33,7 @@ describe('angular-famous-ionic:value', function() {
                     generator.famous = true;
                     generator.ngCordova = true;
                     generator.ngModules = [];
+                    generator.skipRoute = false;
                     generator.template('../../templates/module/index.js', clientFolder + '/scripts/common/index.js');
 
                 });

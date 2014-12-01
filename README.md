@@ -151,7 +151,17 @@ If you don't mention a modulename, yeoman will ask you to provide one.
 
 Produces: 
 * `client/scripts/modulename/index.js` 
+* `client/scripts/modulename/view/home.html`
 
+
+If you do not want any route for the module, you can use the option `--skip-route`   
+Example:
+```
+yo angular-famous-ionic:module modulename --skip-route
+```
+
+In this case this will only produces:
+* `client/scripts/modulename/index.js`
 
 ### Controller
 Generates a new controller.

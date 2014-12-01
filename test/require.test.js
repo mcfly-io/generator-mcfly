@@ -26,6 +26,7 @@ describe('angular-famous-ionic:require', function() {
             generator.famous = true;
             generator.ngCordova = true;
             generator.ngModules = [];
+            generator.skipRoute = false;
 
             suffixes.forEach(function(suffix) {
                 generator.suffix = suffix;

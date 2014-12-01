@@ -311,6 +311,83 @@ describe('angular-famous-ionic:module', function() {
 
         });
 
+        it('should exclude routes with skip-route equal true', function(done) {
+            testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true,
+                    'skip-route': true
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
+                    generator.log = sinon.spy();
+
+                    generator.afterInitializing = function() {
+                        generator.famous = true;
+                        generator.ionic = true;
+                        generator.ngCordova = true;
+                        generator.ngModules = utils.getNgModules(generator);
+
+                    };
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                })
+                .on('end', function() {
+                    var file = clientFolder + '/scripts/' + modulename + '/index.js';
+                    var body = testHelper.readTextFile(file);
+
+                    assert(!_.contains(body, '$stateProvider'));
+
+                    assert.noFile([
+                        clientFolder + '/scripts/' + modulename + '/views/home.html'
+                    ]);
+                    done();
+                });
+
+        });
+
+        it('should include routes with skip-route equal true', function(done) {
+            testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true,
+                    'skip-route': false
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
+                    generator.log = sinon.spy();
+
+                    generator.afterInitializing = function() {
+                        generator.famous = true;
+                        generator.ionic = true;
+                        generator.ngCordova = true;
+                        generator.ngModules = utils.getNgModules(generator);
+
+                    };
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                })
+                .on('end', function() {
+                    var file = clientFolder + '/scripts/' + modulename + '/index.js';
+                    var body = testHelper.readTextFile(file);
+
+                    assert(_.contains(body, '$stateProvider'), '$stateProvider');
+
+                    assert.file([
+                        clientFolder + '/scripts/' + modulename + '/views/home.html'
+                    ]);
+                    done();
+                });
+
+        });
     });
 
 });

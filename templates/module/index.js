@@ -14,6 +14,7 @@ module.exports = function(namespace) {
     var app = angular.module(fullname, ['ui.router', <%= ngModules %>]);
     // inject:folders start
     // inject:folders end
+<% if (!skipRoute) { %>
     app.config(['$stateProvider', '$urlRouterProvider',
         function($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise('/');
@@ -23,5 +24,6 @@ module.exports = function(namespace) {
             });
         }
     ]);
+    <% } %>
     return app;
 };
