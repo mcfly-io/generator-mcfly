@@ -10,7 +10,7 @@ var _ = require('lodash');
 var globToRegexp = require('glob-to-regexp');
 var Q = require('q');
 var utils = require('../utils.js');
-
+var subcomponents = require('./subcomponents.js');
 /**
  * The `Class` generator has several helpers method to help with creating a new generator.
  *
@@ -273,6 +273,11 @@ var ClassGenerator = Base.extend({
         return targetname === 'app' ? '' : '-' + targetname;
     },
 
+    /**
+     * Inject all modules in all targets applications
+     *
+     * @returns {Promise} - A promise after the injection is done
+     */
     injectAllModules: function() {
         var directory;
         var modules;
@@ -295,6 +300,32 @@ var ClassGenerator = Base.extend({
                     return null;
                 }
             });
+    },
+
+    injectAllComponents: function() {
+        var directory;
+        var modules;
+        var that = this;
+        return Q.all([this.getClientScriptFolder(), this.getClientModules()])
+            .then(function(values) {
+                directory = values[0];
+                modules = values[1];
+            })
+            .then(function() {
+                var tasks = [];
+                modules.forEach(function(module) {
+                    tasks.push(utils.injectSubComponent(that, path.join(directory, module)));
+                    subcomponents.forEach(function(localfolder) {
+                        tasks.push(utils.injectComponent(path.join(directory, module, localfolder)));
+                    });
+                });
+
+                return Q.all(tasks);
+            });
+    },
+
+    injectAll: function() {
+        return Q.all([this.injectAllModules(), this.injectAllComponents()]);
     }
 
 });

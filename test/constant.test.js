@@ -72,6 +72,7 @@ describe('angular-famous-ionic:constant', function() {
                 setTimeout(function() {
                     var folder = clientFolder + '/scripts/' + modulename;
                     var body = testHelper.readTextFile(folder + '/index.js');
+
                     assert(_.contains(body, 'require(\'./constants\')(app);'));
                     done();
                 }, 200);
