@@ -3,7 +3,8 @@
 var path = require('path');
 var _ = require('lodash');
 var Class = require('../class');
-var utils = require('../utils');
+var utils = require('../utils.js');
+//var Q = require('q');
 
 var ModuleGenerator = Class.extend({
     constructor: function() {
@@ -36,7 +37,8 @@ var ModuleGenerator = Class.extend({
                 that.afterInitializing();
             }, function() {
                 that.emit('error', 'No module found');
-            }).finally(done);
+            }).
+        finally(done);
     },
 
     prompting: function() {
@@ -94,8 +96,8 @@ var ModuleGenerator = Class.extend({
 
     end: function() {
         var done = this.async();
-        this.clientModules.push(this.modulename);
-        utils.injectModules(this.getClientScriptFolder(), this.clientModules).then(done);
+        return this.injectAllModules().
+        finally(done);
     }
 });
 

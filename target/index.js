@@ -73,7 +73,7 @@ var TargetGenerator = Class.extend({
             this.emit('error', error);
         }
         // special case of target app that should not make a suffix
-        this.suffix = this.targetname === 'app' ? '' : '-' + this.targetname;
+        this.suffix = this.targetnameToSuffix(this.targetname);
     },
 
     writing: {
@@ -96,7 +96,8 @@ var TargetGenerator = Class.extend({
 
     end: function() {
         var done = this.async();
-        done();
+        return this.injectAllModules().
+        finally(done);
     }
 });
 

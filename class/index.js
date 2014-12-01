@@ -9,6 +9,7 @@ var path = require('path');
 var _ = require('lodash');
 var globToRegexp = require('glob-to-regexp');
 var Q = require('q');
+var utils = require('../utils.js');
 
 /**
  * The `Class` generator has several helpers method to help with creating a new generator.
@@ -260,6 +261,40 @@ var ClassGenerator = Base.extend({
                 return result;
             });
 
+    },
+
+    /**
+     * Converts the target name application to suffix
+     * @param {String} targetname - The name of the target application
+     *
+     * @returns {String} - The suffix name of the target application
+     */
+    targetnameToSuffix: function(targetname) {
+        return targetname === 'app' ? '' : '-' + targetname;
+    },
+
+    injectAllModules: function() {
+        var directory;
+        var modules;
+        var targets;
+        var that = this;
+        return Q.all([this.getClientScriptFolder(), this.getClientModules(), this.getClientTargets()])
+            .then(function(values) {
+                directory = values[0];
+                modules = values[1];
+                targets = values[2];
+            }).then(function() {
+
+                if(targets && targets.length > 0) {
+                    var tasks = _(targets).map(function(target) {
+                        var suffix = that.targetnameToSuffix(target);
+                        return utils.injectModules(directory, suffix, modules);
+                    }).value();
+                    return Q.all(tasks);
+                } else {
+                    return null;
+                }
+            });
     }
 
 });

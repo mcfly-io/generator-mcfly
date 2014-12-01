@@ -23,6 +23,12 @@ describe('angular-famous-ionic:module', function() {
                 .on('ready', function(generator) {
                     generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
+                    generator.suffix = '';
+                    generator.template('../../templates/target/index.html', clientFolder + '/index.html');
+                    generator.template('../../templates/target/scripts/main.js', clientFolder + '/scripts/main.js');
+
+                    generator.template('../../templates/target/index.html', clientFolder + '/index-xxx.html');
+                    generator.template('../../templates/target/scripts/main.js', clientFolder + '/scripts/main-xxx.js');
 
                     generator.mkdir(clientFolder + '/scripts/toto');
                     generator.mkdir(clientFolder + '/scripts/tata');
@@ -40,6 +46,33 @@ describe('angular-famous-ionic:module', function() {
                 ]);
                 done();
             });
+
+        });
+
+        it('should inject modules in target file', function(done) {
+
+            this.runGen
+                .on('ready', function(generator) {
+                    var end = Object.getPrototypeOf(generator).end;
+
+                    Object.getPrototypeOf(generator).end = function() {
+
+                        return end.apply(generator).then(function() {
+                            ['', '-xxx'].forEach(function(suffix) {
+
+                                var file = clientFolder + '/scripts/main' + suffix + '.js';
+                                var body = testHelper.readTextFile(file);
+
+                                assert(_.contains(body, 'require(\'./common\')(namespace).name'));
+                                assert(_.contains(body, 'require(\'./tata\')(namespace).name'));
+                                assert(_.contains(body, 'require(\'./toto\')(namespace).name'));
+                            });
+                            done();
+                        });
+
+                    };
+
+                });
 
         });
 
@@ -73,8 +106,8 @@ describe('angular-famous-ionic:module', function() {
                 })
                 .on('error', function(err) {
                     assert(err instanceof Error);
-                    done();
-                });
+                })
+                .on('end', done);
         });
 
         it('with prompting existing modulename should throw an error', function(done) {
@@ -87,8 +120,8 @@ describe('angular-famous-ionic:module', function() {
                         name: 'modulename',
                         message: 'The module name toto already exists'
                     }]));
-                    done();
-                }.bind(this));
+                }.bind(this))
+                .on('end', done);
         });
 
         it('with new modulename should succeed', function(done) {
@@ -137,11 +170,8 @@ describe('angular-famous-ionic:module', function() {
                 })
                 .on('error', function(err) {
                     assert.equal(err, 'No module found');
-                    //done();
                 })
-                .on('end', function() {
-                    done();
-                });
+                .on('end', done);
 
         });
     });

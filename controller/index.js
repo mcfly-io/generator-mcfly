@@ -32,10 +32,6 @@ var ControllerGenerator = Class.extend({
     writing: function() {
         ControllerGenerator.__super__.writing.apply(this, arguments);
 
-    },
-
-    end: function() {
-
     }
 });
 

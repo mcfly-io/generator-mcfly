@@ -180,11 +180,8 @@ describe('angular-famous-ionic:filter', function() {
                 .on('error', function(err) {
                     assert(ctx.generator.log.calledOnce);
                     assert.equal(err, 'No module found');
-                    //done();
                 })
-                .on('end', function() {
-                    done();
-                });
+                .on('end', done);
 
         });
 
@@ -211,11 +208,8 @@ describe('angular-famous-ionic:filter', function() {
                 .on('error', function(err) {
                     assert(ctx.generator.log.calledOnce);
                     assert.equal(err, 'No module found');
-                    //done();
                 })
-                .on('end', function() {
-                    done();
-                });
+                .on('end', done);
         });
     });
 

@@ -181,11 +181,8 @@ describe('angular-famous-ionic:service', function() {
                 .on('error', function(err) {
                     assert(ctx.generator.log.calledOnce);
                     assert.equal(err, 'No module found');
-                    //done();
                 })
-                .on('end', function() {
-                    done();
-                });
+                .on('end', done);
         });
 
         it('should emit error when no module', function(done) {
@@ -211,11 +208,8 @@ describe('angular-famous-ionic:service', function() {
                 .on('error', function(err) {
                     assert(ctx.generator.log.calledOnce);
                     assert.equal(err, 'No module found');
-                    //done();
                 })
-                .on('end', function() {
-                    done();
-                });
+                .on('end', done);
         });
 
     });
@@ -245,12 +239,8 @@ describe('angular-famous-ionic:service', function() {
             .on('error', function(err) {
                 assert(ctx.generator.log.calledOnce);
                 assert.equal(err, 'Invalid service type');
-                //done();
             })
-            .on('end', function() {
-
-                done();
-            });
+            .on('end', done);
     });
 
 });

@@ -54,6 +54,30 @@ describe('angular-famous-ionic:target', function() {
             });
         });
 
+        it('should inject modules in target file', function(done) {
+
+            this.runGen
+                .on('ready', function(generator) {
+                    var end = Object.getPrototypeOf(generator).end;
+
+                    Object.getPrototypeOf(generator).end = function() {
+
+                        return end.apply(generator).then(function() {
+                            [suffix].forEach(function(suffix) {
+
+                                var file = clientFolder + '/scripts/main' + suffix + '.js';
+                                var body = testHelper.readTextFile(file);
+                                assert(_.contains(body, 'require(\'./tata\')(namespace).name'));
+                                assert(_.contains(body, 'require(\'./toto\')(namespace).name'));
+                            });
+                            done();
+                        });
+
+                    };
+
+                });
+
+        });
         it('with empty target name should throw an error', function(done) {
             this.runGen
                 .withPrompt({
@@ -80,8 +104,9 @@ describe('angular-famous-ionic:target', function() {
                 })
                 .on('error', function(err) {
                     assert(err instanceof Error);
-                    done();
-                });
+
+                })
+                .on('end', done);
         });
 
         it('with prompting existing targetname should throw an error', function(done) {
@@ -99,8 +124,8 @@ describe('angular-famous-ionic:target', function() {
                         name: 'targetname',
                         message: 'The target name toto already exists'
                     }]));
-                    done();
-                }.bind(this));
+                }.bind(this))
+                .on('end', done);
         });
 
         it('with new targetname should succeed', function(done) {
@@ -167,11 +192,8 @@ describe('angular-famous-ionic:target', function() {
                 })
                 .on('error', function(err) {
                     assert.equal(err, 'No target found');
-                    //done();
                 })
-                .on('end', function() {
-                    done();
-                });
+                .on('end', done);
 
         });
     });

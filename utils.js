@@ -9,13 +9,15 @@ var fs = require('fs');
 /**
  * Inject the list of angular modules of the main.js file
  * @param {String} directory - The folder containing the modules
+ * @param {String} suffix - The suffix of the target application
  * @param {String[]} modules - The list of modules
  *
  * @returns {Promise} - An empty promise after the injection is done
  */
-exports.injectModules = function(directory, modules) {
+exports.injectModules = function(directory, suffix, modules) {
     var deferred = Q.defer();
-    var mainFile = path.join(directory, 'main.js');
+    var mainFile = path.join(directory, 'main' + suffix + '.js');
+
     gulp.src(mainFile)
         .pipe(ginject(gulp.src(mainFile, {
             read: false
