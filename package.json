@@ -28,6 +28,7 @@
     "constant",
     "value",
     "directive",
+    "require",
     "target",
     "templates",
     "utils.js"

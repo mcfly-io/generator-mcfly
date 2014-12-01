@@ -302,6 +302,11 @@ var ClassGenerator = Base.extend({
             });
     },
 
+    /**
+     * Inject the all list of angular components as well as their sub compnents
+     *
+     * @returns {Promise} - A promise
+     */
     injectAllComponents: function() {
         var directory;
         var modules;
@@ -324,6 +329,11 @@ var ClassGenerator = Base.extend({
             });
     },
 
+    /**
+     * Run the injection for the whole project
+     *
+     * @returns {Promise} - A promise
+     */
     injectAll: function() {
         return Q.all([this.injectAllModules(), this.injectAllComponents()]);
     }
