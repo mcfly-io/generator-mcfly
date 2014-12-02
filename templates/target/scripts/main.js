@@ -4,7 +4,7 @@ var namespace = 'main';
 
 var angular = require('angular');
 <% if (ionic) { %>require('angular-ionic');<% } %>
-var app = angular.module(namespace, [<% if (ionic) { %>'ionic'<% } %>
+var app = angular.module(namespace, [<% if (ionic) { %>'ionic',<% } %>
     // inject:modules start
     // inject:modules end
 ]);

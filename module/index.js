@@ -10,7 +10,7 @@ var ModuleGenerator = Class.extend({
         Class.apply(this, arguments);
         this.createOptions();
 
-        this.option('no-route', {
+        this.option('skip-route', {
             desc: 'Indicates that the module does not expose routes',
             type: 'Boolean',
             defaults: false

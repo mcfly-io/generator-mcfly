@@ -24,6 +24,6 @@ module.exports = function(namespace) {
             });
         }
     ]);
-    <% } %>
+<% } %>
     return app;
 };
