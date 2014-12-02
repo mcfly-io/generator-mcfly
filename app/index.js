@@ -110,7 +110,8 @@ var AppGenerator = Class.extend({
                         release: true,
                         changelog: true,
                         test: true,
-                        style: true
+                        style: true,
+                        dist: true
                     }
                 });
                 done();
