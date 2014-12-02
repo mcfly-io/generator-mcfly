@@ -86,7 +86,46 @@ Also because angular modules do not prevent name collision, each scaffolded comp
 [main app name].[module name].[component name]
 ```
 
-Make sure you se that full name with DI.
+Make sure you use that full name with DI.
+
+Example:
+if you need to require a module from another one, use the following code: 
+Let's say you have 2 modules `common` and `analytics`.
+`analytics` define a service called `mixpanelService`.
+You want to use that service in the `home` controller of `common`.
+
+First go to `/scripts/common/index.js` and add the following code 
+```js
+ ...
+ var analytics = require('../analytics')(namespace);
+ ...
+ var app = angular.module(fullname, [..., analytics.name])
+```
+
+You have now a reference between the 2 modules. Note that the name of the modules are never hard coded :)
+
+Then go to `/scripts/common/controllers/home.js` and add the following code
+
+```js
+ var analytics = require('../../analytics')(app.name.split('.')[0]).name;
+
+ var deps = [analytics + '.mixpanel'];
+
+ function controller(mixpanel) {
+ ...
+ }
+```
+
+Again no hard coded namespace.
+
+
+in common module and want to reference the analytics module
+```js
+var analytics = require('../../analytics')(app.name.split('.')[0]).name;
+```
+Now you can inject the a component of the module analytics with this code
+```js
+```
 
 
 ## Generators
