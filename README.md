@@ -19,7 +19,7 @@ The project has the following capabilities:
 * browserSync
 
 
-> NOTE:
+> **NOTE:**   
 > This generator is using generator-sublime to scaffold common dot files (.jshintrc, .eslintrc, etc...).   
 > Check it out https://www.npmjs.org/package/generator-sublime
 
@@ -135,7 +135,7 @@ Produces:
 * `client/scripts/main-web.js`
 * `client/styles/main-web.scss`
 
-> ** NOTE: **    
+> **NOTE:**    
 > By default the app generate a default application with no suffix. This is equivalent to running the `target` generator with argument `app`
 
 ### Module
@@ -160,7 +160,7 @@ Example:
 yo angular-famous-ionic:module modulename --skip-route
 ```
 
-In this case this will only produces:
+In this case this will only produce:
 * `client/scripts/modulename/index.js`
 
 ### Controller
@@ -241,7 +241,6 @@ Example:
 yo angular-famous-ionic:service modulename servicename
 yo angular-famous-ionic:service modulename servicename --servicetype=service
 yo angular-famous-ionic:service modulename servicename --servicetype=provider
-
 ```
 
 You need at least a module in order to scaffold a service.   

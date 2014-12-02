@@ -22,11 +22,8 @@ describe('angular-famous-ionic:require', function() {
             generator.clientFolder = clientFolder;
             generator.log = sinon.spy();
 
-            generator.ionic = true;
-            generator.famous = true;
-            generator.ngCordova = true;
-            generator.ngModules = [];
-            generator.skipRoute = false;
+            // set options
+            testHelper.setOptions(generator);
 
             suffixes.forEach(function(suffix) {
                 generator.suffix = suffix;

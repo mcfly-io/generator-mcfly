@@ -29,12 +29,10 @@ describe('angular-famous-ionic:controller', function() {
                     generator.mkdir(clientFolder + '/scripts/tata');
                     generator.mkdir(clientFolder + '/scripts/common');
 
+                    // set options
+                    testHelper.setOptions(generator);
+
                     // create an index file for common
-                    generator.ionic = true;
-                    generator.famous = true;
-                    generator.ngCordova = true;
-                    generator.ngModules = [];
-                    generator.skipRoute = false;
                     generator.template('../../templates/module/index.js', clientFolder + '/scripts/common/index.js');
 
                 });
