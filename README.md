@@ -119,15 +119,6 @@ Then go to `/scripts/common/controllers/home.js` and add the following code
 Again no hard coded namespace.
 
 
-in common module and want to reference the analytics module
-```js
-var analytics = require('../../analytics')(app.name.split('.')[0]).name;
-```
-Now you can inject the a component of the module analytics with this code
-```js
-```
-
-
 ## Generators
 
 Available generators:
