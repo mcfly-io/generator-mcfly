@@ -30,6 +30,7 @@
     "browserify": {
         "transform": [
             "html2js-browserify",
+            "jadeify",
             "cssify",
             "browserify-shim",
             "deamdify",
