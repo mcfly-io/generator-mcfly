@@ -14,6 +14,7 @@ var ComponentGenerator = Class.extend({
         that.localFolder = _localFolder;
         that.templateFolder = _templateFolder;
         that.clientFolder = that.getClientFolder();
+
         that.on('end', function() {
             var done = that.async();
             utils.injectComponent(path.join(that.getClientScriptFolder(), that.modulename, that.localFolder))
@@ -76,7 +77,7 @@ var ComponentGenerator = Class.extend({
                 return result;
             },
             message: 'What is the name of your module ?',
-            default: that.modulename || (choices && choices.length >= 1) ? choices[0].value : that.modulename,
+            default: that.modulename || (choices && choices.length >= 1 ? choices[0].value : that.modulename),
             validate: function(value) {
                 value = _.str.trim(value);
                 if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
@@ -115,7 +116,7 @@ var ComponentGenerator = Class.extend({
         var targetDir = path.join(this.clientFolder, 'scripts', this.modulename, this.localFolder);
         this.mkdir(targetDir);
 
-        // make sure the fitlers/index.js exist
+        // make sure the <component>/index.js exist
         utils.createIndexFile(this, '../component', targetDir);
 
         this.template('index.js', path.join(targetDir, this[_templateFolder + 'name'] + '.js'));

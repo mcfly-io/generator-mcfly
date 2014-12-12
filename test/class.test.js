@@ -299,7 +299,21 @@ describe('generator:class', function() {
         });
     });
 
-    it('#getClientModules should succeed', function() {
+    it('#getFiles() with a valid path should resolve the promise', function() {
+        var dir = path.join(__dirname, '..');
+        return generator.getFiles(dir).then(function(directories) {
+            assert(!_.contains(directories, 'class'));
+            assert.equal(_.contains(directories, 'gulpfile.js'), true);
+        });
+    });
+
+    it('#getFiles() with an invalid path should reject the promise', function() {
+        return generator.getFiles('dummy').then(undefined, function(err) {
+            assert.equal(err.name, 'Error');
+        });
+    });
+
+    it('#getClientModules() should succeed', function() {
         generator.getDirectories = function() {
             return Q.when([]);
         };
@@ -309,13 +323,27 @@ describe('generator:class', function() {
         });
     });
 
-    it('#getClientScriptFolder should succeed', function() {
+    it('#getClientScriptFolder() should succeed', function() {
         var result = generator.getClientScriptFolder();
         assert(_.endsWith(result, generator.clientFolder + '/scripts'));
     });
 
-    it('#getClientFolder should default to client', function() {
+    it('#getClientFolder() should default to client', function() {
         var result = generator.getClientFolder();
         assert.equal(result, 'client');
     });
+
+    it('#getClientTargets() should succeed', function(done) {
+        generator.getFiles = function() {
+            return Q.when(['index.html', 'index-www.html', 'index-web.html']);
+        };
+        generator.getClientTargets().then(function(value) {
+            assert.deepEqual(value, ['app', 'www', 'web']);
+        })
+        .catch(function(err) {
+            assert(err === null);
+        })
+        .finally(done);
+    });
+
 });

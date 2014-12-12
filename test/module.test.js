@@ -23,6 +23,12 @@ describe('angular-famous-ionic:module', function() {
                 .on('ready', function(generator) {
                     generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
+                    generator.suffix = '';
+                    generator.template('../../templates/target/index.html', clientFolder + '/index.html');
+                    generator.template('../../templates/target/scripts/main.js', clientFolder + '/scripts/main.js');
+
+                    generator.template('../../templates/target/index.html', clientFolder + '/index-xxx.html');
+                    generator.template('../../templates/target/scripts/main.js', clientFolder + '/scripts/main-xxx.js');
 
                     generator.mkdir(clientFolder + '/scripts/toto');
                     generator.mkdir(clientFolder + '/scripts/tata');
@@ -40,6 +46,33 @@ describe('angular-famous-ionic:module', function() {
                 ]);
                 done();
             });
+
+        });
+
+        it('should inject modules in target file', function(done) {
+
+            this.runGen
+                .on('ready', function(generator) {
+                    var end = Object.getPrototypeOf(generator).end;
+
+                    Object.getPrototypeOf(generator).end = function() {
+
+                        return end.apply(generator).then(function() {
+                            ['', '-xxx'].forEach(function(suffix) {
+
+                                var file = clientFolder + '/scripts/main' + suffix + '.js';
+                                var body = testHelper.readTextFile(file);
+
+                                assert(_.contains(body, 'require(\'./common\')(namespace).name'));
+                                assert(_.contains(body, 'require(\'./tata\')(namespace).name'));
+                                assert(_.contains(body, 'require(\'./toto\')(namespace).name'));
+                            });
+                            done();
+                        });
+
+                    };
+
+                });
 
         });
 
@@ -73,8 +106,8 @@ describe('angular-famous-ionic:module', function() {
                 })
                 .on('error', function(err) {
                     assert(err instanceof Error);
-                    done();
-                });
+                })
+                .on('end', done);
         });
 
         it('with prompting existing modulename should throw an error', function(done) {
@@ -87,8 +120,8 @@ describe('angular-famous-ionic:module', function() {
                         name: 'modulename',
                         message: 'The module name toto already exists'
                     }]));
-                    done();
-                }.bind(this));
+                }.bind(this))
+                .on('end', done);
         });
 
         it('with new modulename should succeed', function(done) {
@@ -137,11 +170,8 @@ describe('angular-famous-ionic:module', function() {
                 })
                 .on('error', function(err) {
                     assert.equal(err, 'No module found');
-                    //done();
                 })
-                .on('end', function() {
-                    done();
-                });
+                .on('end', done);
 
         });
     });
@@ -281,6 +311,83 @@ describe('angular-famous-ionic:module', function() {
 
         });
 
+        it('should exclude routes with skip-route equal true', function(done) {
+            testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true,
+                    'skip-route': true
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
+                    generator.log = sinon.spy();
+
+                    generator.afterInitializing = function() {
+                        generator.famous = true;
+                        generator.ionic = true;
+                        generator.ngCordova = true;
+                        generator.ngModules = utils.getNgModules(generator);
+
+                    };
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                })
+                .on('end', function() {
+                    var file = clientFolder + '/scripts/' + modulename + '/index.js';
+                    var body = testHelper.readTextFile(file);
+
+                    assert(!_.contains(body, '$stateProvider'));
+
+                    assert.noFile([
+                        clientFolder + '/scripts/' + modulename + '/views/home.html'
+                    ]);
+                    done();
+                });
+
+        });
+
+        it('should include routes with skip-route equal true', function(done) {
+            testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true,
+                    'skip-route': false
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
+                    generator.log = sinon.spy();
+
+                    generator.afterInitializing = function() {
+                        generator.famous = true;
+                        generator.ionic = true;
+                        generator.ngCordova = true;
+                        generator.ngModules = utils.getNgModules(generator);
+
+                    };
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                })
+                .on('end', function() {
+                    var file = clientFolder + '/scripts/' + modulename + '/index.js';
+                    var body = testHelper.readTextFile(file);
+
+                    assert(_.contains(body, '$stateProvider'), '$stateProvider');
+
+                    assert.file([
+                        clientFolder + '/scripts/' + modulename + '/views/home.html'
+                    ]);
+                    done();
+                });
+
+        });
     });
 
 });

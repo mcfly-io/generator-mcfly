@@ -32,10 +32,6 @@ var ConstantGenerator = Class.extend({
     writing: function() {
         ConstantGenerator.__super__.writing.apply(this, arguments);
 
-    },
-
-    end: function() {
-
     }
 });
 

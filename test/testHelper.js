@@ -148,6 +148,19 @@ var testHelper = {
      */
     generateRandomString: function() {
         return Math.random().toString(36).slice(2);
+    },
+    /**
+     * Set the options on the generator to allow scaffolding of the templates
+     * @param {Generator} generator - The generator
+     *
+     * @returns {void}
+     */
+    setOptions: function(generator) {
+        generator.ionic = true;
+        generator.famous = true;
+        generator.ngCordova = true;
+        generator.ngModules = [];
+        generator.skipRoute = false;
     }
 };
 

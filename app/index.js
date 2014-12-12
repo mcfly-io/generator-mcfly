@@ -61,7 +61,7 @@ var AppGenerator = Class.extend({
             var prompts = [{
                 name: 'clientFolder',
                 message: 'How would you like to name the client folder?',
-                default: 'www'
+                default: 'client'
             }, {
                 name: 'ionic',
                 type: 'confirm',
@@ -110,7 +110,8 @@ var AppGenerator = Class.extend({
                         release: true,
                         changelog: true,
                         test: true,
-                        style: true
+                        style: true,
+                        dist: true
                     }
                 });
                 done();
@@ -167,6 +168,7 @@ var AppGenerator = Class.extend({
     writing: {
 
         setRoot: function() {
+            this.suffix = '';
             this.sourceRoot(path.join(__dirname, '../templates/app'));
         },
 
@@ -185,13 +187,13 @@ var AppGenerator = Class.extend({
             this.mkdir(this.clientFolder + '/scripts');
             this.mkdir(this.clientFolder + '/images');
             this.template('client/_eslintrc', this.clientFolder + '/.eslintrc');
-            this.template('client/index.html', this.clientFolder + '/index.html');
+            this.template('../target/index.html', this.clientFolder + '/index.html');
             this.template('client/404.html', this.clientFolder + '/404.html');
             this.template('client/robots.txt', this.clientFolder + '/robots.txt');
             this.template('client/favicon.ico', this.clientFolder + '/favicon.ico');
-            this.template('client/styles/main.scss', this.clientFolder + '/styles/main.scss');
-            this.template('client/scripts/main.js', this.clientFolder + '/scripts/main.js');
-            this.template('client/scripts/main.test.js', this.clientFolder + '/scripts/main.test.js');
+            this.template('../target/styles/main.scss', this.clientFolder + '/styles/main.scss');
+            this.template('../target/scripts/main.js', this.clientFolder + '/scripts/main.js');
+            this.template('../target/scripts/main.test.js', this.clientFolder + '/scripts/main.test.js');
         },
 
         testFiles: function() {

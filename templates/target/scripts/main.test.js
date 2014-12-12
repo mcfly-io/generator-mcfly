@@ -1,6 +1,6 @@
 'use strict';
 var angular = require('angular-mocks');
-var app = require('./main.js');
+var app = require('./main<%=suffix%>.js');
 
 describe('app', function() {
 

@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
     <![endif]-->
     <title>Sample app</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main<%=suffix%>.css">
 </head>
 
 <body <% if (ionic) { %>class="platform-cordova"<% } %>>
@@ -17,7 +17,7 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
     <ui-view></ui-view>
-    <script src="scripts/bundle.js"></script>
+    <script src="scripts/bundle<%=suffix%>.js"></script>
 </body>
 
 </html>

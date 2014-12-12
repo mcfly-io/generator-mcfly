@@ -6,8 +6,11 @@ var shell = require('shelljs');
 var chalk = require('chalk');
 var fs = require('fs');
 var path = require('path');
+var _ = require('lodash');
+var globToRegexp = require('glob-to-regexp');
 var Q = require('q');
-
+var utils = require('../utils.js');
+var subcomponents = require('./subcomponents.js');
 /**
  * The `Class` generator has several helpers method to help with creating a new generator.
  *
@@ -157,12 +160,15 @@ var ClassGenerator = Base.extend({
     },
 
     /**
-     * Get the list of directories given a path (Promise)
-     * @param {String} dirPath - The path to start looking for sub diretories
+     * Get the list of directories or files given a path (Promise)
+     * @param {String} dirPath - The path to start looking for sub directories
+     * @param {Boolean} isDirectory - true to retreive directories, false to retreive files
+     *
+     * @private
      *
      * @returns {String[]} - An array of sub directories names
      */
-    getDirectories: function(dirPath) {
+    readDir: function(dirPath, isDirectory) {
         var deferred = Q.defer();
         fs.readdir(dirPath, function(err, files) {
             if(err) {
@@ -171,15 +177,33 @@ var ClassGenerator = Base.extend({
             }
 
             var result = files.filter(function(file) {
-                return fs.statSync(path.join(dirPath, file)).isDirectory();
+                return fs.statSync(path.join(dirPath, file)).isDirectory() === isDirectory;
             });
             deferred.resolve(result);
-
         });
 
         return deferred.promise;
     },
 
+    /**
+     * Get the list of directories given a path (Promise)
+     * @param {String} dirPath - The path to start looking for sub directories
+     *
+     * @returns {String[]} - An array of sub directories names
+     */
+    getDirectories: function(dirPath) {
+        return this.readDir(dirPath, true);
+    },
+
+    /**
+     * Get the list of directories given a path (Promise)
+     * @param {String} dirPath - The path to start looking for sub diretories
+     *
+     * @returns {String[]} - An array of sub directories names
+     */
+    getFiles: function(dirPath) {
+        return this.readDir(dirPath, false);
+    },
     /**
      * Return the list of angularjs client modules (Promise)
      *
@@ -210,6 +234,108 @@ var ClassGenerator = Base.extend({
             this.config.save();
         }
         return retval;
+    },
+
+    /**
+     * Return the list of client targets (Promise)
+     *
+     * @returns {String[]} - An array of client targets
+     */
+    getClientTargets: function() {
+        var re = globToRegexp('{index-*.html,index.html}', {
+            extended: true
+        });
+        return this
+            .getFiles(path.join(this.destinationRoot(), this.clientFolder))
+            .then(function(files) {
+                var result = _(files)
+                    .filter(function(name) {
+                        return re.test(name);
+                    })
+                    .map(function(name) {
+                        var appname = path.basename(name, '.html');
+                        appname = appname === 'index' ? 'app' : _(appname.split('-')).last();
+                        return appname;
+                    })
+                    .value();
+                return result;
+            });
+
+    },
+
+    /**
+     * Converts the target name application to suffix
+     * @param {String} targetname - The name of the target application
+     *
+     * @returns {String} - The suffix name of the target application
+     */
+    targetnameToSuffix: function(targetname) {
+        return targetname === 'app' ? '' : '-' + targetname;
+    },
+
+    /**
+     * Inject all modules in all targets applications
+     *
+     * @returns {Promise} - A promise after the injection is done
+     */
+    injectAllModules: function() {
+        var directory;
+        var modules;
+        var targets;
+        var that = this;
+        return Q.all([this.getClientScriptFolder(), this.getClientModules(), this.getClientTargets()])
+            .then(function(values) {
+                directory = values[0];
+                modules = values[1];
+                targets = values[2];
+            }).then(function() {
+
+                if(targets && targets.length > 0) {
+                    var tasks = _(targets).map(function(target) {
+                        var suffix = that.targetnameToSuffix(target);
+                        return utils.injectModules(directory, suffix, modules);
+                    }).value();
+                    return Q.all(tasks);
+                } else {
+                    return null;
+                }
+            });
+    },
+
+    /**
+     * Inject the all list of angular components as well as their sub compnents
+     *
+     * @returns {Promise} - A promise
+     */
+    injectAllComponents: function() {
+        var directory;
+        var modules;
+        var that = this;
+        return Q.all([this.getClientScriptFolder(), this.getClientModules()])
+            .then(function(values) {
+                directory = values[0];
+                modules = values[1];
+            })
+            .then(function() {
+                var tasks = [];
+                modules.forEach(function(module) {
+                    tasks.push(utils.injectSubComponent(that, path.join(directory, module)));
+                    subcomponents.forEach(function(localfolder) {
+                        tasks.push(utils.injectComponent(path.join(directory, module, localfolder)));
+                    });
+                });
+
+                return Q.all(tasks);
+            });
+    },
+
+    /**
+     * Run the injection for the whole project
+     *
+     * @returns {Promise} - A promise
+     */
+    injectAll: function() {
+        return Q.all([this.injectAllModules(), this.injectAllComponents()]);
     }
 
 });

@@ -19,7 +19,7 @@ The project has the following capabilities:
 * browserSync
 
 
-> NOTE:
+> **NOTE:**   
 > This generator is using generator-sublime to scaffold common dot files (.jshintrc, .eslintrc, etc...).   
 > Check it out https://www.npmjs.org/package/generator-sublime
 
@@ -79,11 +79,52 @@ gulp browsersync    # Creates a browser-sync server, it will display its url, it
 
 The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel free to modify it to your project needs.
 
+## Browserify and namespaces
+At the heart of the generator we use `browserify` to bundle together the client javascript files.   
+Also because angular modules do not prevent name collision, each scaffolded component gets an unique full name composed like this:
+```
+[main app name].[module name].[component name]
+```
+
+Make sure you use that full name with DI.
+
+Example:
+if you need to require a module from another one, use the following code: 
+Let's say you have 2 modules `common` and `analytics`.
+`analytics` define a service called `mixpanelService`.
+You want to use that service in the `home` controller of `common`.
+
+First go to `/scripts/common/index.js` and add the following code 
+```js
+ ...
+ var analytics = require('../analytics')(namespace);
+ ...
+ var app = angular.module(fullname, [..., analytics.name])
+```
+
+You have now a reference between the 2 modules. Note that the name of the modules are never hard coded :)
+
+Then go to `/scripts/common/controllers/home.js` and add the following code
+
+```js
+ var analytics = require('../../analytics')(app.name.split('.')[0]).name;
+
+ var deps = [analytics + '.mixpanel'];
+
+ function controller(mixpanel) {
+ ...
+ }
+```
+
+Again no hard coded namespace.
+
+
 ## Generators
 
 Available generators:
 
 * [angular-famous-ionic](#app) (aka [angular-famous-ionic:app] (#app))
+* [angular-famous-ionic:target](#target)
 * [angular-famous-ionic:module](#module)
 * [angular-famous-ionic:controller](#controller)
 * [angular-famous-ionic:directive](#directive)
@@ -91,6 +132,8 @@ Available generators:
 * [angular-famous-ionic:service](#service)
 * [angular-famous-ionic:value](#value)
 * [angular-famous-ionic:constant](#constant)
+* [angular-famous-ionic:require](#require)
+
 
 **Note: Generators are to be run from the root directory of your app.**
 
@@ -108,6 +151,23 @@ Example:
 yo angular-famous-ionic
 ```
 
+### Target
+Generate a new target application.   
+This is usefull if you want to share code between several applications (mobile, web, etc...).
+
+Example:
+```
+yo angular-famous-ionic:target web
+```
+
+Produces: 
+* `client/index-web.html`
+* `client/scripts/main-web.js`
+* `client/styles/main-web.scss`
+
+> **NOTE:**    
+> By default the app generate a default application with no suffix. This is equivalent to running the `target` generator with argument `app`
+
 ### Module
 Generates a new module.
 The first thing you need to do after executing `yo angular-famous-ionic` is create a module.
@@ -121,7 +181,17 @@ If you don't mention a modulename, yeoman will ask you to provide one.
 
 Produces: 
 * `client/scripts/modulename/index.js` 
+* `client/scripts/modulename/view/home.html`
 
+
+If you do not want any route for the module, you can use the option `--skip-route`   
+Example:
+```
+yo angular-famous-ionic:module modulename --skip-route
+```
+
+In this case this will only produce:
+* `client/scripts/modulename/index.js`
 
 ### Controller
 Generates a new controller.
@@ -201,7 +271,6 @@ Example:
 yo angular-famous-ionic:service modulename servicename
 yo angular-famous-ionic:service modulename servicename --servicetype=service
 yo angular-famous-ionic:service modulename servicename --servicetype=provider
-
 ```
 
 You need at least a module in order to scaffold a service.   
@@ -212,6 +281,15 @@ Produces:
 * `client/scripts/modulename/services/servicename.test.js`
 * `client/scripts/modulename/services/index.js`
 
+
+### Require
+This generator will not scaffold any files.   
+Instead it inspects the existing `client` folder and will refresh the needed injected require statements in every file where it is relevant.   
+
+Example:
+```
+yo angular-famous-ionic:require
+```
 
 ## Adding a third party bower package
 If you want to include a third party bower package do the following:

@@ -30,11 +30,10 @@ describe('angular-famous-ionic:constant', function() {
                     generator.mkdir(clientFolder + '/scripts/tata');
                     generator.mkdir(clientFolder + '/scripts/common');
 
+                    // set options
+                    testHelper.setOptions(generator);
+
                     // create an index file for common
-                    generator.ionic = true;
-                    generator.famous = true;
-                    generator.ngCordova = true;
-                    generator.ngModules = [];
                     generator.template('../../templates/module/index.js', clientFolder + '/scripts/common/index.js');
 
                 });
@@ -72,6 +71,7 @@ describe('angular-famous-ionic:constant', function() {
                 setTimeout(function() {
                     var folder = clientFolder + '/scripts/' + modulename;
                     var body = testHelper.readTextFile(folder + '/index.js');
+
                     assert(_.contains(body, 'require(\'./constants\')(app);'));
                     done();
                 }, 200);
@@ -186,9 +186,7 @@ describe('angular-famous-ionic:constant', function() {
                     assert.equal(err, 'No module found');
                     //done();
                 })
-                .on('end', function() {
-                    done();
-                });
+                .on('end', done);
 
         });
 
@@ -215,11 +213,8 @@ describe('angular-famous-ionic:constant', function() {
                 .on('error', function(err) {
                     assert(ctx.generator.log.calledOnce);
                     assert.equal(err, 'No module found');
-                    //done();
                 })
-                .on('end', function() {
-                    done();
-                });
+                .on('end', done);
         });
     });
 
