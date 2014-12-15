@@ -12,17 +12,20 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            './client/scripts/**/*.html',
-            './client/scripts/**/*.test.js'
+            './<%=clientFolder%>/scripts/**/*.html',
+            './<%=clientFolder%>/scripts/**/*.test.js'
         ],
 
         // list of files to exclude
-        exclude: [],
+        exclude: [
+            './<%=clientFolder%>/scripts/bundle*.js',
+            './<%=clientFolder%>/scripts/main*.js'
+        ],
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            './client/scripts/**/*.test.js': ['browserify']
+            './<%=clientFolder%>/scripts/**/*.test.js': ['browserify']
         },
 
         // test results reporter to use
