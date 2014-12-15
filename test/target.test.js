@@ -44,12 +44,12 @@ describe('angular-famous-ionic:target', function() {
 
         });
 
-        it('index file should contain target name', function(done) {
+        it('index file should not contain target name', function(done) {
             this.runGen.on('end', function() {
                 var file = clientFolder + '/index' + suffix + '.html';
                 var body = testHelper.readTextFile(file);
-                assert(_.contains(body, 'styles/main' + suffix + '.css'));
-                assert(_.contains(body, 'scripts/bundle' + suffix + '.js'));
+                assert(_.contains(body, 'styles/main' + '.css'));
+                assert(_.contains(body, 'scripts/bundle' + '.js'));
                 done();
             });
         });
