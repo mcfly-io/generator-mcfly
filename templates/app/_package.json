@@ -2,14 +2,12 @@
     "name": "<%= _.slugify(appname) %>",
     "version": "0.0.1",
     "scripts": {
-        "preinstall": "bash ./bin/prepublish.sh",
         "test": "gulp test"
     },
     "dependencies": {<% if (famous) { %>
         "famous-polyfills": "^0.3.0"<% } %>
     },
     "devDependencies": {
-        "coveralls": "^2.11.1"
     },
     "engines": {
         "node": ">=0.10.0"
