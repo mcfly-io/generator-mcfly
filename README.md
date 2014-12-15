@@ -88,10 +88,10 @@ Also because angular modules do not prevent name collision, each scaffolded comp
 
 Make sure you use that full name with DI.
 
-Example:
-if you need to require a module from another one, use the following code: 
-Let's say you have 2 modules `common` and `analytics`.
-`analytics` define a service called `mixpanelService`.
+**Example:**   
+if you need to require a module from another one, use the following code:   
+Let's say you have 2 modules `common` and `analytics`.   
+`analytics` define a service called `mixpanelService`.   
 You want to use that service in the `home` controller of `common`.
 
 First go to `/scripts/common/index.js` and add the following code 
@@ -102,7 +102,8 @@ First go to `/scripts/common/index.js` and add the following code
  var app = angular.module(fullname, [..., analytics.name])
 ```
 
-You have now a reference between the 2 modules. Note that the name of the modules are never hard coded :)
+You have now a reference between the 2 modules.   
+Note that the name of the modules are never hard coded :smile:
 
 Then go to `/scripts/common/controllers/home.js` and add the following code
 
@@ -116,7 +117,7 @@ Then go to `/scripts/common/controllers/home.js` and add the following code
  }
 ```
 
-Again no hard coded namespace.
+Again no hard coded namespace :smile:
 
 
 ## Generators
