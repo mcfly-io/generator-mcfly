@@ -37,7 +37,11 @@ describe('angular-famous-ionic:target', function() {
                     folder + '/index' + suffix + '.html',
                     folder + '/scripts/main' + suffix + '.js',
                     folder + '/scripts/main' + suffix + '.test.js',
-                    folder + '/styles/main' + suffix + '.scss'
+                    folder + '/styles/main' + suffix + '.scss',
+
+                    folder + '/404' + suffix + '.html',
+                    folder + '/robots' + suffix + '.txt',
+                    folder + '/favicon' + suffix + '.ico'
                 ]);
                 done();
             });
