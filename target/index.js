@@ -18,6 +18,7 @@ var TargetGenerator = Class.extend({
         this.ionic = this.config.get('ionic');
         this.famous = this.config.get('famous');
         this.fontawesome = this.config.get('fontawesome');
+        this.bootstrap = this.config.get('boostrap');
     },
 
     initializing: function() {
