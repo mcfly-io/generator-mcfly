@@ -13,6 +13,13 @@ var TargetGenerator = Class.extend({
             type: String,
             required: false
         });
+
+        this.option('mobile', {
+            desc: 'Indicates that the app is a mobile app',
+            type: 'Boolean',
+            defaults: false
+        });
+        this.appname = this.config.get('appname');
         this.targetname = this._.camelize(this._.slugify(this._.humanize(this.targetname)));
         this.clientFolder = this.getClientFolder();
         this.ionic = this.config.get('ionic');
@@ -67,6 +74,7 @@ var TargetGenerator = Class.extend({
     },
 
     configuring: function() {
+        this.mobile = this.options.mobile;
         if(_.contains(this.clientTargets, this.targetname)) {
             var msg = 'The target application name ' + this.targetname + ' already exists';
             this.log(this.utils.chalk.red.bold('(ERROR) ') + msg);
@@ -87,6 +95,9 @@ var TargetGenerator = Class.extend({
             this.targetDir = path.join(process.cwd(), this.clientFolder);
             this.mkdir(this.targetDir);
             this.template('index.html', path.join(this.targetDir, 'index' + this.suffix + '.html'));
+            if(this.mobile) {
+                this.template('config.xml', path.join(this.targetDir, 'config' + this.suffix + '.xml'));
+            }
             this.template('scripts/main.js', path.join(this.targetDir, 'scripts/main' + this.suffix + '.js'));
             this.template('scripts/main.test.js', path.join(this.targetDir, 'scripts/main' + this.suffix + '.test.js'));
             this.template('styles/main.scss', path.join(this.targetDir, 'styles/main' + this.suffix + '.scss'));

@@ -22,9 +22,11 @@
         "sinon": false,
         "element": false,
         "by": false,
-        "browser": false
+        "browser": false,
+        "assert": false
     },
     "predef": [
+        "assert",
         "beforeEach",
         "before",
         "afterEach",

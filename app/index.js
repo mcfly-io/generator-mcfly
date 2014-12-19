@@ -156,6 +156,7 @@ var AppGenerator = Class.extend({
     },
 
     configuring: function() {
+        this.config.set('appname', this.appname);
         this.config.set('clientFolder', this.clientFolder);
         this.config.set('ionic', this.ionic);
         this.config.set('famous', this.famous);
