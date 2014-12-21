@@ -56,7 +56,7 @@ I like to publish new versions as soon as possible. So here is the upgrade proce
 
 Because `generator-angular-famous-ionic` has a dependency on `generator-sublime` you should execute the following command:
 ```
-npm update -g generator-famous-ionic generator-sublime
+npm update -g generator-angular-famous-ionic generator-sublime
 ```
 
 ## Client folder
