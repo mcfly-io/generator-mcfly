@@ -229,8 +229,11 @@ describe('angular-famous-ionic:target', function() {
             this.runGen.on('end', function() {
                 var folder = clientFolder;
                 assert.file([
-                    folder + '/config' + suffix + '.xml'
+                    folder + '/config' + suffix + '.xml',
+                    folder + '/hooks' + suffix + '/after_platform_add/010_install_plugins.js',
+                    folder + '/hooks' + suffix + '/after_prepare/010_add_platform_class.js'
                 ]);
+
                 done();
             });
 
