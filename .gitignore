@@ -45,3 +45,6 @@ shippable/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Changelog
+CHANGELOG.md
