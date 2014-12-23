@@ -202,4 +202,43 @@ describe('angular-famous-ionic:target', function() {
         });
     });
 
+    describe('with option mobile', function() {
+        beforeEach(function() {
+            this.runGen = testHelper.runGenerator('target')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true,
+                    'mobile': true
+                })
+                .withPrompt({
+                    targetname: targetname
+                })
+                .on('ready', function(generator) {
+                    generator.appname = 'myapp';
+                    generator.clientFolder = clientFolder;
+                    generator.log = sinon.spy();
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+
+                });
+
+        });
+
+        it('creates config.xml file', function(done) {
+            this.runGen.on('end', function() {
+                var folder = clientFolder;
+                assert.file([
+                    folder + '/config' + suffix + '.xml',
+                    folder + '/hooks' + suffix + '/after_platform_add/010_install_plugins.js',
+                    folder + '/hooks' + suffix + '/after_prepare/010_add_platform_class.js'
+                ]);
+
+                done();
+            });
+
+        });
+
+    });
+
 });
