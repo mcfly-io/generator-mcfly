@@ -33,6 +33,7 @@ describe('angular-famous-ionic:app', function() {
                 'karma.conf.js',
                 'protractor.conf.js',
                 'bin/prepublish.sh',
+                'bin/protractor-fix-version.js',
                 clientFolder + '/.eslintrc',
                 clientFolder + '/index.html',
                 clientFolder + '/404.html',
