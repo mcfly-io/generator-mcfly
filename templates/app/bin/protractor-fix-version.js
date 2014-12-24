@@ -4,7 +4,7 @@ try {
     var chalk = require('chalk');
     gutil.log(chalk.yellow('Executing ./bin/protractor-fix-install'));
     try {
-        var pconfig = require('protractors/config.json');
+        var pconfig = require('protractor/config.json');
 
         pconfig.webdriverVersions.selenium = '2.43.1';
 
