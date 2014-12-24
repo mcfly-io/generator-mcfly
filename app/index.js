@@ -180,6 +180,7 @@ var AppGenerator = Class.extend({
             this.template('karma.conf.js');
             this.template('protractor.conf.js');
             this.template('bin/prepublish.sh');
+            this.template('bin/protractor-fix-version.js');
         },
 
         clientfiles: function() {
