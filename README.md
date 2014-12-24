@@ -169,6 +169,15 @@ Produces:
 > **NOTE:**    
 > By default the app generate a default application with no suffix. This is equivalent to running the `target` generator with argument `app`
 
+You can choose to scaffold a mobile (cordova) app using the option --mobile
+Example:
+```
+yo angular-famous-ionic:target mymobileapp --mobile
+```
+This will scaffold a config.xml file (suffixed with the app name), and hooks expected by cordova.    
+In addition the `dist` folder will conform to cordova expectation (`www` sub folder).
+
+
 ### Module
 Generates a new module.
 The first thing you need to do after executing `yo angular-famous-ionic` is create a module.
