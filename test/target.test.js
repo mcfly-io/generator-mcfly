@@ -225,20 +225,38 @@ describe('angular-famous-ionic:target', function() {
 
         });
 
-        it('creates config.xml file', function(done) {
+        it('creates cordova config.xml', function(done) {
             this.runGen.on('end', function() {
                 var folder = clientFolder;
                 assert.file([
-                    folder + '/config' + suffix + '.xml',
-                    folder + '/hooks' + suffix + '/after_platform_add/010_install_plugins.js',
-                    folder + '/hooks' + suffix + '/after_prepare/010_add_platform_class.js'
+                    folder + '/config' + suffix + '.xml'
                 ]);
 
                 done();
             });
-
         });
 
+        it('creates cordova hooks', function(done) {
+            this.runGen.on('end', function() {
+                var folder = clientFolder;
+                assert.file([
+                    folder + '/cordova/' + targetname + '/hooks' + '/after_platform_add/010_install_plugins.js',
+                    folder + '/cordova/' + targetname + '/hooks' + '/after_prepare/010_add_platform_class.js'
+                ]);
+
+                done();
+            });
+        });
+
+        it('references cordova.js in index.html', function(done) {
+            this.runGen.on('end', function() {
+                var file = clientFolder + '/index' + suffix + '.html';
+                var body = testHelper.readTextFile(file);
+                assert(_.contains(body, 'cordova.js'));
+
+                done();
+            });
+        });
     });
 
 });

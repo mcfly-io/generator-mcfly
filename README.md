@@ -23,6 +23,22 @@ The project has the following capabilities:
 > This generator is using generator-sublime to scaffold common dot files (.jshintrc, .eslintrc, etc...).   
 > Check it out https://www.npmjs.org/package/generator-sublime
 
+## Prerequisites
+In order to get the best experience with this generator, you have to install a couple of globals npm packages.   
+To do so you can execute, after the generator has runned, the following command:
+```bash
+./bin/prepublish.sh
+```
+
+This will install, among others, the following packages globally:
+* gulp
+* browserify
+* watchify
+* cordova
+* ionic (cli) - A good cordova wrapper
+
+Feel free to twick `./bin/prepublish.sh` to add your own requirements.
+
 ## Usage
 
 Install `generator-angular-famous-ionic`:
@@ -67,17 +83,22 @@ If you rename the client folder, make sure you also modify the value stored in `
 Now that the project is created you have a set of simple gulp tasks command available
 ```
 gulp help           # List the main gulp tasks
+gulp lint           # Run lint
 gulp test           # Run lint, unit tests, and e2e tests
 gulp unit           # Run lint and unit tests (karma for client + mocha for server)
 gulp karma          # Run karma client unit tests
 gulp mocha          # Run mocha server unit tests
 gulp e2e            # Run protractor for end to end tests
-gulp browserify     # Generate a bundle.js file
+gulp browserify     # Generate dist file and launc a browser-sync browser and live reload emulator if the target app is mobile
 gulp style          # Generate a main.css file
 gulp browsersync    # Creates a browser-sync server, it will display its url, it watches for js / css / scss / html file changes and inject automatically the change in the browser
+gulp dist           # Distribute the application
+gulp cordova:image  # Generate the cordova icons and splashs
+gulp cordova:run    # Run cordova run (accepts a --platform option)
 ```
 
-The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel free to modify it to your project needs.
+The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel free to modify it to your project needs.   
+The constants are resolved against the `--target` option. The default value for `--target` is `app`.
 
 ## Browserify and namespaces
 At the heart of the generator we use `browserify` to bundle together the client javascript files.   
@@ -310,10 +331,47 @@ If you want to include a third party bower package do the following:
 * if the package exposes a global `.scss` file import it into `client/styles/main.scss` and ajdust eventually the variable for the path font (should be `../fonts`)
 * if the package only exposes a `.css` file adjust the **css** file constants (`gulp/common/constants.js`) to include it
 
+## Cordova applications
+When you scaffold a mobile app (`yo angular-famous-ionic:target myapp --mobile`), this will create a `cordova/myapp` folder under `client`.
+
+This folder contains hooks and resources (icons and spashs) that will be copied over during the `dist` gulp task.
+
+If you want to generate icons and splashes from a single icon file you can execute
+```
+gulp cordova:icon
+```
+It expects an `icon.png` file located in './client/icons/myapp` folder.
+
+The plugins you need for your mobile app must be added in the `./client/cordova/myapp/hooks/010_install_plugins.js' file.   
+The hook is responsible for installing them on relevant platforms.
+
+You first need to execute `gulp dist --t myapp` (with additional `--mode` option i.e `dev` or `prod`), in order to build the dist folder.
+
+Then you need to build the mobile platforms.   
+To do so run:
+```bash
+cd dist/maypp/<dev or prod>/
+cordova platform add <ios or android or ...>
+```
+
+When you run `gulp browsersync --t myapp` the task will detect that `myapp` is a mobile app, and will automatically launch both a browser-sync browser window and a livereload emulator.   
+You can pass an addition `--platform` option to tell it which emulator you want (ios, android, etc...).   
+If you don't pass `--platform` it will choose the value from `constants.js` (`constants.cordova.platform`).
+
+When you are done with testing the app in the browser or the emulator, you can attach your phone device via an USB cable and run: 
+```bash
+gulp cordova:run
+```
+
 ## Testing
 To run unit test for the yeoman project use the following command:
 ```
 gulp test
+```
+
+If you just want to run karma and are not interested yet in linting your files you can run:
+```
+gulp karma
 ```
 
 If you just want to run mocha and are not interested yet in linting your files you can run:

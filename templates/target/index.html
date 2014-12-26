@@ -18,6 +18,7 @@
     <![endif]-->
     <ui-view></ui-view>
     <script src="scripts/bundle.js"></script>
+    <% if (mobile) { %><script src="cordova.js"></script><% } %>
 </body>
 
 </html>

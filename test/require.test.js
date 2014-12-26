@@ -27,6 +27,7 @@ describe('angular-famous-ionic:require', function() {
 
             suffixes.forEach(function(suffix) {
                 generator.suffix = suffix;
+                generator.mobile = false;
                 generator.template('../../templates/target/index.html', clientFolder + '/index' + suffix + '.html');
                 generator.template('../../templates/target/scripts/main.js', clientFolder + '/scripts/main' + suffix + '.js');
 

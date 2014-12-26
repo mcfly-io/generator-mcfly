@@ -22,6 +22,7 @@ describe('angular-famous-ionic:module', function() {
                 })
                 .on('ready', function(generator) {
                     generator.clientFolder = clientFolder;
+                    generator.mobile = false;
                     generator.log = sinon.spy();
                     generator.suffix = '';
                     generator.template('../../templates/target/index.html', clientFolder + '/index.html');

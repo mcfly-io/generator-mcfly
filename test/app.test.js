@@ -10,7 +10,6 @@ describe('angular-famous-ionic:app', function() {
                 'skip-install': true,
                 'check-travis': false,
                 'check-git': true
-
             })
             .withPrompt({
                 someOption: true
@@ -34,6 +33,8 @@ describe('angular-famous-ionic:app', function() {
                 'protractor.conf.js',
                 'bin/prepublish.sh',
                 'bin/protractor-fix-version.js',
+                'bin/cordova-generate-icons',
+                'bin/cordova-generate-splashes',
                 clientFolder + '/.eslintrc',
                 clientFolder + '/index.html',
                 clientFolder + '/404.html',
@@ -43,6 +44,7 @@ describe('angular-famous-ionic:app', function() {
                 clientFolder + '/scripts/main.js',
                 clientFolder + '/scripts/main.test.js',
                 clientFolder + '/images',
+                clientFolder + '/icons',
                 'test/e2e/e2e.test.js',
                 'test/e2e/.eslintrc',
                 'test/mocha/helpers/globals.js'

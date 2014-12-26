@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Generate Cordova splash screens
+
+function usage() {
+    echo "usage: $0 <image-filename> <background-color> [output-directory]";
+    exit 1;
+}
+
+[ "$1" ] && [ "$2" ] || usage
+[ "$3" ] || set "$1" "$2" "."
+
+image=$1
+bgcolor=$2
+output=$3/resources
+
+devices=ios,android #,windows-phone,bada,bada-wac,blackberry,webos
+eval mkdir -p "$output/{$devices}"
+
+# Show the user some progress by outputing all commands being run.
+set -x
+
+convert="convert $1 -background $bgcolor -gravity center"
+
+function androidConvertSplash() {
+    drawables=drawable-land-ldpi,drawable-land-mdpi,drawable-land-hdpi,drawable-land-xhdpi,drawable-port-ldpi,drawable-port-mdpi,drawable-port-hdpi,drawable-port-xhdpi
+    eval mkdir -p "$output/android/{$drawables}"
+
+    $convert -resize 1280x1280 -extent 720x1280 "$output/android/drawable-port-xhdpi/screen.png"
+    $convert -resize 800x800 -extent 480x800 "$output/android/drawable-port-hdpi/screen.png"
+    $convert -resize 480x480 -extent 320x480 "$output/android/drawable-port-mdpi/screen.png"
+    $convert -resize 320x320 -extent 200x320 "$output/android/drawable-port-ldpi/screen.png"
+
+    $convert -resize 1280x1280 -extent 1280x720 "$output/android/drawable-land-xhdpi/screen.png"
+    $convert -resize 800x800 -extent 800x480 "$output/android/drawable-land-hdpi/screen.png"
+    $convert -resize 480x480 -extent 480x320 "$output/android/drawable-land-mdpi/screen.png"
+    $convert -resize 320x320 -extent 320x200 "$output/android/drawable-land-ldpi/screen.png"
+
+    function androidCopySplash() {
+        androidOutput=$(find . -type d | grep "platforms/android/res$")
+        find . -type d | grep "resources/splash/android/drawable" | xargs -I{} cp -R {} $androidOutput
+    }
+    #androidCopySplash
+}
+androidConvertSplash
+
+function iosConvertSplash() {
+    eval mkdir -p "$output/ios/splash"
+    $convert -resize 512x512 -extent 640x1136 "$output/ios/splash/Default-568h@2x~iphone.png"
+    $convert -resize 1024x1024 -extent 2048x1496 "$output/ios/splash/Default-Landscape@2x~ipad.png"
+    $convert -resize 512x512 -extent 1024x748 "$output/ios/splash/Default-Landscape~ipad.png"
+    $convert -resize 1024x1024 -extent 1536x2008 "$output/ios/splash/Default-Portrait@2x~ipad.png"
+    $convert -resize 512x512 -extent 768x1004 "$output/ios/splash/Default-Portrait~ipad.png"
+    $convert -resize 256x256 -extent 320x480 "$output/ios/splash/Default~iphone.png"
+    $convert -resize 256x256 -extent 640x960 "$output/ios/splash/Default@2x~iphone.png"
+    
+    $convert -resize 512x512 -extent 750x1334 "$output/ios/splash/Default-667h.png"
+    $convert -resize 1024x1024 -extent 1242x2208 "$output/ios/splash/Default-736h.png"
+    $convert -resize 1024x1024 -extent 2208x1242 "$output/ios/splash/Default-Landscape-736h.png"
+
+    function iosCopySplash() {
+        cp $(find . | grep "resources/splash/ios/.*\.png") "$(find . -type d | grep 'platforms/ios/.*/Resources/splash')"
+    }
+    #iosCopySplash
+}
+iosConvertSplash
