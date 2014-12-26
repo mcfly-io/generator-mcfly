@@ -23,6 +23,20 @@ The project has the following capabilities:
 > This generator is using generator-sublime to scaffold common dot files (.jshintrc, .eslintrc, etc...).   
 > Check it out https://www.npmjs.org/package/generator-sublime
 
+## Prerequisites
+In order to get the best experience with this generator, you have to install a couple of globals npm packages.   
+To do so you can execute, after the generator has runned, the following command:
+```bash
+./bin/prepublish.sh
+```
+
+This will install, among others, the following packages globally:
+* gulp
+* browserify
+* watchify
+* cordova
+* ionic (cli) - A very good cordova wrapper independent on the fact that you use or not ionic framework
+
 ## Usage
 
 Install `generator-angular-famous-ionic`:
@@ -73,11 +87,12 @@ gulp unit           # Run lint and unit tests (karma for client + mocha for serv
 gulp karma          # Run karma client unit tests
 gulp mocha          # Run mocha server unit tests
 gulp e2e            # Run protractor for end to end tests
-gulp browserify     # Generate a bundle.js file
+gulp browserify     # Generate dist file and launc a browser-sync browser and live reload emulator if the target app is mobile
 gulp style          # Generate a main.css file
 gulp browsersync    # Creates a browser-sync server, it will display its url, it watches for js / css / scss / html file changes and inject automatically the change in the browser
 gulp dist           # Distribute the application
 gulp cordova:image  # Generate the cordova icons and splashs
+gulp cordova:run    # Run cordova run (accepts a `--platform` option)
 ```
 
 The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel free to modify it to your project needs.   

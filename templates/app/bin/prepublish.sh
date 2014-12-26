@@ -15,8 +15,7 @@ npm install -g ionic
 # only if on MacOS
 if [[ "$OSTYPE" == "darwin"* ]]; then
     npm install -g ios-sim
+    npm install -g ios-deploy
 fi
-
-bower install
 
 echo "prepublish executed sucessfully"
