@@ -181,6 +181,8 @@ var AppGenerator = Class.extend({
             this.template('protractor.conf.js');
             this.template('bin/prepublish.sh');
             this.template('bin/protractor-fix-version.js');
+            this.template('bin/cordova-generate-icons');
+            this.template('bin/cordova-generate-splashs');
         },
 
         clientfiles: function() {

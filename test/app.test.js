@@ -34,6 +34,8 @@ describe('angular-famous-ionic:app', function() {
                 'protractor.conf.js',
                 'bin/prepublish.sh',
                 'bin/protractor-fix-version.js',
+                'bin/cordova-generate-icons',
+                'bin/cordova-generate-splashs',
                 clientFolder + '/.eslintrc',
                 clientFolder + '/index.html',
                 clientFolder + '/404.html',
