@@ -10,12 +10,12 @@ describe('angular-famous-ionic:app', function() {
                 'skip-install': true,
                 'check-travis': false,
                 'check-git': true
-
             })
             .withPrompt({
                 someOption: true
             })
             .on('ready', function(generator) {
+                generator.mobile = false;
                 generator.log = sinon.spy();
                 //helpers.stub(generator, 'log', spyLog);
             });
