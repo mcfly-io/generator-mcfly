@@ -97,7 +97,7 @@ var TargetGenerator = Class.extend({
             this.template('index.html', path.join(this.targetDir, 'index' + this.suffix + '.html'));
             if(this.mobile) {
                 this.template('config.xml', path.join(this.targetDir, 'config' + this.suffix + '.xml'));
-                this.directory('hooks', path.join(this.targetDir, 'hooks' + this.suffix));
+                this.directory('hooks', path.join(this.targetDir, 'cordova', this.targetname, 'hooks'));
             }
             this.template('scripts/main.js', path.join(this.targetDir, 'scripts/main' + this.suffix + '.js'));
             this.template('scripts/main.test.js', path.join(this.targetDir, 'scripts/main' + this.suffix + '.test.js'));
