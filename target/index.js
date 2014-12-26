@@ -95,6 +95,9 @@ var TargetGenerator = Class.extend({
             this.targetDir = path.join(process.cwd(), this.clientFolder);
             this.mkdir(this.targetDir);
             this.template('index.html', path.join(this.targetDir, 'index' + this.suffix + '.html'));
+            this.mkdir(path.join(this.targetDir, 'images', this.targetname));
+            this.mkdir(path.join(this.targetDir, 'icons', this.targetname));
+
             if(this.mobile) {
                 this.template('config.xml', path.join(this.targetDir, 'config' + this.suffix + '.xml'));
                 this.directory('hooks', path.join(this.targetDir, 'cordova', this.targetname, 'hooks'));

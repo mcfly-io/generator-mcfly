@@ -189,7 +189,8 @@ var AppGenerator = Class.extend({
             this.mkdir(this.clientFolder);
             this.mkdir(this.clientFolder + '/styles');
             this.mkdir(this.clientFolder + '/scripts');
-            this.mkdir(this.clientFolder + '/images');
+            this.mkdir(this.clientFolder + '/images/app');
+            this.mkdir(this.clientFolder + '/icons/app');
             this.template('client/_eslintrc', this.clientFolder + '/.eslintrc');
             this.template('../target/index.html', this.clientFolder + '/index.html');
             this.template('client/404.html', this.clientFolder + '/404.html');
