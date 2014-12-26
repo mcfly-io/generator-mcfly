@@ -35,7 +35,9 @@ This will install, among others, the following packages globally:
 * browserify
 * watchify
 * cordova
-* ionic (cli) - A very good cordova wrapper independent on the fact that you use or not ionic framework
+* ionic (cli) - A good cordova wrapper
+
+Feel free to twick `./bin/prepublish.sh` to add your own requirements.
 
 ## Usage
 
@@ -92,7 +94,7 @@ gulp style          # Generate a main.css file
 gulp browsersync    # Creates a browser-sync server, it will display its url, it watches for js / css / scss / html file changes and inject automatically the change in the browser
 gulp dist           # Distribute the application
 gulp cordova:image  # Generate the cordova icons and splashs
-gulp cordova:run    # Run cordova run (accepts a `--platform` option)
+gulp cordova:run    # Run cordova run (accepts a --platform option)
 ```
 
 The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel free to modify it to your project needs.   
@@ -328,6 +330,38 @@ If you want to include a third party bower package do the following:
 * adjust the **font** gulp constants (`gulp/common/constants.js`) to include the relevant fonts of the package (if applicable)
 * if the package exposes a global `.scss` file import it into `client/styles/main.scss` and ajdust eventually the variable for the path font (should be `../fonts`)
 * if the package only exposes a `.css` file adjust the **css** file constants (`gulp/common/constants.js`) to include it
+
+## Cordova applications
+When you scaffold a mobile app (`yo angular-famous-ionic:target myapp --mobile`), this will create a `cordova/myapp` folder under `client`.
+
+This folder contains hooks and resources (icons and spashs) that will be copied over during the `dist` gulp task.
+
+If you want to generate icons and splashes from a single icon file you can execute
+```
+gulp cordova:icon
+```
+It expects an `icon.png` file located in './client/icons/myapp` folder.
+
+The plugins you need for your mobile app must be added in the `./client/cordova/myapp/hooks/010_install_plugins.js' file.   
+The hook is responsible for installing them on relevant platforms.
+
+You first need to execute `gulp dist --t myapp` (with additional `--mode` option i.e `dev` or `prod`), in order to build the dist folder.
+
+Then you need to build the mobile platforms.   
+To do so run:
+```bash
+cd dist/maypp/<dev or prod>/
+cordova platform add <ios or android or ...>
+```
+
+When you run `gulp browsersync --t myapp` the task will detect that `myapp` is a mobile app, and will automatically launch both a browser-sync browser window and a livereload emulator.   
+You can pass an addition `--platform` option to tell it which emulator you want (ios, android, etc...).   
+If you don't pass `--platform` it will choose the value from `constants.js` (`constants.cordova.platform`).
+
+When you are done with testing the app in the browser or the emulator, you can attach your phone device via an USB cable and run: 
+```bash
+gulp cordova:run
+```
 
 ## Testing
 To run unit test for the yeoman project use the following command:
