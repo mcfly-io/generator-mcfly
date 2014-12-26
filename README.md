@@ -67,6 +67,7 @@ If you rename the client folder, make sure you also modify the value stored in `
 Now that the project is created you have a set of simple gulp tasks command available
 ```
 gulp help           # List the main gulp tasks
+gulp lint           # Run lint
 gulp test           # Run lint, unit tests, and e2e tests
 gulp unit           # Run lint and unit tests (karma for client + mocha for server)
 gulp karma          # Run karma client unit tests
@@ -75,9 +76,12 @@ gulp e2e            # Run protractor for end to end tests
 gulp browserify     # Generate a bundle.js file
 gulp style          # Generate a main.css file
 gulp browsersync    # Creates a browser-sync server, it will display its url, it watches for js / css / scss / html file changes and inject automatically the change in the browser
+gulp dist           # Distribute the application
+gulp cordova:image  # Generate the cordova icons and splashs
 ```
 
-The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel free to modify it to your project needs.
+The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel free to modify it to your project needs.   
+The constants are resolved against the `--target` option. The default value for `--target` is `app`.
 
 ## Browserify and namespaces
 At the heart of the generator we use `browserify` to bundle together the client javascript files.   
@@ -314,6 +318,11 @@ If you want to include a third party bower package do the following:
 To run unit test for the yeoman project use the following command:
 ```
 gulp test
+```
+
+If you just want to run karma and are not interested yet in linting your files you can run:
+```
+gulp karma
 ```
 
 If you just want to run mocha and are not interested yet in linting your files you can run:
