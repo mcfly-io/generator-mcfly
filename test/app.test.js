@@ -15,7 +15,6 @@ describe('angular-famous-ionic:app', function() {
                 someOption: true
             })
             .on('ready', function(generator) {
-                generator.mobile = false;
                 generator.log = sinon.spy();
                 //helpers.stub(generator, 'log', spyLog);
             });
@@ -35,7 +34,7 @@ describe('angular-famous-ionic:app', function() {
                 'bin/prepublish.sh',
                 'bin/protractor-fix-version.js',
                 'bin/cordova-generate-icons',
-                'bin/cordova-generate-splashs',
+                'bin/cordova-generate-splashes',
                 clientFolder + '/.eslintrc',
                 clientFolder + '/index.html',
                 clientFolder + '/404.html',

@@ -97,6 +97,7 @@ var AppGenerator = Class.extend({
                 this.ngCordova = answers.ngCordova;
                 this.fontawesome = answers.fontawesome;
                 this.bootstrap = answers.bootstrap;
+                this.mobile = false;
                 this.composeWith('sublime:gulps', {
                     options: {
                         clientFolder: answers.clientFolder,
@@ -182,7 +183,7 @@ var AppGenerator = Class.extend({
             this.template('bin/prepublish.sh');
             this.template('bin/protractor-fix-version.js');
             this.template('bin/cordova-generate-icons');
-            this.template('bin/cordova-generate-splashs');
+            this.template('bin/cordova-generate-splashes');
         },
 
         clientfiles: function() {
