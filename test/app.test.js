@@ -45,6 +45,7 @@ describe('angular-famous-ionic:app', function() {
                 clientFolder + '/scripts/main.test.js',
                 clientFolder + '/images',
                 clientFolder + '/icons',
+                clientFolder + '/fonts',
                 'test/e2e/e2e.test.js',
                 'test/e2e/.eslintrc',
                 'test/mocha/helpers/globals.js'
