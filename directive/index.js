@@ -7,10 +7,16 @@ var DirectiveGenerator = Class.extend({
     constructor: function() {
 
         Class.apply(this, arguments);
-
+        //this.createOptions();
         this.argument('directivename', {
             type: String,
             required: false
+        });
+
+        this.option('compile', {
+            desc: 'Scaffold a directive with compile, pre and post link functions',
+            type: 'Boolean',
+            defaults: false
         });
 
         this.directivename = this._.camelize(this._.slugify(this._.humanize(this.directivename)));
@@ -29,6 +35,7 @@ var DirectiveGenerator = Class.extend({
 
     configuring: function() {
         this.htmlname = this._.dasherize(this.directivename);
+        this.compile = this.options.compile;
     },
 
     writing: function() {
@@ -39,8 +46,11 @@ var DirectiveGenerator = Class.extend({
 
         // make sure the fitlers/index.js exist
         utils.createIndexFile(this, '../component', targetDir);
-
-        this.template('index.js', path.join(targetDir, this.directivename + '.js'));
+        if(this.compile) {
+            this.template('index-compile.js', path.join(targetDir, this.directivename + '.js'));
+        } else {
+            this.template('index.js', path.join(targetDir, this.directivename + '.js'));
+        }
         this.template('index.html', path.join(targetDir, this.directivename + '.html'));
         this.template('index.test.js', path.join(targetDir, this.directivename + '.test.js'));
         done();

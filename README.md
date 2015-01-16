@@ -100,6 +100,8 @@ gulp cordova:run    # Run cordova run (accepts a --platform option)
 The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel free to modify it to your project needs.   
 The constants are resolved against the `--target` option. The default value for `--target` is `app`.
 
+To better understand the gulp task system have a look at the docs of [gulp-mux](https://github.com/thaiat/gulp-mux) 
+
 ## Browserify and namespaces
 At the heart of the generator we use `browserify` to bundle together the client javascript files.   
 Also because angular modules do not prevent name collision, each scaffolded component gets an unique full name composed like this:
@@ -311,6 +313,26 @@ Produces:
 * `client/scripts/modulename/services/servicename.js`
 * `client/scripts/modulename/services/servicename.test.js`
 * `client/scripts/modulename/services/index.js`
+
+### Directive
+Generates a new directive.
+You can use the `--compile` option to specify if you want compile, pre and post link function.
+Default `compile` is false.
+
+Example:
+```
+yo angular-famous-ionic:directive modulename myDirective
+yo angular-famous-ionic:directive modulename myDirective --compile
+```
+
+You need at least a module in order to scaffold a directive.   
+If you don't specify arguments, yeoman will display the list of existing modules and let you choose one.   
+
+Produces: 
+* `client/scripts/modulename/directives/myDirective.html`
+* `client/scripts/modulename/directives/myDirective.js`
+* `client/scripts/modulename/directives/myDirective.test.js`
+* `client/scripts/modulename/directives/index.js`
 
 
 ### Require

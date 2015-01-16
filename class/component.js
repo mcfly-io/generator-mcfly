@@ -47,9 +47,13 @@ var ComponentGenerator = Class.extend({
         };
         this.getClientModules()
             .then(function(modules) {
-                if(!_.isArray(modules) || modules.length <= 0) {
+                if(!_.isArray(modules)) {
                     emitError();
                 }
+                if(modules.length <= 0) {
+                    emitError();
+                }
+
                 that.clientModules = modules;
                 done();
             }, function() {
