@@ -66,7 +66,7 @@ exports.injectSubComponent = function(generator, directory) {
                     transform: function() {
                         return _.map(_.sortBy(_.uniq(components)), function(component) {
                             return 'require(\'./' + component + '\')(app);';
-                        }).join('\n    ') + '\n';
+                        }).join('\n');
                     }
                 }))
                 .pipe(gulp.dest(directory))
