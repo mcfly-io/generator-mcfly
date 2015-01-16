@@ -30,7 +30,7 @@ module.exports = function(app) {
                     post: function(scope, element, attrs) {
 
                     }
-                }
+                };
             }
         };
     };
