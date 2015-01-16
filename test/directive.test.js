@@ -48,6 +48,11 @@ describe('angular-famous-ionic:directive', function() {
                     fileHtml,
                     filetest
                 ]);
+                var body = testHelper.readTextFile(file);
+                assert(_.contains(body, 'link:'), 'link function should be found');
+                assert(!_.contains(body, 'compile:'), 'compile function should not be found');
+                assert(!_.contains(body, 'pre:'), 'pre function should not be found');
+                assert(!_.contains(body, 'post:'), 'post function should not be found');
 
                 done();
             });
@@ -200,16 +205,69 @@ describe('angular-famous-ionic:directive', function() {
                     generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
-                        var deferred = Q.defer();
-                        deferred.resolve([]);
-                        return deferred.promise;
+                        return Q.when();
                     };
                 })
                 .on('error', function(err) {
                     assert(ctx.generator.log.calledOnce);
                     assert.equal(err, 'No module found');
                 })
-                .on('end', done);
+                .on('end', function() {
+                    done();
+                });
+        });
+    });
+
+    describe('with option compile', function() {
+        beforeEach(function() {
+            this.runGen = testHelper.runGenerator('directive')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true,
+                    'compile': true
+                })
+                .withPrompt({
+                    modulename: modulename,
+                    directivename: directivename
+                })
+                .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
+                    generator.log = sinon.spy();
+                    // create modules
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/common');
+
+                    // set options
+                    testHelper.setOptions(generator);
+
+                    // create an index file for common
+                    generator.template('../../templates/module/index.js', clientFolder + '/scripts/common/index.js');
+
+                });
+
+        });
+
+        it('creates files', function(done) {
+            this.runGen.on('end', function() {
+                var folder = clientFolder + '/scripts/' + modulename + '/directives';
+                var file = folder + '/' + directivename + '.js';
+                var fileHtml = folder + '/' + directivename + '.html';
+                var filetest = folder + '/' + directivename + '.test.js';
+                assert.file([
+                    file,
+                    fileHtml,
+                    filetest
+                ]);
+                var body = testHelper.readTextFile(file);
+                assert(!_.contains(body, 'link:'), 'link function should not be present');
+                assert(_.contains(body, 'compile:'), 'compile function should be present');
+                assert(_.contains(body, 'pre:'), 'pre function should be found');
+                assert(_.contains(body, 'post:'), 'post function should be found');
+                done();
+            });
+
         });
     });
 
