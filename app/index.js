@@ -19,6 +19,11 @@ var AppGenerator = Class.extend({
             type: String,
             required: false
         });
+        this.option('mobile', {
+            desc: 'Indicates that the app is a mobile app',
+            type: 'Boolean',
+            defaults: false
+        });
         this.appname = this.appname || path.basename(process.cwd());
         this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
 
@@ -97,7 +102,8 @@ var AppGenerator = Class.extend({
                 this.ngCordova = answers.ngCordova;
                 this.fontawesome = answers.fontawesome;
                 this.bootstrap = answers.bootstrap;
-                this.mobile = false;
+                this.mobile = this.options.mobile;
+
                 this.composeWith('sublime:gulps', {
                     options: {
                         clientFolder: answers.clientFolder,
@@ -187,6 +193,7 @@ var AppGenerator = Class.extend({
         },
 
         clientfiles: function() {
+            this.targetDir = path.join(process.cwd(), this.clientFolder);
             this.mkdir(this.clientFolder);
             this.mkdir(this.clientFolder + '/styles');
             this.mkdir(this.clientFolder + '/scripts');
@@ -201,6 +208,10 @@ var AppGenerator = Class.extend({
             this.template('../target/styles/main.scss', this.clientFolder + '/styles/main.scss');
             this.template('../target/scripts/main.js', this.clientFolder + '/scripts/main.js');
             this.template('../target/scripts/main.test.js', this.clientFolder + '/scripts/main.test.js');
+            if(this.mobile) {
+                this.template('../target/config.xml', path.join(this.targetDir, 'config' + '.xml'));
+                this.directory('../target/hooks', path.join(this.targetDir, 'cordova', 'app', 'hooks'));
+            }
         },
 
         testFiles: function() {
