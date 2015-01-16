@@ -170,10 +170,19 @@ Sets up a new AngularJS app, generating all the boilerplate you need to get star
 
 The main application is called `main`.
 
+
 Example:
 ```
 yo angular-famous-ionic
 ```
+
+You can choose to scaffold a mobile (cordova) app using the option --mobile
+Example:
+```
+yo angular-famous-ionic --mobile
+```
+This will scaffold a config.xml file (suffixed with the app name), and hooks expected by cordova.    
+In addition the `dist` folder will conform to cordova expectation (`www` sub folder).
 
 ### Target
 Generate a new target application.   
