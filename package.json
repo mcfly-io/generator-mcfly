@@ -49,11 +49,11 @@
   ],
   "dependencies": {
     "chalk": "0.5.1",
-    "del": "^1.1.1",
+    "del": "1.1.1",
     "glob-to-regexp": "0.0.1",
     "gulp": "3.8.10",
     "gulp-inject": "1.1.1",
-    "gulp-mux": "^0.1.4",
+    "gulp-mux": "^0.1.8",
     "lodash": "2.4.1",
     "q": "1.1.2",
     "shelljs": "0.3.0",
@@ -98,6 +98,6 @@
   },
   "peerDependencies": {
     "yo": ">=1.2.1",
-    "generator-sublime": ">=1.4.16"
+    "generator-sublime": ">=1.4.17"
   }
 }
