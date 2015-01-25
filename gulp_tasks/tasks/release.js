@@ -178,7 +178,7 @@ gulp.task('githubAuth', false, function(cb) {
                 username: username,
                 questions: [{
                     type: 'input',
-                    message: 'Please enter your' + gutil.colors.cyan('GitHub username'),
+                    message: 'Please enter your GitHub username',
                     name: 'username',
                     default: username,
                     validate: function(input) {
@@ -189,7 +189,7 @@ gulp.task('githubAuth', false, function(cb) {
                     }
                 }, {
                     type: 'password',
-                    message: 'Please enter your' + gutil.colors.cyan('GitHub password'),
+                    message: 'Please enter your GitHub password',
                     name: 'password',
                     validate: function(input) {
                         return input !== '';
