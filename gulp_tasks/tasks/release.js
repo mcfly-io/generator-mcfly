@@ -17,6 +17,9 @@ var gutil = require('gulp-util');
 var GitHubApi = require('github');
 var runSequence = require('run-sequence').use(gulp);
 var del = require('del');
+var inquirer = require('inquirer');
+var Q = require('q');
+var githubUsername = require('github-username');
 var helper = require('../common/helper');
 var constants = require('../common/constants')();
 
@@ -125,27 +128,81 @@ gulp.task('push', false, ['tag'], function(cb) {
 
 gulp.task('release', 'Publish a new release version.', ['push']);
 
-gulp.task('release:createRelease', false, ['push'], function(cb) {
+// ############GITHUB SECTION#########
 
-    var github = new GitHubApi({
-        // required
-        version: '3.0.0',
-        // optional
-        debug: true,
-        protocol: 'https',
-        timeout: 5000
-    });
+var github = new GitHubApi({
+    version: '3.0.0',
+    protocol: 'https',
+    timeout: 5000
+});
 
-    if(args.username && args.password) {
-        var username = args.username;
-        var password = args.password;
-        github.authenticate({
-            type: 'basic',
-            username: username,
-            password: password
+var gitGetEmailAsync = Q.nbind(git.exec, git, {
+    args: 'config --get user.email',
+    quiet: true
+});
+var githubUsernameAsync = Q.nfbind(githubUsername);
+
+var inquireAsync = function(result) {
+    var deferred = Q.defer();
+    inquirer.prompt(result.questions, function(answers) {
+        // only resolving what we need
+        deferred.resolve({
+            username: answers.username || result.username,
+            password: answers.password
         });
-    }
+    });
+    return deferred.promise;
+};
 
+var githubAuthSetupAndTestAsync = function(result) {
+    var deferred = Q.defer();
+    github.authenticate({
+        type: 'basic',
+        username: result.username,
+        password: result.password
+    });
+    github.misc.rateLimit({}, function(err, res) {
+        if(err) {
+            deferred.reject(gutil.colors.red('GitHub auth failed! ') + 'Response from server: ' + gutil.colors.yellow(JSON.parse(err).message));
+        }
+        deferred.resolve(gutil.colors.green('GitHub auth successful!'));
+    });
+    return deferred.promise;
+};
+
+gulp.task('githubAuth', false, function(cb) {
+    return gitGetEmailAsync()
+        .then(githubUsernameAsync)
+        .then(function(username) {
+            return {
+                username: username,
+                questions: [{
+                    type: 'input',
+                    message: 'Please enter your' + gutil.colors.cyan('GitHub username'),
+                    name: 'username',
+                    default: username,
+                    validate: function(input) {
+                        return input !== '';
+                    },
+                    when: function() {
+                        return username === null;
+                    }
+                }, {
+                    type: 'password',
+                    message: 'Please enter your' + gutil.colors.cyan('GitHub password'),
+                    name: 'password',
+                    validate: function(input) {
+                        return input !== '';
+                    }
+                }]
+            };
+        })
+        .then(inquireAsync)
+        .then(githubAuthSetupAndTestAsync)
+        .tap(gutil.log);
+});
+
+gulp.task('release:createRelease', false, function(cb) {
     var pkg = helper.readJsonFile('./package.json');
     var v = 'v' + pkg.version;
     var message = pkg.version;
@@ -173,5 +230,5 @@ gulp.task('release:createRelease', false, ['push'], function(cb) {
 });
 
 gulp.task('release:full', 'Publish a new release version.', function() {
-    return runSequence('changelog', 'release:createRelease');
+    return runSequence('githubAuth', 'changelog', 'push', 'release:createRelease');
 });
