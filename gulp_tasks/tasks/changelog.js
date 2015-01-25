@@ -4,7 +4,6 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var changelog = require('conventional-changelog');
 var argv = require('yargs').argv;
-var marked = require('marked');
 var fs = require('fs');
 var q = require('q');
 var path = require('path');
@@ -47,13 +46,7 @@ var makeChangelog = function(options) {
 
 gulp.task('changelog:conventional', false, function(cb) {
     var dest = argv.dest || 'CHANGELOG.md';
-    var toHtml = argv.html || false;
     return makeChangelog(argv).then(function(log) {
-        if(toHtml) {
-            log = marked(log, {
-                gfm: true
-            });
-        }
         fs.writeFileSync(dest, log);
         cb();
     });

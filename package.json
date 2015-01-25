@@ -84,7 +84,6 @@
     "inquirer": "0.8.0",
     "jshint-stylish": "1.0.0",
     "map-stream": "0.1.0",
-    "marked": "0.3.2",
     "mocha": "2.1.0",
     "mocha-lcov-reporter": "0.0.1",
     "mockery": "1.4.0",
