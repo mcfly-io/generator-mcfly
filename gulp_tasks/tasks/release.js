@@ -229,6 +229,10 @@ gulp.task('release:createRelease', false, function(cb) {
         }));
 });
 
-gulp.task('release:full', 'Publish a new release version.', function() {
-    return runSequence('githubAuth', 'changelog', 'push', 'release:createRelease');
+gulp.task('delay', false, function(cb) {
+    setTimeout(cb, 1000);
+});
+
+gulp.task('release:full', 'Publish a new release version on GitHub and upload a changelog.', function() {
+    return runSequence('githubAuth', 'changelog', 'push', 'delay', 'release:createRelease');
 });
