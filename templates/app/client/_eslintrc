@@ -3,7 +3,9 @@
     "browser": true
   },
   "globals": {
-    "inject": true
+    "inject": true,
+    "jasmine": true,
+    "spyOn": true
   },
   "rules": {
     "consistent-this": [1,  "vm"]
