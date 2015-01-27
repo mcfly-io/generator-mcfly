@@ -50,7 +50,9 @@ describe('angular-famous-ionic:app', function() {
                     clientFolder + '/fonts',
                     'test/e2e/e2e.test.js',
                     'test/e2e/.eslintrc',
-                    'test/mocha/helpers/globals.js'
+                    'test/mocha/helpers/globals.js',
+                    'test/unit/unitHelper.js',
+                    'test/unit/polyfill.js'
                 ]);
                 done();
             }.bind(this));
