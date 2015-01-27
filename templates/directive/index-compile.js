@@ -19,7 +19,7 @@ module.exports = function(app) {
                 title: '@' // '@' reads attribute value, '=' provides 2-way binding, '&" works with functions
             },
             controller: controller,
-            controllerAs: 'ctrl',
+            controllerAs: '<%= directivename %>Ctrl',
             bindToController: true,
             template: require('./<%= directivename %>.html'),
             compile: function(tElement, tAttrs) {
