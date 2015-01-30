@@ -1,4 +1,5 @@
 'use strict';
+/*eslint consistent-this:[0] */
 var angular = require('angular-mocks');
 var app = require('../')('app');
 var servicename = '<%= servicename %>';
