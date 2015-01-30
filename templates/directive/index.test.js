@@ -1,5 +1,5 @@
 'use strict';
-
+/*eslint consistent-this:[0] */
 var angular = require('angular-mocks');
 var app = require('../')('app');
 var directivename = '<%= directivename %>';
@@ -22,7 +22,7 @@ describe(app.name, function() {
             }));
 
             it('should succeed', function() {
-                var element = unitHelper.compileDirective.call(this, '<<%= htmlname %>></<%= htmlname %>>');
+                var element = unitHelper.compileDirective.call(this, directivename, '<<%= htmlname %>></<%= htmlname %>>');
                 expect(element.html().trim()).toBeDefined();
             });
 
