@@ -405,6 +405,11 @@ If you just want to run karma and are not interested yet in linting your files y
 gulp karma
 ```
 
+You can eventually also run karma in the background, with auto refresh using the option `--start`
+```
+gulp karma --start
+```
+
 If you just want to run mocha and are not interested yet in linting your files you can run:
 ```
 gulp mocha
