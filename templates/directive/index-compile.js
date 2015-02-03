@@ -7,7 +7,8 @@ module.exports = function(app) {
     // controller
     var controllerDeps = [];
     var controller = function() {
-        var <% directivename %> = this;
+        var <% =directivename %>Ctrl = this;
+        <% =directivename %>Ctrl.directivename = directivename;
     };
     controller.$inject = controllerDeps;
 
