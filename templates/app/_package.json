@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "test": "gulp test",
-        "postinstall": "node ./bin/protractor-fix-version.js"
+        "postinstall": "bower install && node ./bin/protractor-fix-version.js"
     },
     "dependencies": {<% if (famous) { %>
         "famous-polyfills": "^0.3.0"<% } %>

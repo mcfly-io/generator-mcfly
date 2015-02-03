@@ -1,5 +1,5 @@
 'use strict';
- /*eslint consistent-this:[2,  "<%= directivename %>"] */
+ /*eslint consistent-this:[2,  "<%= directivename %>Ctrl"] */
 var directivename = '<%= directivename %>';
 
 module.exports = function(app) {
@@ -7,7 +7,8 @@ module.exports = function(app) {
     // controller
     var controllerDeps = [];
     var controller = function() {
-        var <% directivename %> = this;
+        var <%= directivename %>Ctrl = this;
+        <%= directivename %>Ctrl.directivename = directivename;
     };
     controller.$inject = controllerDeps;
 
