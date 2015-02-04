@@ -1,6 +1,28 @@
 'use strict';
 
+var args = require('yargs').argv;
+
 module.exports = function(config) {
+    var debug = false;
+    try {
+        debug = JSON.parse(args._[0]).debug;
+    } catch(err) {}
+    debug = debug || args.debug;
+
+    var reporters = ['mocha', 'coverage'];
+    var browserify = {
+        debug: true,
+        transform: [
+            [{
+                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**']
+            }, 'browserify-istanbul']
+        ]
+    };
+    if(debug === true) {
+        delete browserify.transform;
+        reporters.splice(reporters.indexOf('coverage'), 1);
+    }
+
     config.set({
         browserNoActivityTimeout: 60000,
 
@@ -33,7 +55,7 @@ module.exports = function(config) {
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         //  reporters: ['dots', 'coverage'],
-        reporters: ['mocha', 'coverage'],
+        reporters: reporters,
 
         // web server port
         port: 9876,
@@ -70,13 +92,6 @@ module.exports = function(config) {
             }]
         },
 
-        browserify: {
-            debug: true,
-            transform: [
-                [{
-                    ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**']
-                }, 'browserify-istanbul']
-            ]
-        }
+        browserify: browserify
     });
 };
