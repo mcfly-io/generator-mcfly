@@ -114,7 +114,7 @@ Make sure you use that full name with DI.
 **Example:**   
 If you need to require a module from another one, use the following code:  
 
-Let's say you have scaffolded 2 modules with the generator, `common` and `analytics`. Since `common` is your base module you first need to connect `analytics` to it with a `require`. Do this in the `module.exports` in `index.js` for `common`, right after the `require` for `angular`. (Make sure you pass the namespace the namespace argument to the `require`.) 
+Let's say you have scaffolded 2 modules with the generator, `common` and `analytics`. Since `common` is your base module you first need to connect `analytics` to it with a `require`. Do this in the `module.exports` in `index.js` for `common`, right after the `require` for `angular`. (Make sure you pass the namespace argument to the `require`.) 
 ```js
 var angular = require('angular');
 var analytics = require('../analytics')(namespace);
