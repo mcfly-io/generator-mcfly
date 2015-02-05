@@ -50,37 +50,37 @@
   "dependencies": {
     "chalk": "0.5.1",
     "del": "1.1.1",
-    "glob-to-regexp": "0.0.1",
+    "glob-to-regexp": "0.0.2",
     "gulp": "3.8.10",
     "gulp-inject": "1.1.1",
-    "gulp-mux": "^0.1.8",
+    "gulp-mux": "latest",
     "lodash": "2.4.1",
     "q": "1.1.2",
     "shelljs": "0.3.0",
-    "update-notifier": "0.2.2",
+    "update-notifier": "0.3.0",
     "yeoman-generator": "0.17.7",
-    "yosay": "1.0.1"
+    "yosay": "1.0.2"
   },
   "devDependencies": {
     "chai": "1.10.0",
     "conventional-changelog": "0.0.11",
     "github": "0.2.3",
     "github-username": "1.1.1",
-    "gulp-bump": "0.1.11",
+    "gulp-bump": "0.1.13",
     "gulp-concat": "2.4.3",
-    "gulp-eslint": "0.1.8",
+    "gulp-eslint": "0.2.2",
     "gulp-exec": "2.1.1",
-    "gulp-git": "0.5.5",
-    "gulp-help": "1.3.1",
+    "gulp-git": "0.5.6",
+    "gulp-help": "1.3.2",
     "gulp-if": "1.2.5",
-    "gulp-istanbul": "0.5.0",
+    "gulp-istanbul": "0.6.0",
     "gulp-jscs": "1.4.0",
-    "gulp-jshint": "1.9.0",
+    "gulp-jshint": "1.9.2",
     "gulp-load-plugins": "0.8.0",
     "gulp-mocha": "2.0.0",
     "gulp-plumber": "0.6.6",
     "gulp-tap": "0.1.3",
-    "gulp-util": "3.0.2",
+    "gulp-util": "3.0.3",
     "inquirer": "0.8.0",
     "jshint-stylish": "1.0.0",
     "map-stream": "0.1.0",
@@ -98,6 +98,6 @@
   },
   "peerDependencies": {
     "yo": ">=1.2.1",
-    "generator-sublime": ">=1.5.2"
+    "generator-sublime": ">=1.5.4"
   }
 }
