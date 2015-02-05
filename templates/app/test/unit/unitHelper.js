@@ -24,12 +24,13 @@ exports.compileDirectiveFamous = function(directivename, html, height) {
     height = height || 100;
 
     var element = jQLite('<fa-app style="height: ' + height + 'px">' + html + '</fa-app>');
-    var app = this.$compile(element)(this.$scope)[0];
+    document.body.appendChild(element[0]);
+    this.$compile(element)(this.$scope);
     this.directive = element.find(camelToDash(directivename));
     this.controller = this.directive.controller(directivename);
     this.scope = this.directive.isolateScope() || this.directive.scope();
-    document.body.appendChild(app);
     this.$scope.$digest();
+
     return element;
 };
 
