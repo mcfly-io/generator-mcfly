@@ -16,7 +16,7 @@ var DirectiveGenerator = Class.extend({
         this.option('compile', {
             desc: 'Scaffold a directive with compile, pre and post link functions',
             type: 'Boolean',
-            defaults: false
+            defaults: true
         });
 
         this.directivename = this._.camelize(this._.slugify(this._.humanize(this.directivename)));

@@ -340,13 +340,13 @@ Produces:
 
 ### Directive
 Generates a new directive.
-You can use the `--compile` option to specify if you want compile, pre and post link function.
-Default `compile` is false.
+You can use the `--compile` option to specify if you want compile, pre and post link function (true), or just a simple link function (false).
+Default `compile` is true.
 
 Example:
 ```
 yo angular-famous-ionic:directive modulename myDirective
-yo angular-famous-ionic:directive modulename myDirective --compile
+yo angular-famous-ionic:directive modulename myDirective --compile=false
 ```
 
 You need at least a module in order to scaffold a directive.   
