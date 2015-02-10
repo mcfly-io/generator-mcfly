@@ -9,6 +9,12 @@ module.exports = function(config) {
     } catch(err) {}
     debug = debug || args.debug;
 
+    var autowatch = true;
+    try {
+        autowatch = JSON.parse(args._[0]).autowatch;
+    } catch(err) {}
+    autowatch = autowatch || args.autowatch;
+
     var reporters = ['mocha', 'coverage'];
     var browserify = {
         debug: true,
@@ -68,7 +74,7 @@ module.exports = function(config) {
         logLevel: config.LOG_ERROR,
 
         // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: true,
+        autoWatch: autowatch,
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
