@@ -2,9 +2,10 @@
 
 var namespace = 'main';
 
-var angular = require('angular');
-<% if (ionic) { %>require('angular-ionic');<% } %>
-var app = angular.module(namespace, [<% if (ionic) { %>'ionic',<% } %>
+var angular = require('angular');<% if (ionic) { %>
+require('angular-ionic');<% } %><% if (material) { %>
+require('angular-material');<% } %>
+var app = angular.module(namespace, [<% if (ionic) { %>'ionic',<% } %><% if (material) { %>'ngMaterial',<% } %>
     // inject:modules start
     // inject:modules end
 ]);

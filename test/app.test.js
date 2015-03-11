@@ -96,6 +96,7 @@ describe('angular-famous-ionic:app', function() {
                 assert(config['generator-angular-famous-ionic'].ionic !== undefined, 'ionic does not exist in .yo-rc.json');
                 assert(config['generator-angular-famous-ionic'].famous !== undefined, 'famous does not exist in .yo-rc.json');
                 assert(config['generator-angular-famous-ionic'].ngCordova !== undefined, 'ngCordova does not exist in .yo-rc.json');
+                assert(config['generator-angular-famous-ionic'].material !== undefined, 'angular-material does not exist in .yo-rc.json');
                 assert(config['generator-angular-famous-ionic'].clientFolder !== undefined, 'clientFolder does not exist in .yo-rc.json');
 
                 done();

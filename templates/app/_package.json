@@ -26,7 +26,9 @@
         "famous-angular": "./bower_components/famous-angular/dist/famous-angular.js"<% } %><% if(ngCordova) { %>,
         "ngCordova": "./bower_components/ngCordova/dist/ng-cordova.js",
         "ngCordovaMocks": "./bower_components/ngCordova/dist/ng-cordova-mocks.js"<% } %><% if(bootstrap) { %>,
-        "angular-bootstrap": "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"<% } %>   
+        "angular-bootstrap": "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"<% } %><% if(material) { %>,
+        "angular-material": "./bower_components/angular-material/angular-material.js",
+        "angular-aria": "./bower_components/angular-aria/angular-aria.js"<% } %>
     },
     "browserify": {
         "transform": [
@@ -93,6 +95,14 @@
                 "angular"
             ],
             "exports": "angular.module('ui.bootstrap').name"
-        }<% } %> 
+        }<% } %><% if(material) { %>,
+        "angular-material": {
+            "depends": [
+                "angular",
+                "angular-aria",
+                "angular-animate"
+            ]
+        }<% } %>
+
     }
 }

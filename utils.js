@@ -154,5 +154,8 @@ exports.getNgModules = function(generator) {
     if(generator.ngCordova) {
         retVal.push('\'ngCordova\'');
     }
+    if(generator.material) {
+        retVal.push('\'ngMaterial\'');
+    }
     return retVal.join(', ');
 };

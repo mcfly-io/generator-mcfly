@@ -159,6 +159,7 @@ var testHelper = {
         generator.ionic = true;
         generator.famous = true;
         generator.ngCordova = true;
+        generator.material = true;
         generator.ngModules = [];
         generator.skipRoute = false;
     }

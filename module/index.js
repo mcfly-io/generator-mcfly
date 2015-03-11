@@ -25,6 +25,7 @@ var ModuleGenerator = Class.extend({
         this.ionic = this.config.get('ionic');
         this.famous = this.config.get('famous');
         this.ngCordova = this.config.get('ngCordova');
+        this.material = this.config.get('material');
         this.ngModules = utils.getNgModules(this);
     },
 
