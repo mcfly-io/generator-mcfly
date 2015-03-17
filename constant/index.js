@@ -12,7 +12,7 @@ var ConstantGenerator = Class.extend({
             required: false
         });
 
-        this.constantname = this._.camelize(this._.slugify(this._.humanize(this.constantname)));
+        this.constantname = this.camelize(this.constantname);
     },
 
     initializing: function() {

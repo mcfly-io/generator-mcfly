@@ -12,7 +12,7 @@ var FilterGenerator = Class.extend({
             required: false
         });
 
-        this.filtername = this._.camelize(this._.slugify(this._.humanize(this.filtername)));
+        this.filtername = this.camelize(this.filtername);
     },
 
     initializing: function() {

@@ -20,7 +20,9 @@ var ModuleGenerator = Class.extend({
             type: String,
             required: false
         });
-        this.modulename = this._.camelize(this._.slugify(this._.humanize(this.modulename)));
+        this.modulename = this.camelize(this.modulename);
+        this.moduleFolder = this.casify(this.modulename);
+
         this.clientFolder = this.getClientFolder();
         this.ionic = this.config.get('ionic');
         this.famous = this.config.get('famous');
@@ -72,6 +74,8 @@ var ModuleGenerator = Class.extend({
 
         this.prompt(prompts, function(answers) {
             this.modulename = this.modulename || answers.modulename;
+            this.modulename = this.camelize(this.modulename);
+            this.moduleFolder = this.casify(this.modulename);
             done();
         }.bind(this));
 
@@ -93,9 +97,11 @@ var ModuleGenerator = Class.extend({
             var done = this.async();
             this.sourceDir = path.join(__dirname, '../templates/module');
             this.sourceRoot(this.sourceDir);
-            this.targetDir = path.join(process.cwd(), this.clientFolder, 'scripts', this.modulename);
+            this.targetDir = path.join(process.cwd(), this.clientFolder, 'scripts', this.moduleFolder);
             this.mkdir(this.targetDir);
-            this.template('index.js', path.join(this.targetDir, 'index.js'));
+            var filename = this.suffixify('index', 'module');
+
+            this.template('index.js', path.join(this.targetDir, filename + '.js'));
             if(!this.skipRoute) {
                 this.template('home.html', path.join(this.targetDir, 'views', 'home.html'));
             }

@@ -6,6 +6,7 @@ var _ = require('lodash');
 var modulename = 'common';
 var directivename = 'myDirective';
 var clientFolder = 'www';
+
 describe('angular-famous-ionic:directive', function() {
     describe('with modules', function() {
         beforeEach(function() {
@@ -323,5 +324,110 @@ describe('angular-famous-ionic:directive', function() {
 
         });
     });
+    describe('with snake-case', function() {
+        beforeEach(function() {
+            this.runGen = testHelper.runGenerator('directive')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename,
+                    directivename: directivename
+                })
+                .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
+                    generator.log = sinon.spy();
 
+                    this.configGet = sinon.stub();
+                    this.configGet.withArgs('filenameCase').returns('snake');
+                    generator.config.get = this.configGet;
+                    // create modules
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/common');
+
+                    // set options
+                    testHelper.setOptions(generator);
+
+                    // create an index file for common
+                    generator.template('../../templates/module/index.js', clientFolder + '/scripts/common/index.js');
+                }.bind(this));
+
+        });
+
+        it('creates files with correct case', function(done) {
+            this.runGen.on('end', function() {
+                var folder = clientFolder + '/scripts/' + modulename + '/directives';
+                var filename = this.runGen.generator._.dasherize(directivename);
+                var file = folder + '/' + filename + '.js';
+                var fileHtml = folder + '/' + filename + '.html';
+                var filetest = folder + '/' + filename + '.test.js';
+                assert.file([
+                    file,
+                    fileHtml,
+                    filetest
+                ]);
+
+                assert(this.configGet.calledWith('filenameCase'));
+                done();
+            }.bind(this));
+
+        });
+
+    });
+    describe('with type suffix', function() {
+        beforeEach(function() {
+            this.runGen = testHelper.runGenerator('directive')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename,
+                    directivename: directivename
+                })
+                .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
+                    generator.log = sinon.spy();
+
+                    this.configGet = sinon.stub();
+                    this.configGet.withArgs('filenameSuffix').returns(true);
+                    generator.config.get = this.configGet;
+                    // create modules
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                    generator.mkdir(clientFolder + '/scripts/common');
+
+                    // set options
+                    testHelper.setOptions(generator);
+
+                    // create an index file for common
+                    generator.template('../../templates/module/index.js', clientFolder + '/scripts/common/index.js');
+                }.bind(this));
+
+        });
+
+        it('creates files with correct suffix', function(done) {
+            this.runGen.on('end', function() {
+                var folder = clientFolder + '/scripts/' + modulename + '/directives';
+                var filename = directivename + '.directive';
+                var file = folder + '/' + filename + '.js';
+                var fileHtml = folder + '/' + filename + '.html';
+                var filetest = folder + '/' + filename + '.test.js';
+                assert.file([
+                    file,
+                    fileHtml,
+                    filetest
+                ]);
+
+                assert(this.configGet.calledWith('filenameSuffix'));
+                done();
+            }.bind(this));
+
+        });
+
+    });
 });

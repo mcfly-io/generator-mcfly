@@ -1,14 +1,13 @@
 'use strict';
 
 var testHelper = require('./testHelper');
-var _ = require('lodash');
 var Q = require('q');
+var _ = require('lodash');
 var utils = require('../utils');
 var modulename = 'common';
 var clientFolder = 'www';
 
 describe('angular-famous-ionic:module', function() {
-
     describe('general test', function() {
         beforeEach(function() {
             this.runGen = testHelper.runGenerator('module')
@@ -422,6 +421,110 @@ describe('angular-famous-ionic:module', function() {
                     ]);
                     done();
                 });
+
+        });
+    });
+
+    describe('with snake-case', function() {
+
+        beforeEach(function() {
+            this.modulename = 'snakeCaseTest';
+            this.runGen = testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: this.modulename
+                })
+                .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
+                    generator.mobile = false;
+                    generator.log = sinon.spy();
+                    generator.suffix = '';
+
+                    this.configGet = sinon.stub();
+                    this.configGet.withArgs('filenameCase').returns('snake');
+
+                    generator.config.get = this.configGet;
+                    generator.template('../../templates/target/index.html', clientFolder + '/index.html');
+                    generator.template('../../templates/target/scripts/main.js', clientFolder + '/scripts/main.js');
+
+                    generator.template('../../templates/target/index.html', clientFolder + '/index-xxx.html');
+                    generator.template('../../templates/target/scripts/main.js', clientFolder + '/scripts/main-xxx.js');
+
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+
+                    // set options
+                    testHelper.setOptions(generator);
+
+                }.bind(this));
+
+        });
+
+        it('creates files with correct case', function(done) {
+            this.runGen.on('end', function() {
+                var moduleFolder = this.runGen.generator._.dasherize(this.modulename);
+                var folder = clientFolder + '/scripts/' + moduleFolder;
+                var file = folder + '/index.js';
+                assert.file([
+                    file
+                ]);
+
+                assert(this.configGet.calledWith('filenameCase'));
+                done();
+            }.bind(this));
+
+        });
+    });
+
+    describe('with type suffixes', function() {
+
+        beforeEach(function() {
+            this.runGen = testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
+                    generator.mobile = false;
+                    generator.log = sinon.spy();
+                    generator.suffix = '';
+
+                    this.configGet = sinon.stub();
+                    this.configGet.withArgs('filenameSuffix').returns(true);
+
+                    generator.config.get = this.configGet;
+                    generator.template('../../templates/target/index.html', clientFolder + '/index.html');
+                    generator.template('../../templates/target/scripts/main.js', clientFolder + '/scripts/main.js');
+
+                    generator.template('../../templates/target/index.html', clientFolder + '/index-xxx.html');
+                    generator.template('../../templates/target/scripts/main.js', clientFolder + '/scripts/main-xxx.js');
+
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                }.bind(this));
+
+        });
+
+        it('creates files with correct suffix', function(done) {
+            this.runGen.on('end', function() {
+                var folder = clientFolder + '/scripts/' + modulename;
+                var file = folder + '/index.module.js';
+                assert.file([
+                    file
+                ]);
+
+                assert(this.configGet.calledWith('filenameSuffix'));
+                done();
+            }.bind(this));
 
         });
     });

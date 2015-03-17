@@ -12,7 +12,7 @@ var ValueGenerator = Class.extend({
             required: false
         });
 
-        this.valuename = this._.camelize(this._.slugify(this._.humanize(this.valuename)));
+        this.valuename = this.camelize(this.valuename);
     },
 
     initializing: function() {

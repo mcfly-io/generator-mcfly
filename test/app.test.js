@@ -92,6 +92,8 @@ describe('angular-famous-ionic:app', function() {
                 ]);
                 var config = testHelper.readJsonFile('.yo-rc.json');
                 assert(config['generator-angular-famous-ionic'].appname !== undefined, 'appname does not exist in .yo-rc.json');
+                assert(config['generator-angular-famous-ionic'].filenameCase !== undefined, 'filenameCase does not exist in .yo-rc.json');
+                assert(config['generator-angular-famous-ionic'].filenameSuffix !== undefined, 'filenameSuffix does not exist in .yo-rc.json');
                 assert(config['generator-angular-famous-ionic'].bootstrap !== undefined, 'bootstrap does not exist in .yo-rc.json');
                 assert(config['generator-angular-famous-ionic'].ionic !== undefined, 'ionic does not exist in .yo-rc.json');
                 assert(config['generator-angular-famous-ionic'].famous !== undefined, 'famous does not exist in .yo-rc.json');

@@ -1,14 +1,13 @@
 'use strict';
 
 var testHelper = require('./testHelper');
-var _ = require('lodash');
 var Q = require('q');
+var _ = require('lodash');
 var targetname = 'web';
 var suffix = '-' + targetname;
 var clientFolder = 'www';
 
 describe('angular-famous-ionic:target', function() {
-
     describe('general test', function() {
         beforeEach(function() {
             this.runGen = testHelper.runGenerator('target')

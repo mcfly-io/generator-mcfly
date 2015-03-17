@@ -20,7 +20,7 @@ var TargetGenerator = Class.extend({
             defaults: false
         });
         this.appname = this.config.get('appname');
-        this.targetname = this._.camelize(this._.slugify(this._.humanize(this.targetname)));
+        this.targetname = this.camelize(this.targetname);
         this.clientFolder = this.getClientFolder();
         this.ionic = this.config.get('ionic');
         this.famous = this.config.get('famous');

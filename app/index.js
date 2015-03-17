@@ -24,8 +24,9 @@ var AppGenerator = Class.extend({
             type: 'Boolean',
             defaults: false
         });
+
         this.appname = this.appname || path.basename(process.cwd());
-        this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
+        this.appname = this.camelize(this.appname);
 
     },
 
@@ -64,6 +65,23 @@ var AppGenerator = Class.extend({
             var done = this.async();
 
             var prompts = [{
+                name: 'filenameCase',
+                type: 'list',
+                message: 'Would you like to use camelCase or snake-case for your filenames?',
+                choices: [{
+                    name: 'camelCase',
+                    value: 'camel'
+                }, {
+                    name: 'snake-case',
+                    value: 'snake'
+                }],
+                default: 'camel'
+            }, {
+                name: 'filenameSuffix',
+                type: 'confirm',
+                message: 'Would you like to use johnpappa style filename suffixes? (i.e. "homeCtrl.controller.js" vs "homeCtrl.js")',
+                default: false
+            }, {
                 name: 'clientFolder',
                 message: 'How would you like to name the client folder?',
                 default: 'client'
@@ -100,6 +118,7 @@ var AppGenerator = Class.extend({
             }];
 
             this.prompt(prompts, function(answers) {
+                this.filenameCase = answers.filenameCase;
                 this.clientFolder = answers.clientFolder;
                 this.bootstrap = answers.bootstrap;
                 this.ionic = answers.ionic;
@@ -109,6 +128,7 @@ var AppGenerator = Class.extend({
                 this.material = answers.material;
                 this.bootstrap = answers.bootstrap;
                 this.mobile = this.options.mobile;
+                this.filenameSuffix = answers.filenameSuffix;
 
                 this.composeWith('sublime:gulps', {
                     options: {
@@ -126,7 +146,7 @@ var AppGenerator = Class.extend({
                         test: true,
                         style: true,
                         dist: true
-                        // pass answers.material
+                            // pass answers.material
                     }
                 });
                 done();
@@ -171,6 +191,8 @@ var AppGenerator = Class.extend({
     },
 
     configuring: function() {
+        this.config.set('filenameCase', this.filenameCase);
+        this.config.set('filenameSuffix', this.filenameSuffix);
         this.config.set('appname', this.appname);
         this.config.set('clientFolder', this.clientFolder);
         this.config.set('ionic', this.ionic);
