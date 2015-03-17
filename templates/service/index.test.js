@@ -13,7 +13,7 @@ describe(app.name, function() {
                 angular.mock.module(app.name);
             });
 <% if(servicetype === 'provider') { %>
-            beforeEach(module([app.name + '.' + servicename + 'Provider', function (serviceNameProvider) {
+            beforeEach(angular.mock.module([app.name + '.' + servicename + 'Provider', function(serviceNameProvider) {
                 // Configure the provider
                 serviceNameProvider.init();
             }]));
