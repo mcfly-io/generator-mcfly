@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
-<body <% if (ionic) { %>class="platform-cordova"<% } %>>
+<body <% if (ionic) { %>class="platform-cordova"<% } %><% if (material) { %>layout="column" flex<% } %>>
     <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
-    <ui-view></ui-view>
+    <ui-view <% if (material) { %>layout="column" flex<% } %>></ui-view>
     <% if (mobile) { %><script src="cordova.js"></script><% } %>
     <script src="scripts/bundle.js"></script>
 </body>

@@ -243,6 +243,37 @@ describe('angular-famous-ionic:module', function() {
 
         });
 
+        it('should include angular-material with material', function(done) {
+            testHelper.runGenerator('module')
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true
+                })
+                .withPrompt({
+                    modulename: modulename
+                })
+                .on('ready', function(generator) {
+                    generator.clientFolder = clientFolder;
+                    generator.log = sinon.spy();
+
+                    generator.afterInitializing = function() {
+                        generator.material = true;
+                        generator.ngModules = utils.getNgModules(generator);
+                    };
+                    generator.mkdir(clientFolder + '/scripts/toto');
+                    generator.mkdir(clientFolder + '/scripts/tata');
+                })
+                .on('end', function() {
+                    var file = clientFolder + '/scripts/' + modulename + '/index.js';
+                    var body = testHelper.readTextFile(file);
+                    assert(_.contains(body, 'require(\'angular-material\');'));
+                    assert(_.contains(body, '\'ngMaterial\''));
+                    done();
+                });
+
+        });
+
         it('should include ngCordova', function(done) {
             testHelper.runGenerator('module')
                 .withOptions({
@@ -274,7 +305,7 @@ describe('angular-famous-ionic:module', function() {
 
         });
 
-        it('should include famous-angular and angular-ionic with famous, ionic and ngCordova', function(done) {
+        it('should include famous-angular and angular-ionic with famous, ionic, ngCordova, and material', function(done) {
             testHelper.runGenerator('module')
                 .withOptions({
                     'skip-install': true,
@@ -292,6 +323,7 @@ describe('angular-famous-ionic:module', function() {
                         generator.famous = true;
                         generator.ionic = true;
                         generator.ngCordova = true;
+                        generator.material = true;
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
@@ -305,6 +337,7 @@ describe('angular-famous-ionic:module', function() {
                     assert(_.contains(body, 'require(\'famous-angular\');'));
                     assert(_.contains(body, 'require(\'angular-ionic\');'));
                     assert(_.contains(body, 'require(\'ngCordova\');'));
+                    assert(_.contains(body, 'require(\'angular-material\');'));
                     assert(_.contains(body, '\'ionic\''));
                     assert(_.contains(body, '\'famous.angular\''));
                     done();
@@ -331,6 +364,7 @@ describe('angular-famous-ionic:module', function() {
                         generator.famous = true;
                         generator.ionic = true;
                         generator.ngCordova = true;
+                        generator.material = true;
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
@@ -370,6 +404,7 @@ describe('angular-famous-ionic:module', function() {
                         generator.famous = true;
                         generator.ionic = true;
                         generator.ngCordova = true;
+                        generator.material = true;
                         generator.ngModules = utils.getNgModules(generator);
 
                     };

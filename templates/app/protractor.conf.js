@@ -4,6 +4,7 @@ exports.config = {
     //seleniumAddress: 'http://localhost:4444/wd/hub',
     //seleniumServerJar: './node_modules/gulp-protractor/node_modules/protractor/selenium/selenium-server-standalone-2.43.1.jar',
     //specs: ['spec.js'],
+    framework: 'jasmine2',
     capabilities: {
         browserName: 'phantomjs',
         version: '',
@@ -13,7 +14,8 @@ exports.config = {
     jasmineNodeOpts: {
         showColors: true,
         silent: true,
-        defaultTimeoutInterval: 30000
+        defaultTimeoutInterval: 30000,
+        print: function() {}
     },
     onPrepare: function() {
         browser.driver.manage().window().setSize(1600, 800);

@@ -22,7 +22,7 @@ describe(app.name, function() {
                 expect(this.filter).toBeDefined();
             });
 
-            it('should be defined', function() {
+            it('should filter', function() {
                 var text = 'This Is My Text';
                 expect(this.filter(text)).toBe(text.toLowerCase());
             });

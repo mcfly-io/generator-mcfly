@@ -83,6 +83,11 @@ var AppGenerator = Class.extend({
                 message: 'Would you like to include ngCordova?',
                 default: true
             }, {
+                name: 'material',
+                type: 'confirm',
+                message: 'Would you like to include angular-material?',
+                default: true
+            }, {
                 name: 'fontawesome',
                 type: 'confirm',
                 message: 'Would you like to include font-awesome?',
@@ -101,6 +106,7 @@ var AppGenerator = Class.extend({
                 this.famous = answers.famous;
                 this.ngCordova = answers.ngCordova;
                 this.fontawesome = answers.fontawesome;
+                this.material = answers.material;
                 this.bootstrap = answers.bootstrap;
                 this.mobile = this.options.mobile;
 
@@ -111,6 +117,7 @@ var AppGenerator = Class.extend({
                         famous: answers.famous,
                         fontawesome: answers.fontawesome,
                         bootstrap: answers.bootstrap,
+                        material: answers.material,
                         lint: true,
                         serve: true,
                         browserify: true,
@@ -119,6 +126,7 @@ var AppGenerator = Class.extend({
                         test: true,
                         style: true,
                         dist: true
+                        // pass answers.material
                     }
                 });
                 done();
@@ -170,6 +178,7 @@ var AppGenerator = Class.extend({
         this.config.set('ngCordova', this.ngCordova);
         this.config.set('fontawesome', this.fontawesome);
         this.config.set('bootstrap', this.bootstrap);
+        this.config.set('material', this.material);
         this.config.forceSave();
     },
 

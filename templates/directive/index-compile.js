@@ -11,7 +11,7 @@ module.exports = function(app) {
         <%= directivename %>Ctrl.directivename = directivename;
     };
     controller.$inject = controllerDeps;
-    
+
     /*eslint-disable consistent-this */
 
     // directive
