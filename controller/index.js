@@ -12,7 +12,7 @@ var ControllerGenerator = Class.extend({
             required: false
         });
 
-        this.controllername = this._.camelize(this._.slugify(this._.humanize(this.controllername)));
+        this.controllername = this.camelize(this.controllername);
     },
 
     initializing: function() {

@@ -13,9 +13,9 @@ var ServiceGenerator = Class.extend({
         var that = this;
         this.on('end', function() {
             var done = that.async();
-            utils.injectComponent(path.join(that.getClientScriptFolder(), that.modulename, 'services'))
+            utils.injectComponent(path.join(that.getClientScriptFolder(), that.moduleFolder, 'services'))
                 .then(function() {
-                    return utils.injectSubComponent(that, path.join(that.getClientScriptFolder(), that.modulename));
+                    return utils.injectSubComponent(that, path.join(that.getClientScriptFolder(), that.moduleFolder));
                 })
                 .then(function() {
                     done();
@@ -39,8 +39,9 @@ var ServiceGenerator = Class.extend({
             type: String,
             required: false
         });
-        this.modulename = this._.camelize(this._.slugify(this._.humanize(this.modulename)));
-        this.servicename = this._.camelize(this._.slugify(this._.humanize(this.servicename)));
+        this.modulename = this.camelize(this.modulename);
+        this.moduleFolder = this.casify(this.modulename);
+        this.servicename = this.camelize(this.servicename);
 
         this.servicetype = this.options.servicetype || this.options.type || 'factory';
 
@@ -126,6 +127,8 @@ var ServiceGenerator = Class.extend({
 
         this.prompt(prompts, function(answers) {
             that.modulename = that.modulename || answers.modulename;
+            that.modulename = that.camelize(that.modulename);
+            that.moduleFolder = that.casify(that.modulename);
             that.servicename = that.servicename || answers.servicename;
             done();
         });
@@ -139,14 +142,16 @@ var ServiceGenerator = Class.extend({
     writing: function() {
         var done = this.async();
         this.sourceRoot(path.join(__dirname, '../templates/service'));
-        var targetDir = path.join(this.clientFolder, 'scripts', this.modulename, 'services');
+        var targetDir = path.join(this.clientFolder, 'scripts', this.moduleFolder, 'services');
         this.mkdir(targetDir);
 
         // make sure the services/index.js exist
         utils.createIndexFile(this, '../component', targetDir);
+        var filename = this.casify(this.servicename);
+        filename = this.suffixify(filename, 'service');
 
-        this.template('index.' + this.servicetype + '.js', path.join(targetDir, this.servicename + '.js'));
-        this.template('index.test.js', path.join(targetDir, this.servicename + '.test.js'));
+        this.template('index.' + this.servicetype + '.js', path.join(targetDir, filename + '.js'));
+        this.template('index.test.js', path.join(targetDir, filename + '.test.js'));
         done();
 
     },

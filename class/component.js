@@ -17,9 +17,9 @@ var ComponentGenerator = Class.extend({
 
         that.on('end', function() {
             var done = that.async();
-            utils.injectComponent(path.join(that.getClientScriptFolder(), that.modulename, that.localFolder))
+            utils.injectComponent(path.join(that.getClientScriptFolder(), that.moduleFolder, that.localFolder))
                 .then(function() {
-                    return utils.injectSubComponent(that, path.join(that.getClientScriptFolder(), that.modulename));
+                    return utils.injectSubComponent(that, path.join(that.getClientScriptFolder(), that.moduleFolder));
                 })
                 .then(function() {
                     done();
@@ -33,7 +33,8 @@ var ComponentGenerator = Class.extend({
             required: false
         });
 
-        this.modulename = this._.camelize(this._.slugify(this._.humanize(this.modulename)));
+        this.modulename = this.camelize(this.modulename);
+        this.moduleFolder = this.casify(this.modulename);
     },
 
     initializing: function() {
@@ -108,6 +109,8 @@ var ComponentGenerator = Class.extend({
         }];
         this.prompt(prompts, function(answers) {
             that.modulename = that.modulename || answers.modulename;
+            that.modulename = that.camelize(that.modulename);
+            that.moduleFolder = that.casify(that.modulename);
             that[_templateFolder + 'name'] = that[_templateFolder + 'name'] || answers[_templateFolder + 'name'];
             done();
         });
@@ -117,16 +120,16 @@ var ComponentGenerator = Class.extend({
     writing: function() {
         var done = this.async();
         this.sourceRoot(path.join(__dirname, '../templates/' + this.templateFolder));
-        var targetDir = path.join(this.clientFolder, 'scripts', this.modulename, this.localFolder);
+        var targetDir = path.join(this.clientFolder, 'scripts', this.moduleFolder, this.localFolder);
         this.mkdir(targetDir);
 
         // make sure the <component>/index.js exist
         utils.createIndexFile(this, '../component', targetDir);
-
-        this.template('index.js', path.join(targetDir, this[_templateFolder + 'name'] + '.js'));
-        this.template('index.test.js', path.join(targetDir, this[_templateFolder + 'name'] + '.test.js'));
+        var filename = this.casify(this[_templateFolder + 'name']);
+        filename = this.suffixify(filename, _templateFolder);
+        this.template('index.js', path.join(targetDir, filename + '.js'));
+        this.template('index.test.js', path.join(targetDir, filename + '.test.js'));
         done();
-
     }
 
 });

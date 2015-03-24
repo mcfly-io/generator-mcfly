@@ -11,6 +11,7 @@ var globToRegexp = require('glob-to-regexp');
 var Q = require('q');
 var utils = require('../utils.js');
 var subcomponents = require('./subcomponents.js');
+
 /**
  * The `Class` generator has several helpers method to help with creating a new generator.
  *
@@ -22,7 +23,7 @@ var subcomponents = require('./subcomponents.js');
 var ClassGenerator = Base.extend({
 
     /**
-     *  Ctor
+     * Ctor
      *
      * @constructor
      */
@@ -59,6 +60,7 @@ var ClassGenerator = Base.extend({
             type: 'Boolean',
             defaults: false
         });
+
     },
 
     /**
@@ -183,6 +185,56 @@ var ClassGenerator = Base.extend({
         });
 
         return deferred.promise;
+    },
+
+    /**
+     * Clean & camelize a string
+     * @param {String} str - The original string
+     *
+     * @returns {String} - The camelized string
+     */
+    camelize: function(str) {
+        return this._.camelize(this._.slugify(this._.humanize(str)));
+    },
+
+    /**
+     * Clean & dasherize a string
+     * @param {String} str - The original string
+     *
+     * @returns {String} - The dasherized string
+     */
+    dasherize: function(str) {
+        return this._.dasherize(this.camelize(str));
+    },
+
+    /**
+     * Get the string back with the correct file casing as defined by filenameCase
+     * @param {String} str - The original string
+     *
+     * @returns {String} - A string with the correct casing (i.e. camelCase, snake-case)
+     */
+    casify: function(str) {
+        var filenameCase = this.config.get('filenameCase') || 'camel';
+        str = this.camelize(str);
+        if(filenameCase === 'snake') {
+            return this.dasherize(str);
+        }
+        return str;
+    },
+
+    /**
+     * Append the component type suffix if filenameSuffix is set to true in the .yo-rc.json
+     * @param {String} str - The original string
+     * @param {String} suffix - The name of the component's type to append
+     *
+     * @returns {String} - Either str or str with the suffix appended. (i.e. 'homeCtrl' vs 'homeCtrl.controller')
+     */
+    suffixify: function(str, suffix) {
+        var filenameSuffix = this.config.get('filenameSuffix');
+        if(filenameSuffix === true || filenameSuffix === 'true') {
+            return str + '.' + suffix;
+        }
+        return str;
     },
 
     /**
