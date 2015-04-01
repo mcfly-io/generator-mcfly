@@ -146,7 +146,6 @@ var AppGenerator = Class.extend({
                         test: true,
                         style: true,
                         dist: true
-                            // pass answers.material
                     }
                 });
                 done();

@@ -8,6 +8,9 @@ var modulename = 'common';
 var clientFolder = 'www';
 
 describe('angular-famous-ionic:module', function() {
+
+    var end = null;
+
     describe('general test', function() {
         beforeEach(function() {
             this.runGen = testHelper.runGenerator('module')
@@ -53,8 +56,9 @@ describe('angular-famous-ionic:module', function() {
 
             this.runGen
                 .on('ready', function(generator) {
-                    var end = Object.getPrototypeOf(generator).end;
-
+                    if(!end) {
+                        end = Object.getPrototypeOf(generator).end;
+                    }
                     Object.getPrototypeOf(generator).end = function() {
 
                         return end.apply(generator).then(function() {
@@ -517,16 +521,47 @@ describe('angular-famous-ionic:module', function() {
         it('creates files with correct suffix', function(done) {
             this.runGen.on('end', function() {
                 var folder = clientFolder + '/scripts/' + modulename;
-                var file = folder + '/index.module.js';
+                var file = folder + '/index.js';
                 assert.file([
                     file
                 ]);
 
-                assert(this.configGet.calledWith('filenameSuffix'));
+                //assert(this.configGet.notCalledWith('filenameSuffix'));
                 done();
-            }.bind(this));
+            });
 
         });
+
+        it('should inject modules in target file xxx', function(done) {
+
+            this.runGen
+                .on('ready', function(generator) {
+
+                    if(!end) {
+                        end = Object.getPrototypeOf(generator).end;
+                    }
+                    Object.getPrototypeOf(generator).end = function() {
+
+                        return end.apply(generator).then(function() {
+                            ['', '-xxx'].forEach(function(suffix) {
+
+                                var file = clientFolder + '/scripts/main' + suffix + '.js';
+                                var body = testHelper.readTextFile(file);
+
+                                assert(_.contains(body, 'require(\'./common\')(namespace).name'));
+                                assert(_.contains(body, 'require(\'./tata\')(namespace).name'));
+                                assert(_.contains(body, 'require(\'./toto\')(namespace).name'));
+                            });
+                            done();
+
+                        });
+
+                    };
+
+                });
+
+        });
+
     });
 
 });
