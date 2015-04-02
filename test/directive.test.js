@@ -417,6 +417,9 @@ describe('angular-famous-ionic:directive', function() {
                 var file = folder + '/' + filename + '.js';
                 var fileHtml = folder + '/' + filename + '.html';
                 var filetest = folder + '/' + filename + '.test.js';
+                var body = testHelper.readTextFile(file);
+                assert(_.contains(body, 'template: require(\'./' + filename + '.html' + '\'),'), 'template should reference suffix html file name');
+
                 assert.file([
                     file,
                     fileHtml,

@@ -48,7 +48,7 @@ var DirectiveGenerator = Class.extend({
         utils.createIndexFile(this, '../component', targetDir);
         var filename = this.casify(this.directivename);
         filename = this.suffixify(filename, 'directive');
-
+        this.filename = filename; // passing the value to the template
         if(this.compile === true || this.compile === 'true') {
             this.template('index-compile.js', path.join(targetDir, filename + '.js'));
         } else {
