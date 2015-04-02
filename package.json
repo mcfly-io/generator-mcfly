@@ -14,7 +14,6 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "preinstall": "bash ./bin/prepublish.sh",
     "test": "gulp test"
   },
   "files": [
@@ -98,6 +97,6 @@
   },
   "peerDependencies": {
     "yo": ">=1.0.0",
-    "generator-sublime": ">=1.5.9"
+    "generator-sublime": ">=1.5.10"
   }
 }
