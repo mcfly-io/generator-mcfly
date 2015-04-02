@@ -251,6 +251,7 @@ var AppGenerator = Class.extend({
             this.mkdir('test/mocha/helpers');
             this.mkdir('test/e2e');
             this.template('test/e2e/e2e.test.js');
+            this.template('test/_jshintrc', 'test/.jshintrc');
             this.template('test/e2e/_eslintrc', 'test/e2e/.eslintrc');
             this.template('test/mocha/helpers/globals.js', 'test/mocha/helpers/globals.js');
             this.template('test/unit/polyfill.js', 'test/unit/polyfill.js');
