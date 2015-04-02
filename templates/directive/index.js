@@ -25,7 +25,7 @@ module.exports = function(app) {
             controller: controller,
             controllerAs: '<%= directivename %>Ctrl',
             bindToController: true,
-            template: require('./<%= directivename %>.html'),
+            template: require('./<%= filename %>.html'),
             link: function(scope, element, attrs) {
 
             }

@@ -13,48 +13,50 @@ describe('angular-famous-ionic:require', function() {
 
     before(function(done) {
         this.runGen = testHelper.runGenerator('require')
-        //             .withOptions({
-        //                 'skip-install': true,
-        //                 'check-travis': false,
-        //                 'check-git': true
-        //             })
-        .on('ready', function(generator) {
-            generator.clientFolder = clientFolder;
-            generator.log = sinon.spy();
+            //             .withOptions({
+            //                 'skip-install': true,
+            //                 'check-travis': false,
+            //                 'check-git': true
+            //             })
+            .on('ready', function(generator) {
+                generator.clientFolder = clientFolder;
+                generator.log = sinon.spy();
 
-            // set options
-            testHelper.setOptions(generator);
+                // set options
+                testHelper.setOptions(generator);
 
-            suffixes.forEach(function(suffix) {
-                generator.suffix = suffix;
-                generator.mobile = false;
-                generator.template('../../templates/target/index.html', clientFolder + '/index' + suffix + '.html');
-                generator.template('../../templates/target/scripts/main.js', clientFolder + '/scripts/main' + suffix + '.js');
+                suffixes.forEach(function(suffix) {
+                    generator.suffix = suffix;
+                    generator.mobile = false;
+                    generator.template('../../templates/target/index.html', clientFolder + '/index' + suffix + '.html');
+                    generator.template('../../templates/target/scripts/main.js', clientFolder + '/scripts/main' + suffix + '.js');
 
-            });
-
-            modules.forEach(function(module) {
-                generator.modulename = module;
-                generator.mkdir(clientFolder + '/scripts/' + module);
-                generator.template('../../templates/module/index.js', clientFolder + '/scripts/' + module + '/index.js');
-                subcomponents.forEach(function(component) {
-                    var singularComponent = component.substring(0, component.length - 1);
-                    generator.template('../../templates/component/index.js', clientFolder + '/scripts/' + module + '/' + component + '/index.js');
-                    files.forEach(function(index) {
-                        // building the name of the component expected by the template
-                        generator[singularComponent + 'name'] = singularComponent + index;
-                        // generating the template
-                        generator.template('../../templates/' + (singularComponent === 'service' ? singularComponent + '/index.service.js' : singularComponent + '/index.js'), clientFolder + '/scripts/' + module + '/' + component + '/' + index + '.js');
-                    });
                 });
 
-            });
+                modules.forEach(function(module) {
+                    generator.modulename = module;
+                    generator.mkdir(clientFolder + '/scripts/' + module);
+                    generator.template('../../templates/module/index.js', clientFolder + '/scripts/' + module + '/index.js');
+                    subcomponents.forEach(function(component) {
+                        var singularComponent = component.substring(0, component.length - 1);
+                        generator.template('../../templates/component/index.js', clientFolder + '/scripts/' + module + '/' + component + '/index.js');
+                        files.forEach(function(index) {
+                            // building the name of the component expected by the template
+                            generator[singularComponent + 'name'] = singularComponent + index;
+                            // building the filename
+                            generator.filename = generator[singularComponent + 'name'];
+                            // generating the template
+                            generator.template('../../templates/' + (singularComponent === 'service' ? singularComponent + '/index.service.js' : singularComponent + '/index.js'), clientFolder + '/scripts/' + module + '/' + component + '/' + index + '.js');
+                        });
+                    });
 
-        }).on('end', function() {
-            setTimeout(function() {
-                done();
-            }, 300);
-        });
+                });
+
+            }).on('end', function() {
+                setTimeout(function() {
+                    done();
+                }, 300);
+            });
     });
 
     //     it('creates files', function(done) {
