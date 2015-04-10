@@ -12,20 +12,21 @@
 This generator will scaffold for you an application using angularjs, browserify, and either ionic framwork or famo.us (even both).
 
 The project has the following capabilities:
-* angularjs best pratices (feature folder structure)
-* SASS enabled
+* Angular best pratices (feature folder structure)
+* Sass enabled
 * jshint, jscsc, eslint enabled (so you shouldn't have any typo left in your js files !)
-* karma configured with browserify including code coverage
-* browserSync
+* Karma configured with Browserify including Code Coverage
+* BrowserSync
 
 
 > **NOTE:**   
-> This generator is using generator-sublime to scaffold common dot files (.jshintrc, .eslintrc, etc...).   
+> This generator is using `generator-sublime` to scaffold common dot files (.jshintrc, .eslintrc, etc...).   
 > Check it out https://www.npmjs.org/package/generator-sublime
 
 ## Prerequisites
 In order to get the best experience with this generator, you have to install a couple of globals npm packages.   
 To do so you can execute, after the generator has runned, the following command:
+
 ```bash
 ./bin/prepublish.sh
 ```
