@@ -36,7 +36,6 @@
             "jadeify",
             "cssify",
             "browserify-shim",
-            "deamdify",
             "brfs"
         ]
     },
