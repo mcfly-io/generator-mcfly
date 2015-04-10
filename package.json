@@ -1,6 +1,6 @@
 {
   "name": "generator-angular-famous-ionic",
-  "version": "1.3.16",
+  "version": "1.3.17",
   "description": "Yeoman generator for scaffolding an app using angularjs browserify and famous",
   "license": "BSD",
   "main": "app/index.js",
