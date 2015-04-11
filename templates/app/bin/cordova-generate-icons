@@ -43,19 +43,29 @@ androidConvertIcon
 function iosConvertIcon() {
     eval mkdir -p "$output/ios/icons"
     $convert -resize 29x29 "$output/ios/icons/icon-small.png"
-    $convert -resize 40x40 "$output/ios/icons/icon-40.png"
-    $convert -resize 50x50 "$output/ios/icons/icon-50.png"
-    $convert -resize 57x57 "$output/ios/icons/icon.png"
     $convert -resize 58x58 "$output/ios/icons/icon-small@2x.png"
-    $convert -resize 60x60 "$output/ios/icons/icon-60.png"
-    $convert -resize 72x72 "$output/ios/icons/icon-72.png"
-    $convert -resize 76x76 "$output/ios/icons/icon-76.png"
+    $convert -resize 87x87 "$output/ios/icons/icon-small@3x.png"
+    
+    $convert -resize 40x40 "$output/ios/icons/icon-40.png"
     $convert -resize 80x80 "$output/ios/icons/icon-40@2x.png"
+    $convert -resize 120x120 "$output/ios/icons/icon-40@3x.png"
+    
+    $convert -resize 50x50 "$output/ios/icons/icon-50.png"
     $convert -resize 100x100 "$output/ios/icons/icon-50@2x.png"
+    
+    $convert -resize 57x57 "$output/ios/icons/icon.png"
     $convert -resize 114x114 "$output/ios/icons/icon@2x.png"
+
+    $convert -resize 60x60 "$output/ios/icons/icon-60.png"
     $convert -resize 120x120 "$output/ios/icons/icon-60@2x.png"
+    $convert -resize 180x180 "$output/ios/icons/icon-60@3x.png"
+    
+    $convert -resize 72x72 "$output/ios/icons/icon-72.png"
     $convert -resize 144x144 "$output/ios/icons/icon-72@2x.png"
+    
+    $convert -resize 76x76 "$output/ios/icons/icon-76.png"
     $convert -resize 152x152 "$output/ios/icons/icon-76@2x.png"
+  
     $convert -resize 512x512 "$output/ios/icons/iTunesArtwork.png"
     $convert -resize 1024x1024 "$output/ios/icons/iTunesArtwork@2x.png"
 
