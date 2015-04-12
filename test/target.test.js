@@ -241,7 +241,7 @@ describe('angular-famous-ionic:target', function() {
             this.runGen.on('end', function() {
                 var folder = clientFolder;
                 assert.file([
-                    folder + '/cordova/' + targetname + '/hooks' + '/after_platform_add/010_install_plugins.js',
+                    folder + '/cordova/' + targetname + '/hooks' + '/before_platform_add/010_install_plugins.js',
                     folder + '/cordova/' + targetname + '/hooks' + '/after_prepare/010_add_platform_class.js'
                 ]);
 

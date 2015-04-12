@@ -151,7 +151,7 @@ describe('angular-famous-ionic:app', function() {
                     clientFolder + '/images',
                     clientFolder + '/icons',
                     clientFolder + '/fonts',
-                    clientFolder + '/cordova/' + 'app' + '/hooks' + '/after_platform_add/010_install_plugins.js',
+                    clientFolder + '/cordova/' + 'app' + '/hooks' + '/before_platform_add/010_install_plugins.js',
                     clientFolder + '/cordova/' + 'app' + '/hooks' + '/after_prepare/010_add_platform_class.js',
                     clientFolder + '/config.xml',
                     'test/e2e/e2e.test.js',

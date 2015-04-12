@@ -49,14 +49,14 @@ var deleteFolderRecursive = function(strPath) {
 function puts(error, stdout, stderr) {
     sys.puts(stdout);
 }
-var subDirPlugins = getDirectories(dirPlugins);
+// var subDirPlugins = getDirectories(dirPlugins);
 
-subDirPlugins.forEach(function(dir) {
-    deleteFolderRecursive(path.join(dirPlugins, dir));
-});
+// subDirPlugins.forEach(function(dir) {
+//     deleteFolderRecursive(path.join(dirPlugins, dir));
+// });
 
 pluginlist.forEach(function(plug) {
-    exec('cordova plugin add ' + plug, puts);
+    exec('cordova plugin remove ' + plug, puts);
 });
 
 pluginlist.forEach(function(plug) {
