@@ -59,9 +59,5 @@ pluginlist.forEach(function(plug) {
     exec('cordova plugin add ' + plug, puts);
 });
 
-pluginlist.forEach(function(plug) {
-    exec('cordova plugin add ' + plug, puts);
-});
-
 // copy the cordova icons and splashes in the existing platforms
 exec('gulp image:cordova', puts);
