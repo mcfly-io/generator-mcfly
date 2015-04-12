@@ -38,7 +38,7 @@ This will install, among others, the following packages globally:
 * cordova
 * ionic (cli) - A good cordova wrapper
 
-Feel free to twick `./bin/prepublish.sh` to add your own requirements.
+Feel free to tweak `./bin/prepublish.sh` to add your own requirements.
 
 ## Usage
 
