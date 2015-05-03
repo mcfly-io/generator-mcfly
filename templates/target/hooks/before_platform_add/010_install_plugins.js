@@ -12,6 +12,10 @@ var pluginlist = [
     'org.apache.cordova.device-orientation',
     'org.apache.cordova.geolocation',
     'org.apache.cordova.console',
+    'org.apache.cordova.file-transfer',
+    'org.apache.cordova.camera',
+    'org.apache.cordova.media-capture',
+    'org.apache.cordova.geolocation',
     'com.ionic.keyboard'
 ];
 
@@ -55,9 +59,9 @@ function puts(error, stdout, stderr) {
 //     deleteFolderRecursive(path.join(dirPlugins, dir));
 // });
 
-pluginlist.forEach(function(plug) {
-    exec('cordova plugin remove ' + plug, puts);
-});
+//pluginlist.forEach(function(plug) {
+//    exec('cordova plugin remove ' + plug, puts);
+//});
 
 pluginlist.forEach(function(plug) {
     exec('cordova plugin add ' + plug, puts);

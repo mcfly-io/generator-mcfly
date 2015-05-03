@@ -68,6 +68,10 @@ Add some content to client/index.html : <h2 ng-controller="main.common.hello as 
 gulp browsersync
 ```
 
+> **NOTE:**      
+> `gulp browsersync` accepts an option --no-browser if you do not want to automatically open a browser
+
+
 ## Upgrade
 I like to publish new versions as soon as possible. So here is the upgrade process.
 
@@ -408,6 +412,12 @@ If you don't pass `--platform` it will choose the value from `constants.js` (`co
 When you are done with testing the app in the browser or the emulator, you can attach your phone device via an USB cable and run: 
 ```bash
 gulp cordova:run
+```
+
+If you want to upload your app to testfairy, first make sure you fill in your api_key for testfairy in `gulp_tasks/common/constants.js`,    
+and then simply run
+```bash
+gulp cordova:testfairy
 ```
 
 ## Testing
