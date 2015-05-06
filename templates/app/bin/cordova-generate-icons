@@ -23,7 +23,7 @@ set -x
 convert="convert $image -background none"
 
 function androidConvertIcon() {
-    drawables=drawable,drawable-ldpi,drawable-mdpi,drawable-hdpi,drawable-xhdpi
+    drawables=drawable,drawable-ldpi,drawable-mdpi,drawable-hdpi,drawable-xhdpi,drawable-xxhdpi,drawable-xxxhdpi
     eval mkdir -p "$output/android/{$drawables}"
 
     $convert -resize 36x36 "$output/android/drawable-ldpi/icon.png"
@@ -31,6 +31,8 @@ function androidConvertIcon() {
     $convert -resize 72x72 "$output/android/drawable-hdpi/icon.png"
     $convert -resize 96x96 "$output/android/drawable-xhdpi/icon.png"
     $convert -resize 96x96 "$output/android/drawable/icon.png"
+    $convert -resize 144x144 "$output/android/drawable-xxhdpi/icon.png"
+    $convert -resize 192x192 "$output/android/drawable-xxxhdpi/icon.png"
 
     function androidCopyIcon() {
         androidOutput=$(find . -type d | grep "platforms/android/res$")
