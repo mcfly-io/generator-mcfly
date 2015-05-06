@@ -23,14 +23,18 @@ set -x
 convert="convert $1 -background $bgcolor -gravity center"
 
 function androidConvertSplash() {
-    drawables=drawable-land-ldpi,drawable-land-mdpi,drawable-land-hdpi,drawable-land-xhdpi,drawable-port-ldpi,drawable-port-mdpi,drawable-port-hdpi,drawable-port-xhdpi
+    drawables=drawable-land-ldpi,drawable-land-mdpi,drawable-land-hdpi,drawable-land-xhdpi,drawable-land-xxhdpi,drawable-land-xxxhdpi,drawable-port-ldpi,drawable-port-mdpi,drawable-port-hdpi,drawable-port-xhdpi,drawable-port-xxhdpi,drawable-port-xxxhdpi
     eval mkdir -p "$output/android/{$drawables}"
 
-    $convert -resize 1280x1280 -extent 720x1280 "$output/android/drawable-port-xhdpi/screen.png"
-    $convert -resize 800x800 -extent 480x800 "$output/android/drawable-port-hdpi/screen.png"
-    $convert -resize 480x480 -extent 320x480 "$output/android/drawable-port-mdpi/screen.png"
-    $convert -resize 320x320 -extent 200x320 "$output/android/drawable-port-ldpi/screen.png"
+    $convert -resize 1280x1280 -extent 1280x1920 "$output/android/drawable-port-xxxhdpi/screen.png"
+    $convert -resize 960x960 -extent 960x1600 "$output/android/drawable-port-xxhdpi/screen.png"
+    $convert -resize 720x720 -extent 720x1280 "$output/android/drawable-port-xhdpi/screen.png"
+    $convert -resize 480x480 -extent 480x800 "$output/android/drawable-port-hdpi/screen.png"
+    $convert -resize 320x320 -extent 320x480 "$output/android/drawable-port-mdpi/screen.png"
+    $convert -resize 200x200 -extent 200x320 "$output/android/drawable-port-ldpi/screen.png"
 
+    $convert -resize 1920x1920 -extent 1920x1280 "$output/android/drawable-land-xxxhdpi/screen.png"
+    $convert -resize 1600x1600 -extent 1600x960 "$output/android/drawable-land-xxhdpi/screen.png"
     $convert -resize 1280x1280 -extent 1280x720 "$output/android/drawable-land-xhdpi/screen.png"
     $convert -resize 800x800 -extent 800x480 "$output/android/drawable-land-hdpi/screen.png"
     $convert -resize 480x480 -extent 480x320 "$output/android/drawable-land-mdpi/screen.png"
