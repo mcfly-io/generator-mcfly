@@ -227,6 +227,7 @@ var AppGenerator = Class.extend({
             this.mkdir(this.clientFolder);
             this.mkdir(this.clientFolder + '/styles');
             this.mkdir(this.clientFolder + '/scripts');
+            this.mkdir('srcmaps');
             this.mkdir(this.clientFolder + '/images/app');
             this.mkdir(this.clientFolder + '/icons/app');
             this.mkdir(this.clientFolder + '/fonts/app');
