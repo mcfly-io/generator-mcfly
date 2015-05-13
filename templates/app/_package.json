@@ -20,6 +20,8 @@
         "angular-mocks": "./bower_components/angular-mocks/angular-mocks.js",
         "angular-ui-router": "./bower_components/angular-ui-router/release/angular-ui-router.js",
         "angular-animate": "./bower_components/angular-animate/angular-animate.js",
+        "angular-resource": "./bower_components/angular-resource/angular-resource.js",
+        "lbServices": "./client/scripts/lbServices.js",
         "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.js"<% if(ionic) { %>,
         "ionic": "./bower_components/ionic/release/js/ionic.js",
         "angular-ionic": "./bower_components/ionic/release/js/ionic-angular.js"<% } %><% if(famous) { %>,
@@ -47,6 +49,16 @@
             "exports": "angular",
             "depends": [
                 "angular"
+            ]
+        },
+        "angular-resource": {
+            "depends": [
+                "angular"
+            ]
+        },
+        "lbServices": {
+            "depends": [
+            "angular-resource"
             ]
         },
         "angular-ui-router": {
