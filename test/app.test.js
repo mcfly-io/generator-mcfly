@@ -48,6 +48,7 @@ describe('angular-famous-ionic:app', function() {
                     clientFolder + '/images',
                     clientFolder + '/icons',
                     clientFolder + '/fonts',
+                    'srcmaps',
                     'test/.jshintrc',
                     'test/e2e/e2e.test.js',
                     'test/e2e/.eslintrc',
