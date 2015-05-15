@@ -25,6 +25,10 @@ describe(app.name, function() {
                 expect(this.controller).toBeDefined();
             });
 
+            it('should expose controllername', function() {
+                expect(this.controller.controllername).toBe(app.name + '.' + controllername);
+            });
+
         });
     });
 });
