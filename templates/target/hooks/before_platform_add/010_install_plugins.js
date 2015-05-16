@@ -16,7 +16,11 @@ var pluginlist = [
     'org.apache.cordova.camera',
     'org.apache.cordova.media-capture',
     'org.apache.cordova.geolocation',
-    'com.ionic.keyboard'
+    'org.apache.cordova.splashscreen',
+    'org.apache.cordova.statusbar',
+    'org.apache.cordova.globalization',
+    'com.ionic.keyboard',
+    'https://github.com/testfairy/testfairy-cordova-plugin'
 ];
 
 // no need to configure below
@@ -53,15 +57,6 @@ var deleteFolderRecursive = function(strPath) {
 function puts(error, stdout, stderr) {
     sys.puts(stdout);
 }
-// var subDirPlugins = getDirectories(dirPlugins);
-
-// subDirPlugins.forEach(function(dir) {
-//     deleteFolderRecursive(path.join(dirPlugins, dir));
-// });
-
-//pluginlist.forEach(function(plug) {
-//    exec('cordova plugin remove ' + plug, puts);
-//});
 
 pluginlist.forEach(function(plug) {
     exec('cordova plugin add ' + plug, puts);
