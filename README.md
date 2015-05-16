@@ -19,8 +19,15 @@ The project has the following capabilities:
 * BrowserSync
 
 
+See it in action here:   
+[![Building a native like interface with Famous](http://img.youtube.com/vi/L56RnM6VI-w/0.jpg)](http://www.youtube.com/watch?v=L56RnM6VI-w)
+
+and here:   
+[![Building a native like interface with Ionic](http://img.youtube.com/vi/EgRh09CO_rk/0.jpg)](http://www.youtube.com/watch?v=EgRh09CO_rk)
+
+
 > **NOTE:**   
-> This generator is using `generator-sublime` to scaffold common dot files (.jshintrc, .eslintrc, etc...).   
+> This generator is using [generator-sublime](https://github.com/thaiat/generator-sublime) to scaffold common dot files (.jshintrc, .eslintrc, etc...).   
 > Check it out https://www.npmjs.org/package/generator-sublime
 
 ## Prerequisites
