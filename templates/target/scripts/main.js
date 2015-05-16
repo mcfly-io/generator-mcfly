@@ -21,6 +21,9 @@ var run = function($ionicPlatform, $window) {
         if($window.StatusBar) {
             $window.StatusBar.styleDefault();
         }
+        if($window.TestFairy) {
+            $window.TestFairy.begin('');
+        }
     });
 };
 <% } else { %>
