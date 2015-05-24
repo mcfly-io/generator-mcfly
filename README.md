@@ -22,6 +22,7 @@ The project has the following capabilities:
 * Browser-sync
 * TestFairy publishing
 
+It also supports ES6 by using the babelify transform
 
 See it in action here:   
 [![Building a native like interface with Famous](http://img.youtube.com/vi/L56RnM6VI-w/0.jpg)](http://www.youtube.com/watch?v=L56RnM6VI-w)
