@@ -38,7 +38,8 @@
             "jadeify",
             "cssify",
             "browserify-shim",
-            "brfs"
+            "brfs",
+            ["babelify", { "optional": ["es7.asyncFunctions"], "only": "./<%=clientFolder%>"}]
         ]
     },
     "browserify-shim": {
