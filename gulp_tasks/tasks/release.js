@@ -234,7 +234,7 @@ gulp.task('release:createRelease', false, function(cb) {
 });
 
 gulp.task('delay', false, function(cb) {
-    setTimeout(cb, 1000);
+    setTimeout(cb, 3000);
 });
 
 gulp.task('release:full', 'Publish a new release version on GitHub and upload a changelog.', function() {
