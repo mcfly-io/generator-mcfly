@@ -19,6 +19,7 @@ var pluginlist = [
     'org.apache.cordova.splashscreen',
     'org.apache.cordova.statusbar',
     'org.apache.cordova.globalization',
+    'org.apache.cordova.inappbrowser',
     'com.ionic.keyboard',
     'https://github.com/testfairy/testfairy-cordova-plugin'
 ];
