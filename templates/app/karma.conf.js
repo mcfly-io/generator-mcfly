@@ -19,6 +19,9 @@ module.exports = function(config) {
     var browserify = {
         debug: true,
         transform: [
+            ['babelify', {
+                'only': ['./<%=clientFolder%>']
+            }],
             [{
                 ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**']
             }, 'browserify-istanbul']
