@@ -9,17 +9,10 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "1.3.16",
-    "angular-mocks": "1.3.16",
-    "angular-animate": "1.3.16",
-    "angular-sanitize": "1.3.16",
-    "angular-resource": "1.3.16",
-    "angular-ui-router": "0.2.15"<% if (ionic) { %>,
+    "marked":"0.3.3"<% if (ionic) { %>,
     "ionic":"1.0.0"<% } %><% if (famous) { %>,
-    "famous-angular": "0.5.0"<% } %><% if (ngCordova) { %>,
-    "ngCordova": "0.1.17-alpha"<% } %><% if (fontawesome) { %>,
+    "famous-angular": "0.5.0"<% } %><% if (fontawesome) { %>,
     "font-awesome": "4.3.0"<% } %><% if (bootstrap) { %>,
-    "angular-bootstrap": "0.13.0",
     "bootstrap": "3.3.4"<% } %><% if (material) { %>,
     "angular-material": "0.9.8-rc1"<% } %>
   },
