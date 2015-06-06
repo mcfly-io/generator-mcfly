@@ -2,6 +2,7 @@
 var path = require('path');
 var utils = require('../utils');
 var Class = require('../class/component.js')('directives', 'directive');
+var _ = require('lodash');
 
 var DirectiveGenerator = Class.extend({
     constructor: function() {
@@ -39,6 +40,10 @@ var DirectiveGenerator = Class.extend({
     },
 
     writing: function() {
+        if(!_.contains(this.clientModules, this.modulename)) {
+            this.log(this.utils.chalk.red('Error: ') + 'The module name ' + this.utils.chalk.yellow(this.modulename) + ' does not exist');
+            return;
+        }
         var done = this.async();
         this.sourceRoot(path.join(__dirname, '../templates/' + 'directive'));
         var targetDir = path.join(this.clientFolder, 'scripts', this.moduleFolder, 'directives');

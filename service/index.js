@@ -140,6 +140,10 @@ var ServiceGenerator = Class.extend({
     },
 
     writing: function() {
+        if(!_.contains(this.clientModules, this.modulename)) {
+            this.log(this.utils.chalk.red('Error: ') + 'The module name ' + this.utils.chalk.yellow(this.modulename) + ' does not exist');
+            return;
+        }
         var done = this.async();
         this.sourceRoot(path.join(__dirname, '../templates/service'));
         var targetDir = path.join(this.clientFolder, 'scripts', this.moduleFolder, 'services');

@@ -1,3 +1,4 @@
+/*eslint no-process-exit:0*/
 'use strict';
 
 var path = require('path');
@@ -109,6 +110,7 @@ var ComponentGenerator = Class.extend({
         }];
         this.prompt(prompts, function(answers) {
             that.modulename = that.modulename || answers.modulename;
+
             that.modulename = that.camelize(that.modulename);
             that.moduleFolder = that.casify(that.modulename);
             that[_templateFolder + 'name'] = that[_templateFolder + 'name'] || answers[_templateFolder + 'name'];
@@ -118,6 +120,10 @@ var ComponentGenerator = Class.extend({
     },
 
     writing: function() {
+        if(!_.contains(this.clientModules, this.modulename)) {
+            this.log(this.utils.chalk.red('Error: ') + 'The module name ' + this.utils.chalk.yellow(this.modulename) + ' does not exist');
+            return;
+        }
         var done = this.async();
         this.sourceRoot(path.join(__dirname, '../templates/' + this.templateFolder));
         var targetDir = path.join(this.clientFolder, 'scripts', this.moduleFolder, this.localFolder);
