@@ -98,7 +98,7 @@ var AppGenerator = Class.extend({
             }, {
                 name: 'ngCordova',
                 type: 'confirm',
-                message: 'Would you like to include ngCordova?',
+                message: 'Would you like to include ng-cordova?',
                 default: true
             }, {
                 name: 'material',

@@ -136,11 +136,11 @@ var github = new GitHubApi({
     timeout: 0
 });
 
-var gitGetEmailAsync = Q.nbind(git.exec, git, {
+var gitGetEmailAsync = Q.denodeify(git.exec, {
     args: 'config --get user.email',
     quiet: true
 });
-var githubUsernameAsync = Q.nfbind(githubUsername);
+var githubUsernameAsync = Q.denodeify(githubUsername);
 
 var inquireAsync = function(result) {
     var deferred = Q.defer();
