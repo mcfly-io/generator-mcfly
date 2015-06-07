@@ -6,7 +6,6 @@ var mocha = $.mocha;
 var istanbul = $.istanbul;
 var karma = $.karma;
 var gutil = require('gulp-util');
-var chalk = require('chalk');
 
 var constants = require('../common/constants')();
 
@@ -37,7 +36,7 @@ gulp.task('karma', function() {
             configFile: 'karma.conf.js',
             action: 'run'
         })).on('error', function() {
-            gutil.log(chalk.red('(ERROR)'), 'karma');
+            gutil.log(gutil.colors.red('(ERROR)'), 'karma');
         });
 });
 
