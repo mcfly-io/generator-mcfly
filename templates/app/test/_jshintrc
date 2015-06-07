@@ -67,7 +67,7 @@
     "maxparams": 15,
     "newcap": true,
     "node": true,
-    "noempty": true,
+    "noempty": false,
     "nonstandard": true,
     "quotmark": "single",
     "sub": true,

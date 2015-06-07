@@ -302,7 +302,7 @@ describe('angular-famous-ionic:module', function() {
                 .on('end', function() {
                     var file = clientFolder + '/scripts/' + modulename + '/index.js';
                     var body = testHelper.readTextFile(file);
-                    assert(_.contains(body, 'require(\'ngCordova\');'));
+                    assert(_.contains(body, 'require(\'ng-cordova\');'));
                     done();
                 });
 
@@ -339,7 +339,7 @@ describe('angular-famous-ionic:module', function() {
 
                     assert(_.contains(body, 'require(\'famous-angular\');'));
                     assert(_.contains(body, 'require(\'angular-ionic\');'));
-                    assert(_.contains(body, 'require(\'ngCordova\');'));
+                    assert(_.contains(body, 'require(\'ng-cordova\');'));
                     assert(_.contains(body, 'require(\'angular-material\');'));
                     assert(_.contains(body, '\'ionic\''));
                     assert(_.contains(body, '\'famous.angular\''));

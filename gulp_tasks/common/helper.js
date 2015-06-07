@@ -2,7 +2,6 @@
 
 var fs = require('fs');
 var gutil = require('gulp-util');
-var chalk = require('chalk');
 var stripJsonComments = require('strip-json-comments');
 var _ = require('lodash');
 var path = require('path');
@@ -25,13 +24,13 @@ var isMobile = exports.isMobile = function(constants) {
  */
 var execHandler = exports.execHandler = function(err, stdout, stderr) {
     if(err) {
-        gutil.log(chalk.red('An error occured executing a command line action'));
+        gutil.log(gutil.colors.red('An error occured executing a command line action'));
     }
     if(stdout) {
         gutil.log(stdout);
     }
     if(stderr) {
-        gutil.log(chalk.red('Error: ') + stderr);
+        gutil.log(gutil.colors.red('Error: ') + stderr);
     }
 };
 
