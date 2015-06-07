@@ -92,6 +92,8 @@ module.exports = function(config) {
 
         coverageReporter: {
             reporters: [{
+                type: 'text'
+            }, {
                 type: 'text-summary'
             }, {
                 type: 'cobertura',
