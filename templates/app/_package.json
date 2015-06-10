@@ -15,7 +15,8 @@
         "famous": "^0.3.5",
         "famous-polyfills": "^0.3.0"<% } %><% if(ngCordova) { %>,
         "ng-cordova": "^0.1.17-alpha"<% } %><% if(bootstrap) { %>,
-        "angular-bootstrap": "^0.12.0"<% } %>
+        "angular-bootstrap": "^0.12.0"<% } %><% if(material) { %>,
+        "angular-material": "^0.9.7"<% } %>
     },
     "devDependencies": {
     },
@@ -27,9 +28,7 @@
         "lbServices": "./client/scripts/lbServices.js"<% if (ionic) { %>,
         "ionic": "./bower_components/ionic/release/js/ionic.js",
         "angular-ionic": "./bower_components/ionic/release/js/ionic-angular.js"<% } %><% if(famous) { %>,
-        "famous-angular": "./bower_components/famous-angular/dist/famous-angular.js"<% } %><% if(material) { %>,
-        "angular-material": "./bower_components/angular-material/angular-material.js",
-        "angular-aria": "./bower_components/angular-aria/angular-aria.js"<% } %>
+        "famous-angular": "./bower_components/famous-angular/dist/famous-angular.js"<% } %>
     },
     "browserify": {
         "transform": [
@@ -66,13 +65,6 @@
               "angular-sanitize",
               "angular-ui-router"
           ]
-        }<% } %><% if(material) { %>,
-        "angular-material": {
-            "depends": [
-                "angular",
-                "angular-aria",
-                "angular-animate"
-            ]
         }<% } %>
 
     }

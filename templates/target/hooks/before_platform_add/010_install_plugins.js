@@ -21,7 +21,8 @@ var pluginlist = [
     'org.apache.cordova.globalization',
     'org.apache.cordova.inappbrowser',
     'com.ionic.keyboard',
-    'https://github.com/testfairy/testfairy-cordova-plugin'
+    'https://github.com/testfairy/testfairy-cordova-plugin',
+    'https://github.com/driftyco/ionic-plugins-deploy'
 ];
 
 // no need to configure below

@@ -1,6 +1,16 @@
 <% if (ionic) { %>@import "../../bower_components/ionic/scss/ionic.scss";<% } %>
 <% if (fontawesome) { %>@import "../../bower_components/font-awesome/scss/font-awesome.scss";<% } %>
 <% if (famous) { %>
+@import "../../bower_components/famous-angular/dist/famous-angular";  
+<% } %>  
+<% if (bootstrap) { %>
+@import "../../bower_components/bootstrap/dist/css/bootstrap";
+@import "../../bower_components/bootstrap/dist/css/bootstrap-theme";
+<% } %>
+<% if (material) { %>
+@import "../../node_modules/angular-material/angular-material";
+<% } %>
+<% if (famous) { %>
 .full-screen {
     position: fixed;
     bottom: 0;
@@ -20,4 +30,4 @@
 }
 <% } %><% if (bootstrap) { %>
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-<% } %>    
+<% } %>
