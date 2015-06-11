@@ -106,7 +106,7 @@ var TargetGenerator = Class.extend({
             this.template('scripts/main.js', path.join(this.targetDir, 'scripts/main' + this.suffix + '.js'));
             this.template('scripts/main.test.js', path.join(this.targetDir, 'scripts/main' + this.suffix + '.test.js'));
             this.template('styles/main.scss', path.join(this.targetDir, 'styles/main' + this.suffix + '.scss'));
-
+            this.template('styles/main.less', path.join(this.targetDir, 'styles/main' + this.suffix + '.less'));
             this.template('../app/client/404.html', this.clientFolder + '/404' + this.suffix + '.html');
             this.template('../app/client/robots.txt', this.clientFolder + '/robots' + this.suffix + '.txt');
             this.template('../app/client/favicon.ico', this.clientFolder + '/favicon' + this.suffix + '.ico');

@@ -37,6 +37,7 @@ describe('angular-famous-ionic:target', function() {
                     folder + '/scripts/main' + suffix + '.js',
                     folder + '/scripts/main' + suffix + '.test.js',
                     folder + '/styles/main' + suffix + '.scss',
+                    folder + '/styles/main' + suffix + '.less',
                     folder + '/images/' + targetname,
                     folder + '/icons/' + targetname,
                     folder + '/fonts/' + targetname,
@@ -155,7 +156,8 @@ describe('angular-famous-ionic:target', function() {
                         folder + '/index' + '.html',
                         folder + '/scripts/main' + '.js',
                         folder + '/scripts/main' + '.test.js',
-                        folder + '/styles/main' + '.scss'
+                        folder + '/styles/main' + '.scss',
+                        folder + '/styles/main' + '.less'
                     ]);
                     done();
                 });
