@@ -16,7 +16,7 @@ This generator will scaffold for you an application using angularjs, browserify,
 
 The project has the following capabilities:
 * Angular best pratices (feature folder structure)
-* Sass enabled
+* Sass AND Less enabled
 * jshint, jscsc, eslint enabled (so you shouldn't have any typo left in your js files !)
 * Karma configured with Browserify including Code Coverage
 * Browser-sync
