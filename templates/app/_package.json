@@ -37,7 +37,7 @@
             "cssify",
             "browserify-shim",
             "brfs",
-            ["babelify", { "optional": ["es7.asyncFunctions"], "only": "./<%=clientFolder%>"}]
+            ["babelify", { "optional": ["es7.asyncFunctions"], "ignore": ["./node_modules", "./bower_components"]}]
         ]
     },
     "browserify-shim": {
