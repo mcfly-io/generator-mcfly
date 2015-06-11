@@ -20,7 +20,7 @@ module.exports = function(config) {
         debug: true,
         transform: [
             ['babelify', {
-                'only': ['./<%=clientFolder%>']
+                'ignore': ['./node_modules', './bower_components']
             }],
             [{
                 ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**']
