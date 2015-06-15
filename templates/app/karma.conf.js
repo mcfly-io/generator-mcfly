@@ -23,7 +23,7 @@ module.exports = function(config) {
                 'ignore': ['./node_modules', './bower_components']
             }],
             [{
-                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**']
+                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/<%=clientFolder%>/scripts/lbServices.js']
             }, 'browserify-istanbul']
         ]
     };
