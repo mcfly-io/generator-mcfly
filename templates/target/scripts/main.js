@@ -29,7 +29,7 @@ var run = function($ionicPlatform, $window) {
 <% } else if (mobile && !ionic) { %>
 var runDeps = ['$window'];
 var run = function($window) {
-    document.addEventListener('deviceready', function () {
+    document.addEventListener('deviceready', function() {
         if($window.cordova && $window.cordova.plugins.Keyboard) {
             $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
@@ -40,7 +40,7 @@ var run = function($window) {
             $window.TestFairy.begin('');
         }
     }, false);
-}
+};
 <% } else { %>
 var runDeps = [];
 var run = function() {

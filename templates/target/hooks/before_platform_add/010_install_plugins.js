@@ -21,7 +21,7 @@ var pluginlist = [
     'cordova-plugin-globalization',
     'cordova-plugin-splashscreen',
     'cordova-plugin-inappbrowser',
-    'cordova-plugin-camera@0.3.5',
+    'cordova-plugin-camera',
     'cordova-plugin-whitelist',
     'com.ionic.keyboard',
     'https://github.com/testfairy/testfairy-cordova-plugin',
