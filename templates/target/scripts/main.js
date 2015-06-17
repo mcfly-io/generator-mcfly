@@ -22,7 +22,7 @@ var run = function($ionicPlatform, $window) {
             $window.StatusBar.styleDefault();
         }
         if($window.TestFairy) {
-            $window.TestFairy.begin('');
+            $window.TestFairy.begin(process.env.TESTFAIRY_IOS_APP_TOKEN);
         }
     });
 };
@@ -37,7 +37,7 @@ var run = function($window) {
             $window.StatusBar.styleDefault();
         }
         if($window.TestFairy) {
-            $window.TestFairy.begin('');
+            $window.TestFairy.begin(process.env.TESTFAIRY_IOS_APP_TOKEN);
         }
     }, false);
 };
