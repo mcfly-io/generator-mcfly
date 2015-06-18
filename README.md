@@ -40,7 +40,7 @@ and here:
 
 
 > **NOTE:**   
-> This generator is using [generator-sublime](https://github.com/thaiat/generator-sublime) to scaffold common dot files (.jshintrc, .eslintrc, etc...).   
+> This generator is using [generator-sublime](https://github.com/mcfly-io/generator-sublime) to scaffold common dot files (.jshintrc, .eslintrc, etc...).   
 > Check it out https://www.npmjs.org/package/generator-sublime
 
 ## Prerequisites
@@ -125,7 +125,7 @@ gulp cordova:run    # Run cordova run (accepts a --platform option)
 The gulp tasks share a constant file located at `gulp/common/constants.js`. Feel free to modify it to your project needs.   
 The constants are resolved against the `--target` option. The default value for `--target` is `app`.
 
-To better understand the gulp task system have a look at the docs of [gulp-mux](https://github.com/thaiat/gulp-mux) 
+To better understand the gulp task system have a look at the docs of [gulp-mux](https://github.com/mcfly-io/gulp-mux) 
 
 ## Browserify and namespaces
 At the heart of the generator we use `browserify` to bundle together the client javascript files.   
