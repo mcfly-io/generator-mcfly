@@ -17,4 +17,4 @@ deploy:
   on:
     tags: true
     all_branches: true
-    repo: mcfly-io/generator-mclfy
+    repo: mcfly-io/generator-mcfly

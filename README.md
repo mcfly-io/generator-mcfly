@@ -16,7 +16,9 @@
 The generator was previously named `generator-angular-famous-ionic`
 
 2 things to note
+
 1. installation is now `npm install -g generator-mcfly`
+
 2. If you have existing project modify the name of the generator in your `.yo-rc.json` file 
 
 ## Description
