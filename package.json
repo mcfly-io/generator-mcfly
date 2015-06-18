@@ -1,6 +1,6 @@
 {
   "name": "generator-mcfly",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "Yeoman generator for scaffolding an app using angularjs browserify",
   "license": "BSD",
   "main": "app/index.js",
