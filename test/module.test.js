@@ -7,7 +7,7 @@ var utils = require('../utils');
 var modulename = 'common';
 var clientFolder = 'www';
 
-describe('angular-famous-ionic:module', function() {
+describe('generator:module', function() {
 
     var end = null;
 

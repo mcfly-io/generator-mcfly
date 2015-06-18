@@ -7,7 +7,7 @@ var targetname = 'web';
 var suffix = '-' + targetname;
 var clientFolder = 'www';
 
-describe('angular-famous-ionic:target', function() {
+describe('generator:target', function() {
     describe('general test', function() {
         beforeEach(function() {
             this.runGen = testHelper.runGenerator('target')

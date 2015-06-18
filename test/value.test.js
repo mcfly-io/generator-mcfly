@@ -7,7 +7,7 @@ var modulename = 'common';
 var valuename = 'myValue';
 var clientFolder = 'www';
 
-describe('angular-famous-ionic:value', function() {
+describe('generator:value', function() {
     describe('with modules', function() {
         beforeEach(function() {
             this.runGen = testHelper.runGenerator('value')

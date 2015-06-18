@@ -7,7 +7,7 @@ var modulename = 'common';
 var filtername = 'myFilter';
 var clientFolder = 'www';
 
-describe('angular-famous-ionic:filter', function() {
+describe('generator:filter', function() {
     describe('with modules', function() {
         beforeEach(function() {
             this.runGen = testHelper.runGenerator('filter')

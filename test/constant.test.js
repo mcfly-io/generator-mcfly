@@ -7,7 +7,7 @@ var modulename = 'common';
 var constantname = 'myConstant';
 var clientFolder = 'www';
 
-describe('angular-famous-ionic:constant', function() {
+describe('generator:constant', function() {
     describe('with modules', function() {
         beforeEach(function() {
             this.runGen = testHelper.runGenerator('constant')

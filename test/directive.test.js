@@ -7,7 +7,7 @@ var modulename = 'common';
 var directivename = 'myDirective';
 var clientFolder = 'www';
 
-describe('angular-famous-ionic:directive', function() {
+describe('generator:directive', function() {
     describe('with modules', function() {
         beforeEach(function() {
             this.runGen = testHelper.runGenerator('directive')

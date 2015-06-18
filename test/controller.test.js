@@ -7,7 +7,7 @@ var modulename = 'common';
 var controllername = 'myController';
 var clientFolder = 'www';
 
-describe('angular-famous-ionic:controller', function() {
+describe('generator:controller', function() {
     describe('with modules', function() {
         beforeEach(function() {
             this.runGen = testHelper.runGenerator('controller')

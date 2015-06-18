@@ -1,15 +1,15 @@
-# generator-angular-famous-ionic 
+# generator-mcfly 
 
-[![Join the chat at https://gitter.im/thaiat/generator-angular-famous-ionic](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/thaiat/generator-angular-famous-ionic?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/mclfy-io/generator-mcfly](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mclfy-io/generator-mcfly?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![NPM version](https://badge.fury.io/js/generator-angular-famous-ionic.svg)](http://badge.fury.io/js/generator-angular-famous-ionic) [![Downloads](http://img.shields.io/npm/dm/generator-angular-famous-ionic.svg)](http://badge.fury.io/js/generator-angular-famous-ionic)   
-[![Build Status](https://travis-ci.org/thaiat/generator-angular-famous-ionic.svg?branch=master)](https://travis-ci.org/thaiat/generator-angular-famous-ionic) [![Test Coverage](https://codeclimate.com/github/thaiat/generator-angular-famous-ionic/badges/coverage.svg)](https://codeclimate.com/github/thaiat/generator-angular-famous-ionic) [![Code Climate](https://codeclimate.com/github/thaiat/generator-angular-famous-ionic/badges/gpa.svg)](https://codeclimate.com/github/thaiat/generator-angular-famous-ionic)   
-[![Dependency Status](https://david-dm.org/thaiat/generator-angular-famous-ionic.svg)](https://david-dm.org/thaiat/generator-angular-famous-ionic) [![devDependency Status](https://david-dm.org/thaiat/generator-angular-famous-ionic/dev-status.svg)](https://david-dm.org/thaiat/generator-angular-famous-ionic#info=devDependencies) [![peerDependency Status](https://david-dm.org/thaiat/generator-angular-famous-ionic/peer-status.svg)](https://david-dm.org/thaiat/generator-angular-famous-ionic#info=peerDependencies)    
+[![NPM version](https://badge.fury.io/js/generator-mcfly.svg)](http://badge.fury.io/js/generator-mcfly) [![Downloads](http://img.shields.io/npm/dm/generator-mcfly.svg)](http://badge.fury.io/js/generator-mcfly)   
+[![Build Status](https://travis-ci.org/mclfy-io/generator-mcfly.svg?branch=master)](https://travis-ci.org/mclfy-io/generator-mcfly) [![Test Coverage](https://codeclimate.com/github/mclfy-io/generator-mcfly/badges/coverage.svg)](https://codeclimate.com/github/mclfy-io/generator-mcfly) [![Code Climate](https://codeclimate.com/github/mclfy-io/generator-mcfly/badges/gpa.svg)](https://codeclimate.com/github/mclfy-io/generator-mcfly)   
+[![Dependency Status](https://david-dm.org/mclfy-io/generator-mcfly.svg)](https://david-dm.org/mclfy-io/generator-mcfly) [![devDependency Status](https://david-dm.org/mclfy-io/generator-mcfly/dev-status.svg)](https://david-dm.org/mclfy-io/generator-mcfly#info=devDependencies) [![peerDependency Status](https://david-dm.org/mclfy-io/generator-mcfly/peer-status.svg)](https://david-dm.org/mclfy-io/generator-mcfly#info=peerDependencies)    
 
 
 > A Yeoman generator for scaffolding an application using angular, browserify, ionic and famous.
 
-[![NPM](https://nodei.co/npm/generator-angular-famous-ionic.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/generator-angular-famous-ionic)
+[![NPM](https://nodei.co/npm/generator-mcfly.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/generator-mcfly)
 
 ## Description
 This generator will scaffold for you an application using angularjs, browserify, and either ionic framwork or famo.us (even both).
@@ -54,9 +54,9 @@ Feel free to tweak `./bin/prepublish.sh` to add your own requirements.
 
 ## Usage
 
-Install `generator-angular-famous-ionic`:
+Install `generator-mcfly`:
 ```
-npm install -g generator-angular-famous-ionic
+npm install -g generator-mcfly
 ```
 
 Make a new directory, and `cd` into it:
@@ -64,18 +64,18 @@ Make a new directory, and `cd` into it:
 mkdir my-new-project && cd $_
 ```
 
-Run `yo angular-famous-ionic`, optionally passing an app name:
+Run `yo mcfly`, optionally passing an app name:
 ```
-yo angular-famous-ionic [app-name]
+yo mcfly [app-name]
 ```
 
 ### Typical workflow
 A typical workflow would look like this:
 ```
 mkdir test-app && cd test-app
-yo angular-famous-ionic
-yo angular-famous-ionic:module common
-yo angular-famous-ionic:controller common hello
+yo mcfly
+yo mcfly:module common
+yo mcfly:controller common hello
 Add some content to client/index.html : <h2 ng-controller="main.common.hello as helloCtrl">{{helloCtrl.message}}</h2>
 gulp browsersync
 ```
@@ -87,9 +87,9 @@ gulp browsersync
 ## Upgrade
 I like to publish new versions as soon as possible. So here is the upgrade process.
 
-Because `generator-angular-famous-ionic` has a dependency on `generator-sublime` you should execute the following command:
+Because `generator-mcfly` has a dependency on `generator-sublime` you should execute the following command:
 ```
-npm update -g generator-angular-famous-ionic generator-sublime
+npm update -g generator-mcfly generator-sublime
 ```
 
 ## Client folder
@@ -179,16 +179,16 @@ Again no hard coded namespace, and only one point of attachment between the modu
 
 Available generators:
 
-* [angular-famous-ionic](#app) (aka [angular-famous-ionic:app] (#app))
-* [angular-famous-ionic:target](#target)
-* [angular-famous-ionic:module](#module)
-* [angular-famous-ionic:controller](#controller)
-* [angular-famous-ionic:directive](#directive)
-* [angular-famous-ionic:filter](#filter)
-* [angular-famous-ionic:service](#service)
-* [angular-famous-ionic:value](#value)
-* [angular-famous-ionic:constant](#constant)
-* [angular-famous-ionic:require](#require)
+* [mcfly](#app) (aka [mcfly:app] (#app))
+* [mcfly:target](#target)
+* [mcfly:module](#module)
+* [mcfly:controller](#controller)
+* [mcfly:directive](#directive)
+* [mcfly:filter](#filter)
+* [mcfly:service](#service)
+* [mcfly:value](#value)
+* [mcfly:constant](#constant)
+* [mcfly:require](#require)
 
 
 **Note: Generators are to be run from the root directory of your app.**
@@ -205,13 +205,13 @@ The main application is called `main`.
 
 Example:
 ```
-yo angular-famous-ionic
+yo mcfly
 ```
 
 You can choose to scaffold a mobile (cordova) app using the option --mobile
 Example:
 ```
-yo angular-famous-ionic --mobile
+yo mcfly --mobile
 ```
 This will scaffold a config.xml file (suffixed with the app name), and hooks expected by cordova.    
 In addition the `dist` folder will conform to cordova expectation (`www` sub folder).
@@ -222,7 +222,7 @@ This is usefull if you want to share code between several applications (mobile, 
 
 Example:
 ```
-yo angular-famous-ionic:target web
+yo mcfly:target web
 ```
 
 Produces: 
@@ -236,7 +236,7 @@ Produces:
 You can choose to scaffold a mobile (cordova) app using the option --mobile
 Example:
 ```
-yo angular-famous-ionic:target mymobileapp --mobile
+yo mcfly:target mymobileapp --mobile
 ```
 This will scaffold a config.xml file (suffixed with the app name), and hooks expected by cordova.    
 In addition the `dist` folder will conform to cordova expectation (`www` sub folder).
@@ -244,11 +244,11 @@ In addition the `dist` folder will conform to cordova expectation (`www` sub fol
 
 ### Module
 Generates a new module.
-The first thing you need to do after executing `yo angular-famous-ionic` is create a module.
+The first thing you need to do after executing `yo mcfly` is create a module.
 
 Example:
 ```
-yo angular-famous-ionic:module modulename
+yo mcfly:module modulename
 ```
 
 If you don't mention a modulename, yeoman will ask you to provide one.
@@ -261,7 +261,7 @@ Produces:
 If you do not want any route for the module, you can use the option `--skip-route`   
 Example:
 ```
-yo angular-famous-ionic:module modulename --skip-route
+yo mcfly:module modulename --skip-route
 ```
 
 In this case this will only produce:
@@ -272,7 +272,7 @@ Generates a new controller.
 
 Example:
 ```
-yo angular-famous-ionic:controller modulename controllername
+yo mcfly:controller modulename controllername
 ```
 
 You need at least a module in order to scaffold a controller.   
@@ -290,7 +290,7 @@ Generates a new filter.
 
 Example:
 ```
-yo angular-famous-ionic:controller modulename filtername
+yo mcfly:controller modulename filtername
 ```
 
 You need at least a module in order to scaffold a filter.   
@@ -307,7 +307,7 @@ Generates a new value.
 
 Example:
 ```
-yo angular-famous-ionic:value modulename valuename
+yo mcfly:value modulename valuename
 ```
 
 You need at least a module in order to scaffold a value.   
@@ -324,7 +324,7 @@ Generates a new constant.
 
 Example:
 ```
-yo angular-famous-ionic:value modulename constantname
+yo mcfly:value modulename constantname
 ```
 
 You need at least a module in order to scaffold a constant.   
@@ -342,9 +342,9 @@ Default `servicetype` is factory.
 
 Example:
 ```
-yo angular-famous-ionic:service modulename servicename
-yo angular-famous-ionic:service modulename servicename --servicetype=service
-yo angular-famous-ionic:service modulename servicename --servicetype=provider
+yo mcfly:service modulename servicename
+yo mcfly:service modulename servicename --servicetype=service
+yo mcfly:service modulename servicename --servicetype=provider
 ```
 
 You need at least a module in order to scaffold a service.   
@@ -362,8 +362,8 @@ Default `compile` is true.
 
 Example:
 ```
-yo angular-famous-ionic:directive modulename myDirective
-yo angular-famous-ionic:directive modulename myDirective --compile=false
+yo mcfly:directive modulename myDirective
+yo mcfly:directive modulename myDirective --compile=false
 ```
 
 You need at least a module in order to scaffold a directive.   
@@ -382,7 +382,7 @@ Instead it inspects the existing `client` folder and will refresh the needed inj
 
 Example:
 ```
-yo angular-famous-ionic:require
+yo mcfly:require
 ```
 
 ## Adding a third party bower package
@@ -395,7 +395,7 @@ If you want to include a third party bower package do the following:
 * if the package only exposes a `.css` file adjust the **css** file constants (`gulp/common/constants.js`) to include it
 
 ## Cordova applications
-When you scaffold a mobile app (`yo angular-famous-ionic:target myapp --mobile`), this will create a `cordova/myapp` folder under `client`.
+When you scaffold a mobile app (`yo mcfly:target myapp --mobile`), this will create a `cordova/myapp` folder under `client`.
 
 This folder contains hooks and resources (icons and spashs) that will be copied over during the `dist` gulp task.
 
@@ -466,7 +466,7 @@ This will tell mocha to run only the tests located in `test/app.test.js` (The -r
 
 ## Changelog
 
-Recent changes can be viewed on Github on the [Releases Page](https://github.com/thaiat/generator-angular-famous-ionic/releases)
+Recent changes can be viewed on Github on the [Releases Page](https://github.com/mclfy-io/generator-mcfly/releases)
 
 ## License
 

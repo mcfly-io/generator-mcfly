@@ -1,6 +1,6 @@
 {
   "generator-generator": {},
-  "generator-angular-famous-ionic": {
+  "generator-mcfly": {
     "clientFolder": "client"
   }
 }

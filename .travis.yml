@@ -17,4 +17,4 @@ deploy:
   on:
     tags: true
     all_branches: true
-    repo: thaiat/generator-angular-famous-ionic
+    repo: mcfly-io/generator-mclfy
