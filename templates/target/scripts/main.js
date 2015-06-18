@@ -22,9 +22,24 @@ var run = function($ionicPlatform, $window) {
             $window.StatusBar.styleDefault();
         }
         if($window.TestFairy) {
-            $window.TestFairy.begin('');
+            $window.TestFairy.begin(process.env.TESTFAIRY_IOS_APP_TOKEN);
         }
     });
+};
+<% } else if (mobile && !ionic) { %>
+var runDeps = ['$window'];
+var run = function($window) {
+    document.addEventListener('deviceready', function() {
+        if($window.cordova && $window.cordova.plugins.Keyboard) {
+            $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if($window.StatusBar) {
+            $window.StatusBar.styleDefault();
+        }
+        if($window.TestFairy) {
+            $window.TestFairy.begin(process.env.TESTFAIRY_IOS_APP_TOKEN);
+        }
+    }, false);
 };
 <% } else { %>
 var runDeps = [];
