@@ -1,10 +1,10 @@
 # generator-mcfly 
 
-[![Join the chat at https://gitter.im/mclfy-io/generator-mcfly](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mclfy-io/generator-mcfly?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/mcfly-io/generator-mcfly](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mcfly-io/generator-mcfly?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![NPM version](https://badge.fury.io/js/generator-mcfly.svg)](http://badge.fury.io/js/generator-mcfly) [![Downloads](http://img.shields.io/npm/dm/generator-mcfly.svg)](http://badge.fury.io/js/generator-mcfly)   
-[![Build Status](https://travis-ci.org/mclfy-io/generator-mcfly.svg?branch=master)](https://travis-ci.org/mclfy-io/generator-mcfly) [![Test Coverage](https://codeclimate.com/github/mclfy-io/generator-mcfly/badges/coverage.svg)](https://codeclimate.com/github/mclfy-io/generator-mcfly) [![Code Climate](https://codeclimate.com/github/mclfy-io/generator-mcfly/badges/gpa.svg)](https://codeclimate.com/github/mclfy-io/generator-mcfly)   
-[![Dependency Status](https://david-dm.org/mclfy-io/generator-mcfly.svg)](https://david-dm.org/mclfy-io/generator-mcfly) [![devDependency Status](https://david-dm.org/mclfy-io/generator-mcfly/dev-status.svg)](https://david-dm.org/mclfy-io/generator-mcfly#info=devDependencies) [![peerDependency Status](https://david-dm.org/mclfy-io/generator-mcfly/peer-status.svg)](https://david-dm.org/mclfy-io/generator-mcfly#info=peerDependencies)    
+[![Build Status](https://travis-ci.org/mcfly-io/generator-mcfly.svg?branch=master)](https://travis-ci.org/mcfly-io/generator-mcfly) [![Test Coverage](https://codeclimate.com/github/mcfly-io/generator-mcfly/badges/coverage.svg)](https://codeclimate.com/github/mcfly-io/generator-mcfly) [![Code Climate](https://codeclimate.com/github/mcfly-io/generator-mcfly/badges/gpa.svg)](https://codeclimate.com/github/mcfly-io/generator-mcfly)   
+[![Dependency Status](https://david-dm.org/mcfly-io/generator-mcfly.svg)](https://david-dm.org/mcfly-io/generator-mcfly) [![devDependency Status](https://david-dm.org/mcfly-io/generator-mcfly/dev-status.svg)](https://david-dm.org/mcfly-io/generator-mcfly#info=devDependencies) [![peerDependency Status](https://david-dm.org/mcfly-io/generator-mcfly/peer-status.svg)](https://david-dm.org/mcfly-io/generator-mcfly#info=peerDependencies)    
 
 
 > A Yeoman generator for scaffolding an application using angular, browserify, ionic and famous.
@@ -466,7 +466,7 @@ This will tell mocha to run only the tests located in `test/app.test.js` (The -r
 
 ## Changelog
 
-Recent changes can be viewed on Github on the [Releases Page](https://github.com/mclfy-io/generator-mcfly/releases)
+Recent changes can be viewed on Github on the [Releases Page](https://github.com/mcfly-io/generator-mcfly/releases)
 
 ## License
 
