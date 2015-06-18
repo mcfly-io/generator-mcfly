@@ -9,7 +9,7 @@ var suffixes = ['', '-xxx'];
 var modules = ['toto', 'tata'];
 var files = _.range(2);
 
-describe('angular-famous-ionic:require', function() {
+describe('generator:require', function() {
 
     before(function(done) {
         this.runGen = testHelper.runGenerator('require')

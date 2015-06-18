@@ -7,7 +7,7 @@ var modulename = 'common';
 var servicename = 'myService';
 var clientFolder = 'www';
 
-describe('angular-famous-ionic:service', function() {
+describe('generator:service', function() {
     describe('with modules', function() {
         beforeEach(function() {
             this.runGen = testHelper.runGenerator('service')

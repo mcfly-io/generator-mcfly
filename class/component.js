@@ -43,7 +43,7 @@ var ComponentGenerator = Class.extend({
         var that = this;
         this.clientModules = [];
         var emitError = function() {
-            that.log(that.utils.chalk.red('No module could be found. Please run \'yo angular-famous-ionic:module\' to create one.'));
+            that.log(that.utils.chalk.red('No module could be found. Please run \'yo mcfly:module\' to create one.'));
             that.emit('error', 'No module found');
             done();
         };
