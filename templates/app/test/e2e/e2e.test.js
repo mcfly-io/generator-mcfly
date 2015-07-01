@@ -14,6 +14,11 @@ describe('e2e test', function() {
         });
     });
 
+    afterAll(function(done) {
+        // make sure you keep this otherwise screen shot reporter bypass the latest test
+        process.nextTick(done);
+    });
+
     it('should have a title', function() {
         expect(browser.getTitle()).toEqual('Sample app');
     });
