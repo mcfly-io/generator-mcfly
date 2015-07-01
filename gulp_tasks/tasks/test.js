@@ -9,7 +9,7 @@ var gutil = require('gulp-util');
 
 var constants = require('../common/constants')();
 
-gulp.task('mocha', function(done) {
+gulp.task('mocha', 'Runs mocha unit tests', function(done) {
     gulp.src(constants.mocha.libs)
         .pipe(istanbul({
             includeUntested: true
@@ -30,17 +30,7 @@ gulp.task('mocha', function(done) {
         });
 });
 
-gulp.task('karma', function() {
-    gulp.src(['no need to supply files because everything is in config file'])
-        .pipe(karma({
-            configFile: 'karma.conf.js',
-            action: 'run'
-        })).on('error', function() {
-            gutil.log(gutil.colors.red('(ERROR)'), 'karma');
-        });
-});
-
-gulp.task('test', function(done) {
+gulp.task('test', 'Lint, then run all unit tests', function(done) {
     runSequence(
         'lint', ['mocha'],
         done
