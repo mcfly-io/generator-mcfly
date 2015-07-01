@@ -2,8 +2,7 @@
     "name": "<%= _.slugify(appname) %>",
     "version": "0.0.1",
     "scripts": {
-        "test": "gulp test",
-        "postinstall": "node ./bin/protractor-fix-version.js"
+        "test": "gulp test"
     },
     "repository": {
         "type": "git",
