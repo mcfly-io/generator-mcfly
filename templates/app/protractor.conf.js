@@ -8,7 +8,7 @@ exports.config = {
     capabilities: {
         browserName: 'chrome',
         version: '',
-        platform: 'ANY'
+        platform: 'ANY',
         'phantomjs.binary.path': './node_modules/phantomjs/bin/phantomjs'
     },
     jasmineNodeOpts: {
