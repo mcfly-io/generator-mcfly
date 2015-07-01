@@ -51,7 +51,7 @@ describe('generator:app', function() {
                     clientFolder + '/fonts',
                     'srcmaps',
                     'test/.jshintrc',
-                    'test/e2e/e2e.test.js',
+                    'test/e2e/app/e2e.test.js',
                     'test/e2e/.eslintrc',
                     'test/mocha/helpers/globals.js',
                     'test/unit/unitHelper.js',
@@ -157,7 +157,7 @@ describe('generator:app', function() {
                     clientFolder + '/cordova/' + 'app' + '/hooks' + '/before_platform_add/010_install_plugins.js',
                     clientFolder + '/cordova/' + 'app' + '/hooks' + '/after_prepare/010_add_platform_class.js',
                     clientFolder + '/config.xml',
-                    'test/e2e/e2e.test.js',
+                    'test/e2e/app/e2e.test.js',
                     'test/e2e/.eslintrc',
                     'test/mocha/helpers/globals.js'
                 ]);

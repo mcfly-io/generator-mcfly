@@ -3,13 +3,13 @@
 exports.config = {
     //seleniumAddress: 'http://localhost:4444/wd/hub',
     //seleniumServerJar: './node_modules/gulp-protractor/node_modules/protractor/selenium/selenium-server-standalone-2.43.1.jar',
-    //specs: ['test/e2e/**/*.test.js'],
+    //specs: ['test/e2e/**/*.js'],
     framework: 'jasmine2',
     capabilities: {
         browserName: 'chrome',
         version: '',
         platform: 'ANY'
-        //'phantomjs.binary.path': './node_modules/karma-phantomjs-launcher/node_modules/phantomjs/bin/phantomjs'
+        'phantomjs.binary.path': './node_modules/phantomjs/bin/phantomjs'
     },
     jasmineNodeOpts: {
         showColors: true,

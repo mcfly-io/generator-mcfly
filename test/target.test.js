@@ -43,7 +43,8 @@ describe('generator:target', function() {
                     folder + '/fonts/' + targetname,
                     folder + '/404' + suffix + '.html',
                     folder + '/robots' + suffix + '.txt',
-                    folder + '/favicon' + suffix + '.ico'
+                    folder + '/favicon' + suffix + '.ico',
+                    'test/e2e/' + targetname + '/' + 'e2e.test.js'
                 ]);
                 done();
             });
