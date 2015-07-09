@@ -42,9 +42,9 @@ var testHelper = {
 
         exec: function(cmd, cb) {
             assert(_.isString(cmd), 'cmd should be a string');
-            if(cmd === 'cat ~/.npmrc | grep \'email\'') {
+            if (cmd === 'cat ~/.npmrc | grep \'email\'') {
                 cb(null, 'email=' + this.githubUserMock.email);
-            } else if(cmd === 'cat ~/.npmrc | grep \'_auth\'') {
+            } else if (cmd === 'cat ~/.npmrc | grep \'_auth\'') {
                 cb(null, '_auth=dxxsdsdfsd');
             } else {
                 cb(null, '');
@@ -108,8 +108,8 @@ var testHelper = {
         });
         var runGen = helpers
             .run(path.join(__dirname, '../' + name))
-        //.inDir(path.join(os.tmpdir(), guid, 'temp-test'))
-        .inDir(path.join(os.tmpdir(), './temp-test'))
+            //.inDir(path.join(os.tmpdir(), guid, 'temp-test'))
+            .inDir(path.join(os.tmpdir(), './temp-test'))
             .withGenerators(deps)
             .on('ready', function() {
                 // TODO : Monkey patching waiting for pull request #648

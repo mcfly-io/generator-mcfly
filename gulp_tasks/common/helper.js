@@ -23,13 +23,13 @@ var isMobile = exports.isMobile = function(constants) {
  * @param  {String} stderr - The stderr string
  */
 var execHandler = exports.execHandler = function(err, stdout, stderr) {
-    if(err) {
+    if (err) {
         gutil.log(gutil.colors.red('An error occured executing a command line action'));
     }
-    if(stdout) {
+    if (stdout) {
         gutil.log(stdout);
     }
-    if(stderr) {
+    if (stderr) {
         gutil.log(gutil.colors.red('Error: ') + stderr);
     }
 };

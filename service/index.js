@@ -59,7 +59,7 @@ var ServiceGenerator = Class.extend({
 
         var serviceTypes = ['service', 'factory', 'provider'];
 
-        if(!_.contains(serviceTypes, that.servicetype)) {
+        if (!_.contains(serviceTypes, that.servicetype)) {
             that.log(that.utils.chalk.red('Invalid service type. The possible values are : ' + serviceTypes.join(', ')));
             that.emit('error', 'Invalid service type');
             /*eslint no-process-exit:0 */
@@ -69,7 +69,7 @@ var ServiceGenerator = Class.extend({
 
         this.getClientModules()
             .then(function(modules) {
-                if(!_.isArray(modules) || modules.length <= 0) {
+                if (!_.isArray(modules) || modules.length <= 0) {
                     emitError();
                 }
                 that.clientModules = modules;
@@ -102,10 +102,10 @@ var ServiceGenerator = Class.extend({
             default: that.modulename || (choices && choices.length >= 1 ? choices[0].value : that.modulename),
             validate: function(value) {
                 value = _.str.trim(value);
-                if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
+                if (_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
                     return 'Please enter a non empty name';
                 }
-                if(!_.contains(that.clientModules, value)) {
+                if (!_.contains(that.clientModules, value)) {
                     return 'The module name ' + value + ' does not exist';
                 }
                 return true;
@@ -118,7 +118,7 @@ var ServiceGenerator = Class.extend({
             message: 'How would like to name your service ?',
             validate: function(value) {
                 value = _.str.trim(value);
-                if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
+                if (_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
                     return 'Please enter a non empty name';
                 }
                 return true;
@@ -140,7 +140,7 @@ var ServiceGenerator = Class.extend({
     },
 
     writing: function() {
-        if(!_.contains(this.clientModules, this.modulename)) {
+        if (!_.contains(this.clientModules, this.modulename)) {
             this.log(this.utils.chalk.red('Error: ') + 'The module name ' + this.utils.chalk.yellow(this.modulename) + ' does not exist');
             return;
         }

@@ -27,7 +27,7 @@ module.exports = function(config) {
             }, 'browserify-istanbul']
         ]
     };
-    if(debug === true) {
+    if (debug === true) {
         delete browserify.transform;
         reporters.splice(reporters.indexOf('coverage'), 1);
     }

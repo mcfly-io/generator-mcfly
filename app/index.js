@@ -50,7 +50,7 @@ var AppGenerator = Class.extend({
     prompting: {
         welcome: function() {
             // Have Yeoman greet the user.
-            if(!this.options['skip-welcome-message']) {
+            if (!this.options['skip-welcome-message']) {
                 this.log(yosay('Welcome to the amazing mcfly generator!'));
             }
 
@@ -240,7 +240,7 @@ var AppGenerator = Class.extend({
             this.template('../target/styles/main.less', this.clientFolder + '/styles/main.less');
             this.template('../target/scripts/main.js', this.clientFolder + '/scripts/main.js');
             this.template('../target/scripts/main.test.js', this.clientFolder + '/scripts/main.test.js');
-            if(this.mobile) {
+            if (this.mobile) {
                 this.template('../target/config.xml', path.join(this.targetDir, 'config' + '.xml'));
                 this.directory('../target/hooks', path.join(this.targetDir, 'cordova', 'app', 'hooks'));
             }

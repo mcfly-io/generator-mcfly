@@ -7,13 +7,13 @@ module.exports = function(app) {
 
     function filter() {
         return function(items, filterValue) {
-            if(!filterValue) {
+            if (!filterValue) {
                 return items;
             }
 
             var filtered = [];
             filterValue = filterValue.toLowerCase();
-            for(var i = 0; i < items.length; i++) {
+            for (var i = 0; i < items.length; i++) {
                 var item = items[i];
                 //custom filter logic here
                 filtered.push(item);

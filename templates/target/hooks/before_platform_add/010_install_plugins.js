@@ -44,10 +44,10 @@ function getDirectories(srcpath) {
 }
 
 var deleteFolderRecursive = function(strPath) {
-    if(fs.existsSync(strPath)) {
+    if (fs.existsSync(strPath)) {
         fs.readdirSync(strPath).forEach(function(file, index) {
             var curPath = path.join(strPath, file);
-            if(fs.lstatSync(curPath).isDirectory()) {
+            if (fs.lstatSync(curPath).isDirectory()) {
                 // recurse
                 deleteFolderRecursive(curPath);
             } else {

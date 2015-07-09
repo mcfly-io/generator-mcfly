@@ -56,7 +56,7 @@ describe('generator:module', function() {
 
             this.runGen
                 .on('ready', function(generator) {
-                    if(!end) {
+                    if (!end) {
                         end = Object.getPrototypeOf(generator).end;
                     }
                     Object.getPrototypeOf(generator).end = function() {
@@ -537,7 +537,7 @@ describe('generator:module', function() {
             this.runGen
                 .on('ready', function(generator) {
 
-                    if(!end) {
+                    if (!end) {
                         end = Object.getPrototypeOf(generator).end;
                     }
                     Object.getPrototypeOf(generator).end = function() {

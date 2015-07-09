@@ -338,12 +338,12 @@ describe('generator:class', function() {
             return Q.when(['index.html', 'index-www.html', 'index-web.html']);
         };
         generator.getClientTargets().then(function(value) {
-            assert.deepEqual(value, ['app', 'www', 'web']);
-        })
-        .catch(function(err) {
-            assert(err === null);
-        })
-        .finally(done);
+                assert.deepEqual(value, ['app', 'www', 'web']);
+            })
+            .catch(function(err) {
+                assert(err === null);
+            })
+            .finally(done);
     });
 
 });

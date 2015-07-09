@@ -57,10 +57,10 @@ var TargetGenerator = Class.extend({
             default: this.targetname,
             validate: function(value) {
                 value = _.str.trim(value);
-                if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
+                if (_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
                     return 'Please enter a non empty name';
                 }
-                if(_.contains(that.clientTargets, value)) {
+                if (_.contains(that.clientTargets, value)) {
                     return 'The target name ' + value + ' already exists';
                 }
                 return true;
@@ -76,7 +76,7 @@ var TargetGenerator = Class.extend({
 
     configuring: function() {
         this.mobile = this.options.mobile;
-        if(_.contains(this.clientTargets, this.targetname)) {
+        if (_.contains(this.clientTargets, this.targetname)) {
             var msg = 'The target application name ' + this.targetname + ' already exists';
             this.log(this.utils.chalk.red.bold('(ERROR) ') + msg);
             var error = new Error(msg);
@@ -99,7 +99,7 @@ var TargetGenerator = Class.extend({
             this.mkdir(path.join(this.targetDir, 'images', this.targetname));
             this.mkdir(path.join(this.targetDir, 'icons', this.targetname));
             this.mkdir(path.join(this.targetDir, 'fonts', this.targetname));
-            if(this.mobile) {
+            if (this.mobile) {
                 this.template('config.xml', path.join(this.targetDir, 'config' + this.suffix + '.xml'));
                 this.directory('hooks', path.join(this.targetDir, 'cordova', this.targetname, 'hooks'));
             }

@@ -15,13 +15,13 @@ var run = function($ionicPlatform, $window) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
-        if($window.cordova && $window.cordova.plugins.Keyboard) {
+        if ($window.cordova && $window.cordova.plugins.Keyboard) {
             $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
-        if($window.StatusBar) {
+        if ($window.StatusBar) {
             $window.StatusBar.styleDefault();
         }
-        if($window.TestFairy) {
+        if ($window.TestFairy) {
             $window.TestFairy.begin(process.env.TESTFAIRY_IOS_APP_TOKEN);
         }
     });
@@ -30,13 +30,13 @@ var run = function($ionicPlatform, $window) {
 var runDeps = ['$window'];
 var run = function($window) {
     document.addEventListener('deviceready', function() {
-        if($window.cordova && $window.cordova.plugins.Keyboard) {
+        if ($window.cordova && $window.cordova.plugins.Keyboard) {
             $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
-        if($window.StatusBar) {
+        if ($window.StatusBar) {
             $window.StatusBar.styleDefault();
         }
-        if($window.TestFairy) {
+        if ($window.TestFairy) {
             $window.TestFairy.begin(process.env.TESTFAIRY_IOS_APP_TOKEN);
         }
     }, false);

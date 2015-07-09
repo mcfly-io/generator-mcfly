@@ -17,7 +17,7 @@ gulp.task('jshint', false, function() {
     var hasError = false;
     var hasShown = false;
     var successReporter = map(function(file, cb) {
-        if(!file.jshint.success) {
+        if (!file.jshint.success) {
             hasError = true;
         }
         cb(null, file);
@@ -35,7 +35,7 @@ gulp.task('jshint', false, function() {
             throw new Error('jshint failed');
         })
         .pipe(map(function() {
-            if(!hasError && !hasShown) {
+            if (!hasError && !hasShown) {
                 hasShown = true;
                 gutil.log(chalk.green('All Jshint files passed'));
 
@@ -60,7 +60,7 @@ gulp.task('jscs', false, function() {
     });
 
     combined.on('end', function() {
-        if(!hasError) {
+        if (!hasError) {
             gutil.log(chalk.green('All Jscs files passed'));
 
         }
@@ -76,14 +76,14 @@ gulp.task('eslint', false, function() {
         .pipe(eslint.format())
         .on('data', function(file) {
 
-            if(file.eslint.messages && file.eslint.messages.length && _.any(file.eslint.messages, function(item) {
-                return item.severity === 2;
-            })) {
+            if (file.eslint.messages && file.eslint.messages.length && _.any(file.eslint.messages, function(item) {
+                    return item.severity === 2;
+                })) {
                 hasError = true;
             }
         })
         .on('end', function() {
-            if(!hasError && !hasShown) {
+            if (!hasError && !hasShown) {
                 hasShown = true;
                 gutil.log(chalk.green('All EsLint files passed'));
 
@@ -107,12 +107,12 @@ gulp.task('static', false, function() {
     return gulp.src(constants.lint)
         .pipe(plumber({
             errorHandler: function(err) {
-                if(err.plugin === 'gulp-jscs') {
+                if (err.plugin === 'gulp-jscs') {
                     gutil.log(err.toString());
                 }
                 status.hasError = true;
                 status.errs.push(err);
-                if(!status.hasShown) {
+                if (!status.hasShown) {
                     status.hasShown = true;
 
                     this.emit('end');
@@ -129,7 +129,7 @@ gulp.task('static', false, function() {
         .pipe(jshint.reporter('fail'))
         .pipe(eslint.failOnError())
         .on('end', function() {
-            if(status.hasError) {
+            if (status.hasError) {
                 gutil.log(chalk.red('lint failed'));
                 throw new Error('lint_error');
 
