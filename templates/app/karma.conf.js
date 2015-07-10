@@ -1,6 +1,9 @@
 'use strict';
 
 var args = require('yargs').argv;
+var constants = require('./gulp_tasks/common/constants')();
+var webpack = require('./webpack.config');
+var isWebpack = constants.moduleManager === 'webpack';
 
 module.exports = function(config) {
     var debug = false;
@@ -20,13 +23,37 @@ module.exports = function(config) {
         debug: true,
         transform: [
             ['babelify', {
+                'stage': 0,
+                'optional': ['es7.asyncFunctions'],
                 'ignore': ['./node_modules', './bower_components']
             }],
-            [{
+            ['browserify-istanbul', {
+                instrumenter: require('isparta'),
                 ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/<%=clientFolder%>/scripts/lbServices.js']
-            }, 'browserify-istanbul']
+            }]
         ]
     };
+
+    webpack.cache = true;
+    webpack.devtool = 'inline-source-map';
+    webpack.module.preLoaders = webpack.module.preLoaders || [];
+    webpack.module.preLoaders.push({
+        test: /\.js$/,
+        exclude: /(tests.webpack.js|.test.js|node_modules|bower_components)/,
+        loader: 'istanbul-instrumenter'
+    });
+
+    var preprocessors;
+    if (isWebpack) {
+        preprocessors = {
+            './<%=clientFolder%>/scripts/tests.webpack.js': ['webpack', 'sourcemap']
+        };
+    } else {
+        preprocessors = {
+            './<%=clientFolder%>/scripts/**/*.test.js': ['browserify']
+        };
+    }
+
     if (debug === true) {
         delete browserify.transform;
         reporters.splice(reporters.indexOf('coverage'), 1);
@@ -40,12 +67,12 @@ module.exports = function(config) {
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['browserify', 'jasmine'],
+        frameworks: isWebpack ? ['jasmine'] : ['browserify', 'jasmine'],
 
         // list of files / patterns to load in the browser
         files: [
-            './<%=clientFolder%>/scripts/**/*.html',
-            './<%=clientFolder%>/scripts/**/*.test.js'
+            //'./client/scripts/**/*.html',
+            isWebpack ? './<%=clientFolder%>/scripts/tests.webpack.js' : './<%=clientFolder%>/scripts/**/*.test.js'
         ],
 
         // list of files to exclude
@@ -56,9 +83,7 @@ module.exports = function(config) {
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: {
-            './<%=clientFolder%>/scripts/**/*.test.js': ['browserify']
-        },
+        preprocessors: preprocessors,
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
@@ -102,7 +127,16 @@ module.exports = function(config) {
                 type: 'lcov'
             }]
         },
-
+        webpack: webpack,
+        webpackMiddleware: {
+            noInfo: true,
+            stats: {
+                hash: false,
+                version: false,
+                colors: true,
+                moduleSort: 'name'
+            }
+        },
         browserify: browserify
     });
 };

@@ -141,6 +141,7 @@ var AppGenerator = Class.extend({
                         lint: true,
                         serve: true,
                         browserify: true,
+                        webpack: true,
                         release: true,
                         changelog: true,
                         test: true,
@@ -216,6 +217,7 @@ var AppGenerator = Class.extend({
             this.template('_bowerrc', '.bowerrc');
             this.template('karma.conf.js');
             this.template('protractor.conf.js');
+            this.template('webpack.config.js');
             this.template('bin/prepublish.sh');
             this.template('bin/protractor-fix-version.js');
             this.template('bin/cordova-generate-icons');
@@ -240,6 +242,7 @@ var AppGenerator = Class.extend({
             this.template('../target/styles/main.less', this.clientFolder + '/styles/main.less');
             this.template('../target/scripts/main.js', this.clientFolder + '/scripts/main.js');
             this.template('../target/scripts/main.test.js', this.clientFolder + '/scripts/main.test.js');
+            this.template('client/scripts/tests.webpack.js', this.clientFolder + '/scripts/tests.webpack.js');
             if (this.mobile) {
                 this.template('../target/config.xml', path.join(this.targetDir, 'config' + '.xml'));
                 this.directory('../target/hooks', path.join(this.targetDir, 'cordova', 'app', 'hooks'));
