@@ -1,7 +1,7 @@
 'use strict';
 require('angular-ui-router');<% if (ionic) { %>
 require('angular-sanitize');
-require('angular-animate');    
+require('angular-animate');
 require('ionic-angular');<% } %><% if (material) { %>
 require('angular-material');<% } %><% if (famous) { %>
 require('famous-angular');<% } %><% if (ngCordova) { %>
@@ -18,15 +18,16 @@ module.exports = function(namespace) {
     // inject:folders start
     // inject:folders end
 <% if (!skipRoute) { %>
-    app.config(['$stateProvider', '$urlRouterProvider',
-        function($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise('/');
-            $stateProvider.state('home', {
-                url: '/',
-                template: require('./views/home.html')
-            });
-        }
-    ]);
+    var configRoutesDeps = ['$stateProvider', '$urlRouterProvider'];
+    var configRoutes = function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/');
+        $stateProvider.state('home', {
+            url: '/',
+            template: require('./views/home.html')
+        });
+    };
+    configRoutes.$inject = configRoutesDeps;
+    app.config(configRoutes);
 <% } %>
     return app;
 };

@@ -5,7 +5,7 @@ var namespace = 'main';
 var angular = require('angular');
 require('angular-ui-router');<% if (ionic) { %>
 require('angular-animate');
-require('angular-sanitize');           
+require('angular-sanitize');
 require('ionic-angular');<% } %><% if (material) { %>
 require('angular-material');<% } %>
 var app = angular.module(namespace, [<% if (ionic) { %>'ionic', <% } %><% if (material) { %>'ngMaterial',<% } %>
