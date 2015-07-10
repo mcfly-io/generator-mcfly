@@ -1,6 +1,8 @@
 'use strict';
 require('angular-ui-router');<% if (ionic) { %>
-require('angular-ionic');<% } %><% if (material) { %>
+require('angular-sanitize');
+require('angular-animate');    
+require('ionic-angular');<% } %><% if (material) { %>
 require('angular-material');<% } %><% if (famous) { %>
 require('famous-angular');<% } %><% if (ngCordova) { %>
 require('ng-cordova');<% } %>

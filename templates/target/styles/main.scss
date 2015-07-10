@@ -1,11 +1,11 @@
-<% if (ionic) { %>@import "../../bower_components/ionic/scss/ionic.scss";<% } %>
-<% if (fontawesome) { %>@import "../../bower_components/font-awesome/scss/font-awesome.scss";<% } %>
+<% if (ionic) { %>@import "../../node_modules/ionic-sdk/scss/ionic.scss";<% } %>
+<% if (fontawesome) { %>@import "../../node_modules/font-awesome/scss/font-awesome.scss";<% } %>
 <% if (famous) { %>
 @import "../../bower_components/famous-angular/dist/famous-angular";  
 <% } %>  
 <% if (bootstrap) { %>
-@import "../../bower_components/bootstrap/dist/css/bootstrap";
-@import "../../bower_components/bootstrap/dist/css/bootstrap-theme";
+@import "../../node_modules/bootstrap/dist/css/bootstrap";
+@import "../../node_modules/bootstrap/dist/css/bootstrap-theme";
 <% } %>
 <% if (material) { %>
 @import "../../node_modules/angular-material/angular-material";

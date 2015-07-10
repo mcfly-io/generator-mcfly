@@ -2,8 +2,11 @@
 
 var namespace = 'main';
 
-var angular = require('angular');<% if (ionic) { %>
-require('angular-ionic');<% } %><% if (material) { %>
+var angular = require('angular');
+require('angular-ui-router');<% if (ionic) { %>
+require('angular-animate');
+require('angular-sanitize');           
+require('ionic-angular');<% } %><% if (material) { %>
 require('angular-material');<% } %>
 var app = angular.module(namespace, [<% if (ionic) { %>'ionic', <% } %><% if (material) { %>'ngMaterial',<% } %>
     // inject:modules start
@@ -30,6 +33,8 @@ var run = function($ionicPlatform, $window) {
 var runDeps = ['$window'];
 var run = function($window) {
     document.addEventListener('deviceready', function() {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
         if ($window.cordova && $window.cordova.plugins.Keyboard) {
             $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
