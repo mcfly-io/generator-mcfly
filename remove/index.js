@@ -63,7 +63,7 @@ var RemoveGenerator = Class.extend({
         var that = this;
         var files = [];
 
-        if(this.confirmation !== true) {
+        if (this.confirmation !== true) {
             done();
             return;
         }
@@ -72,14 +72,14 @@ var RemoveGenerator = Class.extend({
             return fs.existsSync('./' + clientFolder + '/config' + suffix + '.xml');
         };
 
-        if(this.component === 'target') {
+        if (this.component === 'target') {
             this.suffix = gmux.targets.targetToSuffix(this.targetname);
 
             files.push(path.join(this.targetDir, 'index' + this.suffix + '.html'));
             files.push(path.join(this.targetDir, 'images', this.targetname));
             files.push(path.join(this.targetDir, 'icons', this.targetname));
             files.push(path.join(this.targetDir, 'fonts', this.targetname));
-            if(isMobile(this.clientFolder, this.suffix)) {
+            if (isMobile(this.clientFolder, this.suffix)) {
                 files.push(path.join(this.targetDir, 'config' + this.suffix + '.xml'));
                 files.push(path.join(this.targetDir, 'cordova', this.targetname, 'hooks'));
             }
@@ -91,7 +91,7 @@ var RemoveGenerator = Class.extend({
             files.push(path.join(this.targetDir, 'favicon' + this.suffix + '.ico'));
 
             del(files, function(err, deletedFiles) {
-                if(err) {
+                if (err) {
                     that.log(chalk.red.bold('(ERROR) '), err);
                 } else {
                     that.log('Files deleted:\n' + deletedFiles.join('\n'));

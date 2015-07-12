@@ -2,13 +2,14 @@
 describe('e2e test', function() {
 
     beforeEach(function() {
-        browser.get('http://localhost:5555');
+        browser.ignoreSynchronization = true;
+        browser.get('/');  // the base url is set in protractor.conf.js
     });
 
     afterEach(function() {
         browser.manage().logs().get('browser').then(function(browserlog) {
             //expect(browserlog.length).toEqual(0);
-            if(browserlog.length) {
+            if (browserlog.length) {
                 //console.error('Error log: ' + JSON.stringify(browserlog));
             }
         });

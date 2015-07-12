@@ -40,7 +40,7 @@ var DirectiveGenerator = Class.extend({
     },
 
     writing: function() {
-        if(!_.contains(this.clientModules, this.modulename)) {
+        if (!_.contains(this.clientModules, this.modulename)) {
             this.log(this.utils.chalk.red('Error: ') + 'The module name ' + this.utils.chalk.yellow(this.modulename) + ' does not exist');
             return;
         }
@@ -54,7 +54,7 @@ var DirectiveGenerator = Class.extend({
         var filename = this.casify(this.directivename);
         filename = this.suffixify(filename, 'directive');
         this.filename = filename; // passing the value to the template
-        if(this.compile === true || this.compile === 'true') {
+        if (this.compile === true || this.compile === 'true') {
             this.template('index-compile.js', path.join(targetDir, filename + '.js'));
         } else {
             this.template('index.js', path.join(targetDir, filename + '.js'));

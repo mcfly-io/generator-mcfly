@@ -56,7 +56,7 @@ describe('generator:module', function() {
 
             this.runGen
                 .on('ready', function(generator) {
-                    if(!end) {
+                    if (!end) {
                         end = Object.getPrototypeOf(generator).end;
                     }
                     Object.getPrototypeOf(generator).end = function() {
@@ -182,7 +182,7 @@ describe('generator:module', function() {
 
     describe('angular modules', function() {
 
-        it('should include angular-ionic with ionic', function(done) {
+        it('should include ionic-angular with ionic', function(done) {
             testHelper.runGenerator('module')
                 .withOptions({
                     'skip-install': true,
@@ -207,7 +207,7 @@ describe('generator:module', function() {
                 .on('end', function() {
                     var file = clientFolder + '/scripts/' + modulename + '/index.js';
                     var body = testHelper.readTextFile(file);
-                    assert(_.contains(body, 'require(\'angular-ionic\');'));
+                    assert(_.contains(body, 'require(\'ionic-angular\');'));
                     assert(_.contains(body, '\'ionic\''));
                     done();
                 });
@@ -308,7 +308,7 @@ describe('generator:module', function() {
 
         });
 
-        it('should include famous-angular and angular-ionic with famous, ionic, ngCordova, and material', function(done) {
+        it('should include famous-angular and ionic-angular with famous, ionic, ngCordova, and material', function(done) {
             testHelper.runGenerator('module')
                 .withOptions({
                     'skip-install': true,
@@ -338,7 +338,7 @@ describe('generator:module', function() {
                     var body = testHelper.readTextFile(file);
 
                     assert(_.contains(body, 'require(\'famous-angular\');'));
-                    assert(_.contains(body, 'require(\'angular-ionic\');'));
+                    assert(_.contains(body, 'require(\'ionic-angular\');'));
                     assert(_.contains(body, 'require(\'ng-cordova\');'));
                     assert(_.contains(body, 'require(\'angular-material\');'));
                     assert(_.contains(body, '\'ionic\''));
@@ -537,7 +537,7 @@ describe('generator:module', function() {
             this.runGen
                 .on('ready', function(generator) {
 
-                    if(!end) {
+                    if (!end) {
                         end = Object.getPrototypeOf(generator).end;
                     }
                     Object.getPrototypeOf(generator).end = function() {

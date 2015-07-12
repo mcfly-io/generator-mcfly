@@ -62,10 +62,10 @@ var ModuleGenerator = Class.extend({
             default: this.modulename,
             validate: function(value) {
                 value = _.str.trim(value);
-                if(_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
+                if (_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
                     return 'Please enter a non empty name';
                 }
-                if(_.contains(that.clientModules, value)) {
+                if (_.contains(that.clientModules, value)) {
                     return 'The module name ' + value + ' already exists';
                 }
                 return true;
@@ -83,7 +83,7 @@ var ModuleGenerator = Class.extend({
 
     configuring: function() {
         this.skipRoute = this.options['skip-route'];
-        if(_.contains(this.clientModules, this.modulename)) {
+        if (_.contains(this.clientModules, this.modulename)) {
             var msg = 'The module name ' + this.modulename + ' already exists';
             this.log(this.utils.chalk.red.bold('(ERROR) ') + msg);
             var error = new Error(msg);
@@ -103,7 +103,7 @@ var ModuleGenerator = Class.extend({
             var filename = 'index'; // we are ignoring the filename suffix options for modules as it changes the require() statements
 
             this.template('index.js', path.join(this.targetDir, filename + '.js'));
-            if(!this.skipRoute) {
+            if (!this.skipRoute) {
                 this.template('home.html', path.join(this.targetDir, 'views', 'home.html'));
             }
             done();

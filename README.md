@@ -28,11 +28,12 @@ The project has the following capabilities:
 * Angular best pratices (feature folder structure)
 * Sass AND Less enabled
 * jshint, jscsc, eslint enabled (so you shouldn't have any typo left in your js files !)
-* Karma configured with Browserify including Code Coverage
+* Webpack or Browserify (you can switch them out)
+* Karma configured with Code Coverage
 * Browser-sync
 * TestFairy publishing
 
-It also supports ES6 by using the babelify transform
+It also supports ES6/7 by using the babel
 
 See it in action here:   
 [![Building a native like interface with Famous](http://img.youtube.com/vi/L56RnM6VI-w/0.jpg)](http://www.youtube.com/watch?v=L56RnM6VI-w)
@@ -57,6 +58,7 @@ This will install, among others, the following packages globally:
 * gulp
 * browserify
 * watchify
+* webpack
 * cordova
 * ionic (cli) - A good cordova wrapper
 
@@ -116,7 +118,8 @@ gulp unit           # Run lint and unit tests (karma for client + mocha for serv
 gulp karma          # Run karma client unit tests
 gulp mocha          # Run mocha server unit tests
 gulp e2e            # Run protractor for end to end tests
-gulp browserify     # Generate dist file and launc a browser-sync browser and live reload emulator if the target app is mobile
+gulp browserify     # Generate a distribution folder using browserify
+gulp webpack:run    # Generate a distribution folder using webpack
 gulp style          # Generate a main.css file
 gulp browsersync    # Creates a browser-sync server, it will display its url, it watches for js / css / scss / html file changes and inject automatically the change in the browser
 gulp dist           # Distribute the application
@@ -129,8 +132,10 @@ The constants are resolved against the `--target` option. The default value for 
 
 To better understand the gulp task system have a look at the docs of [gulp-mux](https://github.com/mcfly-io/gulp-mux) 
 
-## Browserify and namespaces
-At the heart of the generator we use `browserify` to bundle together the client javascript files.   
+## Browserify/Webpack and namespaces
+At the heart of the generator we use `browserify` or `webpack` to bundle together the client javascript files.   
+To switch between `browserify` or `webpack` change the constant value `bundleManager` in `gulp_tasks/common/constants.js` (`'browserify'` or `'webpack'`)
+
 Also because angular modules do not prevent name collision, each scaffolded component gets an unique full name composed like this:
 ```
 [main app name].[module name].[component name]
@@ -396,13 +401,19 @@ yo mcfly:require
 ```
 
 ## Adding a third party bower package
+You should always prefer an npm package instead of a bower package. Most of client side libraries nowadays exist as both npm and bower packages.
+But sometimes it is not the case and you have to deal with a bower package.
+
 If you want to include a third party bower package do the following:
 
 * `bower install --save yourpackage`
-* modify `package.json` bower section to include a path to the global minified javascript file of the package
+* modify `package.json` `browser` section to include a path to the global minified javascript file of the package
 * adjust the **font** gulp constants (`gulp/common/constants.js`) to include the relevant fonts of the package (if applicable)
 * if the package exposes a global `.scss` file import it into `client/styles/main.scss` and ajdust eventually the variable for the path font (should be `../fonts`)
 * if the package only exposes a `.css` file adjust the **css** file constants (`gulp/common/constants.js`) to include it
+* if the package relies on other libraries
+  * Either add a browser-shim section (but this will only work with browserify, not webpack)
+  * Or make sure you require the dependencies in your code just before you require the package.
 
 ## Cordova applications
 When you scaffold a mobile app (`yo mcfly:target myapp --mobile`), this will create a `cordova/myapp` folder under `client`.
@@ -427,7 +438,7 @@ cd dist/maypp/<dev or prod>/
 cordova platform add <ios or android or ...>
 ```
 
-When you run `gulp browsersync --t myapp` the task will detect that `myapp` is a mobile app, and will automatically launch both a browser-sync browser window and a livereload emulator.   
+When you run `gulp browsersync --target myapp` the task will detect that `myapp` is a mobile app, and will automatically launch both a browser-sync browser window and a livereload emulator.   
 You can pass an addition `--platform` option to tell it which emulator you want (ios, android, etc...).   
 If you don't pass `--platform` it will choose the value from `constants.js` (`constants.cordova.platform`).
 
@@ -441,6 +452,10 @@ and then simply run
 ```bash
 gulp cordova:testfairy
 ```
+
+### Cordova Content Security Policy
+The `index.html` is configured to be permissive.
+Adjust the meta tags `Content-Security-Policy` to your needs. Reference is here : http://content-security-policy.com/ 
 
 ## Testing
 To run unit test for the yeoman project use the following command:

@@ -36,16 +36,16 @@ var constants = require('../common/constants')();
 gulp.task('bump', false, function(cb) {
     var bumpType = 'patch';
     // major.minor.patch
-    if(args.patch) {
+    if (args.patch) {
         bumpType = 'patch';
     }
-    if(args.minor) {
+    if (args.minor) {
         bumpType = 'minor';
     }
-    if(args.major) {
+    if (args.major) {
         bumpType = 'major';
     }
-    if(args.prerelease) {
+    if (args.prerelease) {
         bumpType = 'prerelease';
     }
     bumpType = process.env.BUMP || bumpType;
@@ -62,7 +62,7 @@ gulp.task('bump', false, function(cb) {
             type: bumpType
         })))
         .pipe(tap(function(file) {
-            if(!version) {
+            if (!version) {
                 var json = JSON.parse(String(file.contents));
                 version = json.version;
             }
@@ -70,7 +70,7 @@ gulp.task('bump', false, function(cb) {
         .pipe(gulp.dest('./'))
         .on('end', function() {
             // then after we have the correct value for version, we take care of the xml files
-            if(srcxml.length > 0) {
+            if (srcxml.length > 0) {
                 gulp.src(srcxml)
                     .pipe(tap(function(file) {
                         var xml = new XML(String(file.contents));
@@ -104,7 +104,7 @@ gulp.task('tag', false, ['commit'], function(cb) {
     var v = 'v' + pkg.version;
     var message = pkg.version;
     git.tag(v, message, function(err) {
-        if(err) {
+        if (err) {
             throw new Error(err);
         }
         cb();
@@ -113,7 +113,7 @@ gulp.task('tag', false, ['commit'], function(cb) {
 
 gulp.task('push', false, ['tag'], function(cb) {
     exec('git push origin master  && git push origin master --tags', function(err) {
-        if(err) {
+        if (err) {
             throw new Error(err);
         }
         cb();
@@ -162,7 +162,7 @@ var githubAuthSetupAndTestAsync = function(result) {
         password: result.password
     });
     github.misc.rateLimit({}, function(err, res) {
-        if(err) {
+        if (err) {
             deferred.reject(gutil.colors.red('GitHub auth failed! ') + 'Response from server: ' + gutil.colors.yellow(err.message));
         }
         deferred.resolve(gutil.colors.green('GitHub auth successful!'));
@@ -224,7 +224,7 @@ gulp.task('release:createRelease', false, function(cb) {
                 body: body
             };
             github.releases.createRelease(msg, function(err, res) {
-                if(err) {
+                if (err) {
                     gutil.log(gutil.colors.red('Error: ' + err));
                 } else {
                     del('CHANGELOG.md');

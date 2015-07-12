@@ -1,5 +1,5 @@
 'use strict';
-
+var constants = require('./gulp_tasks/common/constants')();
 exports.config = {
     //seleniumAddress: 'http://localhost:4444/wd/hub',
     //seleniumServerJar: './node_modules/gulp-protractor/node_modules/protractor/selenium/selenium-server-standalone-2.43.1.jar',
@@ -7,18 +7,25 @@ exports.config = {
     framework: 'jasmine2',
     capabilities: {
         browserName: 'chrome',
+        chromeOption: {
+            args: ['--disable - extensions ']
+        },
         version: '',
         platform: 'ANY',
         'phantomjs.binary.path': './node_modules/phantomjs/bin/phantomjs'
     },
+    baseUrl: 'http://localhost:' + constants.e2e.port,
     jasmineNodeOpts: {
         showColors: true,
         silent: true,
+        includeStackTrace: true,
         defaultTimeoutInterval: 30000,
         print: function() {}
     },
     onPrepare: function() {
+        browser.manage().timeouts().setScriptTimeout(30000);
         browser.driver.manage().window().setSize(1600, 800);
+        browser.executeScript('window.name = "NG_ENABLE_DEBUG_INFO"'); // see https://github.com/angular/protractor/issues/2116
 
         require('jasmine-reporters');
         var SpecReporter = require('jasmine-spec-reporter');

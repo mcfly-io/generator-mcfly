@@ -133,7 +133,7 @@ exports.injectComponent = function(directory) {
  * @returns {void}
  */
 exports.createIndexFile = function(generator, sourceDir, targetDir) {
-    if(!fs.existsSync(path.join(targetDir, 'index.js'))) {
+    if (!fs.existsSync(path.join(targetDir, 'index.js'))) {
         generator.template(sourceDir + '/index.js', path.join(targetDir, 'index.js'));
     }
 };
@@ -145,16 +145,16 @@ exports.createIndexFile = function(generator, sourceDir, targetDir) {
  */
 exports.getNgModules = function(generator) {
     var retVal = [];
-    if(generator.ionic) {
+    if (generator.ionic) {
         retVal.push('\'ionic\'');
     }
-    if(generator.famous) {
+    if (generator.famous) {
         retVal.push('\'famous.angular\'');
     }
-    if(generator.ngCordova) {
+    if (generator.ngCordova) {
         retVal.push('\'ngCordova\'');
     }
-    if(generator.material) {
+    if (generator.material) {
         retVal.push('\'ngMaterial\'');
     }
     return retVal.join(', ');

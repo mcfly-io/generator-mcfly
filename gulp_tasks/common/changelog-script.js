@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 'use strict';
 
 var child = require('child_process');
@@ -22,7 +23,7 @@ var warn = function() {
 };
 
 var parseRawCommit = function(raw) {
-    if(!raw) {
+    if (!raw) {
         return null;
     }
 
@@ -37,20 +38,20 @@ var parseRawCommit = function(raw) {
 
     lines.forEach(function(line) {
         match = line.match(/(?:Closes|Fixes)\s#(\d+)/);
-        if(match) {
+        if (match) {
             msg.closes.push(parseInt(match[1], 10));
         }
     });
 
     match = raw.match(/BREAKING CHANGE:([\s\S]*)/);
-    if(match) {
+    if (match) {
         msg.breaking = match[1];
     }
 
     msg.body = lines.join('\n');
     match = msg.subject.match(/^(.*)\((.*)\)\:\s(.*)$/);
 
-    if(!match || !match[1] || !match[3]) {
+    if (!match || !match[1] || !match[3]) {
         warn('Incorrect message: %s %s', msg.hash, msg.subject);
         return null;
     }
@@ -84,7 +85,7 @@ var printSection = function(stream, title, section, printCommitLinks) {
     printCommitLinks = printCommitLinks === undefined ? true : printCommitLinks;
     var components = Object.getOwnPropertyNames(section).sort();
 
-    if(!components.length) {
+    if (!components.length) {
         return;
     }
 
@@ -94,8 +95,8 @@ var printSection = function(stream, title, section, printCommitLinks) {
         var prefix = '-';
         var nested = section[name].length > 1;
 
-        if(name !== EMPTY_COMPONENT) {
-            if(nested) {
+        if (name !== EMPTY_COMPONENT) {
+            if (nested) {
                 stream.write(util.format('- **%s:**\n', name));
                 prefix = '  -';
             } else {
@@ -104,9 +105,9 @@ var printSection = function(stream, title, section, printCommitLinks) {
         }
 
         section[name].forEach(function(commit) {
-            if(printCommitLinks) {
+            if (printCommitLinks) {
                 stream.write(util.format('%s %s\n  (%s', prefix, commit.subject, linkToCommit(commit.hash)));
-                if(commit.closes.length) {
+                if (commit.closes.length) {
                     stream.write(',\n   ' + commit.closes.map(linkToIssue).join(', '));
                 }
                 stream.write(')\n');
@@ -127,7 +128,7 @@ var readGitLog = function(grep, from) {
 
         stdout.split('\n==END==\n').forEach(function(rawCommit) {
             var commit = parseRawCommit(rawCommit);
-            if(commit) {
+            if (commit) {
                 commits.push(commit);
             }
         });
@@ -152,12 +153,12 @@ var writeChangelog = function(stream, commits, version) {
         var section = sections[commit.type];
         var component = commit.component || EMPTY_COMPONENT;
 
-        if(section) {
+        if (section) {
             section[component] = section[component] || [];
             section[component].push(commit);
         }
 
-        if(commit.breaking) {
+        if (commit.breaking) {
             sections.breaks[component] = sections.breaks[component] || [];
             sections.breaks[component].push({
                 subject: util.format('due to %s,\n %s', linkToCommit(commit.hash), commit.breaking),
@@ -177,7 +178,7 @@ var writeChangelog = function(stream, commits, version) {
 var getPreviousTag = function() {
     var deferred = q.defer();
     child.exec(GIT_TAG_CMD, function(code, stdout) {
-        if(code) {
+        if (code) {
             deferred.reject('Cannot get the previous tag.');
         } else {
             deferred.resolve(stdout.replace('\n', ''));
@@ -190,7 +191,7 @@ var generate = function(version, from, file) {
 
     getPreviousTag().then(function(tag) {
         //console.log('Reading git log since', tag);
-        if(from) {
+        if (from) {
             tag = from;
         }
         readGitLog('^fix|^feat|^perf|BREAKING', tag).then(function(commits) {
@@ -205,6 +206,6 @@ var generate = function(version, from, file) {
 exports.parseRawCommit = parseRawCommit;
 
 // hacky start if not run by jasmine :-D
-if(process.argv.join('').indexOf('jasmine-node') === -1) {
+if (process.argv.join('').indexOf('jasmine-node') === -1) {
     generate(process.argv[2], process.argv[3], process.argv[4]);
 }

@@ -9,12 +9,8 @@
     "tests"
   ],
   "dependencies": {
-    "marked":"0.3.3"<% if (ionic) { %>,
-    "ionic":"1.0.0"<% } %><% if (famous) { %>,
-    "famous-angular": "0.5.0"<% } %><% if (fontawesome) { %>,
-    "font-awesome": "4.3.0"<% } %><% if (bootstrap) { %>,
-    "bootstrap": "3.3.4"<% } %><% if (material) { %>,
-    "angular-material": "0.9.8-rc1"<% } %>
+    "marked":"0.3.3"<% if (famous) { %>,
+    "famous-angular": "0.5.0"<% } %>
   },
   "resolutions": {
   }

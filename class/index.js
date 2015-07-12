@@ -78,13 +78,13 @@ var ClassGenerator = Base.extend({
 
         var deferred = Q.defer();
 
-        if(this.options['check-' + cmd] === false) {
+        if (this.options['check-' + cmd] === false) {
             deferred.resolve(undefined);
         }
 
-        if(!this.utils.shell.which(cmd)) {
+        if (!this.utils.shell.which(cmd)) {
             this.log(chalk.red.bold('(ERROR)') + ' It looks like you do not have ' + cmd + ' installed...');
-            if(exit === true) {
+            if (exit === true) {
                 deferred.reject(new Error(cmd + ' is missing'));
                 this.utils.shell.exit(1);
             } else {
@@ -117,7 +117,7 @@ var ClassGenerator = Base.extend({
     checkTravis: function() {
         return this.checkCmd('travis', false)
             .then(function(value) {
-                if(value === false) {
+                if (value === false) {
                     this.utils.shell.exec('gem install travis -v' + this.travisOptions.version + ' --no-rdoc --no-ri');
                     return true;
                 }
@@ -140,8 +140,8 @@ var ClassGenerator = Base.extend({
             packageVersion: pkg.version,
             updateCheckInterval: 1
         });
-        if(notifier.update) {
-            if(notifier.update.latest !== pkg.version) {
+        if (notifier.update) {
+            if (notifier.update.latest !== pkg.version) {
                 notifier.notify();
                 this.utils.shell.exit(1);
             }
@@ -149,7 +149,7 @@ var ClassGenerator = Base.extend({
     },
 
     hasListOption: function(answers, list, option) {
-        if(!answers || !answers[list]) {
+        if (!answers || !answers[list]) {
             return false;
         }
         return answers[list].indexOf(option) !== -1;
@@ -173,7 +173,7 @@ var ClassGenerator = Base.extend({
     readDir: function(dirPath, isDirectory) {
         var deferred = Q.defer();
         fs.readdir(dirPath, function(err, files) {
-            if(err) {
+            if (err) {
                 deferred.reject(err);
                 return deferred.promise;
             }
@@ -216,7 +216,7 @@ var ClassGenerator = Base.extend({
     casify: function(str) {
         var filenameCase = this.config.get('filenameCase') || 'camel';
         str = this.camelize(str);
-        if(filenameCase === 'snake') {
+        if (filenameCase === 'snake') {
             return this.dasherize(str);
         }
         return str;
@@ -231,7 +231,7 @@ var ClassGenerator = Base.extend({
      */
     suffixify: function(str, suffix) {
         var filenameSuffix = this.config.get('filenameSuffix');
-        if(filenameSuffix === true || filenameSuffix === 'true') {
+        if (filenameSuffix === true || filenameSuffix === 'true') {
             return str + '.' + suffix;
         }
         return str;
@@ -280,7 +280,7 @@ var ClassGenerator = Base.extend({
      */
     getClientFolder: function() {
         var retval = this.config.get('clientFolder');
-        if(!retval) {
+        if (!retval) {
             retval = 'client';
             this.config.set('clientFolder', retval);
             this.config.save();
@@ -342,7 +342,7 @@ var ClassGenerator = Base.extend({
                 targets = values[2];
             }).then(function() {
 
-                if(targets && targets.length > 0) {
+                if (targets && targets.length > 0) {
                     var tasks = _(targets).map(function(target) {
                         var suffix = that.targetnameToSuffix(target);
                         return utils.injectModules(directory, suffix, modules);
