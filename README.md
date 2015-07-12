@@ -134,6 +134,8 @@ To better understand the gulp task system have a look at the docs of [gulp-mux](
 
 ## Browserify/Webpack and namespaces
 At the heart of the generator we use `browserify` or `webpack` to bundle together the client javascript files.   
+To switch between `browserify` or `webpack` change the constant value `bundleManager` in `gulp_tasks/common/constants.js` (`'browserify'` or `'webpack'`)
+
 Also because angular modules do not prevent name collision, each scaffolded component gets an unique full name composed like this:
 ```
 [main app name].[module name].[component name]
@@ -412,6 +414,7 @@ If you want to include a third party bower package do the following:
 * if the package relies on other libraries
   * Either add a browser-shim section (but this will only work with browserify, not webpack)
   * Or make sure you require the dependencies in your code just before you require the package.
+
 ## Cordova applications
 When you scaffold a mobile app (`yo mcfly:target myapp --mobile`), this will create a `cordova/myapp` folder under `client`.
 
@@ -435,7 +438,7 @@ cd dist/maypp/<dev or prod>/
 cordova platform add <ios or android or ...>
 ```
 
-When you run `gulp browsersync --t myapp` the task will detect that `myapp` is a mobile app, and will automatically launch both a browser-sync browser window and a livereload emulator.   
+When you run `gulp browsersync --target myapp` the task will detect that `myapp` is a mobile app, and will automatically launch both a browser-sync browser window and a livereload emulator.   
 You can pass an addition `--platform` option to tell it which emulator you want (ios, android, etc...).   
 If you don't pass `--platform` it will choose the value from `constants.js` (`constants.cordova.platform`).
 
@@ -449,6 +452,10 @@ and then simply run
 ```bash
 gulp cordova:testfairy
 ```
+
+### Cordova Content Security Policy
+The `index.html` is configured to be permissive.
+Adjust the meta tags `Content-Security-Policy` to your needs. Reference is here : http://content-security-policy.com/ 
 
 ## Testing
 To run unit test for the yeoman project use the following command:
