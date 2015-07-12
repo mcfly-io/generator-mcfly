@@ -6,6 +6,7 @@ var angular = require('angular');
 require('angular-ui-router');<% if (ionic) { %>
 require('angular-animate');
 require('angular-sanitize');
+require('ionic');
 require('ionic-angular');<% } %><% if (material) { %>
 require('angular-material');<% } %>
 var app = angular.module(namespace, [<% if (ionic) { %>'ionic', <% } %><% if (material) { %>'ngMaterial',<% } %>
@@ -13,7 +14,7 @@ var app = angular.module(namespace, [<% if (ionic) { %>'ionic', <% } %><% if (ma
     // inject:modules end
 ]);
 
-if(process.env.SENTRY_MODE === 'prod') {
+if (process.env.SENTRY_MODE === 'prod') {
     var configCompileDeps = ['$compileProvider'];
     var configCompile = function($compileProvider) {
         $compileProvider.debugInfoEnabled(false);
@@ -21,7 +22,6 @@ if(process.env.SENTRY_MODE === 'prod') {
     configCompile.$inject = configCompileDeps;
     app.config(configCompile);
 }
-
 <% if (ionic) { %>
 var runDeps = ['$ionicPlatform', '$window'];
 var run = function($ionicPlatform, $window) {
