@@ -15,11 +15,11 @@ exports.compileDirective = function(directivename, html, runDigest) {
 
     var element = jQLite(html);
     this.$compile(element)(this.$scope);
-    if(runDigest) {
+    if (runDigest) {
         this.$scope.$digest();
     }
     this.directive = element.find(camelToDash(directivename));
-    if(this.directive.length === 0) {
+    if (this.directive.length === 0) {
         this.directive = element;
     }
     this.controller = this.directive.controller(directivename);
@@ -41,7 +41,7 @@ exports.compileDirectiveFamous = function(directivename, html, height) {
 
 exports.cleanDocument = function() {
     var body = document.body;
-    while(body.firstChild) {
+    while (body.firstChild) {
         body.removeChild(body.firstChild);
     }
 };
