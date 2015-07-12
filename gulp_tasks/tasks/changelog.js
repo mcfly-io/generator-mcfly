@@ -10,16 +10,17 @@ var path = require('path');
 var gutil = require('gulp-util');
 var exec = $.exec;
 var concat = $.concat;
+var order = $.order;
 var helper = require('../common/helper');
 
 var constants = require('../common/constants')();
 
 var repository = constants.repository;
-if (repository.length <= 0) {
-    throw new Error('The repository cannot be empty');
-}
 
 var makeChangelog = function(options) {
+    if (repository.length <= 0) {
+        throw new Error('The repository cannot be empty');
+    }
     var pkg = helper.readJsonFile('./package.json');
     var codename = pkg.codename;
     var file = options.standalone ? '' : path.join(__dirname, 'CHANGELOG.md');
@@ -52,25 +53,22 @@ gulp.task('changelog:conventional', false, function(cb) {
     });
 });
 
-gulp.task('changelog:script', false, function(cb) {
+gulp.task('changelog:script', false, function(done) {
     var pkg = helper.readJsonFile('./package.json');
     var options = argv;
     var version = options.version || pkg.version;
     var from = options.from || '';
-    var streamqueue = require('streamqueue');
-    var stream = streamqueue({
-        objectMode: true
-    });
 
-    stream.queue(gulp.src('').pipe(exec('node ./gulp_tasks/common/changelog-script.js ' + version + ' ' + from, {
-        pipeStdout: true
-    })));
-    stream.queue(gulp.src('CHANGELOG.md'));
-
-    stream.done()
+    gulp.src('')
+        .pipe(exec('node ./gulp_tasks/common/changelog-script.js ' + version + ' ' + from, {
+            pipeStdout: true
+        }))
+        .pipe(concat('updates.md'))
+        .pipe(helper.addSrc('CHANGELOG.md'))
+        .pipe(order(['updates.md', 'CHANGELOG.md']))
         .pipe(concat('CHANGELOG.md'))
         .pipe(gulp.dest('./'))
-        .on('end', cb);
+        .on('end', done);
 });
 
 gulp.task('changelog', 'Generates a CHANGELOG.md file.', ['changelog:script']);
