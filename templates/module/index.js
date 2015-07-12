@@ -2,6 +2,7 @@
 require('angular-ui-router');<% if (ionic) { %>
 require('angular-sanitize');
 require('angular-animate');
+require('ionic');
 require('ionic-angular');<% } %><% if (material) { %>
 require('angular-material');<% } %><% if (famous) { %>
 require('famous-angular');<% } %><% if (ngCordova) { %>
