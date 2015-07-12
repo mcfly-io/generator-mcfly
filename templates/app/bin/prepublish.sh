@@ -8,6 +8,7 @@ which gulp || npm install -g gulp
 which codeclimate || npm install -g codeclimate-test-reporter
 which browserify || npm install -g browserify
 which watchify || npm install -g watchify
+which webpack || npm install -g webpack
 
 npm install -g cordova
 npm install -g ionic
