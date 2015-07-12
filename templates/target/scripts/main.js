@@ -12,6 +12,16 @@ var app = angular.module(namespace, [<% if (ionic) { %>'ionic', <% } %><% if (ma
     // inject:modules start
     // inject:modules end
 ]);
+
+if(process.env.SENTRY_MODE === 'prod') {
+    var configCompileDeps = ['$compileProvider'];
+    var configCompile = function($compileProvider) {
+        $compileProvider.debugInfoEnabled(false);
+    };
+    configCompile.$inject = configCompileDeps;
+    app.config(configCompile);
+}
+
 <% if (ionic) { %>
 var runDeps = ['$ionicPlatform', '$window'];
 var run = function($ionicPlatform, $window) {

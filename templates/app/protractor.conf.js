@@ -25,6 +25,7 @@ exports.config = {
     onPrepare: function() {
         browser.manage().timeouts().setScriptTimeout(30000);
         browser.driver.manage().window().setSize(1600, 800);
+        browser.executeScript('window.name = "NG_ENABLE_DEBUG_INFO"'); // see https://github.com/angular/protractor/issues/2116
 
         require('jasmine-reporters');
         var SpecReporter = require('jasmine-spec-reporter');
