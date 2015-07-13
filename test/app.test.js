@@ -11,7 +11,8 @@ describe('generator:app', function() {
                 .withOptions({
                     'skip-install': true,
                     'check-travis': false,
-                    'check-git': true
+                    'check-git': true,
+                    'testmode': true
                 })
                 .withPrompt({
                     someOption: true
@@ -71,7 +72,8 @@ describe('generator:app', function() {
         it('should skip welcome message when skip-welcome-message is true', function(done) {
             this.runGen
                 .withOptions({
-                    'skip-welcome-message': true
+                    'skip-welcome-message': true,
+                    'testmode': true
                 })
                 .on('end', function() {
                     assert.equal(this.runGen.generator.log.calledWith(yosay('Welcome to the amazing mcfly generator!')), false);
@@ -82,7 +84,8 @@ describe('generator:app', function() {
         it('should display welcome message when skip-welcome-message is false', function(done) {
             this.runGen
                 .withOptions({
-                    'skip-welcome-message': false
+                    'skip-welcome-message': false,
+                    'testmode': true
                 })
                 .on('end', function() {
                     assert(this.runGen.generator.log.calledWith(yosay('Welcome to the amazing mcfly generator!')));
@@ -118,7 +121,8 @@ describe('generator:app', function() {
                     'skip-install': true,
                     'check-travis': false,
                     'check-git': true,
-                    'mobile': true
+                    'mobile': true,
+                    'testmode': true
                 })
                 .withPrompt({
                     someOption: true

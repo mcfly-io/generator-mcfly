@@ -25,6 +25,12 @@ var AppGenerator = Class.extend({
             defaults: false
         });
 
+        this.option('testmode', {
+            desc: 'Only use when testing',
+            type: 'Boolean',
+            defaults: false
+        });
+
         this.appname = this.appname || path.basename(process.cwd());
         this.appname = this.camelize(this.appname);
 
@@ -58,9 +64,9 @@ var AppGenerator = Class.extend({
                 options: {
                     'skip-welcome-message': true
                 }
-            }, {
-                local: require.resolve('generator-sublime')
-            });
+            }, this.options.testmode ? null : {
+                    local: require.resolve('generator-sublime')
+                });
 
         },
         askFor: function() {
@@ -150,7 +156,7 @@ var AppGenerator = Class.extend({
                         style: true,
                         dist: true
                     }
-                }, {
+                }, this.options.testmode ? null : {
                     local: require.resolve('generator-sublime')
                 });
                 done();
