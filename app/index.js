@@ -64,6 +64,8 @@ var AppGenerator = Class.extend({
                 options: {
                     'skip-welcome-message': true
                 }
+            }, this.options.testmode ? null : {
+                local: require.resolve('generator-sublime/app')
             });
 
         },
@@ -154,6 +156,8 @@ var AppGenerator = Class.extend({
                         style: true,
                         dist: true
                     }
+                }, this.options.testmode ? null : {
+                    local: require.resolve('generator-sublime/gulps')
                 });
                 done();
             }.bind(this));
