@@ -64,9 +64,7 @@ var AppGenerator = Class.extend({
                 options: {
                     'skip-welcome-message': true
                 }
-            }, this.options.testmode ? null : {
-                    local: require.resolve('generator-sublime')
-                });
+            });
 
         },
         askFor: function() {
@@ -156,8 +154,6 @@ var AppGenerator = Class.extend({
                         style: true,
                         dist: true
                     }
-                }, this.options.testmode ? null : {
-                    local: require.resolve('generator-sublime')
                 });
                 done();
             }.bind(this));
