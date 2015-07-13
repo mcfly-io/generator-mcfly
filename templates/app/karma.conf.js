@@ -22,14 +22,14 @@ module.exports = function(config) {
     var browserify = {
         debug: true,
         transform: [
+            ['browserify-istanbul', {
+                instrumenter: require('isparta'),
+                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/<%=clientFolder%>/scripts/lbServices.js']
+            }],
             ['babelify', {
                 'stage': 0,
                 'optional': ['es7.asyncFunctions'],
                 'ignore': ['./node_modules', './bower_components']
-            }],
-            ['browserify-istanbul', {
-                instrumenter: require('isparta'),
-                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/<%=clientFolder%>/scripts/lbServices.js']
             }]
         ]
     };
