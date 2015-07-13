@@ -1,6 +1,6 @@
 {
   "name": "generator-mcfly",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Yeoman generator for scaffolding an app using angularjs browserify",
   "license": "MIT",
   "main": "app/index.js",
@@ -49,7 +49,6 @@
   "dependencies": {
     "chalk": "1.0.0",
     "del": "1.2.0",
-    
     "glob-to-regexp": "0.0.2",
     "gulp": "3.9.0",
     "gulp-inject": "1.2.0",
