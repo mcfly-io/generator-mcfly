@@ -59,7 +59,7 @@ var AppGenerator = Class.extend({
                     'skip-welcome-message': true
                 }
             }, {
-                local: require.resolve('generator-subime')
+                local: require.resolve('generator-sublime')
             });
 
         },
