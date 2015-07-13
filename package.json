@@ -49,6 +49,7 @@
   "dependencies": {
     "chalk": "1.0.0",
     "del": "1.2.0",
+    "generator-sublime": ">=1.8.0",
     "glob-to-regexp": "0.0.2",
     "gulp": "3.9.0",
     "gulp-inject": "1.2.0",
@@ -98,9 +99,5 @@
     "stream-combiner": "0.2.2",
     "strip-json-comments": "1.0.2",
     "yargs": "3.10.0"
-  },
-  "peerDependencies": {
-    "yo": ">=1.0.0",
-    "generator-sublime": ">=1.8.0"
   }
 }
