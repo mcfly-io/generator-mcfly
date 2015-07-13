@@ -67,23 +67,23 @@ Feel free to tweak `./bin/prepublish.sh` to add your own requirements.
 ## Usage
 
 Install `generator-mcfly`:
-```
+```bash
 npm install -g generator-mcfly
 ```
 
 Make a new directory, and `cd` into it:
-```
+```bash
 mkdir my-new-project && cd $_
 ```
 
 Run `yo mcfly`, optionally passing an app name:
-```
+```bash
 yo mcfly [app-name]
 ```
 
 ### Typical workflow
 A typical workflow would look like this:
-```
+```bash
 mkdir test-app && cd test-app
 yo mcfly
 yo mcfly:module common
@@ -99,9 +99,8 @@ gulp browsersync
 ## Upgrade
 I like to publish new versions as soon as possible. So here is the upgrade process.
 
-Because `generator-mcfly` has a dependency on `generator-sublime` you should execute the following command:
-```
-npm update -g generator-mcfly generator-sublime
+```bash
+npm update -g generator-mcfly
 ```
 
 ## Client folder
