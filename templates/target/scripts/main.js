@@ -1,7 +1,10 @@
 'use strict';
 
 var namespace = 'main';
-
+// fix protractor issue
+if (window.location.toString().indexOf('localhost:5555') > 0) {
+    window.name = 'NG_DEFER_BOOTSTRAP!NG_ENABLE_DEBUG_INFO!';
+}
 var angular = require('angular');
 require('angular-ui-router');<% if (ionic) { %>
 require('angular-animate');

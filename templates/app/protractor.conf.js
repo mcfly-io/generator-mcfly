@@ -12,7 +12,8 @@ exports.config = {
         },
         version: '',
         platform: 'ANY',
-        'phantomjs.binary.path': './node_modules/phantomjs/bin/phantomjs'
+        'phantomjs.binary.path': require('phantomjs').path,
+        'phantomjs.ghostdriver.cli.args': ['--loglevel=VERBOSE']
     },
     baseUrl: 'http://localhost:' + constants.e2e.port,
     jasmineNodeOpts: {
@@ -25,7 +26,15 @@ exports.config = {
     onPrepare: function() {
         browser.manage().timeouts().setScriptTimeout(30000);
         browser.driver.manage().window().setSize(1600, 800);
-        browser.executeScript('window.name = "NG_ENABLE_DEBUG_INFO"'); // see https://github.com/angular/protractor/issues/2116
+
+        var disableNgAnimate = function() {
+            window.angular.module('disableNgAnimate', []).run(['$animate', function($animate) {
+                $animate.enabled(false);
+            }]);
+        };
+        browser.addMockModule('disableNgAnimate', disableNgAnimate);
+
+        //browser.executeScript('window.name = "NG_ENABLE_DEBUG_INFO"'); // see https://github.com/angular/protractor/issues/2116
 
         require('jasmine-reporters');
         var SpecReporter = require('jasmine-spec-reporter');

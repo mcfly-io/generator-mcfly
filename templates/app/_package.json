@@ -32,8 +32,8 @@
     "browser": {
         "unitHelper": "./test/unit/unitHelper.js",
         "lbServices": "./client/scripts/lbServices.js"<% if (ionic) { %>,
-        "ionic": "./node_modules/ionic-sdk/release/js/ionic.js",
-        "ionic-angular": "./node_modules/ionic-sdk/release/js/ionic-angular.js"<% } %><% if(famous) { %>,
+        "ionic": "ionic-sdk/release/js/ionic.js",
+        "ionic-angular": "ionic-sdk/release/js/ionic-angular.js"<% } %><% if(famous) { %>,
         "famous-angular": "./bower_components/famous-angular/dist/famous-angular.js"<% } %>
     },
     "browserify": {
