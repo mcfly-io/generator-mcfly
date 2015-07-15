@@ -2,7 +2,7 @@
 describe('e2e test', function() {
 
     beforeEach(function() {
-        browser.ignoreSynchronization = true;
+        //browser.ignoreSynchronization = true;
         browser.get('/');  // the base url is set in protractor.conf.js
     });
 
