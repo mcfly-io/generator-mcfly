@@ -9,7 +9,7 @@
 
 > A Yeoman generator for scaffolding an application using angular, browserify, ionic and famous.
 
-[![NPM](https://nodei.co/npm/generator-mcfly.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/generator-mcfly)
+[![NPM](https://nodei.co/npm/generator-mcfly.png?downloads=false&downloadRank=false&stars=false)](https://nodei.co/npm/generator-mcfly)
 
 
 # IMPORTANT UPDATE
