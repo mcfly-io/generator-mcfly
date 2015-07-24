@@ -5,10 +5,9 @@ node_js:
 
 before_script:
   - npm install -g gulp
-  - npm install -g codeclimate-test-reporter
 
 after_success:
-  - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN codeclimate < ./coverage/lcov.info
+  - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN codeclimate-test-reporter < ./coverage/lcov.info
 
 deploy:
   provider: npm
