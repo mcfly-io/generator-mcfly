@@ -73,7 +73,10 @@ module.exports = {
         }, {
             test: /\.html$/,
             cacheable: true,
-            loader: 'html'
+            loader: 'html',
+            query: {
+                attrs: false // indicates that image src should not be processed
+            }
         }, {
             test: /\.json$/,
             cacheable: true,
