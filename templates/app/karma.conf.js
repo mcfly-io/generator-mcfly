@@ -19,6 +19,10 @@ module.exports = function(config) {
     autowatch = autowatch || args.autowatch;
 
     var reporters = ['mocha', 'coverage'];
+
+    var browserifyTestFiles = './<%=clientFolder%>/scripts/common/**/*.test.js';
+    var webpackTestFiles = './<%=clientFolder%>/scripts/tests.webpack.js';
+
     var browserify = {
         debug: true,
         transform: [
@@ -43,15 +47,11 @@ module.exports = function(config) {
         loader: 'istanbul-instrumenter'
     });
 
-    var preprocessors;
+    var preprocessors = {};
     if (isWebpack) {
-        preprocessors = {
-            './<%=clientFolder%>/scripts/tests.webpack.js': ['webpack', 'sourcemap']
-        };
+        preprocessors[webpackTestFiles] = ['webpack', 'sourcemap'];
     } else {
-        preprocessors = {
-            './<%=clientFolder%>/scripts/**/*.test.js': ['browserify']
-        };
+        preprocessors[browserifyTestFiles] = ['browserify'];
     }
 
     if (debug === true) {
@@ -72,7 +72,7 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             //'./client/scripts/**/*.html',
-            isWebpack ? './<%=clientFolder%>/scripts/tests.webpack.js' : './<%=clientFolder%>/scripts/**/*.test.js'
+            isWebpack ? webpackTestFiles : browserifyTestFiles
         ],
 
         // list of files to exclude
