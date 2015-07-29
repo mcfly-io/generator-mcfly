@@ -3,7 +3,10 @@
 var args = require('yargs').argv;
 var constants = require('./gulp_tasks/common/constants')();
 var webpack = require('./webpack.config');
-var isWebpack = constants.moduleManager === 'webpack';
+var args = process.env.ARGS ? JSON.parse(process.env.ARGS) : {};
+var moduleManager = args.bundler ? args.bundler : constants.moduleManager;
+var entry = args.entry ? '/' + args.entry : '';
+var isWebpack = moduleManager === 'webpack';
 
 module.exports = function(config) {
     var debug = false;
@@ -20,8 +23,8 @@ module.exports = function(config) {
 
     var reporters = ['mocha', 'coverage'];
 
-    var browserifyTestFiles = './<%=clientFolder%>/scripts/common/**/*.test.js';
-    var webpackTestFiles = './<%=clientFolder%>/scripts/tests.webpack.js';
+    var browserifyTestFiles = './<%=clientFolder%>/scripts' + entry + '/**/*.test.js';
+    var webpackTestFiles = './<%=clientFolder%>/scripts' + entry + '/tests.webpack.js';
 
     var browserify = {
         debug: true,

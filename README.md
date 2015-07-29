@@ -476,6 +476,10 @@ You can eventually also run karma in the background, with auto refresh using the
 ```
 gulp karma --start
 ```
+If you want to run karma with a specific bundle manager and a specific module, you can run:
+```
+gulp karma --bundler webpack --entry common
+```
 
 If you just want to run mocha and are not interested yet in linting your files you can run:
 ```
