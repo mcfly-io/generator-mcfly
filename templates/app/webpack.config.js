@@ -8,11 +8,10 @@ module.exports = {
     cache: true,
     context: path.join(__dirname, 'client/scripts'),
     output: {
-        // devtoolModuleFilenameTemplate: function(info) {
-        //     //console.log(module);
-        //     return 'scripts/' + info.resourcePath.replace(__dirname, '../..').replace('/~/', '/node_modules/');
-        // },
-        devtoolModuleFilenameTemplate: 'scripts/[resource-path]',
+        devtoolModuleFilenameTemplate: function(info) {
+            return 'scripts/' + info.resourcePath.replace(__dirname, '../..').replace('/~/g', '/node_modules/');
+        },
+        //devtoolModuleFilenameTemplate: 'scripts/[resource-path]',
         devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'
     },
     stats: {
