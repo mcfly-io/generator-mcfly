@@ -9,13 +9,13 @@ module.exports = function(config) {
     var debug = false;
     try {
         debug = JSON.parse(args._[0]).debug;
-    } catch(err) {}
+    } catch (err) {}
     debug = debug || args.debug;
 
     var autowatch = true;
     try {
         autowatch = JSON.parse(args._[0]).autowatch;
-    } catch(err) {}
+    } catch (err) {}
     autowatch = autowatch || args.autowatch;
 
     var reporters = ['mocha', 'coverage'];
@@ -39,7 +39,7 @@ module.exports = function(config) {
     };
 
     webpack.cache = true;
-    webpack.devtool = 'inline-source-map';
+    webpack.devtool = 'eval'; //'inline-source-map';
     webpack.module.preLoaders = webpack.module.preLoaders || [];
     webpack.module.preLoaders.push({
         test: /\.js$/,

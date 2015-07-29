@@ -3,7 +3,8 @@
     "description": "<%= _.slugify(appname) %>",
     "version": "0.0.1",
     "scripts": {
-        "test": "gulp test"
+        "test": "gulp test",
+        "jsbeautify": "js-beautify <%=clientFolder%>/**/*.js <%=clientFolder%>/*.js -r"
     },
     "repository": {
         "type": "git",
@@ -32,7 +33,7 @@
     },
     "browser": {
         "unitHelper": "./test/unit/unitHelper.js",
-        "lbServices": "./client/scripts/lbServices.js"<% if (ionic) { %>,
+        "lbServices": "./<%=clientFolder%>/scripts/lbServices.js"<% if (ionic) { %>,
         "ionic": "ionic-sdk/release/js/ionic.js",
         "ionic-angular": "ionic-sdk/release/js/ionic-angular.js"<% } %><% if(famous) { %>,
         "famous-angular": "./bower_components/famous-angular/dist/famous-angular.js"<% } %>

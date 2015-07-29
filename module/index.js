@@ -103,6 +103,7 @@ var ModuleGenerator = Class.extend({
             var filename = 'index'; // we are ignoring the filename suffix options for modules as it changes the require() statements
 
             this.template('index.js', path.join(this.targetDir, filename + '.js'));
+            this.template('tests.webpack.js', path.join(this.targetDir, 'tests.webpack.js'));
             if (!this.skipRoute) {
                 this.template('home.html', path.join(this.targetDir, 'views', 'home.html'));
             }

@@ -45,7 +45,8 @@ describe('generator:module', function() {
                 var folder = clientFolder + '/scripts/' + modulename;
                 var file = folder + '/index.js';
                 assert.file([
-                    file
+                    file,
+                    folder + '/tests.webpack.js'
                 ]);
                 done();
             });
@@ -474,7 +475,8 @@ describe('generator:module', function() {
                 var folder = clientFolder + '/scripts/' + moduleFolder;
                 var file = folder + '/index.js';
                 assert.file([
-                    file
+                    file,
+                    folder + '/tests.webpack.js'
                 ]);
 
                 assert(this.configGet.calledWith('filenameCase'));
@@ -523,7 +525,8 @@ describe('generator:module', function() {
                 var folder = clientFolder + '/scripts/' + modulename;
                 var file = folder + '/index.js';
                 assert.file([
-                    file
+                    file,
+                    folder + '/tests.webpack.js'
                 ]);
 
                 //assert(this.configGet.notCalledWith('filenameSuffix'));
