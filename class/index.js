@@ -335,6 +335,10 @@ var ClassGenerator = Base.extend({
         var modules;
         var targets;
         var that = this;
+        this.skipInjectModules = this.options['skip-inject-modules'];
+        if (this.skipInjectModules) {
+            return Q.when(null);
+        }
         return Q.all([this.getClientScriptFolder(), this.getClientModules(), this.getClientTargets()])
             .then(function(values) {
                 directory = values[0];

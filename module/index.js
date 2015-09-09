@@ -16,6 +16,12 @@ var ModuleGenerator = Class.extend({
             defaults: false
         });
 
+        this.option('skip-inject-modules', {
+            desc: 'Indicates that the generator should not auto-inject all modules after scaffolding',
+            type: 'Boolean',
+            defaults: false
+        });
+
         this.argument('modulename', {
             type: String,
             required: false

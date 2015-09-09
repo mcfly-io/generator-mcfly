@@ -120,7 +120,7 @@ var ComponentGenerator = Class.extend({
     },
 
     writing: function() {
-        if (!_.contains(this.clientModules, this.modulename)) {
+        if (!_.contains(this.clientModules, this.moduleFolder)) {
             this.log(this.utils.chalk.red('Error: ') + 'The module name ' + this.utils.chalk.yellow(this.modulename) + ' does not exist');
             return;
         }
