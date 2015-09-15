@@ -3,22 +3,29 @@
 var args = require('yargs').argv;
 var constants = require('./gulp_tasks/common/constants')();
 var webpack = require('./webpack.config');
-var isWebpack = constants.moduleManager === 'webpack';
+var args = process.env.ARGS ? JSON.parse(process.env.ARGS) : {};
+var moduleManager = args.bundler ? args.bundler : constants.moduleManager;
+var entry = args.entry ? '/' + args.entry : '';
+var isWebpack = moduleManager === 'webpack';
 
 module.exports = function(config) {
     var debug = false;
     try {
         debug = JSON.parse(args._[0]).debug;
-    } catch(err) {}
+    } catch (err) {}
     debug = debug || args.debug;
 
     var autowatch = true;
     try {
         autowatch = JSON.parse(args._[0]).autowatch;
-    } catch(err) {}
+    } catch (err) {}
     autowatch = autowatch || args.autowatch;
 
     var reporters = ['mocha', 'coverage'];
+
+    var browserifyTestFiles = './<%=clientFolder%>/scripts' + entry + '/**/*.test.js';
+    var webpackTestFiles = './<%=clientFolder%>/scripts' + entry + '/tests.webpack.js';
+
     var browserify = {
         debug: true,
         transform: [
@@ -35,23 +42,19 @@ module.exports = function(config) {
     };
 
     webpack.cache = true;
-    webpack.devtool = 'inline-source-map';
+    webpack.devtool = 'eval'; //'inline-source-map';
     webpack.module.preLoaders = webpack.module.preLoaders || [];
     webpack.module.preLoaders.push({
         test: /\.js$/,
-        exclude: /(tests.webpack.js|.test.js|node_modules|bower_components)/,
+        exclude: /(tests.webpack.js|.test.js|node_modules|bower_components|test)/,
         loader: 'istanbul-instrumenter'
     });
 
-    var preprocessors;
+    var preprocessors = {};
     if (isWebpack) {
-        preprocessors = {
-            './<%=clientFolder%>/scripts/tests.webpack.js': ['webpack', 'sourcemap']
-        };
+        preprocessors[webpackTestFiles] = ['webpack', 'sourcemap'];
     } else {
-        preprocessors = {
-            './<%=clientFolder%>/scripts/**/*.test.js': ['browserify']
-        };
+        preprocessors[browserifyTestFiles] = ['browserify'];
     }
 
     if (debug === true) {
@@ -72,7 +75,7 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             //'./client/scripts/**/*.html',
-            isWebpack ? './<%=clientFolder%>/scripts/tests.webpack.js' : './<%=clientFolder%>/scripts/**/*.test.js'
+            isWebpack ? webpackTestFiles : browserifyTestFiles
         ],
 
         // list of files to exclude

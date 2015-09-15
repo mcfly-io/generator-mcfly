@@ -8,11 +8,10 @@ module.exports = {
     cache: true,
     context: path.join(__dirname, 'client/scripts'),
     output: {
-        // devtoolModuleFilenameTemplate: function(info) {
-        //     //console.log(module);
-        //     return 'scripts/' + info.resourcePath.replace(__dirname, '../..').replace('/~/', '/node_modules/');
-        // },
-        devtoolModuleFilenameTemplate: 'scripts/[resource-path]',
+        devtoolModuleFilenameTemplate: function(info) {
+            return 'scripts/' + info.resourcePath.replace(__dirname, '../..').replace('/~/g', '/node_modules/');
+        },
+        //devtoolModuleFilenameTemplate: 'scripts/[resource-path]',
         devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'
     },
     stats: {
@@ -73,7 +72,10 @@ module.exports = {
         }, {
             test: /\.html$/,
             cacheable: true,
-            loader: 'html'
+            loader: 'html',
+            query: {
+                attrs: false // indicates that image src should not be processed
+            }
         }, {
             test: /\.json$/,
             cacheable: true,
@@ -94,7 +96,7 @@ module.exports = {
     },
     plugins: [
         new webpack.ResolverPlugin([
-            new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('package.json', ['main']),
+            new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('package.json', ['browser', 'main']),
             new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
         ]),
         new webpack.optimize.DedupePlugin(),

@@ -1,4 +1,5 @@
 'use strict';
+var angular = require('angular');
 require('angular-ui-router');<% if (ionic) { %>
 require('angular-sanitize');
 require('angular-animate');
@@ -14,10 +15,10 @@ module.exports = function(namespace) {
 
     var fullname = namespace + '.' + modulename;
 
-    var angular = require('angular');
     var app = angular.module(fullname, ['ui.router', <%= ngModules %>]);
     // inject:folders start
     // inject:folders end
+    app.namespace = app.namespace || {};
 <% if (!skipRoute) { %>
     var configRoutesDeps = ['$stateProvider', '$urlRouterProvider'];
     var configRoutes = function($stateProvider, $urlRouterProvider) {
