@@ -154,7 +154,8 @@ var AppGenerator = Class.extend({
                         changelog: true,
                         test: true,
                         style: true,
-                        dist: true
+                        dist: true,
+                        graph: true
                     }
                 }, this.options.testmode ? null : {
                     local: require.resolve('generator-sublime/gulps')
