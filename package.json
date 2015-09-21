@@ -78,7 +78,7 @@
     "gulp-help": "1.6.0",
     "gulp-if": "1.2.5",
     "gulp-istanbul": "0.10.0",
-    "gulp-jscs": "1.6.0",
+    "gulp-jscs": "2.0.0",
     "gulp-jshint": "^1.11.2",
     "gulp-load-plugins": "0.10.0",
     "gulp-mocha": "2.1.1",

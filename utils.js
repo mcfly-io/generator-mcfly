@@ -129,8 +129,6 @@ exports.injectComponent = function(directory) {
  * @param {Generator} generator - The generator
  * @param {String} sourceDir - The folder were the template file is located (for example '../module/services' or '../component')
  * @param {String} targetDir - The folder were the file should be created
- *
- * @returns {void}
  */
 exports.createIndexFile = function(generator, sourceDir, targetDir) {
     if (!fs.existsSync(path.join(targetDir, 'index.js'))) {

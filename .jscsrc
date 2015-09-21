@@ -10,5 +10,16 @@
   "disallowImplicitTypeConversion": ["string"],
   "requireSpaceAfterKeywords": [],
   "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
+  "jsDoc": {
+    "disallowNewlineAfterDescription": true,
+    "checkParamNames": true,
+    "requireParamTypes": true,
+    "checkRedundantParams": true,
+    "checkReturnTypes": true,
+    "checkRedundantReturns": true,
+    "requireReturnTypes": true,
+    "checkTypes": true,
+    "requireParamDescription": true
+  },
   "requireLineFeedAtFileEnd": null
 }

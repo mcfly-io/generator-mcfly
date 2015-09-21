@@ -99,7 +99,6 @@ var testHelper = {
      * Run a generator
      * @param {String} name - The name of the generator
      * @param  {String[]} [subs] - An optional array of sub generators names
-     *
      * @returns {RunContext} - runContext
      */
     runGenerator: function(name, subs) {
@@ -120,12 +119,9 @@ var testHelper = {
 
     /**
      * Instantiate a simple, dummy generator
-     *
      * @private
-     *
      * @param {Class} [baseClass] - The base class of the generator, defaults to require('yeoman-generator').base
      * @param {Object} [methods] - An object haskey of methods that should exist on the returned generator, default to a single 'test' method
-     *
      * @returns {Generator} - An instance of the generator
      */
     createGenerator: function(baseClass, methods) {
@@ -143,7 +139,6 @@ var testHelper = {
 
     /**
      * Generate a 16 characters random string
-     *
      * @returns {String} - A 16 characters randome string
      */
     generateRandomString: function() {
@@ -152,8 +147,6 @@ var testHelper = {
     /**
      * Set the options on the generator to allow scaffolding of the templates
      * @param {Generator} generator - The generator
-     *
-     * @returns {void}
      */
     setOptions: function(generator) {
         generator.ionic = true;
