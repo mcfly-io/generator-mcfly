@@ -23,7 +23,7 @@ var pluginlist = [
     'cordova-plugin-inappbrowser',
     'cordova-plugin-camera',
     'cordova-plugin-whitelist',
-    'com.ionic.keyboard',
+    'ionic-plugin-keyboard',
     'https://github.com/testfairy/testfairy-cordova-plugin',
     'https://github.com/driftyco/ionic-plugins-deploy'
 ];
