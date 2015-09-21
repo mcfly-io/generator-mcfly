@@ -46,7 +46,8 @@ module.exports = function(config) {
     webpack.module.preLoaders = webpack.module.preLoaders || [];
     webpack.module.preLoaders.push({
         test: /\.js$/,
-        exclude: /(tests.webpack.js|.test.js|node_modules|bower_components|test)/,
+        exclude: /(\.webpack\.js|\.test.js|node_modules|bower_components)/,
+        //exclude: /(tests.webpack.js|.test.js|node_modules|bower_components|test)/,
         loader: 'istanbul-instrumenter'
     });
 

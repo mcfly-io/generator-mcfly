@@ -9,7 +9,7 @@ module.exports = {
     context: path.join(__dirname, 'client/scripts'),
     output: {
         devtoolModuleFilenameTemplate: function(info) {
-            return 'scripts/' + info.resourcePath.replace(__dirname, '../..').replace('/~/g', '/node_modules/');
+            return 'scripts/' + info.resourcePath.replace(__dirname, '../..').replace(/~/g, '/node_modules/');
         },
         //devtoolModuleFilenameTemplate: 'scripts/[resource-path]',
         devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'

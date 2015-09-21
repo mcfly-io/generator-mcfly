@@ -14,9 +14,7 @@ var subcomponents = require('./subcomponents.js');
 
 /**
  * The `Class` generator has several helpers method to help with creating a new generator.
- *
  * It can be used in place of the `Base` generator
- *
  * @augments Base
  * @alias Easy
  */
@@ -24,7 +22,6 @@ var ClassGenerator = Base.extend({
 
     /**
      * Ctor
-     *
      * @constructor
      */
     constructor: function() {
@@ -40,7 +37,6 @@ var ClassGenerator = Base.extend({
 
     /**
      * Create the standard basic options
-     *
      */
     createOptions: function() {
         this.option('check-travis', {
@@ -65,12 +61,9 @@ var ClassGenerator = Base.extend({
 
     /**
      * Check if a command line utility is installed
-     *
      * @private
-     *
      * @param {String} cmd - The name of the command line utility (example : git)
      * @param {Boolean} exit - true if process should exit, false otherwise, defaults to false
-     *
      * @returns {Q.promise} - A promise returning undefined if check was skipped, false if not installed or true if installed
      */
     checkCmd: function(cmd, exit) {
@@ -101,7 +94,6 @@ var ClassGenerator = Base.extend({
 
     /**
      * Check if git is installed
-     *
      * @returns {Q.promise} - A promise returning undefined if check was skipped, false if not installed or true if installed
      */
     checkGit: function() {
@@ -111,7 +103,6 @@ var ClassGenerator = Base.extend({
 
     /**
      * Check if travis is installed
-     *
      * @returns {Q.promise} - A promise returning undefined if check was skipped, false if not installed or true if installed
      */
     checkTravis: function() {
@@ -127,7 +118,6 @@ var ClassGenerator = Base.extend({
 
     /**
      * Check if Python is installed
-     *
      * @returns {Q.promise} - A promise returning undefined if check was skipped, false if  not installed or true if installed
      */
     checkPython: function() {
@@ -143,7 +133,7 @@ var ClassGenerator = Base.extend({
         if (notifier.update) {
             if (notifier.update.latest !== pkg.version) {
                 notifier.notify();
-                this.utils.shell.exit(1);
+                //this.utils.shell.exit(1);
             }
         }
     },
@@ -165,9 +155,7 @@ var ClassGenerator = Base.extend({
      * Get the list of directories or files given a path (Promise)
      * @param {String} dirPath - The path to start looking for sub directories
      * @param {Boolean} isDirectory - true to retreive directories, false to retreive files
-     *
      * @private
-     *
      * @returns {String[]} - An array of sub directories names
      */
     readDir: function(dirPath, isDirectory) {
@@ -190,7 +178,6 @@ var ClassGenerator = Base.extend({
     /**
      * Clean & camelize a string
      * @param {String} str - The original string
-     *
      * @returns {String} - The camelized string
      */
     camelize: function(str) {
@@ -200,7 +187,6 @@ var ClassGenerator = Base.extend({
     /**
      * Clean & dasherize a string
      * @param {String} str - The original string
-     *
      * @returns {String} - The dasherized string
      */
     dasherize: function(str) {
@@ -210,7 +196,6 @@ var ClassGenerator = Base.extend({
     /**
      * Get the string back with the correct file casing as defined by filenameCase
      * @param {String} str - The original string
-     *
      * @returns {String} - A string with the correct casing (i.e. camelCase, snake-case)
      */
     casify: function(str) {
@@ -226,7 +211,6 @@ var ClassGenerator = Base.extend({
      * Append the component type suffix if filenameSuffix is set to true in the .yo-rc.json
      * @param {String} str - The original string
      * @param {String} suffix - The name of the component's type to append
-     *
      * @returns {String} - Either str or str with the suffix appended. (i.e. 'homeCtrl' vs 'homeCtrl.controller')
      */
     suffixify: function(str, suffix) {
@@ -240,7 +224,6 @@ var ClassGenerator = Base.extend({
     /**
      * Get the list of directories given a path (Promise)
      * @param {String} dirPath - The path to start looking for sub directories
-     *
      * @returns {String[]} - An array of sub directories names
      */
     getDirectories: function(dirPath) {
@@ -250,15 +233,14 @@ var ClassGenerator = Base.extend({
     /**
      * Get the list of directories given a path (Promise)
      * @param {String} dirPath - The path to start looking for sub diretories
-     *
      * @returns {String[]} - An array of sub directories names
      */
     getFiles: function(dirPath) {
         return this.readDir(dirPath, false);
     },
+
     /**
      * Return the list of angularjs client modules (Promise)
-     *
      * @returns {String[]} - An array of client modules
      */
     getClientModules: function() {
@@ -267,15 +249,14 @@ var ClassGenerator = Base.extend({
 
     /**
      * Return the client script folder
-     *
      * @returns {String} - The path of the client script folder
      */
     getClientScriptFolder: function() {
         return path.join(this.destinationRoot(), this.clientFolder, 'scripts');
     },
 
-    /** Return the client folder from .yo-rc.json file, or create it
-     *
+    /**
+     * Return the client folder from .yo-rc.json file, or create it
      * @returns {String} - The name of the client folder
      */
     getClientFolder: function() {
@@ -290,7 +271,6 @@ var ClassGenerator = Base.extend({
 
     /**
      * Return the list of client targets (Promise)
-     *
      * @returns {String[]} - An array of client targets
      */
     getClientTargets: function() {
@@ -327,7 +307,6 @@ var ClassGenerator = Base.extend({
 
     /**
      * Inject all modules in all targets applications
-     *
      * @returns {Promise} - A promise after the injection is done
      */
     injectAllModules: function() {
@@ -360,7 +339,6 @@ var ClassGenerator = Base.extend({
 
     /**
      * Inject the all list of angular components as well as their sub compnents
-     *
      * @returns {Promise} - A promise
      */
     injectAllComponents: function() {
@@ -387,7 +365,6 @@ var ClassGenerator = Base.extend({
 
     /**
      * Run the injection for the whole project
-     *
      * @returns {Promise} - A promise
      */
     injectAll: function() {

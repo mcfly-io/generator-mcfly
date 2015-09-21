@@ -4,8 +4,6 @@ var runSequence = require('run-sequence');
 var $ = require('gulp-load-plugins')();
 var mocha = $.mocha;
 var istanbul = $.istanbul;
-var karma = $.karma;
-var gutil = require('gulp-util');
 
 var constants = require('../common/constants')();
 
