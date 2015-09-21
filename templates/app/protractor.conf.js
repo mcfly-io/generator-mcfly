@@ -38,21 +38,23 @@ exports.config = {
 
         require('jasmine-reporters');
         var SpecReporter = require('jasmine-spec-reporter');
-        var HtmlReporter = require('protractor-html-screenshot-reporter');
-        var path = require('path');
+        var HtmlReporter = require('protractor-jasmine2-screenshot-reporter');
+        //var path = require('path');
         jasmine.getEnv().addReporter(new SpecReporter({
             displaySpecDuration: true,
             displayStacktrace: true
         }));
         jasmine.getEnv().addReporter(new HtmlReporter({
-            baseDirectory: './reports/screenshots',
-            takeScreenShotsOnlyForFailedSpecs: false,
-            docName: 'index.html',
-            pathBuilder: function(spec, descriptions, results, capabilities) {
-                // Return '<browser>/<specname>' as path for screenshots:
-                // Example: 'firefox/list-should work'.
-                return path.join(capabilities.caps_.browserName, descriptions.join('-'));
-            }
+            dest: './reports/screenshots',
+            filename: 'index.html'
+            //baseDirectory: './reports/screenshots',
+            //takeScreenShotsOnlyForFailedSpecs: false,
+            //docName: 'index.html',
+            //pathBuilder: function(spec, descriptions, results, capabilities) {
+            //    // Return '<browser>/<specname>' as path for screenshots:
+            //    // Example: 'firefox/list-should work'.
+            //    return path.join(capabilities.caps_.browserName, descriptions.join('-'));
+            //}
         }));
     }
 };
