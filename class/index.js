@@ -133,7 +133,7 @@ var ClassGenerator = Base.extend({
         if (notifier.update) {
             if (notifier.update.latest !== pkg.version) {
                 notifier.notify();
-                this.utils.shell.exit(1);
+                //this.utils.shell.exit(1);
             }
         }
     },
