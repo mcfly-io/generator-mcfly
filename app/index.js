@@ -75,7 +75,7 @@ var AppGenerator = Class.extend({
             var prompts = [{
                 name: 'filenameCase',
                 type: 'list',
-                message: 'Would you like to use camelCase or snake-case for your filenames?',
+                message: 'Do you want your filenames in camelCase or snake-case?',
                 choices: [{
                     name: 'camelCase',
                     value: 'camel'
@@ -87,7 +87,7 @@ var AppGenerator = Class.extend({
             }, {
                 name: 'filenameSuffix',
                 type: 'confirm',
-                message: 'Would you like to use johnpappa style filename suffixes? (i.e. "homeCtrl.controller.js" vs "homeCtrl.js")',
+                message: 'Would you like to use Johnpappa style filename suffixes? ("homeCtrl.controller.js" vs "homeCtrl.js")',
                 default: false
             }, {
                 name: 'clientFolder',
@@ -102,7 +102,7 @@ var AppGenerator = Class.extend({
                 name: 'famous',
                 type: 'confirm',
                 message: 'Would you like to include famous-angular?',
-                default: true
+                default: false
             }, {
                 name: 'ngCordova',
                 type: 'confirm',
@@ -112,12 +112,12 @@ var AppGenerator = Class.extend({
                 name: 'material',
                 type: 'confirm',
                 message: 'Would you like to include angular-material?',
-                default: true
+                default: false
             }, {
                 name: 'fontawesome',
                 type: 'confirm',
                 message: 'Would you like to include font-awesome?',
-                default: false
+                default: true
             }, {
                 name: 'bootstrap',
                 type: 'confirm',
