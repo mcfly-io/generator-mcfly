@@ -2,13 +2,12 @@
 
 var gulp = require('gulp');
 var args = require('yargs').argv;
-var $ = require('gulp-load-plugins')();
 var exec = require('child_process').exec;
-var bump = $.bump;
-var tap = $.tap;
+var bump = require('gulp-bump');
+var tap = require('gulp-tap');
 var XML = require('node-jsxml').XML;
-var git = $.git;
-var gulpif = $.if;
+var git = require('gulp-git');
+var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var GitHubApi = require('github');
 var runSequence = require('run-sequence').use(gulp);

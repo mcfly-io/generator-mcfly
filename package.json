@@ -49,7 +49,7 @@
   "dependencies": {
     "chalk": "1.1.1",
     "del": "2.0.2",
-    "generator-sublime": ">=1.9.7",
+    "generator-sublime": ">=1.9.8",
     "glob-to-regexp": "0.1.0",
     "gulp": "3.9.0",
     "gulp-inject": "2.2.0",
@@ -80,7 +80,6 @@
     "gulp-istanbul": "0.10.0",
     "gulp-jscs": "2.0.0",
     "gulp-jshint": "^1.11.2",
-    "gulp-load-plugins": "0.10.0",
     "gulp-mocha": "2.1.3",
     "gulp-order": "^1.1.1",
     "gulp-plumber": "1.0.1",
