@@ -108,6 +108,7 @@
     "semi": 2,
     "semi-spacing": 2,
     "space-after-keywords": [2, "always"],
+    "space-infix-ops": [2, {"int32Hint": false}],
     "strict": [2, "global"],
     "use-isnan": 2,
     "valid-jsdoc": [2, { "prefer": { "return": "returns" }, "requireReturn": false, "requireParamDescription": true }],
