@@ -31,7 +31,7 @@ module.exports = function(config) {
         transform: [
             ['browserify-istanbul', {
                 instrumenter: require('isparta'),
-                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/<%=clientFolder%>/scripts/lbServices.js']
+                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/<%=clientFolder%>/scripts/lbServices.js', '**/externals/**/*.js']
             }],
             ['babelify', {
                 'stage': 0,
