@@ -1,4 +1,5 @@
 'use strict';
+require('babel/register');
 var constants = require('./gulp_tasks/common/constants')();
 exports.config = {
     //seleniumAddress: 'http://localhost:4444/wd/hub',
