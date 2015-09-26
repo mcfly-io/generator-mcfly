@@ -32,8 +32,23 @@ exports.config = {
                 $animate.enabled(false);
             }]);
         };
+        var disableCssAnimate = function() {
+            window.angular.module('disableCssAnimate', [])
+                .run(function() {
+                    var style = document.createElement('style');
+                    style.type = 'text/css';
+                    style.innerHTML = '* {' +
+                        '-webkit-transition: none !important;' +
+                        '-moz-transition: none !important' +
+                        '-o-transition: none !important' +
+                        '-ms-transition: none !important' +
+                        'transition: none !important' +
+                        '}';
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                });
+        };
         browser.addMockModule('disableNgAnimate', disableNgAnimate);
-
+        browser.addMockModule('disableCssAnimate', disableCssAnimate);
         //browser.executeScript('window.name = "NG_ENABLE_DEBUG_INFO"'); // see https://github.com/angular/protractor/issues/2116
 
         require('jasmine-reporters');
@@ -47,14 +62,14 @@ exports.config = {
         jasmine.getEnv().addReporter(new HtmlReporter({
             dest: './reports/screenshots',
             filename: 'index.html'
-            //baseDirectory: './reports/screenshots',
-            //takeScreenShotsOnlyForFailedSpecs: false,
-            //docName: 'index.html',
-            //pathBuilder: function(spec, descriptions, results, capabilities) {
-            //    // Return '<browser>/<specname>' as path for screenshots:
-            //    // Example: 'firefox/list-should work'.
-            //    return path.join(capabilities.caps_.browserName, descriptions.join('-'));
-            //}
+                //baseDirectory: './reports/screenshots',
+                //takeScreenShotsOnlyForFailedSpecs: false,
+                //docName: 'index.html',
+                //pathBuilder: function(spec, descriptions, results, capabilities) {
+                //    // Return '<browser>/<specname>' as path for screenshots:
+                //    // Example: 'firefox/list-should work'.
+                //    return path.join(capabilities.caps_.browserName, descriptions.join('-'));
+                //}
         }));
     }
 };
