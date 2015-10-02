@@ -23,10 +23,14 @@
         "famous-polyfills": "^0.3.0"<% } %><% if(ngCordova) { %>,
         "ng-cordova": "^0.1.20-alpha"<% } %><% if(bootstrap) { %>,
         "angular-bootstrap": "^0.12.2"<% } %><% if(material) { %>,
+        "angular-aria": "^1.4.6",
         "angular-material": "^0.11.0"<% } %><% if (bootstrap) { %>,
-        "bootstrap": "3.3.5"<% } %>
+        "bootstrap-sass": "3.3.5"<% } %>
     },
     "devDependencies": {
+        <% if (webpack) { %>
+        "transfer-webpack-plugin": "0.1.4"
+        <% } %>
     },
     "engines": {
         "node": ">=0.10.0"
@@ -37,7 +41,7 @@
         "ionic": "ionic-sdk/release/js/ionic.js",
         "ionic-angular": "ionic-sdk/release/js/ionic-angular.js"<% } %><% if(famous) { %>,
         "famous-angular": "./bower_components/famous-angular/dist/famous-angular.js"<% } %>
-    },
+    }<% if (browserify) { %>,
     "browserify": {
         "transform": [
             ["babelify", { "stage": 0, "optional": ["es7.asyncFunctions", "runtime"], "ignore": ["./node_modules", "./bower_components"]}],
@@ -65,5 +69,5 @@
           ]
         }<% } %>
 
-    }
+    }<% } %>
 }

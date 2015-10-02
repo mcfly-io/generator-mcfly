@@ -3,6 +3,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var helper = require('./gulp_tasks/common/helper');
+<% if (mobile) { %>var TransferWebpackPlugin = require('transfer-webpack-plugin');<% } %>
 
 module.exports = {
     cache: true,
@@ -17,6 +18,12 @@ module.exports = {
     stats: {
         colors: true,
         reasons: true
+    },
+    resolveLoader: {
+        alias: {
+            'copy': 'file-loader?name=../[path][name].[ext]&context=./client',
+            'copy-root': 'file-loader?name=../../[path][name].[ext]&context=./client'
+        }
     },
     resolve: {
         alias: {
@@ -82,16 +89,16 @@ module.exports = {
             loader: 'json'
         }, {
             test: /\.woff/,
-            loader: 'url?prefix=font/&limit=10000&mimetype=application/font-woff'
+            loader: 'url?name=assets/[name].[hash].[ext]&limit=10000&mimetype=application/font-woff'
         }, {
             test: /\.ttf/,
-            loader: 'file?prefix=font/'
+            loader: 'file?name=assets/[name].[hash].[ext]'
         }, {
             test: /\.eot/,
-            loader: 'file?prefix=font/'
+            loader: 'file?name=assets/[name].[hash].[ext]'
         }, {
             test: /\.svg/,
-            loader: 'file?prefix=font/'
+            loader: 'file?name=assets/[name].[hash].[ext]'
         }]
     },
     plugins: [
@@ -104,7 +111,9 @@ module.exports = {
         new webpack.optimize.AggressiveMergingPlugin(),
         new webpack.BannerPlugin(helper.getBanner(), {
             raw: true
-        })
-
+        })<% if (mobile) { %>,
+        new TransferWebpackPlugin([
+            { from: './cordova/app/hooks', to: '../../hooks' }
+        ], path.join(__dirname, 'client'))<% } %>
     ]
 };

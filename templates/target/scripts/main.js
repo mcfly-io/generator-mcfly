@@ -1,5 +1,21 @@
 'use strict';
 
+<% if (webpack) { %>
+// styles
+require('../styles/main.less');
+require('../styles/main.scss');
+
+// copy files to output folder
+require('!!copy!../index.html');
+require('!!copy!../404.html');
+require('!!copy!../robots.txt');
+
+<% if (mobile) {%>
+require('!!copy-root!../config.xml');
+<% } %>
+
+<% } %>
+
 var namespace = 'main';
 // fix protractor issue
 if (window.location.toString().indexOf('localhost:5555') > 0) {

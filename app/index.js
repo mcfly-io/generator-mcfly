@@ -85,6 +85,18 @@ var AppGenerator = Class.extend({
                 }],
                 default: 'camel'
             }, {
+                name: 'moduleBundler',
+                type: 'list',
+                message: 'Would you like browserify or webpack?',
+                choices: [{
+                    name: 'browserify',
+                    value: 'browserify'
+                }, {
+                    name: 'webpack',
+                    value: 'webpack'
+                }],
+                default: 'browserify'
+            }, {
                 name: 'filenameSuffix',
                 type: 'confirm',
                 message: 'Would you like to use Johnpappa style filename suffixes? ("homeCtrl.controller.js" vs "homeCtrl.js")',
@@ -137,6 +149,9 @@ var AppGenerator = Class.extend({
                 this.bootstrap = answers.bootstrap;
                 this.mobile = this.options.mobile;
                 this.filenameSuffix = answers.filenameSuffix;
+                this.moduleBundler = answers.moduleBundler;
+                this.webpack = answers.moduleBundler === 'webpack';
+                this.browserify = !this.webpack;
 
                 this.composeWith('sublime:gulps', {
                     options: {
@@ -148,12 +163,13 @@ var AppGenerator = Class.extend({
                         material: answers.material,
                         lint: true,
                         serve: true,
-                        browserify: true,
-                        webpack: true,
+                        moduleManager: this.moduleBundler,
+                        browserify: this.browserify,
+                        webpack: this.webpack,
                         release: true,
                         changelog: true,
                         test: true,
-                        style: true,
+                        style: this.browserify, // webpack handles styles itself
                         dist: true,
                         graph: true
                     }
