@@ -151,6 +151,8 @@ var testHelper = {
     setOptions: function(generator) {
         generator.ionic = true;
         generator.famous = true;
+        generator.browserify = true;
+        generator.webpack = false;
         generator.ngCordova = true;
         generator.material = true;
         generator.ngModules = [];

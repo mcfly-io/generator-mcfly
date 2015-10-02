@@ -20,6 +20,8 @@ describe('generator:target', function() {
                     targetname: targetname
                 })
                 .on('ready', function(generator) {
+                    generator.browserify = true;
+                    generator.webpack = false;
                     generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.mkdir(clientFolder + '/scripts/toto');
@@ -189,6 +191,8 @@ describe('generator:target', function() {
                 })
                 .on('ready', function(generator) {
                     generator.clientFolder = clientFolder;
+                    generator.browserify = true;
+                    generator.webpack = false;
                     generator.log = sinon.spy();
                     generator.getClientTargets = function() {
 
@@ -219,6 +223,8 @@ describe('generator:target', function() {
                     targetname: targetname
                 })
                 .on('ready', function(generator) {
+                    generator.browserify = true;
+                    generator.webpack = false;
                     generator.appname = 'myapp';
                     generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
