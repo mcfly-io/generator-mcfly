@@ -88,17 +88,8 @@ module.exports = {
             cacheable: true,
             loader: 'json'
         }, {
-            test: /\.woff/,
-            loader: 'url?name=assets/[name].[hash].[ext]&limit=10000&mimetype=application/font-woff'
-        }, {
-            test: /\.ttf/,
-            loader: 'file?name=assets/[name].[hash].[ext]'
-        }, {
-            test: /\.eot/,
-            loader: 'file?name=assets/[name].[hash].[ext]'
-        }, {
-            test: /\.svg/,
-            loader: 'file?name=assets/[name].[hash].[ext]'
+          test: /\.(mp3|png|gif|jpe?g|ttf|eot|svg|woff(2)?)(\?[a-z0-9\.=]+)?$/,
+          loader: 'file-loader?name=../assets/[name].[hash:4].[ext]'
         }]
     },
     plugins: [
