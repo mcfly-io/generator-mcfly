@@ -7,7 +7,7 @@ var helper = require('./gulp_tasks/common/helper');
 
 module.exports = {
     cache: true,
-    context: path.join(__dirname, 'client/scripts'),
+    context: path.join(__dirname, '<%=clientFolder%>/scripts'),
     output: {
         devtoolModuleFilenameTemplate: function(info) {
             return 'scripts/' + info.resourcePath.replace(__dirname, '../..').replace(/~/g, '/node_modules/');
@@ -21,8 +21,8 @@ module.exports = {
     },
     resolveLoader: {
         alias: {
-            'copy': 'file-loader?name=../[path][name].[ext]&context=./client',
-            'copy-root': 'file-loader?name=../../[path][name].[ext]&context=./client'
+            'copy': 'file-loader?name=../[path][name].[ext]&context=./<%=clientFolder%>',
+            'copy-root': 'file-loader?name=../../[path][name].[ext]&context=./<%=clientFolder%>'
         }
     },
     resolve: {
@@ -30,7 +30,7 @@ module.exports = {
             'ionic': 'ionic-sdk/release/js/ionic.js',
             'ionic-angular': 'ionic-sdk/release/js/ionic-angular.js',
             'unitHelper': './test/unit/unitHelper.js',
-            'lbServices': './client/scripts/lbServices.js'
+            'lbServices': './<%=clientFolder%>/scripts/lbServices.js'
         },
         root: [
             path.resolve(path.join(__dirname, 'node_modules')),
@@ -114,6 +114,6 @@ module.exports = {
         })<% if (mobile) { %>,
         new TransferWebpackPlugin([
             { from: './cordova/app/hooks', to: '../../hooks' }
-        ], path.join(__dirname, 'client'))<% } %>
+        ], path.join(__dirname, '<%=clientFolder%>'))<% } %>
     ]
 };
