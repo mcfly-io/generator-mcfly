@@ -31,12 +31,12 @@ module.exports = function(config) {
         transform: [
             ['browserify-istanbul', {
                 instrumenter: require('isparta'),
-                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/<%=clientFolder%>/scripts/lbServices.js']
+                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/externals/**/*.js', '**/<%=clientFolder%>/scripts/lbServices.js']
             }],
             ['babelify', {
                 'stage': 0,
                 'optional': ['es7.asyncFunctions'],
-                'ignore': ['./node_modules', './bower_components']
+                'ignore': ['./node_modules', './bower_components', './externals']
             }]
         ]
     };
