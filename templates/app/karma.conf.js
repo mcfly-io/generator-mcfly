@@ -3,9 +3,9 @@
 var args = require('yargs').argv;
 var constants = require('./gulp_tasks/common/constants')();
 var webpack = require('./webpack.config');
-var args = process.env.ARGS ? JSON.parse(process.env.ARGS) : {};
+var args = global.args || (process.env.ARGS ? JSON.parse(process.env.ARGS) : {});
 var moduleManager = args.bundler ? args.bundler : constants.moduleManager;
-var entry = args.entry ? '/' + args.entry : '';
+var moduleEntry = args.module ? '/' + args.module : '';
 var isWebpack = moduleManager === 'webpack';
 
 module.exports = function(config) {
@@ -23,20 +23,20 @@ module.exports = function(config) {
 
     var reporters = ['mocha', 'coverage'];
 
-    var browserifyTestFiles = './<%=clientFolder%>/scripts' + entry + '/**/*.test.js';
-    var webpackTestFiles = './<%=clientFolder%>/scripts' + entry + '/tests.webpack.js';
+    var browserifyTestFiles = './<%=clientFolder%>/scripts' + moduleEntry + '/**/*.test.js';
+    var webpackTestFiles = './<%=clientFolder%>/scripts' + moduleEntry + '/tests.webpack.js';
 
     var browserify = {
         debug: true,
         transform: [
             ['browserify-istanbul', {
                 instrumenter: require('isparta'),
-                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/<%=clientFolder%>/scripts/lbServices.js']
+                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/<%=clientFolder%>/scripts/lbServices.js', '**/externals/**/*.js']
             }],
             ['babelify', {
                 'stage': 0,
                 'optional': ['es7.asyncFunctions'],
-                'ignore': ['./node_modules', './bower_components']
+                'ignore': ['./node_modules', './bower_components', './externals']
             }]
         ]
     };
