@@ -138,6 +138,16 @@ The constants are resolved against the `--target` option. The default value for 
 
 To better understand the gulp task system have a look at the docs of [gulp-mux](https://github.com/mcfly-io/gulp-mux) 
 
+## Ionic.io platform
+
+![](http://ionic.io/img/iologo.png)
+
+The gulp system also includes some basic tasks for ensuring that your ionic projects in your `dist/` are able to make use of the [ionic.io](https://apps.ionic.io/) platform. These are found in `gulp_tasks/tasks/ionic.js`. To use thre ionic.io platform features, you will need to add your project's [`app_id`, `api_key`, and `name` from ionic.io](http://docs.ionic.io/docs/io-api-keys) to your `gulp_tasks/common/constants.js` file in the entry in the `ionic` section with your current target's name.
+
+Currently `'ionic:deploy'` is the only entry-point task, and it runs a `'dist'` and then handles the uploading and optional deployment of a project update to the ionic deploy server. You need to specify a target with a `--target=<targetname>` and then which mode you're using (usually `prod`) with `--mode=<dev|prod>`. After that you can add the `--note` and `--deploy` flags as specified by the [`ionic deploy` cli](http://docs.ionic.io/docs/deploy-deploying-updates).
+
+More tasks to integrate with other ionic.io services are coming soon, but in the meantime, if you write your own, feel free to make a PR to [`mcfly-io/generator-sublime`](https://github.com/mcfly-io/generator-sublime). The file to edit is [`templates/gulps/tasks/ionic.js`](https://github.com/mcfly-io/generator-sublime/tree/master/templates/gulps/tasks/ionic.js).
+
 ## Browserify/Webpack and namespaces
 At the heart of the generator we use `browserify` or `webpack` to bundle together the client javascript files.   
 To switch between `browserify` or `webpack` change the constant value `bundleManager` in `gulp_tasks/common/constants.js` (`'browserify'` or `'webpack'`)
