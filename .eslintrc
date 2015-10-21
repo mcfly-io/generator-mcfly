@@ -21,6 +21,7 @@
   ],
   "parser": "babel-eslint",
   "rules": {
+    "comma-dangle": [2, "never"],
     "camelcase": 0,
     "complexity": [0, 11],
     "consistent-return": 2,
