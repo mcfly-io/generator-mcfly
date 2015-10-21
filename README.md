@@ -96,6 +96,13 @@ gulp browsersync
 > `gulp browsersync` accepts an option --no-browser if you do not want to automatically open a browser
 
 
+
+
+> **NOTE:**      
+> `gulp browsersync` accepts an option --https if you do want to force an HTTPS connection   
+> you can also control http vs https using in `gulp_taks/common/constants.js` -> `serve.https` boolean
+
+
 ## Upgrade
 I like to publish new versions as soon as possible. So here is the upgrade process.
 
