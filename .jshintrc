@@ -23,7 +23,8 @@
     "sinon": false,
     "element": false,
     "by": false,
-    "browser": false
+    "browser": false,
+    "protractor": false
   },
   "predef": [
     "beforeEach",
@@ -49,7 +50,8 @@
     "sinon",
     "element",
     "by",
-    "browser"
+    "browser",
+    "protractor"
   ],
   "bitwise": true,
   "browser": true,
