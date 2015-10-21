@@ -2,6 +2,7 @@
   "globals": {
     "beforeEach": false,
     "before": false,
+    "beforeAll": false,
     "after": false,
     "afterEach": false,
     "afterAll": false,
@@ -27,6 +28,7 @@
   "predef": [
     "beforeEach",
     "before",
+    "beforeAll",
     "afterEach",
     "after",
     "afterAll",
