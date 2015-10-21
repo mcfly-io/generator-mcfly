@@ -4,7 +4,9 @@
     "version": "0.0.1",
     "scripts": {
         "test": "gulp test",
-        "jsbeautify": "js-beautify <%=clientFolder%>/**/*.js <%=clientFolder%>/*.js -r"
+        "jsbeautify": "js-beautify <%=clientFolder%>/**/*.js <%=clientFolder%>/*.js -r",
+        "protractor_debug_1": "./node_modules/protractor/bin/webdriver-manager start",
+        "protractor_debug_2": "./node_modules/protractor/bin/elementexplorer.js http://localhost:5000"
     },
     "repository": {
         "type": "git",

@@ -25,7 +25,7 @@ var pluginlist = [
     'cordova-plugin-whitelist',
     'ionic-plugin-keyboard',
     'https://github.com/testfairy/testfairy-cordova-plugin',
-    'https://github.com/driftyco/ionic-plugins-deploy'
+    'ionic-plugin-deploy'
 ];
 
 // no need to configure below

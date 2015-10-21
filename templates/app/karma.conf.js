@@ -31,7 +31,7 @@ module.exports = function(config) {
         transform: [
             ['browserify-istanbul', {
                 instrumenter: require('isparta'),
-                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/<%=clientFolder%>/scripts/lbServices.js', '**/externals/**/*.js']
+                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/externals/**/*.js', '**/<%=clientFolder%>/scripts/lbServices.js']
             }],
             ['babelify', {
                 'stage': 0,
@@ -46,7 +46,7 @@ module.exports = function(config) {
     webpack.module.preLoaders = webpack.module.preLoaders || [];
     webpack.module.preLoaders.push({
         test: /\.js$/,
-        exclude: /(\.webpack\.js|\.test.js|node_modules|bower_components)/,
+        exclude: /(\.webpack\.js|\.test.js|node_modules|bower_components|test)/,
         //exclude: /(tests.webpack.js|.test.js|node_modules|bower_components|test)/,
         loader: 'istanbul-instrumenter'
     });
@@ -64,7 +64,7 @@ module.exports = function(config) {
     }
 
     config.set({
-        browserNoActivityTimeout: 60000,
+        browserNoActivityTimeout: 120000,
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '',
@@ -121,6 +121,8 @@ module.exports = function(config) {
 
         coverageReporter: {
             reporters: [{
+                type: 'json'
+            }, {
                 type: 'text'
             }, {
                 type: 'text-summary'
