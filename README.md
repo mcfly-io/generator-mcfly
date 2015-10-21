@@ -25,7 +25,7 @@ The generator was previously named `generator-angular-famous-ionic`
 This generator will scaffold for you an application using angularjs, browserify, and either ionic framwork or famo.us (even both).
 
 The project has the following capabilities:
-* Angular best pratices (feature folder structure)
+* Angular best practices (feature folder structure)
 * Sass AND Less enabled
 * jshint, jscsc, eslint enabled (so you shouldn't have any typo left in your js files !)
 * Webpack or Browserify (you can switch them out)

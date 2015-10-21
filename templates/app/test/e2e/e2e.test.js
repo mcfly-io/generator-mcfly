@@ -3,7 +3,7 @@ describe('e2e test', function() {
 
     beforeEach(function() {
         //browser.ignoreSynchronization = true;
-        browser.get('/');  // the base url is set in protractor.conf.js
+        browser.get('/'); // the base url is set in protractor.conf.js
     });
 
     afterEach(function() {
@@ -13,6 +13,9 @@ describe('e2e test', function() {
                 //console.error('Error log: ' + JSON.stringify(browserlog));
             }
         });
+        // clear cookies and local storage
+        browser.manage().deleteAllCookies();
+        browser.executeScript('window.localStorage.clear();');
     });
 
     afterAll(function(done) {
