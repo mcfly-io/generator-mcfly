@@ -13,8 +13,10 @@ require('ionic');
 require('ionic-angular');<% } %><% if (material) { %>
 require('angular-material');<% } %><% if (bootstrap) { %>
 require('angular-ui-bootstrap');<% } %>
+require('./ionic-service-core');
 var app = angular.module(namespace, [<% if (ionic) { %>'ionic',<% } %><% if (material) { %> 'ngMaterial',<% } %><% if (bootstrap) { %> 'ui.bootstrap',<% } %>
-    // inject:modules start
+<% if (mobile) { %>    'ionic.service.core'
+<% } %>    // inject:modules start
     // inject:modules end
 ]);
 

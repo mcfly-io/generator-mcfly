@@ -258,6 +258,9 @@ var AppGenerator = Class.extend({
             this.template('../target/scripts/main.js', this.clientFolder + '/scripts/main.js');
             this.template('../target/scripts/main.test.js', this.clientFolder + '/scripts/main.test.js');
             this.template('client/scripts/tests.webpack.js', this.clientFolder + '/scripts/tests.webpack.js');
+            if (this.ionic) {
+                this.template('client/scripts/ionic-service-core.js', this.clientFolder + '/scripts/ionic-service-core.js');
+            }
             if (this.mobile) {
                 this.template('../target/config.xml', path.join(this.targetDir, 'config' + '.xml'));
                 this.directory('../target/hooks', path.join(this.targetDir, 'cordova', 'app', 'hooks'));

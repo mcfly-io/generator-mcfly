@@ -20,6 +20,7 @@
     <![endif]-->
     <ui-view <% if (material) { %>layout="column" flex<% } %>></ui-view>
     <% if (mobile) { %><script src="cordova.js"></script><% } %>
+    <% if (ionic) { %><script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script></script><% } %>
     <script src="scripts/bundle.js"></script>
 </body>
 
