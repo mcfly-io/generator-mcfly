@@ -214,6 +214,7 @@ describe('generator:target', function() {
                     'skip-install': true,
                     'check-travis': false,
                     'check-git': true,
+                    'ionic': true,
                     'mobile': true
                 })
                 .withPrompt({
@@ -262,54 +263,18 @@ describe('generator:target', function() {
                 done();
             });
         });
-    });
 
-    describe('with option ionic true', function() {
-        beforeEach(function() {
-            this.runGen = testHelper.runGenerator('target')
-                .withOptions({
-                    'skip-install': true,
-                    'check-travis': false,
-                    'check-git': true,
-                    'ionic': true,
-                })
-                .withPrompt({
-                    targetname: targetname
-                })
-                .on('ready', function(generator) {
-                    generator.appname = 'myapp';
-                    generator.clientFolder = clientFolder;
-                    generator.log = sinon.spy();
-                    generator.mkdir(clientFolder + '/scripts/toto');
-                    generator.mkdir(clientFolder + '/scripts/tata');
-                    //helpers.stub(generator, 'log', spyLog);
-                });
-        });
-
-        it('references ionic.io.bundle.min.js in index.html', function(done) {
+        it('references ionic.io.bundle.min.js in main.js', function(done) {
             this.runGen.on('end', function() {
-                var clientFolder = this.runGen.generator.config.get('clientFolder');
 
-                var file = clientFolder + '/index-' + targetname + '.html';
+                var file = clientFolder + '/scripts/main' + suffix + '.js';
                 var body = testHelper.readTextFile(file);
-                assert(_.contains(body, 'ionic.io.bundle.min.js'));
+                assert(_.contains(body, 'ionic.io.bundle.min'));
+                assert(_.contains(body, 'ionic.service.core'));
 
                 done();
-            }.bind(this));
+            });
         });
-
-        it('references ionic-service-core.js in main.js', function(done) {
-            this.runGen.on('end', function() {
-                var clientFolder = this.runGen.generator.config.get('clientFolder');
-
-                var file = clientFolder + '/main-' + targetname + '.js';
-                var body = testHelper.readTextFile(file);
-                assert(_.contains(body, 'ionic-service-core.js'));
-
-                done();
-            }.bind(this));
-        });
-
     });
 
 });
