@@ -195,4 +195,86 @@ describe('generator:app', function() {
         });
 
     });
+    describe('with option ionic true', function() {
+        beforeEach(function() {
+            this.runGen = testHelper.runGenerator('app', ['sublime:app'])
+                .withOptions({
+                    'skip-install': true,
+                    'check-travis': false,
+                    'check-git': true,
+                    'ionic': true,
+                    'testmode': true
+                })
+                .withPrompt({
+                    someOption: true
+                })
+                .on('ready', function(generator) {
+                    generator.log = sinon.spy();
+                    //helpers.stub(generator, 'log', spyLog);
+                });
+
+        });
+
+        it('creates files', function(done) {
+            this.runGen.on('end', function() {
+                var clientFolder = this.runGen.generator.config.get('clientFolder');
+
+                assert.file([
+                    'package.json',
+                    'bower.json',
+                    '.bowerrc',
+                    'karma.conf.js',
+                    'protractor.conf.js',
+                    'webpack.config.js',
+                    'bin/prepublish.sh',
+                    'bin/protractor-fix-version.js',
+                    'bin/cordova-generate-icons',
+                    'bin/cordova-generate-splashes',
+                    clientFolder + '/.eslintrc',
+                    clientFolder + '/index.html',
+                    clientFolder + '/404.html',
+                    clientFolder + '/robots.txt',
+                    clientFolder + '/favicon.ico',
+                    clientFolder + '/styles/main.scss',
+                    clientFolder + '/styles/main.less',
+                    clientFolder + '/scripts/main.js',
+                    clientFolder + '/scripts/main.test.js',
+                    clientFolder + '/scripts/ionic-service-core.js',
+                    clientFolder + '/images',
+                    clientFolder + '/icons',
+                    clientFolder + '/fonts',
+                    'test/e2e/app/e2e.test.js',
+                    'test/e2e/.eslintrc',
+                    'test/mocha/helpers/globals.js'
+                ]);
+                done();
+            }.bind(this));
+
+        });
+
+        it('references ionic.io.bundle.min.js in index.html', function(done) {
+            this.runGen.on('end', function() {
+                var clientFolder = this.runGen.generator.config.get('clientFolder');
+
+                var file = clientFolder + '/index' + '.html';
+                var body = testHelper.readTextFile(file);
+                assert(_.contains(body, 'ionic.io.bundle.min.js'));
+
+                done();
+            }.bind(this));
+        });
+
+        it('references ionic-service-core.js in main.js', function(done) {
+            this.runGen.on('end', function() {
+                var clientFolder = this.runGen.generator.config.get('clientFolder');
+
+                var file = clientFolder + '/main' + '.js';
+                var body = testHelper.readTextFile(file);
+                assert(_.contains(body, 'ionic-service-core.js'));
+
+                done();
+            }.bind(this));
+        });
+
+    });
 });
