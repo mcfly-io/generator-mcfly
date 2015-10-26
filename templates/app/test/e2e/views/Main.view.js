@@ -1,11 +1,11 @@
 'use strict';
 
-var BaseView = require('./BaseView');
+var BaseView = require('./Base.view');
 
 class MainView extends BaseView {
     constructor() {
         super();
-        this.url = '/#/main';
+        this.url = '/#';
     }
 }
 
