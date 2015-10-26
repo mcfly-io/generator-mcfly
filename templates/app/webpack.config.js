@@ -34,7 +34,7 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.jsx?$/,
-            exclude: /(node_modules|bower_components)/,
+            exclude: /(node_modules|bower_components|externals)/,
             cacheable: true,
             loader: 'babel-loader',
             query: {
@@ -46,7 +46,7 @@ module.exports = {
         }, {
             test: /\.js$/,
             loader: 'transform/cacheable?brfs!transform/cacheable?envify',
-            exclude: /(node_modules|bower_components)/,
+            exclude: /(node_modules|bower_components|externals)/,
             cacheable: true
         }, {
             test: /\.css$/,
@@ -57,18 +57,18 @@ module.exports = {
             test: /\.scss$/,
             loader: 'style!css!sass?sourceMap',
             cacheable: true,
-            exclude: /(node_modules|bower_components)/
+            exclude: /(node_modules|bower_components|externals)/
         }, {
             test: /\.sass$/,
             // Passing indentedSyntax query param to node-sass
             loader: 'style!css!sass?indentedSyntax&sourceMap',
             cacheable: true,
-            exclude: /(node_modules|bower_components)/
+            exclude: /(node_modules|bower_components|externals)/
         }, {
             test: /\.less$/,
             loader: 'style!css!less?strictMath&noIeCompat',
             cacheable: true,
-            exclude: /(node_modules|bower_components)/
+            exclude: /(node_modules|bower_components|externals)/
         }, {
             test: /\.html$/,
             cacheable: true,
