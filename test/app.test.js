@@ -54,11 +54,17 @@ describe('generator:app', function() {
                     clientFolder + '/fonts',
                     'srcmaps',
                     'test/.jshintrc',
-                    'test/e2e/app/e2e.test.js',
+                    'test/e2e/app/tests.protractor.js',
+                    'test/e2e/app/main.e2e.test.js',
+                    'test/e2e/views/Base.view.js',
+                    'test/e2e/views/Main.view.js',
                     'test/e2e/.eslintrc',
                     'test/mocha/helpers/globals.js',
                     'test/unit/unitHelper.js',
-                    'test/unit/polyfill.js'
+                    'test/unit/polyfill.js',
+                    'protractor/browserExtension.js',
+                    'protractor/byExtension.js',
+                    'protractor/coverage.js'
                 ]);
                 done();
             }.bind(this));
@@ -164,7 +170,10 @@ describe('generator:app', function() {
                     clientFolder + '/cordova/' + 'app' + '/hooks' + '/before_platform_add/010_install_plugins.js',
                     clientFolder + '/cordova/' + 'app' + '/hooks' + '/after_prepare/010_add_platform_class.js',
                     clientFolder + '/config.xml',
-                    'test/e2e/app/e2e.test.js',
+                    'test/e2e/app/tests.protractor.js',
+                    'test/e2e/app/main.e2e.test.js',
+                    'test/e2e/views/Base.view.js',
+                    'test/e2e/views/Main.view.js',
                     'test/e2e/.eslintrc',
                     'test/mocha/helpers/globals.js'
                 ]);

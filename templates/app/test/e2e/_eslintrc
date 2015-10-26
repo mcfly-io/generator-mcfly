@@ -1,7 +1,6 @@
 {
   "globals": {
-    "element": true,
-    "by": true
+    "element": true
   },
   "rules": {
     "no-console": 0
