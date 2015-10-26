@@ -47,7 +47,7 @@
     "no-console": 2,
     "no-constant-condition": 2,
     "no-control-regex": 2,
-    "no-debugger": 1,
+    "no-debugger": 2,
     "no-delete-var": 2,
     "no-dupe-keys": 2,
     "no-empty": 0,
