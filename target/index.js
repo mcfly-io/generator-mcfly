@@ -120,7 +120,9 @@ var TargetGenerator = Class.extend({
 
             // add specific e2e test for the target
             this.mkdir(path.join(this.targetDir, 'test', 'e2e'));
-            this.template('../app/test/e2e/e2e.test.js', path.join('test', 'e2e', this.targetname, 'e2e.test.js'));
+            this.template('../app/test/e2e/app/tests.protractor.js', path.join('test', 'e2e', this.targetname, 'tests.protractor.js'));
+            this.template('../app/test/e2e/app/main.e2e.test.js', path.join('test', 'e2e', this.targetname, 'main.e2e.test.js'));
+
             done();
         }
     },

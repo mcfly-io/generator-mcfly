@@ -228,6 +228,9 @@ var AppGenerator = Class.extend({
             this.template('_bowerrc', '.bowerrc');
             this.template('karma.conf.js');
             this.template('protractor.conf.js');
+            this.template('protractor/browserExtension.js');
+            this.template('protractor/byExtension.js');
+            this.template('protractor/coverage.js');
             this.template('webpack.config.js');
             this.template('bin/prepublish.sh');
             this.template('bin/protractor-fix-version.js');
@@ -266,7 +269,10 @@ var AppGenerator = Class.extend({
             this.mkdir('test/mocha');
             this.mkdir('test/mocha/helpers');
             this.mkdir('test/e2e/app');
-            this.template('test/e2e/e2e.test.js', 'test/e2e/app/e2e.test.js');
+            this.template('test/e2e/app/main.e2e.test.js', 'test/e2e/app/main.e2e.test.js');
+            this.template('test/e2e/app/tests.protractor.js', 'test/e2e/app/tests.protractor.js');
+            this.template('test/e2e/views/Base.view.js', 'test/e2e/views/Base.view.js');
+            this.template('test/e2e/views/Main.view.js', 'test/e2e/views/Main.view.js');
             this.template('test/_jshintrc', 'test/.jshintrc');
             this.template('test/e2e/_eslintrc', 'test/e2e/.eslintrc');
             this.template('test/mocha/helpers/globals.js', 'test/mocha/helpers/globals.js');

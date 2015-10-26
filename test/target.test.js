@@ -44,7 +44,8 @@ describe('generator:target', function() {
                     folder + '/404' + suffix + '.html',
                     folder + '/robots' + suffix + '.txt',
                     folder + '/favicon' + suffix + '.ico',
-                    'test/e2e/' + targetname + '/' + 'e2e.test.js'
+                    'test/e2e/' + targetname + '/' + 'tests.protractor.js',
+                    'test/e2e/' + targetname + '/' + 'main.e2e.test.js'
                 ]);
                 done();
             });
