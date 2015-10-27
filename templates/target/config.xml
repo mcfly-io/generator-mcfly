@@ -58,9 +58,6 @@
     <param name="ios-package" value="CDVSplashScreen"/>
     <param name="onload" value="true"/>
   </feature>
-  <feature name="org.apache.cordova.facebook.Connect">
-    <param name="ios-package" value="FacebookConnectPlugin"/>
-  </feature>
     <platform name="blackberry10">
     <icon src="icon-86.png"/>
     <icon src="icon-150.png"/>
