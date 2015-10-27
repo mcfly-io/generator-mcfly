@@ -72,7 +72,7 @@ if (isCI) {
     config.directConnect = true;
 }
 
-if (argv.coverage) {
+if (argv.coverage === true || argv.coverage === 'true') {
     config.plugins = config.plugins || [];
     config.plugins.push({
         package: 'protractor-istanbul-plugin',
