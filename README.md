@@ -464,7 +464,7 @@ The `index.html` is configured to be permissive.
 Adjust the meta tags `Content-Security-Policy` to your needs. Reference is here : http://content-security-policy.com/ 
 
 ## Testing
-To run unit test for the yeoman project use the following command:
+To run unit test and e2e tests for the yeoman project use the following command:
 ```
 gulp test
 ```
@@ -485,7 +485,7 @@ gulp karma --start
 ```
 If you want to run karma with a specific bundle manager and a specific module, you can run:
 ```
-gulp karma --bundler webpack --entry common
+gulp karma --bundler webpack --module common
 ```
 
 If you just want to run mocha and are not interested yet in linting your files you can run:
@@ -499,6 +499,21 @@ mocha test/app.test.js -r test/helpers/globals.js
 ```
 This will tell mocha to run only the tests located in `test/app.test.js` (The -r option is necessary here to add global configuration file for mocha, when using gulp the `globals.js` is added automatically)
 
+You can run e2e tests using the following command:
+```
+gulp e2e # the same as gulp e2e --coverage --target=app
+```
+This will dist and instrument the source code so you get code coverage, and use the default target
+
+If you didn't change the source code you can bypass the dist:
+```
+gulp e2e --skip-dist
+```
+
+If you want another target:
+```
+gulp e2e --target=dashboard
+```
 ## Changelog
 
 Recent changes can be viewed on Github on the [Releases Page](https://github.com/mcfly-io/generator-mcfly/releases)

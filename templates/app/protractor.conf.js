@@ -5,12 +5,18 @@ var coverage = require('./protractor/coverage');
 var browserExtension = require('./protractor/browserExtension');
 var byExtension = require('./protractor/byExtension');
 var constants = require('./gulp_tasks/common/constants')();
-
+var helper = require('./gulp_tasks/common/helper');
 var destScreenShots = './reports/screenshots';
+var target = argv.target;
+var targetSuffix = require('gulp-mux').targets.targetToSuffix(target);
 var coveragePath = 'coverage/e2e/' + argv.target;
 coverage.cleanFolder(coveragePath);
+var isMobile = helper.isMobile({
+    clientFolder: constants.clientFolder,
+    targetSuffix: targetSuffix
+});
 var isCI = process.env.CI === 'true';
-
+var timeout = 400000;
 var config = {
     //seleniumAddress: 'http://localhost:4445/wd/hub',
     //seleniumServerJar: './node_modules/gulp-protractor/node_modules/protractor/selenium/selenium-server-standalone-2.43.1.jar',
@@ -33,19 +39,23 @@ var config = {
         showColors: true,
         silent: true,
         includeStackTrace: true,
-        defaultTimeoutInterval: 400000,
+        defaultTimeoutInterval: timeout,
         print: function() {}
     },
     onPrepare: function() {
-        browser.manage().timeouts().setScriptTimeout(400000);
-        //browser.driver.manage().window().maximize();
-        browser.driver.manage().window().setSize(550, 900);
-
         browserExtension.extendsBrowser(browser, {
             destScreenShots: destScreenShots
         });
 
         byExtension.extendsBy(by);
+
+        browser.manage().timeouts().setScriptTimeout(timeout);
+
+        if (isMobile) {
+            browser.driver.manage().window().setSize(550, 900);
+        } else {
+            browser.maximizeWindow();
+        }
 
         require('jasmine-reporters');
         var SpecReporter = require('jasmine-spec-reporter');
@@ -72,7 +82,7 @@ if (isCI) {
     config.directConnect = true;
 }
 
-if (argv.coverage) {
+if (argv.coverage === true || argv.coverage === 'true') {
     config.plugins = config.plugins || [];
     config.plugins.push({
         package: 'protractor-istanbul-plugin',

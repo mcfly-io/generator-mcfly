@@ -94,6 +94,19 @@ var getLogs = function() {
     return browserObj.manage().logs().get('browser');
 };
 
+var maximizeWindow = function() {
+    setTimeout(function() {
+        browserObj.driver.executeScript(function() {
+            return {
+                width: window.screen.availWidth,
+                height: window.screen.availHeight
+            };
+        }).then(function(result) {
+            browserObj.driver.manage().window().setSize(result.width, result.height);
+        });
+    });
+};
+
 var extendsBrowser = function(browser, config) {
     browserObj = browser;
     // save options
@@ -116,6 +129,7 @@ var extendsBrowser = function(browser, config) {
     browserObj.waitForUrlToChangeTo = waitForUrlToChangeTo;
     browserObj.clearState = clearState;
     browserObj.getLogs = getLogs;
+    browserObj.maximizeWindow = maximizeWindow;
 };
 
 module.exports = {
