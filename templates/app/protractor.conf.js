@@ -16,7 +16,7 @@ var isMobile = helper.isMobile({
     targetSuffix: targetSuffix
 });
 var isCI = process.env.CI === 'true';
-
+var timeout = 400000;
 var config = {
     //seleniumAddress: 'http://localhost:4445/wd/hub',
     //seleniumServerJar: './node_modules/gulp-protractor/node_modules/protractor/selenium/selenium-server-standalone-2.43.1.jar',
@@ -39,7 +39,7 @@ var config = {
         showColors: true,
         silent: true,
         includeStackTrace: true,
-        defaultTimeoutInterval: 400000,
+        defaultTimeoutInterval: timeout,
         print: function() {}
     },
     onPrepare: function() {
@@ -49,7 +49,7 @@ var config = {
 
         byExtension.extendsBy(by);
 
-        browser.manage().timeouts().setScriptTimeout(400000);
+        browser.manage().timeouts().setScriptTimeout(timeout);
 
         if (isMobile) {
             browser.driver.manage().window().setSize(550, 900);
