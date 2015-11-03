@@ -7,7 +7,7 @@
 [![Dependency Status](https://david-dm.org/mcfly-io/generator-mcfly.svg)](https://david-dm.org/mcfly-io/generator-mcfly) [![devDependency Status](https://david-dm.org/mcfly-io/generator-mcfly/dev-status.svg)](https://david-dm.org/mcfly-io/generator-mcfly#info=devDependencies) [![peerDependency Status](https://david-dm.org/mcfly-io/generator-mcfly/peer-status.svg)](https://david-dm.org/mcfly-io/generator-mcfly#info=peerDependencies)    
 
 
-> A Yeoman generator for scaffolding an application using angular, browserify, ionic and famous.
+> A Yeoman generator for scaffolding an application using angular, browserify or webpack, ionic, angular-ui-bootstrap, angular-material...
 
 [![NPM](https://nodei.co/npm/generator-mcfly.png?downloads=false&downloadRank=false&stars=false)](https://nodei.co/npm/generator-mcfly)
 
@@ -15,14 +15,14 @@
 # IMPORTANT UPDATE
 The generator was previously named `generator-angular-famous-ionic`
 
-2 things to note
+2 things to note:
 
 1. installation is now `npm install -g generator-mcfly`
 
 2. If you have existing project modify the name of the generator in your `.yo-rc.json` file 
 
 ## Description
-This generator will scaffold for you an application using angularjs, browserify, and either ionic framwork or famo.us (even both).
+This generator will scaffold for you an application using angularjs, browserify or webpack, ionic framwork or angular-boostrap-ui or angular-material.
 
 The project has the following capabilities:
 * Angular best practices (feature folder structure)
