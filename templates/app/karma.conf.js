@@ -120,6 +120,7 @@ module.exports = function(config) {
         },
 
         coverageReporter: {
+            dir : './coverage/unit',
             reporters: [{
                 type: 'json'
             }, {
