@@ -7,7 +7,7 @@ require('ionic');
 require('ionic-angular');<% } %><% if (material) { %>
 require('angular-material');<% } %><% if (famous) { %>
 require('famous-angular');<% } %><% if (ngCordova) { %>
-require('ng-cordova');<% } %><% if (boostrap) { %>
+require('ng-cordova');<% } %><% if (bootstrap) { %>
 require('angular-ui-bootstrap');<% } %>
 
 var modulename = '<%= modulename %>';

@@ -11,7 +11,7 @@ require('angular-animate');
 require('angular-sanitize');
 require('ionic');
 require('ionic-angular');<% } %><% if (material) { %>
-require('angular-material');<% } %><% if (boostrap) { %>
+require('angular-material');<% } %><% if (bootstrap) { %>
 require('angular-ui-bootstrap');<% } %>
 var app = angular.module(namespace, [<% if (ionic) { %>'ionic',<% } %><% if (material) { %> 'ngMaterial',<% } %><% if (bootstrap) { %> 'ui.bootstrap',<% } %>
     // inject:modules start
