@@ -133,6 +133,7 @@ var TargetGenerator = Class.extend({
     },
 
     end: function() {
+        var chalk = this.utils.chalk;
         var that = this;
         var done = this.async();
         return this.injectAllModules()
@@ -142,7 +143,7 @@ var TargetGenerator = Class.extend({
                     that.log('If you want to use any of the ' + chalk.cyan('https://apps.ionic.io') + ' services ');
                     that.log('- e.g. ionicPush for mobile push messaging or ionicDeploy for hot pushing code updates -');
                     that.log('you should comment out line ' + chalk.green('22') + ' in ' + chalk.blue('client/index' + that.suffix + '.html') + ' and uncomment ');
-                    that.log('line ' + chalk.green('14') + ' in ' + chalk.blue('client/scripts/main' + that.suffix + '.js') + ' to require ' + chalk.yellow('ionic.io.bundle.min.js') + ', as');
+                    that.log('line ' + chalk.green('14') + ' in ' + chalk.blue('client/scripts/main' + that.suffix + '.js') + ' to require ' + chalk.yellow('ionic.io.bundle.min.js') + ', as well as');
                     that.log('the ' + chalk.magenta('\'ionic.service.core\'') + ' module dependency. Finally, create your app on ' + chalk.cyan('https://apps.ionic.io'));
                     that.log('and fill in the ' + chalk.magenta('app_id') + ' and ' + chalk.magenta('api_key') + ' in ' + chalk.blue('gulp_tasks/common/constants.js') + ' in ');
                     that.log(chalk.magenta('consants.ionic.' + that.targetname) + ', and then run \'' + chalk.yellow('gulp ionic:platformcopy --target=' + that.targetname) + '\'.');

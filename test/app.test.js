@@ -193,7 +193,7 @@ describe('generator:app', function() {
                 done();
             }.bind(this));
         });
-        
+
         it('references ionic.io.bundle.min.js in main.js', function(done) {
             this.runGen.on('end', function() {
                 var clientFolder = this.runGen.generator.config.get('clientFolder');

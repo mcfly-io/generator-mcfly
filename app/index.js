@@ -3,6 +3,7 @@
 var path = require('path');
 var yosay = require('yosay');
 var Class = require('../class');
+var chalk = require('chalk');
 
 var AppGenerator = Class.extend({
     constructor: function() {
@@ -303,7 +304,7 @@ var AppGenerator = Class.extend({
             this.log('If you want to use any of the ' + chalk.cyan('https://apps.ionic.io') + ' services ');
             this.log('- e.g. ionicPush for mobile push messaging or ionicDeploy for hot pushing code updates -');
             this.log('you should comment out line ' + chalk.green('22') + ' in ' + chalk.blue('client/index.html') + ' and uncomment ');
-            this.log('line ' + chalk.green('14') + ' in ' + chalk.blue('client/scripts/main.js') + ' to require ' + chalk.yellow('ionic.io.bundle.min.js') + ', as');
+            this.log('line ' + chalk.green('14') + ' in ' + chalk.blue('client/scripts/main.js') + ' to require ' + chalk.yellow('ionic.io.bundle.min.js') + ', as well as');
             this.log('the ' + chalk.yellow('\'ionic.service.core\'') + ' module dependency. Finally, create your app on ' + chalk.cyan('https://apps.ionic.io'));
             this.log('and fill in the ' + chalk.magenta('app_id') + ' and ' + chalk.magenta('api_key') + ' in ' + chalk.blue('gulp_tasks/common/constants.js') + ' in ');
             this.log(chalk.magenta('consants.ionic.app') + ', and then run \'' + chalk.yellow('gulp ionic:platformcopy --target=app') + '\'.');
