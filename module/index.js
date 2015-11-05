@@ -34,6 +34,7 @@ var ModuleGenerator = Class.extend({
         this.famous = this.config.get('famous');
         this.ngCordova = this.config.get('ngCordova');
         this.material = this.config.get('material');
+        this.bootstrap = this.config.get('bootstrap');
         this.ngModules = utils.getNgModules(this);
     },
 
