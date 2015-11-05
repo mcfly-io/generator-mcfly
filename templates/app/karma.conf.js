@@ -2,6 +2,7 @@
 
 var args = require('yargs').argv;
 var constants = require('./gulp_tasks/common/constants')();
+var resolutions = require('browserify-resolutions');
 var webpack = require('./webpack.config');
 var args = global.args || (process.env.ARGS ? JSON.parse(process.env.ARGS) : {});
 var moduleManager = args.bundler ? args.bundler : constants.moduleManager;
@@ -38,7 +39,12 @@ module.exports = function(config) {
                 'optional': ['es7.asyncFunctions'],
                 'ignore': ['./node_modules', './bower_components', './externals']
             }]
-        ]
+        ],
+        configure: function(bundle) {
+            bundle.on('prebundle', function() {
+                bundle.plugin(resolutions, '*');
+            });
+        }
     };
 
     webpack.cache = true;
@@ -120,6 +126,7 @@ module.exports = function(config) {
         },
 
         coverageReporter: {
+            dir : './coverage/unit',
             reporters: [{
                 type: 'json'
             }, {

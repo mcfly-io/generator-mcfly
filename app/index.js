@@ -102,6 +102,7 @@ var AppGenerator = Class.extend({
                 name: 'famous',
                 type: 'confirm',
                 message: 'Would you like to include famous-angular?',
+                when: false,
                 default: false
             }, {
                 name: 'ngCordova',
@@ -121,7 +122,7 @@ var AppGenerator = Class.extend({
             }, {
                 name: 'bootstrap',
                 type: 'confirm',
-                message: 'Would you like to include bootstrap?',
+                message: 'Would you like to include angular-ui-bootstrap?',
                 default: false
             }];
 

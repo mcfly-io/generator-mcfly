@@ -25,6 +25,7 @@ describe('generator:module', function() {
                 .on('ready', function(generator) {
                     generator.clientFolder = clientFolder;
                     generator.mobile = false;
+                    generator.bootstrap = false;
                     generator.log = sinon.spy();
                     generator.suffix = '';
                     generator.template('../../templates/target/index.html', clientFolder + '/index.html');
@@ -165,6 +166,7 @@ describe('generator:module', function() {
                 })
                 .on('ready', function(generator) {
                     generator.clientFolder = clientFolder;
+                    generator.bootstrap = false;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
 
@@ -199,6 +201,7 @@ describe('generator:module', function() {
 
                     generator.afterInitializing = function() {
                         generator.ionic = true;
+                        generator.bootstrap = false;
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
@@ -231,6 +234,7 @@ describe('generator:module', function() {
 
                     generator.afterInitializing = function() {
                         generator.famous = true;
+                        generator.bootstrap = false;
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
@@ -263,6 +267,7 @@ describe('generator:module', function() {
 
                     generator.afterInitializing = function() {
                         generator.material = true;
+                        generator.bootstrap = false;
                         generator.ngModules = utils.getNgModules(generator);
                     };
                     generator.mkdir(clientFolder + '/scripts/toto');
@@ -294,6 +299,7 @@ describe('generator:module', function() {
 
                     generator.afterInitializing = function() {
                         generator.ngCordova = true;
+                        generator.bootstrap = false;
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
@@ -328,6 +334,7 @@ describe('generator:module', function() {
                         generator.ionic = true;
                         generator.ngCordova = true;
                         generator.material = true;
+                        generator.bootstrap = false;
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
@@ -369,6 +376,7 @@ describe('generator:module', function() {
                         generator.ionic = true;
                         generator.ngCordova = true;
                         generator.material = true;
+                        generator.bootstrap = false;
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
@@ -409,6 +417,7 @@ describe('generator:module', function() {
                         generator.ionic = true;
                         generator.ngCordova = true;
                         generator.material = true;
+                        generator.bootstrap = false;
                         generator.ngModules = utils.getNgModules(generator);
 
                     };
@@ -446,6 +455,7 @@ describe('generator:module', function() {
                 .on('ready', function(generator) {
                     generator.clientFolder = clientFolder;
                     generator.mobile = false;
+                    generator.bootstrap = false;
                     generator.log = sinon.spy();
                     generator.suffix = '';
 
@@ -501,6 +511,7 @@ describe('generator:module', function() {
                 .on('ready', function(generator) {
                     generator.clientFolder = clientFolder;
                     generator.mobile = false;
+                    generator.bootstrap = false;
                     generator.log = sinon.spy();
                     generator.suffix = '';
 
