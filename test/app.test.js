@@ -194,5 +194,18 @@ describe('generator:app', function() {
             }.bind(this));
         });
 
+        it('references ionic.io.bundle.min.js in main.js', function(done) {
+            this.runGen.on('end', function() {
+                var clientFolder = this.runGen.generator.config.get('clientFolder');
+
+                var file = clientFolder + '/scripts/main' + '.js';
+                var body = testHelper.readTextFile(file);
+                assert(_.contains(body, 'ionic.io.bundle.min'));
+                assert(_.contains(body, 'ionic.service.core'));
+
+                done();
+            }.bind(this));
+        });
+
     });
 });

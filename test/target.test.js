@@ -214,6 +214,7 @@ describe('generator:target', function() {
                     'skip-install': true,
                     'check-travis': false,
                     'check-git': true,
+                    'ionic': true,
                     'mobile': true
                 })
                 .withPrompt({
@@ -258,6 +259,18 @@ describe('generator:target', function() {
                 var file = clientFolder + '/index' + suffix + '.html';
                 var body = testHelper.readTextFile(file);
                 assert(_.contains(body, 'cordova.js'));
+
+                done();
+            });
+        });
+
+        it('references ionic.io.bundle.min.js in main.js', function(done) {
+            this.runGen.on('end', function() {
+
+                var file = clientFolder + '/scripts/main' + suffix + '.js';
+                var body = testHelper.readTextFile(file);
+                assert(_.contains(body, 'ionic.io.bundle.min' + suffix));
+                assert(_.contains(body, 'ionic.service.core'));
 
                 done();
             });

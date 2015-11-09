@@ -10,11 +10,13 @@ require('angular-ui-router');<% if (ionic) { %>
 require('angular-animate');
 require('angular-sanitize');
 require('ionic');
-require('ionic-angular');<% } %><% if (material) { %>
-require('angular-material');<% } %><% if (bootstrap) { %>
+require('ionic-angular');<% } %>
+<% if (mobile) { %>// require(<%= ionicBundle %>);
+<% } %><% if (material) { %>require('angular-material');<% } %><% if (bootstrap) { %>
 require('angular-ui-bootstrap');<% } %>
 var app = angular.module(namespace, [<% if (ionic) { %>'ionic',<% } %><% if (material) { %> 'ngMaterial',<% } %><% if (bootstrap) { %> 'ui.bootstrap',<% } %>
-    // inject:modules start
+<% if (mobile) { %>    // 'ionic.service.core',
+<% } %>    // inject:modules start
     // inject:modules end
 ]);
 
