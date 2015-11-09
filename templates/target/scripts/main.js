@@ -11,7 +11,7 @@ require('angular-animate');
 require('angular-sanitize');
 require('ionic');
 require('ionic-angular');<% } %>
-<% if (mobile) { %>// require('./ionic.io.bundle.min');
+<% if (mobile) { %>// require(<% var ionicBundle = './ionic.io.bundle.min'; if (suffix) { ionicBundle = ionicBundle + suffix; } %><%= ionicBundle %>);
 <% } %><% if (material) { %>require('angular-material');<% } %><% if (bootstrap) { %>
 require('angular-ui-bootstrap');<% } %>
 var app = angular.module(namespace, [<% if (ionic) { %>'ionic',<% } %><% if (material) { %> 'ngMaterial',<% } %><% if (bootstrap) { %> 'ui.bootstrap',<% } %>
