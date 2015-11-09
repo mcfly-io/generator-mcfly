@@ -216,6 +216,10 @@ var AppGenerator = Class.extend({
         this.config.set('bootstrap', this.bootstrap);
         this.config.set('material', this.material);
         this.config.forceSave();
+        // build require for ionic bundle if target is mobile
+        if (this.mobile) {
+            this.ionicBundle = './ionic.io.bundle.min';
+        }
     },
 
     writing: {

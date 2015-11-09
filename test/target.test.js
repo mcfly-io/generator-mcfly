@@ -269,7 +269,7 @@ describe('generator:target', function() {
 
                 var file = clientFolder + '/scripts/main' + suffix + '.js';
                 var body = testHelper.readTextFile(file);
-                assert(_.contains(body, 'ionic.io.bundle.min'));
+                assert(_.contains(body, 'ionic.io.bundle.min' + suffix));
                 assert(_.contains(body, 'ionic.service.core'));
 
                 done();

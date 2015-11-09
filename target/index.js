@@ -97,6 +97,11 @@ var TargetGenerator = Class.extend({
         }
         // special case of target app that should not make a suffix
         this.suffix = this.targetnameToSuffix(this.targetname);
+        // build require for ionic bundle if target is mobile
+        if (this.mobile) {
+            this.ionicBundle = './ionic.io.bundle.min' + this.suffix;
+        }
+
     },
 
     writing: {

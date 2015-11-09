@@ -142,13 +142,33 @@ To better understand the gulp task system have a look at the docs of [gulp-mux](
 
 ![](http://ionic.io/img/iologo.png)
 
-The gulp system also includes some basic tasks for ensuring that your ionic projects in your `dist/` are able to make use of the [apps.ionic.io](https://apps.ionic.io/) platform. These are found in `gulp_tasks/tasks/ionic.js`. To use the ionic.io platform services, you will need to scaffold a mobile target (with `yo mcfly --mobile` or `yo mcfly:target --mobile`) and then create a project on [apps.ionic.io](https://apps.ionic.io/). Add your project's [`app_id`, `api_key`, and `name` from apps.ionic.io](http://docs.ionic.io/docs/io-api-keys) to your `gulp_tasks/common/constants.js` file in the entry in the `ionic` section with your current target's name. Next run
+The gulp system also includes some basic tasks for ensuring that your ionic projects in your `dist/` are able to make use of the [apps.ionic.io](https://apps.ionic.io/) platform. These are found in `gulp_tasks/tasks/ionic.js`. To use the ionic.io platform services, you will need to scaffold a mobile target (with `yo mcfly --mobile` or `yo mcfly:target --mobile`) and then create a project on [apps.ionic.io](https://apps.ionic.io/). 
+
+Next make sure your target has the correct properties from your ionic project; most importantly the [`app_id`, `api_key`, and `name` from apps.ionic.io](http://docs.ionic.io/docs/io-api-keys). You should fill thes in inside your `gulp_tasks/common/constants.js` file, in the `ionic` section for your target. If you plan to use `Ionic Push`, make sure to also include the `dev_push: true` property, so your app will know to register for the correct push notifications. 
+
+>If you don't see an entry in `constants.ionic` for your target, simply copy and fill in the one for the `app` target. Make sure you end up with a `constants.ionic` that looks like this:
+    ```js
+        ionic: {
+            ionicPlatform: { ... },
+            app: { ... },
+            <yourtargetname>: {  // fill this object with your ionic.io details
+                app_id: '123abcd',
+                api_key: '0123456789abcdefghij0123456789abcdefghij012345',
+                name: 'My New Ionic App',
+                dev_push: true
+            }
+        }
+    ```
+
+After your save the constants you need, run
 
 ```sh
 gulp ionic:platformcopy --target=<targetname>
 ```
 
-to copy over the [`ionic-platform-web-client`](https://github.com/driftyco/ionic-platform-web-client) bundle into your client folder, and then uncomment the `require('./ionic.io.bundle.min.js');` in [`client/scripts/main<targetsuffix>.js:14`](https://github.com/mcfly-io/generator-mcfly/blob/master/templates/target/scripts/main.js#L14) as well as the module dependency for `'ionic.service.core'` that follows it. Finally comment out the script include of `cordova.js` in [`client/index<targetsuffix>.html:22`](https://github.com/mcfly-io/generator-mcfly/blob/master/templates/target/index.html#L22), since the `ionic.io.bundle.min.js` will automatically load the correct instance of the `cordova.js` script for you.
+to copy over the [`ionic-platform-web-client`](https://github.com/driftyco/ionic-platform-web-client) bundle into your client folder, injecting your project's `ionic.io` data into it along the way.
+
+Next, uncomment the line that says `require('./ionic.io.bundle.min-<yourtargetname>');` at [`client/scripts/main<targetsuffix>.js:14`](https://github.com/mcfly-io/generator-mcfly/blob/master/templates/target/scripts/main.js#L14) as well as the module dependency for `'ionic.service.core'` that follows it. Finally comment out the script include of `cordova.js` in [`client/index<targetsuffix>.html:22`](https://github.com/mcfly-io/generator-mcfly/blob/master/templates/target/index.html#L22), since the `ionic.io.bundle.min.js` will automatically load the correct instance of the `cordova.js` script for you.
 
 Currently `'ionic:deploy'` is the only entry-point task, and it runs a `'dist'` and then handles the uploading and optional deployment of a project update to the ionic deploy server. You need to specify a target with a `--target=<targetname>` and then which mode you're using (usually `prod`) with `--mode=<dev|prod>`. After that you can add the `--note` and `--deploy` flags as specified by the [`ionic deploy` cli](http://docs.ionic.io/docs/deploy-deploying-updates).
 
