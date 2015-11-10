@@ -1,7 +1,7 @@
 'use strict';
 
+global.Promise = require('bluebird');
 var testHelper = require('./testHelper');
-var Q = require('q');
 var _ = require('lodash');
 var modulename = 'common';
 var valuename = 'myValue';
@@ -171,9 +171,9 @@ describe('generator:value', function() {
                     generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
-                        var deferred = Q.defer();
-                        deferred.reject('an error occured');
-                        return deferred.promise;
+                        return new Promise(function(resolve, reject) {
+                            reject('an error occured');
+                        });
                     };
                 })
                 .on('error', function(err) {
@@ -199,9 +199,9 @@ describe('generator:value', function() {
                     generator.clientFolder = clientFolder;
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
-                        var deferred = Q.defer();
-                        deferred.resolve([]);
-                        return deferred.promise;
+                        return new Promise(function(resolve, reject) {
+                            resolve([]);
+                        });
                     };
                 })
                 .on('error', function(err) {

@@ -1,7 +1,7 @@
 'use strict';
 
+global.Promise = require('bluebird');
 var testHelper = require('./testHelper');
-var Q = require('q');
 var _ = require('lodash');
 var targetname = 'web';
 var suffix = '-' + targetname;
@@ -107,7 +107,7 @@ describe('generator:target', function() {
                 })
                 .on('ready', function(generator) {
                     generator.getClientTargets = function() {
-                        return Q.when(['toto']);
+                        return Promise.resolve(['toto']);
                     };
                 })
                 .on('error', function(err) {
@@ -124,7 +124,7 @@ describe('generator:target', function() {
                 })
                 .on('ready', function(generator) {
                     generator.getClientTargets = function() {
-                        return Q.when(['toto']);
+                        return Promise.resolve(['toto']);
                     };
                 })
                 .on('error', function() {
@@ -193,10 +193,9 @@ describe('generator:target', function() {
                     generator.log = sinon.spy();
                     generator.getClientTargets = function() {
 
-                        var deferred = Q.defer();
-                        deferred.reject('an error occured');
-                        return deferred.promise;
-
+                        return new Promise(function(resolve, reject) {
+                            reject('an error occured');
+                        });
                     };
                 })
                 .on('error', function(err) {

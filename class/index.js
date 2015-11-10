@@ -1,4 +1,5 @@
 'use strict';
+global.Promise = require('bluebird');
 var yeoman = require('yeoman-generator');
 var updateNotifier = require('update-notifier');
 var Base = yeoman.generators.Base;
@@ -8,7 +9,6 @@ var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
 var globToRegexp = require('glob-to-regexp');
-var Q = require('q');
 var utils = require('../utils.js');
 var subcomponents = require('./subcomponents.js');
 
@@ -69,27 +69,27 @@ var ClassGenerator = Base.extend({
     checkCmd: function(cmd, exit) {
         exit = exit !== false;
 
-        var deferred = Q.defer();
+        return new Promise(function(resolve, reject) {
 
-        if (this.options['check-' + cmd] === false) {
-            deferred.resolve(undefined);
-        }
-
-        if (!this.utils.shell.which(cmd)) {
-            this.log(chalk.red.bold('(ERROR)') + ' It looks like you do not have ' + cmd + ' installed...');
-            if (exit === true) {
-                deferred.reject(new Error(cmd + ' is missing'));
-                this.utils.shell.exit(1);
-            } else {
-                deferred.resolve(false);
+            if (this.options['check-' + cmd] === false) {
+                resolve(undefined);
             }
 
-        } else {
-            this.log(chalk.gray(cmd + ' is installed, continuing...\n'));
-            deferred.resolve(true);
-        }
+            if (!this.utils.shell.which(cmd)) {
+                this.log(chalk.red.bold('(ERROR)') + ' It looks like you do not have ' + cmd + ' installed...');
+                if (exit === true) {
+                    reject(new Error(cmd + ' is missing'));
+                    this.utils.shell.exit(1);
+                } else {
+                    resolve(false);
+                }
 
-        return deferred.promise;
+            } else {
+                this.log(chalk.gray(cmd + ' is installed, continuing...\n'));
+                resolve(true);
+            }
+
+        });
     },
 
     /**
@@ -159,20 +159,20 @@ var ClassGenerator = Base.extend({
      * @returns {String[]} - An array of sub directories names
      */
     readDir: function(dirPath, isDirectory) {
-        var deferred = Q.defer();
-        fs.readdir(dirPath, function(err, files) {
-            if (err) {
-                deferred.reject(err);
-                return deferred.promise;
-            }
+        return new Promise(function(resolve, reject) {
+            fs.readdir(dirPath, function(err, files) {
+                if (err) {
+                    reject(err);
+                } else {
 
-            var result = files.filter(function(file) {
-                return fs.statSync(path.join(dirPath, file)).isDirectory() === isDirectory;
+                    var result = files.filter(function(file) {
+                        return fs.statSync(path.join(dirPath, file)).isDirectory() === isDirectory;
+                    });
+                    resolve(result);
+                }
             });
-            deferred.resolve(result);
-        });
 
-        return deferred.promise;
+        });
     },
 
     /**
@@ -316,9 +316,9 @@ var ClassGenerator = Base.extend({
         var that = this;
         this.skipInjectModules = this.options['skip-inject-modules'];
         if (this.skipInjectModules) {
-            return Q.when(null);
+            return Promise.resolve(null);
         }
-        return Q.all([this.getClientScriptFolder(), this.getClientModules(), this.getClientTargets()])
+        return Promise.all([this.getClientScriptFolder(), this.getClientModules(), this.getClientTargets()])
             .then(function(values) {
                 directory = values[0];
                 modules = values[1];
@@ -330,7 +330,7 @@ var ClassGenerator = Base.extend({
                         var suffix = that.targetnameToSuffix(target);
                         return utils.injectModules(directory, suffix, modules);
                     }).value();
-                    return Q.all(tasks);
+                    return Promise.all(tasks);
                 } else {
                     return null;
                 }
@@ -345,7 +345,7 @@ var ClassGenerator = Base.extend({
         var directory;
         var modules;
         var that = this;
-        return Q.all([this.getClientScriptFolder(), this.getClientModules()])
+        return Promise.all([this.getClientScriptFolder(), this.getClientModules()])
             .then(function(values) {
                 directory = values[0];
                 modules = values[1];
@@ -359,7 +359,7 @@ var ClassGenerator = Base.extend({
                     });
                 });
 
-                return Q.all(tasks);
+                return Promise.all(tasks);
             });
     },
 
@@ -368,7 +368,7 @@ var ClassGenerator = Base.extend({
      * @returns {Promise} - A promise
      */
     injectAll: function() {
-        return Q.all([this.injectAllModules(), this.injectAllComponents()]);
+        return Promise.all([this.injectAllModules(), this.injectAllComponents()]);
     }
 
 });

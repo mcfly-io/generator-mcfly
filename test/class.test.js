@@ -1,10 +1,10 @@
 'use strict';
 
+global.Promise = require('bluebird');
 var testHelper = require('./testHelper');
 var chalk = require('chalk');
 var _ = require('lodash');
 var path = require('path');
-var Q = require('q');
 var Class = require('../class');
 
 describe('generator:class', function() {
@@ -315,7 +315,7 @@ describe('generator:class', function() {
 
     it('#getClientModules() should succeed', function() {
         generator.getDirectories = function() {
-            return Q.when([]);
+            return Promise.resolve([]);
         };
         return generator.getClientModules().then(function(values) {
             assert(Array.isArray(values));
@@ -335,7 +335,7 @@ describe('generator:class', function() {
 
     it('#getClientTargets() should succeed', function(done) {
         generator.getFiles = function() {
-            return Q.when(['index.html', 'index-www.html', 'index-web.html']);
+            return Promise.resolve(['index.html', 'index-www.html', 'index-web.html']);
         };
         generator.getClientTargets().then(function(value) {
                 assert.deepEqual(value, ['app', 'www', 'web']);

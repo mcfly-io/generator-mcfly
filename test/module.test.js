@@ -1,7 +1,7 @@
 'use strict';
 
+global.Promise = require('bluebird');
 var testHelper = require('./testHelper');
-var Q = require('q');
 var _ = require('lodash');
 var utils = require('../utils');
 var modulename = 'common';
@@ -170,9 +170,9 @@ describe('generator:module', function() {
                     generator.log = sinon.spy();
                     generator.getClientModules = function() {
 
-                        var deferred = Q.defer();
-                        deferred.reject('an error occured');
-                        return deferred.promise;
+                        return new Promise(function(resolve, reject) {
+                            reject('an error occured');
+                        });
                     };
                 })
                 .on('error', function(err) {

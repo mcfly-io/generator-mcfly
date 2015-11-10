@@ -47,6 +47,7 @@
     "scaffold"
   ],
   "dependencies": {
+    "bluebird": "^3.0.5",
     "chalk": "1.1.1",
     "del": "2.0.2",
     "generator-sublime": ">=1.9.18",
@@ -55,10 +56,9 @@
     "gulp-inject": "3.0.0",
     "gulp-mux": "latest",
     "lodash": "2.4.1",
-    "q": "1.4.1",
     "shelljs": "0.5.3",
     "update-notifier": "0.5.0",
-    "yeoman-generator": "0.17.7",
+    "yeoman-generator": "0.21.1",
     "yosay": "1.0.5"
   },
   "devDependencies": {
