@@ -7,6 +7,8 @@ var modulename = 'common';
 var servicename = 'myService';
 var clientFolder = 'www';
 
+require('./helpers/globals');
+
 describe('generator:service', function() {
     describe('with modules', function() {
         beforeEach(function() {
@@ -16,7 +18,7 @@ describe('generator:service', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     servicename: servicename
                 })
@@ -99,7 +101,7 @@ describe('generator:service', function() {
 
         it('with empty servicename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     servicename: ''
                 })
@@ -114,7 +116,7 @@ describe('generator:service', function() {
 
         it('with empty modulename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: ''
                 })
                 .on('end', function() {
@@ -129,7 +131,7 @@ describe('generator:service', function() {
         it('with unknown modulename should throw an error', function(done) {
             var missingModulename = 'dummy';
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: missingModulename
                 })
                 .on('end', function() {
@@ -162,7 +164,7 @@ describe('generator:service', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     servicename: servicename
                 })
@@ -189,7 +191,7 @@ describe('generator:service', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     servicename: servicename
                 })
@@ -220,7 +222,7 @@ describe('generator:service', function() {
                 'check-git': true,
                 'servicetype': 'dummy'
             })
-            .withPrompt({
+            .withPrompts({
                 modulename: modulename,
                 servicename: servicename
             })
@@ -248,7 +250,7 @@ describe('generator:service', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     servicename: servicename
                 })
@@ -301,7 +303,7 @@ describe('generator:service', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     servicename: servicename
                 })

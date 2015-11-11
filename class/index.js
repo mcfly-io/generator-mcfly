@@ -1,8 +1,8 @@
 'use strict';
 global.Promise = require('bluebird');
-var yeoman = require('yeoman-generator');
+var generators = require('yeoman-generator');
 var updateNotifier = require('update-notifier');
-var Base = yeoman.generators.Base;
+var Base = generators.Base;
 var shell = require('shelljs');
 var chalk = require('chalk');
 var fs = require('fs');
@@ -11,6 +11,7 @@ var _ = require('lodash');
 var globToRegexp = require('glob-to-regexp');
 var utils = require('../utils.js');
 var subcomponents = require('./subcomponents.js');
+var stripJsonComments = require('strip-json-comments');
 
 /**
  * The `Class` generator has several helpers method to help with creating a new generator.
@@ -59,6 +60,16 @@ var ClassGenerator = Base.extend({
 
     },
 
+    readTextFile: function(filename) {
+        var body = fs.readFileSync(filename, 'utf8');
+        return body;
+    },
+
+    readJsonFile: function(filename) {
+        var body = this.readTextFile(filename);
+        return JSON.parse(stripJsonComments(body));
+    },
+
     /**
      * Check if a command line utility is installed
      * @private
@@ -89,7 +100,7 @@ var ClassGenerator = Base.extend({
                 resolve(true);
             }
 
-        });
+        }.bind(this));
     },
 
     /**
@@ -181,7 +192,7 @@ var ClassGenerator = Base.extend({
      * @returns {String} - The camelized string
      */
     camelize: function(str) {
-        return this._.camelize(this._.slugify(this._.humanize(str)));
+        return _.camelize(_.snakeCase(str));
     },
 
     /**
@@ -190,7 +201,7 @@ var ClassGenerator = Base.extend({
      * @returns {String} - The dasherized string
      */
     dasherize: function(str) {
-        return this._.dasherize(this.camelize(str));
+        return _.dasherize(this.camelize(str));
     },
 
     /**

@@ -7,6 +7,8 @@ var modulename = 'common';
 var filtername = 'myFilter';
 var clientFolder = 'www';
 
+require('./helpers/globals');
+
 describe('generator:filter', function() {
     describe('with modules', function() {
         beforeEach(function() {
@@ -16,7 +18,7 @@ describe('generator:filter', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     filtername: filtername
                 })
@@ -99,7 +101,7 @@ describe('generator:filter', function() {
 
         it('with empty filtername should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     filtername: ''
                 })
@@ -114,7 +116,7 @@ describe('generator:filter', function() {
 
         it('with empty modulename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: ''
                 })
                 .on('end', function() {
@@ -129,7 +131,7 @@ describe('generator:filter', function() {
         it('with unknown modulename should throw an error', function(done) {
             var missingModulename = 'dummy';
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: missingModulename
                 })
                 .on('end', function() {
@@ -163,7 +165,7 @@ describe('generator:filter', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     filtername: filtername
                 })
@@ -191,7 +193,7 @@ describe('generator:filter', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     filtername: filtername
                 })
@@ -219,7 +221,7 @@ describe('generator:filter', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     filtername: filtername
                 })
@@ -271,7 +273,7 @@ describe('generator:filter', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     filtername: filtername
                 })

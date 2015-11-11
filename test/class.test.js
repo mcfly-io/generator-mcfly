@@ -7,6 +7,8 @@ var _ = require('lodash');
 var path = require('path');
 var Class = require('../class');
 
+require('./helpers/globals');
+
 describe('generator:class', function() {
     var generator;
 

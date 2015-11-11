@@ -7,6 +7,8 @@ var utils = require('../utils');
 var modulename = 'common';
 var clientFolder = 'www';
 
+require('./helpers/globals');
+
 describe('generator:module', function() {
 
     var end = null;
@@ -19,7 +21,7 @@ describe('generator:module', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
@@ -93,7 +95,7 @@ describe('generator:module', function() {
 
         it('with empty modulename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: ''
                 })
                 .on('end', function() {
@@ -107,7 +109,7 @@ describe('generator:module', function() {
 
         it('with passing existing modulename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: 'toto'
                 })
                 .on('error', function(err) {
@@ -118,7 +120,7 @@ describe('generator:module', function() {
 
         it('with prompting existing modulename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: 'toto'
                 })
                 .on('error', function() {
@@ -132,7 +134,7 @@ describe('generator:module', function() {
 
         it('with new modulename should succeed', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: 'dummy'
                 })
                 .on('end', function() {
@@ -161,7 +163,7 @@ describe('generator:module', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
@@ -192,7 +194,7 @@ describe('generator:module', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
@@ -225,7 +227,7 @@ describe('generator:module', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
@@ -258,7 +260,7 @@ describe('generator:module', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
@@ -290,7 +292,7 @@ describe('generator:module', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
@@ -322,7 +324,7 @@ describe('generator:module', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
@@ -364,7 +366,7 @@ describe('generator:module', function() {
                     'check-git': true,
                     'skip-route': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
@@ -405,7 +407,7 @@ describe('generator:module', function() {
                     'check-git': true,
                     'skip-route': false
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename
                 })
                 .on('ready', function(generator) {
@@ -449,7 +451,7 @@ describe('generator:module', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: this.modulename
                 })
                 .on('ready', function(generator) {
@@ -505,7 +507,7 @@ describe('generator:module', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename
                 })
                 .on('ready', function(generator) {

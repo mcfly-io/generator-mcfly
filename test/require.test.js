@@ -5,6 +5,8 @@ var subcomponents = require('../class/subcomponents.js');
 var clientFolder = 'www';
 var _ = require('lodash');
 
+require('./helpers/globals');
+
 var suffixes = ['', '-xxx'];
 var modules = ['toto', 'tata'];
 var files = _.range(2);

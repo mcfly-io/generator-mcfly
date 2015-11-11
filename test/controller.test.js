@@ -7,6 +7,8 @@ var modulename = 'common';
 var controllername = 'myController';
 var clientFolder = 'www';
 
+require('./helpers/globals');
+
 describe('generator:controller', function() {
     describe('with modules', function() {
         beforeEach(function() {
@@ -16,7 +18,7 @@ describe('generator:controller', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     controllername: controllername
                 })
@@ -99,7 +101,7 @@ describe('generator:controller', function() {
 
         it('with empty controllername should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     controllername: ''
                 })
@@ -114,7 +116,7 @@ describe('generator:controller', function() {
 
         it('with empty modulename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: ''
                 })
                 .on('end', function() {
@@ -129,7 +131,7 @@ describe('generator:controller', function() {
         it('with unknown modulename should throw an error', function(done) {
             var missingModulename = 'dummy';
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: missingModulename
                 })
                 .on('end', function() {
@@ -163,7 +165,7 @@ describe('generator:controller', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     controllername: controllername
                 })
@@ -194,7 +196,7 @@ describe('generator:controller', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     controllername: controllername
                 })
@@ -225,7 +227,7 @@ describe('generator:controller', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     controllername: controllername
                 })
@@ -278,7 +280,7 @@ describe('generator:controller', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     controllername: controllername
                 })

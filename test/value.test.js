@@ -16,7 +16,7 @@ describe('generator:value', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     valuename: valuename
                 })
@@ -99,7 +99,7 @@ describe('generator:value', function() {
 
         it('with empty valuename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     valuename: ''
                 })
@@ -114,7 +114,7 @@ describe('generator:value', function() {
 
         it('with empty modulename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: ''
                 })
                 .on('end', function() {
@@ -129,7 +129,7 @@ describe('generator:value', function() {
         it('with unknown modulename should throw an error', function(done) {
             var missingModulename = 'dummy';
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: missingModulename
                 })
                 .on('end', function() {
@@ -163,7 +163,7 @@ describe('generator:value', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     valuename: valuename
                 })
@@ -191,7 +191,7 @@ describe('generator:value', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     valuename: valuename
                 })
@@ -219,7 +219,7 @@ describe('generator:value', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     valuename: valuename
                 })
@@ -271,7 +271,7 @@ describe('generator:value', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     valuename: valuename
                 })

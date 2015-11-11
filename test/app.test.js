@@ -4,6 +4,8 @@ var testHelper = require('./testHelper');
 var yosay = require('yosay');
 var _ = require('lodash');
 
+require('./helpers/globals');
+
 describe('generator:app', function() {
     describe('with option mobile false', function() {
         beforeEach(function() {
@@ -14,7 +16,7 @@ describe('generator:app', function() {
                     'check-git': true,
                     'testmode': true
                 })
-                .withPrompt({
+                .withPrompts({
                     someOption: true
                 })
                 .on('ready', function(generator) {
@@ -130,7 +132,7 @@ describe('generator:app', function() {
                     'mobile': true,
                     'testmode': true
                 })
-                .withPrompt({
+                .withPrompts({
                     someOption: true
                 })
                 .on('ready', function(generator) {

@@ -46,5 +46,12 @@ shippable/
 ehthumbs.db
 Thumbs.db
 
+# Cordova
+platforms/
+plugins/
+
+# Visual Studio Code
+.vscode/
+
 # Changelog
 CHANGELOG.md

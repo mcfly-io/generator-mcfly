@@ -7,6 +7,8 @@ var modulename = 'common';
 var directivename = 'myDirective';
 var clientFolder = 'www';
 
+require('./helpers/globals');
+
 describe('generator:directive', function() {
     describe('with modules', function() {
         beforeEach(function() {
@@ -16,7 +18,7 @@ describe('generator:directive', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     directivename: directivename
                 })
@@ -106,7 +108,7 @@ describe('generator:directive', function() {
 
         it('with empty directivename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     directivename: ''
                 })
@@ -121,7 +123,7 @@ describe('generator:directive', function() {
 
         it('with empty modulename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: ''
                 })
                 .on('end', function() {
@@ -136,7 +138,7 @@ describe('generator:directive', function() {
         it('with unknown modulename should throw an error', function(done) {
             var missingModulename = 'dummy';
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: missingModulename
                 })
                 .on('end', function() {
@@ -170,7 +172,7 @@ describe('generator:directive', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     directivename: directivename
                 })
@@ -198,7 +200,7 @@ describe('generator:directive', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     directivename: directivename
                 })
@@ -228,7 +230,7 @@ describe('generator:directive', function() {
                     'check-git': true,
                     'compile': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     directivename: directivename
                 })
@@ -281,7 +283,7 @@ describe('generator:directive', function() {
                     'check-git': true,
                     'compile': false
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     directivename: directivename
                 })
@@ -332,7 +334,7 @@ describe('generator:directive', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     directivename: directivename
                 })
@@ -385,7 +387,7 @@ describe('generator:directive', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     directivename: directivename
                 })

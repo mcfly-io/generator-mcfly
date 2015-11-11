@@ -90,8 +90,8 @@ var testHelper = {
     startMock: function(mockery) {
         this.endMock(mockery);
         mockery.enable({
-            warnOnUnregistered: false,
-            useCleanCache: true
+            warnOnUnregistered: false
+            // useCleanCache: true
         });
     },
 

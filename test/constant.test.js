@@ -7,6 +7,8 @@ var modulename = 'common';
 var constantname = 'myConstant';
 var clientFolder = 'www';
 
+require('./helpers/globals');
+
 describe('generator:constant', function() {
     describe('with modules', function() {
         beforeEach(function() {
@@ -16,7 +18,7 @@ describe('generator:constant', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     constantname: constantname
                 })
@@ -102,7 +104,7 @@ describe('generator:constant', function() {
 
         it('with empty constantname should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     constantname: ''
                 })
@@ -117,7 +119,7 @@ describe('generator:constant', function() {
 
         it('with empty modulename should throw an error', function(done) {
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: ''
                 })
                 .on('end', function() {
@@ -132,7 +134,7 @@ describe('generator:constant', function() {
         it('with unknown modulename should throw an error', function(done) {
             var missingModulename = 'dummy';
             this.runGen
-                .withPrompt({
+                .withPrompts({
                     modulename: missingModulename
                 })
                 .on('end', function() {
@@ -166,7 +168,7 @@ describe('generator:constant', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     constantname: constantname
                 })
@@ -195,7 +197,7 @@ describe('generator:constant', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     constantname: constantname
                 })
@@ -224,7 +226,7 @@ describe('generator:constant', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     constantname: constantname
                 })
@@ -277,7 +279,7 @@ describe('generator:constant', function() {
                     'check-travis': false,
                     'check-git': true
                 })
-                .withPrompt({
+                .withPrompts({
                     modulename: modulename,
                     constantname: constantname
                 })
