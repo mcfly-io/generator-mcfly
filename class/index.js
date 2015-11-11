@@ -12,7 +12,7 @@ var globToRegexp = require('glob-to-regexp');
 var utils = require('../utils.js');
 var subcomponents = require('./subcomponents.js');
 var stripJsonComments = require('strip-json-comments');
-
+var mkdirp = require('mkdirp');
 /**
  * The `Class` generator has several helpers method to help with creating a new generator.
  * It can be used in place of the `Base` generator
@@ -34,6 +34,8 @@ var ClassGenerator = Base.extend({
         this.utils.shell = shell;
         this.utils.updateNotifier = updateNotifier;
         this.utils.chalk = chalk;
+        this.utils.mkdir = mkdirp.sync.bind(mkdirp);
+        this.utils._ = _;
     },
 
     /**

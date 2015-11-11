@@ -247,13 +247,13 @@ var AppGenerator = Class.extend({
 
         clientfiles: function() {
             this.targetDir = path.join(process.cwd(), this.clientFolder);
-            this.mkdir(this.clientFolder);
-            this.mkdir(this.clientFolder + '/styles');
-            this.mkdir(this.clientFolder + '/scripts');
-            this.mkdir('srcmaps');
-            this.mkdir(this.clientFolder + '/images/app');
-            this.mkdir(this.clientFolder + '/icons/app');
-            this.mkdir(this.clientFolder + '/fonts/app');
+            this.utils.mkdir(this.clientFolder);
+            this.utils.mkdir(this.clientFolder + '/styles');
+            this.utils.mkdir(this.clientFolder + '/scripts');
+            this.utils.mkdir('srcmaps');
+            this.utils.mkdir(this.clientFolder + '/images/app');
+            this.utils.mkdir(this.clientFolder + '/icons/app');
+            this.utils.mkdir(this.clientFolder + '/fonts/app');
             this.template('client/_eslintrc', this.clientFolder + '/.eslintrc');
             this.template('../target/index.html', this.clientFolder + '/index.html');
             this.template('client/404.html', this.clientFolder + '/404.html');
@@ -271,11 +271,11 @@ var AppGenerator = Class.extend({
         },
 
         testFiles: function() {
-            this.mkdir('test');
-            this.mkdir('test/unit');
-            this.mkdir('test/mocha');
-            this.mkdir('test/mocha/helpers');
-            this.mkdir('test/e2e/app');
+            this.utils.mkdir('test');
+            this.utils.mkdir('test/unit');
+            this.utils.mkdir('test/mocha');
+            this.utils.mkdir('test/mocha/helpers');
+            this.utils.mkdir('test/e2e/app');
             this.template('test/e2e/app/main.e2e.test.js', 'test/e2e/app/main.e2e.test.js');
             this.template('test/e2e/app/tests.protractor.js', 'test/e2e/app/tests.protractor.js');
             this.template('test/e2e/views/Base.view.js', 'test/e2e/views/Base.view.js');
@@ -289,7 +289,7 @@ var AppGenerator = Class.extend({
         },
 
         serverfiles: function() {
-            this.mkdir('server');
+            this.utils.mkdir('server');
         }
     },
 

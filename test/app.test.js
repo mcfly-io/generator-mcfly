@@ -73,9 +73,9 @@ describe('generator:app', function() {
 
         });
 
-        it('package.json should reference prepublish.sh');
+        //it('package.json should reference prepublish.sh');
 
-        it('should display woot message if installation is successfull');
+        //it('should display woot message if installation is successfull');
 
         it('should skip welcome message when skip-welcome-message is true', function(done) {
             this.runGen
@@ -112,7 +112,7 @@ describe('generator:app', function() {
                 assert(config['generator-mcfly'].filenameSuffix !== undefined, 'filenameSuffix does not exist in .yo-rc.json');
                 assert(config['generator-mcfly'].bootstrap !== undefined, 'bootstrap does not exist in .yo-rc.json');
                 assert(config['generator-mcfly'].ionic !== undefined, 'ionic does not exist in .yo-rc.json');
-                assert(config['generator-mcfly'].famous !== undefined, 'famous does not exist in .yo-rc.json');
+                //assert(config['generator-mcfly'].famous !== undefined, 'famous does not exist in .yo-rc.json');
                 assert(config['generator-mcfly'].ngCordova !== undefined, 'ngCordova does not exist in .yo-rc.json');
                 assert(config['generator-mcfly'].material !== undefined, 'angular-material does not exist in .yo-rc.json');
                 assert(config['generator-mcfly'].clientFolder !== undefined, 'clientFolder does not exist in .yo-rc.json');

@@ -105,7 +105,7 @@ var ModuleGenerator = Class.extend({
             this.sourceDir = path.join(__dirname, '../templates/module');
             this.sourceRoot(this.sourceDir);
             this.targetDir = path.join(process.cwd(), this.clientFolder, 'scripts', this.moduleFolder);
-            this.mkdir(this.targetDir);
+            this.utils.mkdir(this.targetDir);
             //var filename = this.suffixify('index', 'module');
             var filename = 'index'; // we are ignoring the filename suffix options for modules as it changes the require() statements
 

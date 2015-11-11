@@ -16,7 +16,7 @@ module.exports = function(namespace) {
 
     var fullname = namespace + '.' + modulename;
 
-    var app = angular.module(fullname, ['ui.router', <%= ngModules %>]);
+    var app = angular.module(fullname, ['ui.router', <%- ngModules %>]);
     // inject:folders start
     // inject:folders end
     app.namespace = app.namespace || {};

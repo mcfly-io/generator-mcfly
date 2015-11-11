@@ -108,12 +108,8 @@ var testHelper = {
         var runGen = helpers
             .run(path.join(__dirname, '../' + name))
             //.inDir(path.join(os.tmpdir(), guid, 'temp-test'))
-            .inDir(path.join(os.tmpdir(), './temp-test'))
-            .withGenerators(deps)
-            .on('ready', function() {
-                // TODO : Monkey patching waiting for pull request #648
-                runGen.generator.on('error', runGen.emit.bind(runGen, 'error'));
-            });
+            //.inDir(path.join(os.tmpdir(), './temp-test'))
+            .withGenerators(deps);
         return runGen;
     },
 
