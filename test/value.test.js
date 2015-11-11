@@ -7,6 +7,8 @@ var modulename = 'common';
 var valuename = 'myValue';
 var clientFolder = 'www';
 
+require('./helpers/globals');
+
 describe('generator:value', function() {
     describe('with modules', function() {
         beforeEach(function() {

@@ -192,7 +192,7 @@ var ClassGenerator = Base.extend({
      * @returns {String} - The camelized string
      */
     camelize: function(str) {
-        return _.camelize(_.snakeCase(str));
+        return _.camelCase(_.snakeCase(str));
     },
 
     /**
@@ -201,7 +201,7 @@ var ClassGenerator = Base.extend({
      * @returns {String} - The dasherized string
      */
     dasherize: function(str) {
-        return _.dasherize(this.camelize(str));
+        return _.snakeCase(this.camelize(str));
     },
 
     /**
