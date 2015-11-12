@@ -11,7 +11,6 @@ var _ = require('lodash');
 var globToRegexp = require('glob-to-regexp');
 var utils = require('../utils.js');
 var subcomponents = require('./subcomponents.js');
-var stripJsonComments = require('strip-json-comments');
 var mkdirp = require('mkdirp');
 /**
  * The `Class` generator has several helpers method to help with creating a new generator.
@@ -60,16 +59,6 @@ var ClassGenerator = Base.extend({
             defaults: false
         });
 
-    },
-
-    readTextFile: function(filename) {
-        var body = fs.readFileSync(filename, 'utf8');
-        return body;
-    },
-
-    readJsonFile: function(filename) {
-        var body = this.readTextFile(filename);
-        return JSON.parse(stripJsonComments(body));
     },
 
     /**
