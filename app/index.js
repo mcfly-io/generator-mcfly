@@ -304,13 +304,16 @@ var AppGenerator = Class.extend({
 
         if (this.mobile) {
             this.log('');
-            this.log('If you want to use any of the ' + chalk.cyan('https://apps.ionic.io') + ' services ');
-            this.log('- e.g. ionicPush for mobile push messaging or ionicDeploy for hot pushing code updates -');
-            this.log('you should comment out line ' + chalk.green('22') + ' in ' + chalk.blue('client/index.html') + ' and uncomment ');
-            this.log('line ' + chalk.green('14') + ' in ' + chalk.blue('client/scripts/main.js') + ' to require ' + chalk.yellow('ionic.io.bundle.min.js') + ', as well as');
-            this.log('the ' + chalk.yellow('\'ionic.service.core\'') + ' module dependency. Finally, create your app on ' + chalk.cyan('https://apps.ionic.io'));
-            this.log('and fill in the ' + chalk.magenta('app_id') + ' and ' + chalk.magenta('api_key') + ' in ' + chalk.blue('gulp_tasks/common/constants.js') + ' in ');
-            this.log(chalk.magenta('consants.ionic.app') + ', and then run \'' + chalk.yellow('gulp ionic:platformcopy --target=app') + '\'.');
+            this.log('To use any of the ionic.io services (ionicPush, ionicDeploy, etc...)');
+            this.log('  1) Create your project on ' + chalk.cyan('https://apps.ionic.io'));
+            this.log('  2) ' + chalk.blue('gulp_tasks/common/constants.js') + ':');
+            this.log('     - fill in ' + chalk.yellow('constants.ionic.app.app_id') + ' and ' + chalk.yellow('constants.ionic.app.api_key'));
+            this.log('  3) Run ' + chalk.magenta('gulp ionic:platformcopy --target=app'));
+            this.log('  4) ' + chalk.blue('client/index.html') + ':');
+            this.log('     - comment out line ' + chalk.green('22') + ' to disable the default loading of ' + chalk.blue('cordova.js'));
+            this.log('  5) ' + chalk.blue('client/scripts/main.js') + ':');
+            this.log('     - uncomment line ' + chalk.green('14') + ' to require ' + chalk.blue('client/scripts/ionic.io.bundle.min.js'));
+            this.log('     - uncomment the module dependency for ' + chalk.blue('\'ionic.service.core\''));
         }
     }
 });
