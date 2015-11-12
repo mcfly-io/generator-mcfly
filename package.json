@@ -50,7 +50,7 @@
     "bluebird": "3.0.5",
     "chalk": "1.1.1",
     "del": "2.0.2",
-    "generator-sublime": ">=2.0.0",
+    "generator-sublime": ">=2.0.1",
     "glob-to-regexp": "0.1.0",
     "gulp": "3.9.0",
     "gulp-inject": "3.0.0",
