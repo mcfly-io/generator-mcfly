@@ -23,4 +23,5 @@ deploy:
   on:
     tags: true
     all_branches: true
+    node: '0.12' # this should be quoted; otherwise, 0.10 would not work
     repo: mcfly-io/generator-mcfly
