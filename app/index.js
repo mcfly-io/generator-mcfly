@@ -294,14 +294,13 @@ var AppGenerator = Class.extend({
     },
 
     install: function() {
-
-    },
-
-    end: function() {
         this.installDependencies({
             skipInstall: this.options['skip-install'],
             skipMessage: this.options['skip-message']
         });
+    },
+
+    end: function() {
 
         if (this.mobile) {
             this.log('');
