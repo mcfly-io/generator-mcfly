@@ -11,7 +11,7 @@ require('./helpers/globals');
 
 describe('generator:target', function() {
     describe('general test', function() {
-        beforeEach(function() {
+        beforeEach(function(done) {
             this.runGen = testHelper.runGenerator('target')
                 .withOptions({
                     'skip-install': true,
@@ -26,7 +26,7 @@ describe('generator:target', function() {
                     generator.log = sinon.spy();
                     generator.utils.mkdir(clientFolder + '/scripts/toto');
                     generator.utils.mkdir(clientFolder + '/scripts/tata');
-
+                    done();
                 });
 
         });
@@ -198,7 +198,8 @@ describe('generator:target', function() {
     });
 
     describe('with option mobile', function() {
-        beforeEach(function() {
+
+        beforeEach(function(done) {
             this.runGen = testHelper.runGenerator('target')
                 .withOptions({
                     'skip-install': true,
@@ -216,7 +217,7 @@ describe('generator:target', function() {
                     generator.log = sinon.spy();
                     generator.utils.mkdir(clientFolder + '/scripts/toto');
                     generator.utils.mkdir(clientFolder + '/scripts/tata');
-
+                    done();
                 });
 
         });
@@ -255,15 +256,14 @@ describe('generator:target', function() {
         });
 
         it('references ionic.io.bundle.min.js in main.js', function(done) {
-            this.runGen.on('end', function() {
-
-                var file = clientFolder + '/scripts/main' + suffix + '.js';
-                var body = testHelper.readTextFile(file);
-                assert(_.contains(body, 'ionic.io.bundle.min' + suffix));
-                assert(_.contains(body, 'ionic.service.core'));
-
-                done();
-            });
+            this.runGen
+                .on('end', function() {
+                    var file = clientFolder + '/scripts/main' + suffix + '.js';
+                    var body = testHelper.readTextFile(file);
+                    assert(_.contains(body, 'require(\'./ionic.io.bundle.min' + suffix + '\')'), 'ionic.io.bundle.min is missing');
+                    assert(_.contains(body, 'ionic.service.core'), 'ionic.service.core is missing');
+                    done();
+                });
         });
     });
 

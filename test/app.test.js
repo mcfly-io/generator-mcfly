@@ -202,9 +202,8 @@ describe('generator:app', function() {
 
                 var file = clientFolder + '/scripts/main' + '.js';
                 var body = testHelper.readTextFile(file);
-                assert(_.contains(body, 'ionic.io.bundle.min'));
-                assert(_.contains(body, 'ionic.service.core'));
-
+                assert(_.contains(body, 'require(\'./ionic.io.bundle.min\')'), 'ionic.io.bundle.min is missing');
+                assert(_.contains(body, 'ionic.service.core'), 'ionic.service.core is missing');
                 done();
             }.bind(this));
         });
