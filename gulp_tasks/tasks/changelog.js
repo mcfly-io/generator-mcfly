@@ -1,10 +1,10 @@
 'use strict';
 
+global.Promise = require('bluebird');
 var gulp = require('gulp');
 var changelog = require('conventional-changelog');
 var argv = require('yargs').argv;
 var fs = require('fs');
-var q = require('q');
 var path = require('path');
 var gutil = require('gulp-util');
 var exec = require('gulp-exec');
@@ -26,22 +26,22 @@ var makeChangelog = function(options) {
     var subtitle = options.subtitle || '"' + codename + '"';
     var from = options.from;
     var version = options.version || pkg.version;
-    var deferred = q.defer();
-    changelog({
-        repository: repository,
-        version: version,
-        subtitle: subtitle,
-        file: file,
-        from: from
-    }, function(err, log) {
-        if (err) {
-            deferred.reject(err);
-        } else {
-            gutil.log('LOG', log);
-            deferred.resolve(log);
-        }
+    return new Promise(function(resolve, reject) {
+        changelog({
+            repository: repository,
+            version: version,
+            subtitle: subtitle,
+            file: file,
+            from: from
+        }, function(err, log) {
+            if (err) {
+                reject(err);
+            } else {
+                gutil.log('LOG', log);
+                resolve(log);
+            }
+        });
     });
-    return deferred.promise;
 };
 
 gulp.task('changelog:conventional', false, function(cb) {

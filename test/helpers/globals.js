@@ -2,10 +2,10 @@
 
 var _ = require('lodash');
 
-// Q
-global.Q = require('q');
+// Bluebird
+global.Promise = require('bluebird');
 // make sure we get full stack trace when running the tests
-global.Q.longStackSupport = true;
+// global.Q.longStackSupport = true;
 
 // SINON
 global.sinon = require('sinon');

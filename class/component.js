@@ -101,8 +101,10 @@ var ComponentGenerator = Class.extend({
             },
             message: 'How would like to name your ' + _templateFolder + ' ?',
             validate: function(value) {
+
                 value = _.str.trim(value);
                 if (_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
+                    that.prompt_errors = 'Please enter a non empty name';
                     return 'Please enter a non empty name';
                 }
                 return true;
@@ -127,7 +129,7 @@ var ComponentGenerator = Class.extend({
         var done = this.async();
         this.sourceRoot(path.join(__dirname, '../templates/' + this.templateFolder));
         var targetDir = path.join(this.clientFolder, 'scripts', this.moduleFolder, this.localFolder);
-        this.mkdir(targetDir);
+        this.utils.mkdir(targetDir);
 
         // make sure the <component>/index.js exist
         utils.createIndexFile(this, '../component', targetDir);

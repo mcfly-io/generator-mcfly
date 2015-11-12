@@ -5,6 +5,8 @@ var subcomponents = require('../class/subcomponents.js');
 var clientFolder = 'www';
 var _ = require('lodash');
 
+require('./helpers/globals');
+
 var suffixes = ['', '-xxx'];
 var modules = ['toto', 'tata'];
 var files = _.range(2);
@@ -35,7 +37,7 @@ describe('generator:require', function() {
 
                 modules.forEach(function(module) {
                     generator.modulename = module;
-                    generator.mkdir(clientFolder + '/scripts/' + module);
+                    generator.utils.mkdir(clientFolder + '/scripts/' + module);
                     generator.template('../../templates/module/index.js', clientFolder + '/scripts/' + module + '/index.js');
                     subcomponents.forEach(function(component) {
                         var singularComponent = component.substring(0, component.length - 1);

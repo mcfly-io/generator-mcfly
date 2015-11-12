@@ -32,6 +32,7 @@ The project has the following capabilities:
 * Karma configured with Code Coverage
 * Browser-sync
 * TestFairy publishing
+* Ionic.io publishing
 
 It also supports ES6/7 by using the babel
 

@@ -1,6 +1,6 @@
 {
-    "name": "<%= _.slugify(appname) %>",
-    "description": "<%= _.slugify(appname) %>",
+    "name": "<%= utils._.snakeCase(appname) %>",
+    "description": "<%= utils._.snakeCase(appname) %>",
     "version": "0.0.1",
     "license": "UNLICENSED",
     "scripts": {

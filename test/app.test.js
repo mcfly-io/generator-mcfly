@@ -4,6 +4,8 @@ var testHelper = require('./testHelper');
 var yosay = require('yosay');
 var _ = require('lodash');
 
+require('./helpers/globals');
+
 describe('generator:app', function() {
     describe('with option mobile false', function() {
         beforeEach(function() {
@@ -14,7 +16,7 @@ describe('generator:app', function() {
                     'check-git': true,
                     'testmode': true
                 })
-                .withPrompt({
+                .withPrompts({
                     someOption: true
                 })
                 .on('ready', function(generator) {
@@ -71,9 +73,9 @@ describe('generator:app', function() {
 
         });
 
-        it('package.json should reference prepublish.sh');
+        //it('package.json should reference prepublish.sh');
 
-        it('should display woot message if installation is successfull');
+        //it('should display woot message if installation is successfull');
 
         it('should skip welcome message when skip-welcome-message is true', function(done) {
             this.runGen
@@ -110,7 +112,7 @@ describe('generator:app', function() {
                 assert(config['generator-mcfly'].filenameSuffix !== undefined, 'filenameSuffix does not exist in .yo-rc.json');
                 assert(config['generator-mcfly'].bootstrap !== undefined, 'bootstrap does not exist in .yo-rc.json');
                 assert(config['generator-mcfly'].ionic !== undefined, 'ionic does not exist in .yo-rc.json');
-                assert(config['generator-mcfly'].famous !== undefined, 'famous does not exist in .yo-rc.json');
+                //assert(config['generator-mcfly'].famous !== undefined, 'famous does not exist in .yo-rc.json');
                 assert(config['generator-mcfly'].ngCordova !== undefined, 'ngCordova does not exist in .yo-rc.json');
                 assert(config['generator-mcfly'].material !== undefined, 'angular-material does not exist in .yo-rc.json');
                 assert(config['generator-mcfly'].clientFolder !== undefined, 'clientFolder does not exist in .yo-rc.json');
@@ -130,7 +132,7 @@ describe('generator:app', function() {
                     'mobile': true,
                     'testmode': true
                 })
-                .withPrompt({
+                .withPrompts({
                     someOption: true
                 })
                 .on('ready', function(generator) {
@@ -200,9 +202,8 @@ describe('generator:app', function() {
 
                 var file = clientFolder + '/scripts/main' + '.js';
                 var body = testHelper.readTextFile(file);
-                assert(_.contains(body, 'ionic.io.bundle.min'));
-                assert(_.contains(body, 'ionic.service.core'));
-
+                assert(_.contains(body, 'require(\'./ionic.io.bundle.min\')'), 'ionic.io.bundle.min is missing');
+                assert(_.contains(body, 'ionic.service.core'), 'ionic.service.core is missing');
                 done();
             }.bind(this));
         });

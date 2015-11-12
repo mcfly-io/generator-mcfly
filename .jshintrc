@@ -62,6 +62,7 @@
   "dojo": true,
   "esnext": true,
   "forin": true,
+  "esnext": true,
   "indent": 4,
   "latedef": true,
   "maxdepth": 4,

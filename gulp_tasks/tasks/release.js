@@ -1,5 +1,6 @@
 'use strict';
 
+global.Promise = require('bluebird');
 var gulp = require('gulp');
 var args = require('yargs').argv;
 var exec = require('child_process').exec;
@@ -13,7 +14,6 @@ var GitHubApi = require('github');
 var runSequence = require('run-sequence').use(gulp);
 var del = require('del');
 var inquirer = require('inquirer');
-var Q = require('q');
 var githubUsername = require('github-username');
 var helper = require('../common/helper');
 var constants = require('../common/constants')();
@@ -130,44 +130,45 @@ var github = new GitHubApi({
     timeout: 0
 });
 
-var gitGetEmailAsync = Q.denodeify(git.exec, {
+var gitGetEmailAsync = Promise.promisify(git.exec.bind(git, {
     args: 'config --get user.email',
     quiet: true
-});
-var githubUsernameAsync = Q.denodeify(githubUsername);
+}));
+
+var githubUsernameAsync = Promise.promisify(githubUsername);
 
 var inquireAsync = function(result) {
-    var deferred = Q.defer();
-    inquirer.prompt(result.questions, function(answers) {
-        // only resolving what we need
-        deferred.resolve({
-            username: answers.username || result.username,
-            password: answers.password
+    return new Promise(function(resolve, reject) {
+        inquirer.prompt(result.questions, function(answers) {
+            // only resolving what we need
+            resolve({
+                username: answers.username || result.username,
+                password: answers.password
+            });
         });
     });
-    return deferred.promise;
 };
 
 var githubAuthSetupAndTestAsync = function(result) {
-    var deferred = Q.defer();
-    github.authenticate({
-        type: 'basic',
-        username: result.username,
-        password: result.password
+    return new Promise(function(resolve, reject) {
+        github.authenticate({
+            type: 'basic',
+            username: result.username,
+            password: result.password
+        });
+        github.misc.rateLimit({}, function(err, res) {
+            if (err) {
+                reject(gutil.colors.red('GitHub auth failed! ') + 'Response from server: ' + gutil.colors.yellow(err.message));
+            }
+            resolve(gutil.colors.green('GitHub auth successful!'));
+        });
     });
-    github.misc.rateLimit({}, function(err, res) {
-        if (err) {
-            deferred.reject(gutil.colors.red('GitHub auth failed! ') + 'Response from server: ' + gutil.colors.yellow(err.message));
-        }
-        deferred.resolve(gutil.colors.green('GitHub auth successful!'));
-    });
-    return deferred.promise;
 };
 
 gulp.task('githubAuth', false, function(cb) {
     return gitGetEmailAsync()
         .then(githubUsernameAsync)
-        .fail(function() {
+        .catch(function() {
             //gutil.log(gutil.colors.red(err));
             return null;
         })
