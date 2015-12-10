@@ -177,7 +177,7 @@ More tasks to integrate with other ionic.io services are coming soon, but in the
 
 ## Browserify/Webpack and namespaces
 At the heart of the generator we use `browserify` or `webpack` to bundle together the client javascript files.   
-To switch between `browserify` or `webpack` change the constant value `bundleManager` in `gulp_tasks/common/constants.js` (`'browserify'` or `'webpack'`)
+To switch between `browserify` or `webpack` change the constant value `moduleManager` in `gulp_tasks/common/constants.js` (`'browserify'` or `'webpack'`)
 
 Also because angular modules do not prevent name collision, each scaffolded component gets an unique full name composed like this:
 ```
