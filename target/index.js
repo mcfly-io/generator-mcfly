@@ -2,6 +2,7 @@
 
 var path = require('path');
 var _ = require('lodash');
+var _str = require('underscore.string');
 var Class = require('../class');
 
 var TargetGenerator = Class.extend({
@@ -63,7 +64,7 @@ var TargetGenerator = Class.extend({
             message: 'What is the name of your target application?',
             default: this.targetname,
             validate: function(value) {
-                value = _.str.trim(value);
+                value = _str.trim(value);
                 if (_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
                     return 'Please enter a non empty name';
                 }
