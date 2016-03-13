@@ -63,7 +63,7 @@
     "yosay": "1.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "4.1.5",
+    "babel-eslint": "4.1.8",
     "chai": "3.4.1",
     "codeclimate-test-reporter": "0.1.1",
     "conventional-changelog": "0.5.1",
