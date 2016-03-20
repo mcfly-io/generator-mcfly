@@ -63,7 +63,7 @@ var TargetGenerator = Class.extend({
             message: 'What is the name of your target application?',
             default: this.targetname,
             validate: function(value) {
-                value = _.str.trim(value);
+                value = _.trim(value);
                 if (_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
                     return 'Please enter a non empty name';
                 }
