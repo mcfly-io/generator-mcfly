@@ -100,7 +100,6 @@
     "stream-combiner": "0.2.2",
     "strip-json-comments": "1.0.4",
     "try-thread-sleep": "1.0.0",
-    "underscore.string": "~3.3.4",
     "yargs": "3.30.0"
   }
 }
