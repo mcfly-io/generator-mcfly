@@ -2,7 +2,6 @@
 
 var path = require('path');
 var _ = require('lodash');
-var _str = require('underscore.string');
 var utils = require('../utils');
 var Class = require('../class');
 
@@ -102,7 +101,7 @@ var ServiceGenerator = Class.extend({
             message: 'What is the name of your module ?',
             default: that.modulename || (choices && choices.length >= 1 ? choices[0].value : that.modulename),
             validate: function(value) {
-                value = _str.trim(value);
+                value = _.trim(value);
                 if (_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
                     return 'Please enter a non empty name';
                 }
@@ -118,7 +117,7 @@ var ServiceGenerator = Class.extend({
             },
             message: 'How would like to name your service ?',
             validate: function(value) {
-                value = _str.trim(value);
+                value = _.trim(value);
                 if (_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
                     return 'Please enter a non empty name';
                 }

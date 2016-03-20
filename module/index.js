@@ -2,7 +2,6 @@
 
 var path = require('path');
 var _ = require('lodash');
-var _str = require('underscore.string');
 var Class = require('../class');
 var utils = require('../utils.js');
 
@@ -69,7 +68,7 @@ var ModuleGenerator = Class.extend({
             message: 'What is the name of your module ?',
             default: this.modulename,
             validate: function(value) {
-                value = _str.trim(value);
+                value = _.trim(value);
                 if (_.isEmpty(value) || value[0] === '/' || value[0] === '\\') {
                     return 'Please enter a non empty name';
                 }
