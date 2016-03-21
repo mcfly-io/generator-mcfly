@@ -9,7 +9,7 @@ require('./helpers/globals');
 describe('generator:app', function() {
     describe('with option mobile false', function() {
         beforeEach(function() {
-            this.runGen = testHelper.runGenerator('app', ['sublime:app'])
+            this.runGen = testHelper.runGenerator('app', ['sublime:app', 'sublime:gulps'])
                 .withOptions({
                     'skip-install': true,
                     'check-travis': false,
@@ -124,7 +124,7 @@ describe('generator:app', function() {
 
     describe('with option mobile true', function() {
         beforeEach(function() {
-            this.runGen = testHelper.runGenerator('app', ['sublime:app'])
+            this.runGen = testHelper.runGenerator('app', ['sublime:app', 'sublime:gulps'])
                 .withOptions({
                     'skip-install': true,
                     'check-travis': false,

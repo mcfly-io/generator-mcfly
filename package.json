@@ -63,7 +63,7 @@
     "yosay": "1.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "4.1.5",
+    "babel-eslint": "5.0.0",
     "chai": "3.4.1",
     "codeclimate-test-reporter": "0.1.1",
     "conventional-changelog": "0.5.1",
@@ -73,7 +73,7 @@
     "github-username": "2.1.0",
     "gulp-bump": "1.0.0",
     "gulp-concat": "^2.6.0",
-    "gulp-eslint": "1.1.0",
+    "gulp-eslint": "2.0.0",
     "gulp-exec": "2.1.2",
     "gulp-git": "1.6.0",
     "gulp-help": "1.6.1",
