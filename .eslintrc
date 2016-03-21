@@ -20,7 +20,6 @@
   "plugins": [
     "nodeca"
   ],
-  "parser": "babel-eslint",
   "rules": {
     "comma-dangle": [2, "never"],
     "camelcase": 0,
@@ -32,6 +31,7 @@
     "eol-last": 0,
     "eqeqeq": [2, "smart"],
     "indent": [0, 4, {"SwitchCase": 1}],
+    "keyword-spacing": [2, {"before": true, "after": true, "overrides": {}}],
     "nodeca/indent": [2, "spaces", 4 ],
     "max-depth": [0, 4],
     "max-len": [0, 80, 4],
@@ -53,7 +53,6 @@
     "no-dupe-keys": 2,
     "no-empty": 0,
     "no-empty-character-class": 2,
-    "no-empty-label": 2,
     "no-ex-assign": 2,
     "no-extend-native": 2,
     "no-extra-boolean-cast": 2,
@@ -109,7 +108,6 @@
     "quotes": [2, "single"],
     "semi": 2,
     "semi-spacing": 2,
-    "space-after-keywords": [2, "always"],
     "space-infix-ops": [2, {"int32Hint": false}],
     "strict": [2, "global"],
     "use-isnan": 2,

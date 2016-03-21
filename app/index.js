@@ -294,9 +294,9 @@ var AppGenerator = Class.extend({
     },
 
     install: function() {
-        this.installDependencies({
-            skipInstall: this.options['skip-install'],
-            skipMessage: this.options['skip-message']
+        this.npmInstall(null, {
+            skipInstall: this.options['skip-install']
+                //     skipMessage: this.options['skip-message']
         });
     },
 
