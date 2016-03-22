@@ -41,7 +41,7 @@ describe('generator:app', function() {
                     'bin/protractor-fix-version.js',
                     'bin/cordova-generate-icons',
                     'bin/cordova-generate-splashes',
-                    clientFolder + '/.eslintrc',
+                    clientFolder + '/.eslintrc.json',
                     clientFolder + '/index.html',
                     clientFolder + '/404.html',
                     clientFolder + '/robots.txt',
@@ -60,7 +60,7 @@ describe('generator:app', function() {
                     'test/e2e/app/main.e2e.test.js',
                     'test/e2e/views/Base.view.js',
                     'test/e2e/views/Main.view.js',
-                    'test/e2e/.eslintrc',
+                    'test/e2e/.eslintrc.json',
                     'test/mocha/helpers/globals.js',
                     'test/unit/unitHelper.js',
                     'test/unit/polyfill.js',
@@ -157,7 +157,7 @@ describe('generator:app', function() {
                     'bin/protractor-fix-version.js',
                     'bin/cordova-generate-icons',
                     'bin/cordova-generate-splashes',
-                    clientFolder + '/.eslintrc',
+                    clientFolder + '/.eslintrc.json',
                     clientFolder + '/index.html',
                     clientFolder + '/404.html',
                     clientFolder + '/robots.txt',
@@ -176,7 +176,7 @@ describe('generator:app', function() {
                     'test/e2e/app/main.e2e.test.js',
                     'test/e2e/views/Base.view.js',
                     'test/e2e/views/Main.view.js',
-                    'test/e2e/.eslintrc',
+                    'test/e2e/.eslintrc.json',
                     'test/mocha/helpers/globals.js'
                 ]);
                 done();
