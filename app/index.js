@@ -254,7 +254,7 @@ var AppGenerator = Class.extend({
             this.utils.mkdir(this.clientFolder + '/images/app');
             this.utils.mkdir(this.clientFolder + '/icons/app');
             this.utils.mkdir(this.clientFolder + '/fonts/app');
-            this.template('client/_eslintrc', this.clientFolder + '/.eslintrc');
+            this.template('client/_eslintrc.json', this.clientFolder + '/.eslintrc.json');
             this.template('../target/index.html', this.clientFolder + '/index.html');
             this.template('client/404.html', this.clientFolder + '/404.html');
             this.template('client/robots.txt', this.clientFolder + '/robots.txt');
@@ -281,7 +281,7 @@ var AppGenerator = Class.extend({
             this.template('test/e2e/views/Base.view.js', 'test/e2e/views/Base.view.js');
             this.template('test/e2e/views/Main.view.js', 'test/e2e/views/Main.view.js');
             this.template('test/_jshintrc', 'test/.jshintrc');
-            this.template('test/e2e/_eslintrc', 'test/e2e/.eslintrc');
+            this.template('test/e2e/_eslintrc.json', 'test/e2e/.eslintrc.json');
             this.template('test/mocha/helpers/globals.js', 'test/mocha/helpers/globals.js');
             this.template('test/unit/polyfill.js', 'test/unit/polyfill.js');
             this.template('test/unit/unitHelper.js', 'test/unit/unitHelper.js');

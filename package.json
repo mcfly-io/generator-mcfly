@@ -67,6 +67,7 @@
     "chai": "3.5.0",
     "codeclimate-test-reporter": "0.3.1",
     "conventional-changelog": "1.1.0",
+    "eslint": "^2.4.0",
     "eslint-plugin-nodeca": "1.0.3",
     "event-stream": "3.3.2",
     "github": "0.2.4",
