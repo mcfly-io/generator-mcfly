@@ -5,6 +5,7 @@
     "license": "UNLICENSED",
     "scripts": {
         "test": "gulp test",
+        "karma": "karma start --single-run",
         "jsbeautify": "js-beautify <%=clientFolder%>/**/*.js <%=clientFolder%>/*.js -r",
         "protractor_debug_1": "./node_modules/protractor/bin/webdriver-manager start",
         "protractor_debug_2": "./node_modules/protractor/bin/elementexplorer.js http://localhost:5000"

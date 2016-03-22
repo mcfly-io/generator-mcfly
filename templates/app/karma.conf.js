@@ -1,10 +1,10 @@
 'use strict';
-
+var _ = require('lodash');
 var args = require('yargs').argv;
 var constants = require('./gulp_tasks/common/constants')();
 var resolutions = require('browserify-resolutions');
 var webpack = require('./webpack.config');
-var args = global.args || (process.env.ARGS ? JSON.parse(process.env.ARGS) : {});
+args = _.assign(args, global.args || (process.env.ARGS ? JSON.parse(process.env.ARGS) : {}));
 var moduleManager = args.bundler ? args.bundler : constants.moduleManager;
 var moduleEntry = args.module ? '/' + args.module : '';
 var isWebpack = moduleManager === 'webpack';
@@ -126,18 +126,23 @@ module.exports = function(config) {
         },
 
         coverageReporter: {
-            dir : './coverage/unit',
+            dir: 'coverage/unit/',
             reporters: [{
-                type: 'json'
+                type: 'json',
+                subdir: '.'
             }, {
-                type: 'text'
+                type: 'text',
+                subdir: '.'
             }, {
-                type: 'text-summary'
+                type: 'text-summary',
+                subdir: '.'
             }, {
                 type: 'cobertura',
-                file: 'coverage.xml'
+                file: 'coverage.xml',
+                subdir: '.'
             }, {
-                type: 'lcov'
+                type: 'lcov',
+                subdir: '.'
             }]
         },
         webpack: webpack,
