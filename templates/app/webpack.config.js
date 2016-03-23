@@ -38,8 +38,8 @@ module.exports = {
             cacheable: true,
             loader: 'babel-loader',
             query: {
-                stage: 0,
-                optional: ['runtime', 'es7.asyncFunctions'],
+                presets: 'es2015',
+                //optional: ['runtime', 'es7.asyncFunctions'],
                 //retainLines: true,
                 cacheDirectory: true
             }

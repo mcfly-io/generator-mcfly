@@ -2,7 +2,7 @@
 var _ = require('lodash');
 var args = require('yargs').argv;
 var constants = require('./gulp_tasks/common/constants')();
-var resolutions = require('browserify-resolutions');
+// var resolutions = require('browserify-resolutions');
 var webpack = require('./webpack.config');
 args = _.assign(args, global.args || (process.env.ARGS ? JSON.parse(process.env.ARGS) : {}));
 var moduleManager = args.bundler ? args.bundler : constants.moduleManager;
@@ -32,17 +32,17 @@ module.exports = function(config) {
         transform: [
             ['browserify-istanbul', {
                 instrumenter: require('isparta'),
+                instrumenterConfig: { babel: { presets: ['es2015'] } },
                 ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/externals/**/*.js', '**/<%=clientFolder%>/scripts/lbServices.js']
             }],
             ['babelify', {
-                'stage': 0,
-                'optional': ['es7.asyncFunctions'],
+                'presets':'es2015',
                 'ignore': ['./node_modules', './bower_components', './externals']
             }]
         ],
         configure: function(bundle) {
             bundle.on('prebundle', function() {
-                bundle.plugin(resolutions, '*');
+                // bundle.plugin(resolutions, '*');
             });
         }
     };

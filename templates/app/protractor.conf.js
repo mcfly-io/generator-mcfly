@@ -1,5 +1,7 @@
 'use strict';
-require('babel/register');
+require('babel-register')({
+    presets: ['es2015']
+});
 var argv = require('yargs').argv;
 var coverage = require('./protractor/coverage');
 var browserExtension = require('./protractor/browserExtension');
@@ -30,7 +32,7 @@ var config = {
         version: '',
         platform: 'ANY',
         name: 'App Tests',
-        'phantomjs.binary.path': require('phantomjs').path,
+        'phantomjs.binary.path': require('phantomjs-prebuilt').path,
         'phantomjs.ghostdriver.cli.args': ['--loglevel=VERBOSE']
     },
 
