@@ -80,7 +80,6 @@
     "gulp-help": "1.6.1",
     "gulp-if": "2.0.0",
     "gulp-istanbul": "0.10.3",
-    "gulp-jscs": "3.0.2",
     "gulp-jshint": "2.0.0",
     "gulp-mocha": "2.2.0",
     "gulp-order": "1.1.1",
@@ -99,7 +98,6 @@
     "require-dir": "0.3.0",
     "run-sequence": "1.1.5",
     "sinon": "1.17.3",
-    "stream-combiner": "0.2.2",
     "strip-json-comments": "2.0.1",
     "try-thread-sleep": "1.0.0",
     "yargs": "4.3.2"

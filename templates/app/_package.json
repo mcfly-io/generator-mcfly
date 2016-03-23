@@ -44,7 +44,7 @@
     },
     "browserify": {
         "transform": [
-            ["babelify", { "stage": 0, "optional": ["es7.asyncFunctions", "runtime"], "ignore": ["./node_modules", "./bower_components"]}],
+            ["babelify", { "presets": "es2015", "ignore": ["./node_modules", "./bower_components"]}],
             "html2js-browserify",
             "cssify",
             "browserify-shim",
