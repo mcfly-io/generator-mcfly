@@ -19,6 +19,12 @@ var isMobile = helper.isMobile({
 });
 var isCI = process.env.CI === 'true';
 var timeout = 400000;
+
+var HtmlReporter = require('protractor-jasmine2-screenshot-reporter');
+var htmlReporter = new HtmlReporter({
+    dest: destScreenShots,
+    filename: 'index.html'
+});
 var config = {
     //seleniumAddress: 'http://localhost:4445/wd/hub',
     //seleniumServerJar: './node_modules/gulp-protractor/node_modules/protractor/selenium/selenium-server-standalone-2.43.1.jar',
@@ -44,6 +50,11 @@ var config = {
         defaultTimeoutInterval: timeout,
         print: function() {}
     },
+    beforeLaunch: function() {
+        return new Promise(function(resolve) {
+            htmlReporter.beforeLaunch(resolve);
+        });
+    },
     onPrepare: function() {
         browserExtension.extendsBrowser(browser, {
             destScreenShots: destScreenShots
@@ -61,15 +72,11 @@ var config = {
 
         require('jasmine-reporters');
         var SpecReporter = require('jasmine-spec-reporter');
-        var HtmlReporter = require('protractor-jasmine2-screenshot-reporter');
         jasmine.getEnv().addReporter(new SpecReporter({
             displaySpecDuration: true,
             displayStacktrace: true
         }));
-        jasmine.getEnv().addReporter(new HtmlReporter({
-            dest: destScreenShots,
-            filename: 'index.html'
-        }));
+        jasmine.getEnv().addReporter(htmlReporter);
     }
 
 };
