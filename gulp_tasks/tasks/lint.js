@@ -4,7 +4,7 @@ var eslint = require('gulp-eslint');
 var constants = require('../common/constants')();
 
 gulp.task('eslint', false, function() {
-    gulp.src(constants.lint)
+    return gulp.src(constants.lint)
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
