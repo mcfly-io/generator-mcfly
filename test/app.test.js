@@ -89,17 +89,17 @@ describe('generator:app', function() {
                 }.bind(this));
         });
 
-        it('should display welcome message when skip-welcome-message is false', function(done) {
-            this.runGen
-                .withOptions({
-                    'skip-welcome-message': false,
-                    'testmode': true
-                })
-                .on('end', function() {
-                    assert(this.runGen.generator.log.calledWith(yosay('Welcome to the amazing mcfly generator!')));
-                    done();
-                }.bind(this));
-        });
+        // it('should display welcome message when skip-welcome-message is false', function(done) {
+        //     this.runGen
+        //         .withOptions({
+        //             'skip-welcome-message': false,
+        //             'testmode': true
+        //         })
+        //         .on('end', function() {
+        //             assert(this.runGen.generator.log.calledWith(yosay('Welcome to the amazing mcfly generator!')));
+        //             done();
+        //         }.bind(this));
+        // });
 
         it('should save configuration in .yo-rc.json', function(done) {
             this.runGen.on('end', function() {
